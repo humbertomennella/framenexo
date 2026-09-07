@@ -1,5 +1,7 @@
 ---
 import {articleUrl,href,date,reading,categorySlug} from '../lib/news';
+import EditorialCover from './EditorialCover.astro';
 const {article:a}=Astro.props;
+const useEditorialCover=a.image==='/og.png';
 ---
-<article class="card"><a class="card-image" href={articleUrl(a)} tabindex="-1" aria-hidden="true"><img src={href(a.image)} alt="" width="1200" height="675" loading="lazy" decoding="async"/></a><div class="card-body"><a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><h3><a href={articleUrl(a)}>{a.title}</a></h3><p>{a.description}</p><div class="meta"><time datetime={a.publishedAt}>{date(a.publishedAt)}</time><span>{reading(a)} min de leitura</span></div></div></article>
+<article class="card"><a class="card-image" href={articleUrl(a)} tabindex="-1" aria-hidden="true">{useEditorialCover?<EditorialCover article={a} compact/>:<img src={href(a.image)} alt="" width="1200" height="675" loading="lazy" decoding="async"/>}</a><div class="card-body"><a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><h3><a href={articleUrl(a)}>{a.title}</a></h3><p>{a.description}</p><div class="meta"><time datetime={a.publishedAt}>{date(a.publishedAt)}</time><span>{reading(a)} min de leitura</span></div></div></article>

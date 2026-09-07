@@ -1,0 +1,9 @@
+---
+const {article:a, compact=false}=Astro.props;
+const variant=[...a.slug].reduce((sum:number,char:string)=>sum+char.charCodeAt(0),0)%4;
+---
+<div class:list={["editorial-cover",`cover-v${variant}`,compact&&"compact"]} role={compact?undefined:"img"} aria-label={compact?undefined:`Capa editorial tipográfica: ${a.title}`}>
+  <span class="cover-kicker">FrameNexo / {a.category}</span>
+  <strong>{a.title}</strong>
+  <span class="cover-note">Capa editorial · não é imagem do jogo</span>
+</div>
