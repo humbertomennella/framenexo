@@ -1,7 +1,7 @@
 {
-  "repository": "https://github.com/humbertomennella/framenexo",
+  "repository": "humbertomennella/framenexo",
   "githubPages": true,
   "scheduleActive": true,
   "generationValidated": false,
-  "notes": "Repositório público, GitHub Pages e primeiro deploy concluídos. A validação editorial no runner continua pendente até a primeira execução do coletor."
+  "notes": "Rotina executada no GitHub. O site mostra os dados do último build."
 }
