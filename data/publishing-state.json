@@ -1,8 +1,8 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-07T13:45:17Z",
+  "lastPublishedAt": "2026-09-07T14:05:00Z",
   "lastCollectedAt": "2026-09-07T19:09:07Z",
-  "editionCount": 1,
+  "editionCount": 2,
   "history": [
     {
       "slug": "exodus-previa-combate-escolhas",
@@ -56,6 +56,24 @@
       "publishedAt": "2026-09-07T13:45:17Z",
       "sourceUrls": [
         "https://blog.playstation.com/2026/08/26/playstation-plus-monthly-games-for-september-sniper-elite-resistance-mlb-the-show-26-wobbly-life-chained-echoes"
+      ]
+    },
+    {
+      "slug": "railbreak-dx-xbox-lancamento",
+      "title": "Railbreak DX chega ao Xbox com foco em pontuação e partidas rápidas",
+      "eventKey": "railbreak-dx-xbox-lancamento",
+      "publishedAt": "2026-09-07T14:00:00Z",
+      "sourceUrls": [
+        "https://news.xbox.com/en-us/2026/09/04/rack-up-points-in-arcade-hit-railbreak-dx"
+      ]
+    },
+    {
+      "slug": "xbox-tcl-app-tv",
+      "title": "Xbox anuncia aplicativo para televisores TCL em parceria com a fabricante",
+      "eventKey": "xbox-tcl-app-tv",
+      "publishedAt": "2026-09-07T14:05:00Z",
+      "sourceUrls": [
+        "https://news.xbox.com/en-us/2026/09/04/xbox-app-tcl-smart-tv"
       ]
     }
   ]
