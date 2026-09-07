@@ -7,7 +7,7 @@
 - Primeira edição: seis notas sobre acontecimentos reais, redigidas com IA e conferidas nas fontes oficiais em 7 de setembro de 2026.
 - Frontend completo, busca, categorias, arquivo, RSS, sitemap e painel de status.
 - Coleta real: 170 candidatos, sete feeds responderam; o feed da IGN apresentou timeout.
-- Código dos workflows enviado para [`humbertomennella/framenexo`](https://github.com/humbertomennella/framenexo). O repositório está público e a fonte do GitHub Pages já foi salva; a primeira execução de publicação precisa concluir para validar o endereço final.
+- Código dos workflows enviado para [`humbertomennella/framenexo`](https://github.com/humbertomennella/framenexo). O repositório está público, o GitHub Pages está configurado e o primeiro deploy foi concluído com sucesso.
 - A publicação de revisão em Sites é privada, acessível ao proprietário. Ela é um retrato estático e não recebe futuras edições do GitHub automaticamente.
 - Veja `docs/VALIDACAO.md` e `data/deployment-status.json` para distinguir verificações concluídas de etapas pendentes.
 
@@ -120,7 +120,7 @@ Ele aborta se a conta não corresponder ou se o repositório já existir. Não m
 
 Após o primeiro deploy, confirme a URL retornada pela execução e registre a ativação em `data/deployment-status.json`.
 
-O endereço esperado de Pages, ainda **não ativo nem verificado**, é `https://humbertomennella.github.io/framenexo/`. O workflow configura `SITE_URL` com a origem do proprietário e `BASE_PATH` com o nome do repositório. `astro.config.mjs` admite as mesmas variáveis no ambiente local; `.env.example` documenta os valores. Para mudar domínio, obtenha autorização antes de alterar essa configuração.
+O endereço do Pages é `https://humbertomennella.github.io/framenexo/`. O workflow configura `SITE_URL` com a origem do proprietário e `BASE_PATH` com o nome do repositório. `astro.config.mjs` admite as mesmas variáveis no ambiente local; `.env.example` documenta os valores. Para mudar domínio, obtenha autorização antes de alterar essa configuração.
 
 ## Workflows e permissões
 
