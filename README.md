@@ -1,0 +1,3 @@
+# FrameNexo
+
+Portal gamer automatizado.
