@@ -1,0 +1,74 @@
+name: Coleta e edição
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Considerar uma edição antes da janela de dez horas
+        type: boolean
+        default: false
+  workflow_call:
+    inputs:
+      force:
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: framenexo-editorial
+  cancel-in-progress: false
+jobs:
+  editorial:
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      sha: ${{ steps.commit.outputs.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Coletar, verificar e redigir
+        id: pipeline
+        continue-on-error: true
+        env:
+          FORCE_EDITION: ${{ inputs.force || 'false' }}
+        run: |
+          if [ "$FORCE_EDITION" = "true" ]; then
+            python3 scripts/run_editorial.py --force
+          else
+            python3 scripts/run_editorial.py
+          fi
+      - name: Validar antes de salvar conteúdo
+        run: |
+          npm run build
+          npm run check:site
+      - name: Salvar dados e matérias aprovadas
+        id: commit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/commit_changes.py
+      - name: Registrar falha da execução
+        if: steps.pipeline.outcome == 'failure'
+        run: exit 1
+  deploy:
+    needs: editorial
+    if: ${{ always() && needs.editorial.outputs.changed == 'true' && needs.editorial.outputs.sha != '' }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ needs.editorial.outputs.sha }}

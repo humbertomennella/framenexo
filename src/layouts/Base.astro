@@ -1,0 +1,27 @@
+---
+import '../styles/global.css';
+import {href,categories,categorySlug,jsonld} from '../lib/news';
+const {title='Games. Contexto. Próximo frame.',description='Notícias de games com fontes, contexto e transparência editorial. PC, consoles, RPGs e a indústria dos jogos.',image='/og.png',article=false,noindex=false} = Astro.props;
+const canonical = new URL(Astro.url.pathname,Astro.site).href;
+const imageUrl = new URL(href(image),Astro.site).href;
+const siteTitle = `${title} | FrameNexo`;
+---
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{siteTitle}</title><meta name="description" content={description}/><meta name="theme-color" content="#090a0d"/>
+<link rel="canonical" href={canonical}/><link rel="icon" href={href('favicon.svg')} type="image/svg+xml"/>
+<link rel="alternate" type="application/rss+xml" title="FrameNexo — RSS" href={href('rss.xml')}/>
+<meta property="og:site_name" content="FrameNexo"/><meta property="og:locale" content="pt_BR"/><meta property="og:type" content={article?'article':'website'}/>
+<meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:image" content={imageUrl}/>
+<meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content={title}/><meta name="twitter:description" content={description}/><meta name="twitter:image" content={imageUrl}/>
+{noindex&&<meta name="robots" content="noindex,follow"/>}
+<script type="application/ld+json" set:html={jsonld({'@context':'https://schema.org','@type':'Organization',name:'FrameNexo',url:new URL(href(),Astro.site).href,logo:new URL(href('favicon.svg'),Astro.site).href})}/>
+<slot name="head"/>
+</head><body id="topo">
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<header class="site-header"><div class="wrap masthead"><a href={href()} class="wordmark" aria-label="FrameNexo — início">FRAME<span>/</span>NEXO</a><p class="motto">O JOGO CONTINUA.<br/>O CONTEXTO IMPORTA.</p><div class="header-actions"><a href={href('busca/')} aria-label="Buscar notícias"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="m15 15 6 6" stroke="currentColor" stroke-width="1.5"/></svg><span>Buscar</span></a><a class="rss-link" href={href('rss.xml')}>RSS ↗</a></div></div>
+<nav class="wrap categories" aria-label="Editorias"><a href={href('ultimas/')} class:list={{active:Astro.url.pathname===href('ultimas/')}}>Últimas</a>{categories.map(c=><a href={href(`categoria/${categorySlug(c)}/`)} class:list={{active:Astro.url.pathname===href(`categoria/${categorySlug(c)}/`)}}>{c}</a>)}</nav></header>
+<main id="conteudo" class="wrap"><slot/></main>
+<footer class="site-footer"><div class="wrap footer-top"><div><a href={href()} class="wordmark small">FRAME<span>/</span>NEXO</a><p>Games. Contexto. Próximo frame.</p></div><nav aria-label="Institucional"><a href={href('sobre/')}>Sobre</a><a href={href('politica-editorial/')}>Política editorial</a><a href={href('fontes/')}>Fontes</a><a href={href('arquivo/')}>Arquivo</a><a href={href('status/')}>Status</a><a href={href('rss.xml')}>RSS</a></nav></div><div class="wrap footer-bottom"><p>© {new Date().getUTCFullYear()} FrameNexo</p><p>Produção com automação e IA. Fontes em cada matéria.</p><a href="#topo" id="back-top">Voltar ao topo ↑</a></div></footer>
+<script>document.getElementById('back-top')?.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});document.querySelector<HTMLAnchorElement>('.wordmark')?.focus();});</script>
+</body></html>

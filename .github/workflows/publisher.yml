@@ -1,0 +1,18 @@
+name: Publicação manual
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Antecipar a janela editorial mantendo todas as verificações
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+jobs:
+  publish:
+    if: ${{ !github.event.repository.private }}
+    uses: ./.github/workflows/collector.yml
+    with:
+      force: ${{ inputs.force }}

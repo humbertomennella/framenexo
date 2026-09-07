@@ -1,0 +1,19 @@
+{
+  "name": "framenexo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "node scripts/build.mjs",
+    "preview": "astro preview --host 0.0.0.0",
+    "test": "python3 -m unittest discover -s tests -v",
+    "check:site": "python3 scripts/check_site.py",
+    "collect": "python3 scripts/pipeline.py collect",
+    "publish": "python3 scripts/pipeline.py publish",
+    "pipeline": "python3 scripts/run_editorial.py"
+  },
+  "dependencies": {"astro": "7.3.1"},
+  "devDependencies": {"typescript": "7.0.2"},
+  "engines": {"node": ">=24"}
+}

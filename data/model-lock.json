@@ -1,0 +1,13 @@
+{
+  "engine": "llama.cpp b10831",
+  "engineUrl": "https://github.com/ggml-org/llama.cpp/releases/download/b10831/llama-b10831-bin-ubuntu-x64.tar.gz",
+  "engineSha256": "ea07051ce8d76bf2240e6325bd607c8fe2db18863f9076625f9831a3fa5058ac",
+  "model": "Qwen3-4B-Q4_K_M",
+  "modelRevision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+  "modelUrl": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf",
+  "modelSha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5",
+  "license": "Apache-2.0",
+  "platform": "Linux x86_64",
+  "requiredDiskGB": 4,
+  "requiredMemoryGB": 8
+}

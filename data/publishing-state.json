@@ -1,0 +1,62 @@
+{
+  "paused": false,
+  "lastPublishedAt": "2026-09-07T13:45:17Z",
+  "lastCollectedAt": "2026-09-07T13:58:46Z",
+  "editionCount": 1,
+  "history": [
+    {
+      "slug": "exodus-previa-combate-escolhas",
+      "title": "Exodus detalha combate e escolhas em nova prévia do Xbox",
+      "eventKey": "exodus-previa-combate-escolhas",
+      "publishedAt": "2026-09-07T13:45:17Z",
+      "sourceUrls": [
+        "https://news.xbox.com/en-us/2026/09/04/exodus-preview-hands-on"
+      ]
+    },
+    {
+      "slug": "xbox-cloud-limites-novembro",
+      "title": "Xbox anuncia limites mensais para Cloud Gaming a partir de novembro",
+      "eventKey": "xbox-cloud-limites-novembro",
+      "publishedAt": "2026-09-07T13:45:17Z",
+      "sourceUrls": [
+        "https://news.xbox.com/en-us/2026/09/03/xbox-cloud-gaming-changes"
+      ]
+    },
+    {
+      "slug": "state-of-play-setembro-calendario",
+      "title": "State of Play abre um novo capítulo no calendário do PS5",
+      "eventKey": "state-of-play-setembro-calendario",
+      "publishedAt": "2026-09-07T13:45:17Z",
+      "sourceUrls": [
+        "https://blog.playstation.com/2026/09/03/state-of-play-state-of-play-japan-all-announcements-trailers"
+      ]
+    },
+    {
+      "slug": "game-pass-setembro-primeira-onda",
+      "title": "Game Pass programa Dragonwilds e The Royal Writ para setembro",
+      "eventKey": "game-pass-setembro-primeira-onda",
+      "publishedAt": "2026-09-07T13:45:17Z",
+      "sourceUrls": [
+        "https://news.xbox.com/en-us/2026/09/01/xbox-game-pass-update-september-wave-1"
+      ]
+    },
+    {
+      "slug": "bioeden-gestao-restauracao",
+      "title": "BioEden transforma restauração ambiental em jogo de gestão",
+      "eventKey": "bioeden-gestao-restauracao",
+      "publishedAt": "2026-09-07T13:45:17Z",
+      "sourceUrls": [
+        "https://news.xbox.com/en-us/2026/09/03/bioeden-4x-to-4r"
+      ]
+    },
+    {
+      "slug": "ps-plus-setembro-chained-echoes",
+      "title": "PlayStation Plus de setembro inclui Chained Echoes e Sniper Elite",
+      "eventKey": "ps-plus-setembro-chained-echoes",
+      "publishedAt": "2026-09-07T13:45:17Z",
+      "sourceUrls": [
+        "https://blog.playstation.com/2026/08/26/playstation-plus-monthly-games-for-september-sniper-elite-resistance-mlb-the-show-26-wobbly-life-chained-echoes"
+      ]
+    }
+  ]
+}

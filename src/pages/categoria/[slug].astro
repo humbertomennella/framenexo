@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';import Card from '../../components/Card.astro';import {categories,categorySlug,articles,inCategory,href} from '../../lib/news';
+export function getStaticPaths(){return categories.map(c=>({params:{slug:categorySlug(c)},props:{category:c}}))}
+const {category:c}=Astro.props;const items=articles.filter(a=>inCategory(a,c));
+---
+<Base title={c} description={`Notícias de ${c} no FrameNexo. Acontecimentos, fontes e contexto.`}><header class="page-head"><span class="eyebrow">Editorias / FrameNexo</span><h1>{c}</h1><p>{c==='Rumores'?'Informações sem confirmação oficial, sempre identificadas como tal.':c==='Análises'?'Interpretação identificada e fundamentada, separada da notícia.':`Acompanhe ${c} com fontes e contexto.`}</p></header>{items.length?<section class="cards page-section" aria-label={`Notícias de ${c}`}>{items.map(a=><Card article={a}/>)}</section>:<section class="empty"><h2>A próxima história ainda está em apuração.</h2><p>{c==='Rumores'||c==='Análises'?'Esta editoria exige revisão editorial antes de publicar.':'Ainda não há matérias publicadas nesta editoria.'} Publicamos quando há informação suficiente.</p><a class="button" href={href('ultimas/')}>Ver últimas notícias ↗</a></section>}</Base>

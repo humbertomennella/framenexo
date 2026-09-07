@@ -1,0 +1,48 @@
+[
+  {
+    "at": "2026-09-07T13:45:17Z",
+    "event": "initial_edition",
+    "published": 6,
+    "sources": [
+      "playstation-en",
+      "xbox-en"
+    ],
+    "method": "AI-assisted writing with primary-source checks in the creation session"
+  },
+  {
+    "at": "2026-09-07T13:58:46Z",
+    "event": "collection",
+    "collected": 170,
+    "discarded": 2,
+    "sourceCounts": {
+      "xbox-en": 10,
+      "cdprojekt": 2,
+      "pcgamer": 50,
+      "vgc": 10,
+      "playstation-en": 10,
+      "eurogamer": 80,
+      "playstation-br": 10
+    },
+    "errors": [
+      {
+        "source": "ign",
+        "code": "TimeoutError"
+      }
+    ],
+    "seconds": 98.99
+  },
+  {
+    "at": "2026-09-07T14:15:19Z",
+    "event": "model_validation",
+    "candidate": "fa3b117bb8fde10b7e94",
+    "approved": true,
+    "seconds": 94.61
+  },
+  {
+    "at": "2026-09-07T14:18:30.695933+00:00",
+    "event": "manual_validation",
+    "candidate": "fa3b117bb8fde10b7e94",
+    "approved": false,
+    "reason": "Same-model review accepted unsupported promotional language; deterministic guard added and factual scope extraction tightened."
+  }
+]

@@ -1,0 +1,4 @@
+---
+import Base from '../layouts/Base.astro';import Card from '../components/Card.astro';import {articles} from '../lib/news';
+---
+<Base title="Últimas notícias" description="As publicações mais recentes do FrameNexo, com contexto e fontes identificadas."><header class="page-head"><span class="eyebrow">O próximo frame</span><h1>Últimas notícias</h1><p>Acompanhe os acontecimentos que estão movendo os games.</p></header><section class="cards page-section" aria-label="Notícias recentes">{articles.map(a=><Card article={a}/>)}</section></Base>
