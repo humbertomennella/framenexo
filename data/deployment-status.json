@@ -2,6 +2,6 @@
   "repository": "humbertomennella/framenexo",
   "githubPages": true,
   "scheduleActive": true,
-  "generationValidated": false,
-  "notes": "Rotina executada no GitHub. O site mostra os dados do último build."
+  "generationValidated": true,
+  "notes": "Build, testes, imagens, RSS, sitemap e links validados antes da publicação."
 }

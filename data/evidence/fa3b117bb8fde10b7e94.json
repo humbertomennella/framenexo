@@ -1,0 +1,8 @@
+{
+  "sourceUrls": ["https://news.xbox.com/en-us/2026/09/04/play-the-wreck-runners-september-update-early-with-xbox-insiders"],
+  "verifiedAt": "2026-09-07T21:07:00Z",
+  "confidence": "CONFIRMADO",
+  "duplicate": false,
+  "claims": ["O teste é gratuito e não exige possuir o jogo.", "A sessão termina em 9 de setembro às 17h UTC.", "A versão inclui português do Brasil.", "O conteúdo está em desenvolvimento e pode mudar."],
+  "checks": ["fonte primária", "data", "números", "duplicidade", "rumor", "texto original"]
+}

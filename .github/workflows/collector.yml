@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       force:
-        description: Considerar uma edição antes da janela de dez horas
+        description: Considerar uma edição antes da janela de uma hora
         type: boolean
         default: false
   workflow_call:

@@ -1,0 +1,8 @@
+{
+  "sourceUrls": ["https://blog.br.playstation.com/2026/09/03/rhapsody-in-scarlet-anunciado-para-ps5"],
+  "verifiedAt": "2026-09-07T21:08:00Z",
+  "confidence": "CONFIRMADO",
+  "duplicate": false,
+  "claims": ["O jogo foi anunciado para PS5.", "A história se passa na Nova York dos anos 1920.", "Ellie comanda criaturas chamadas Besthas.", "A fonte não informa data de lançamento."],
+  "checks": ["fonte primária", "data", "duplicidade", "rumor", "texto original"]
+}

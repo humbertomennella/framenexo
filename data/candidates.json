@@ -28,7 +28,7 @@
     "category": "Xbox",
     "internalSummary": "Candidato de Xbox Wire; contexto factual será extraído antes da redação.",
     "relevance": 65,
-    "status": "candidate",
+    "status": "published",
     "confidence": "CONFIRMADO"
   },
   {
@@ -2620,7 +2620,7 @@
     "category": "PlayStation",
     "internalSummary": "Candidato de PlayStation Blog Brasil; contexto factual será extraído antes da redação.",
     "relevance": 65,
-    "status": "candidate",
+    "status": "published",
     "confidence": "CONFIRMADO"
   },
   {
@@ -2668,7 +2668,7 @@
     "category": "PlayStation",
     "internalSummary": "Candidato de PlayStation Blog Brasil; contexto factual será extraído antes da redação.",
     "relevance": 75,
-    "status": "candidate",
+    "status": "published",
     "confidence": "CONFIRMADO"
   },
   {

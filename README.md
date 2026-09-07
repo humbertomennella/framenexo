@@ -53,7 +53,7 @@ npm run collect
 # Instala e verifica aproximadamente 2,5 GB de pesos
 python3 scripts/local_model.py install
 
-# Fluxo completo, respeitando a janela de dez horas
+# Fluxo completo, respeitando a janela de uma hora
 python3 scripts/run_editorial.py
 
 # Considera uma edição imediatamente, mantendo os filtros factuais
@@ -166,7 +166,7 @@ O modelo usa CPU, download público e arquivos locais. Ele pode levar minutos po
 
 | Sintoma | Diagnóstico e ação |
 |---|---|
-| Nenhuma nova matéria | Verifique janela de dez horas, pausa, relevância e estados retidos. Não é necessariamente erro. |
+| Nenhuma nova matéria | Verifique janela de uma hora, pausa, relevância, mídia aprovada e estados retidos. Não é necessariamente erro. |
 | Timeout/403 de fonte | Consulte a fonte e seu feed; não contorne bloqueios. Outras fontes continuam. |
 | Falha de checksum | Não execute o arquivo baixado. Confira versão e origem; atualize o lock somente após validação. |
 | Modelo sem memória ou indisponível | Use Linux x86_64, RAM suficiente e loopback. Não mude para API paga automaticamente. |

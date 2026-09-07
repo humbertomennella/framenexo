@@ -4,9 +4,9 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import pipeline as p
 class Rules(unittest.TestCase):
- def test_ten_hours_across_midnight(self):
+ def test_one_hour_across_midnight(self):
   s={'lastPublishedAt':'2026-09-01T20:30:00Z'}
-  self.assertFalse(p.due(s,p.date('2026-09-02T06:29:59Z')));self.assertTrue(p.due(s,p.date('2026-09-02T06:30:00Z')))
+  self.assertFalse(p.due(s,p.date('2026-09-01T21:29:59Z')));self.assertTrue(p.due(s,p.date('2026-09-01T21:30:00Z')))
  def test_first_edition_is_due(self):self.assertTrue(p.due({}))
  def test_pause_wins(self):self.assertFalse(p.due({'paused':True}))
  def test_tracking_removed(self):self.assertEqual(p.canonical_url('https://host.test/a/?utm_source=x&x=2#section'),'https://host.test/a?x=2')
@@ -56,17 +56,24 @@ class Publication(unittest.TestCase):
  def tearDown(self):self.patch.stop();self.temp.cleanup()
  def test_atomic_idempotent_write(self):
   self.assertTrue(p.write('data/test.json',{'a':1}));self.assertFalse(p.write('data/test.json',{'a':1}));self.assertEqual(p.read('data/test.json',{}),{'a':1});self.assertFalse(list(self.root.rglob('*.tmp')))
+ def add_media(self,c):
+  path='/images/news/test.webp';asset=self.root/'public/images/news/test.webp';asset.parent.mkdir(parents=True,exist_ok=True);asset.write_bytes(b'webp')
+  p.write('data/image-rights.json',[{'path':path,'origin':'generated','credit':'FrameNexo','license':'original','sourceURL':None,'proof':'test fixture'}])
+  c['media']={'path':path,'alt':'Ilustração editorial de teste.','credit':'FrameNexo — ilustração editorial original.'};return c
+ def test_candidate_without_approved_media_is_not_published(self):
+  p.write('data/sources.json',[{'id':'official'}]);p.write('data/candidates.json',[{'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'}])
+  self.assertEqual(p.publish(force=True)['published'],0)
  def test_empty_batch_does_not_advance_clock(self):
   state={'lastPublishedAt':'2026-01-01T00:00:00Z','editionCount':2};p.write('data/publishing-state.json',state);p.write('data/candidates.json',[]);self.assertEqual(p.publish(force=True)['published'],0);self.assertEqual(p.read('data/publishing-state.json',{}),state)
  def test_pause_even_when_forced(self):
   p.write('data/publishing-state.json',{'paused':True});self.assertEqual(p.publish(force=True)['published'],0)
  def test_publication_is_immutable_and_idempotent(self):
-  p.write('data/sources.json',[{'id':'official','hosts':['example.com']}]);c={'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'};p.write('data/candidates.json',[c]);draft={'title':'Jogo recebe expansão anunciada oficialmente','description':'Novas informações divulgadas em anúncio oficial.','paragraphs':['Parágrafo factual aprovado.','Outro parágrafo factual aprovado.'],'eventKey':'game-expansion-2026-09','tags':['PC'],'facts':[{'claim':'Anúncio oficial','quote':'announcement'}]};review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
+  p.write('data/sources.json',[{'id':'official','hosts':['example.com']}]);c=self.add_media({'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'});p.write('data/candidates.json',[c]);draft={'title':'Jogo recebe expansão anunciada oficialmente','description':'Novas informações divulgadas em anúncio oficial.','paragraphs':['Parágrafo factual aprovado.','Outro parágrafo factual aprovado.'],'eventKey':'game-expansion-2026-09','tags':['PC'],'facts':[{'claim':'Anúncio oficial','quote':'announcement'}]};review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
   with patch.object(p,'evidence',return_value='Official announcement.'),patch.object(p,'generate',return_value=(draft,review)):
    self.assertEqual(p.publish(force=True)['published'],1);self.assertEqual(p.publish(force=True)['published'],0)
   self.assertEqual(len(list((self.root/'content/news').glob('*.md'))),1);self.assertEqual(p.read('data/publishing-state.json',{})['editionCount'],1)
  def test_dry_run_does_not_publish(self):
-  p.write('data/sources.json',[{'id':'official'}]);p.write('data/candidates.json',[{'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'}]);d={'title':'Expansão de um jogo recebe anúncio oficial','description':'Informações do anúncio oficial.','paragraphs':['A','B'],'eventKey':'game-expansion-2026-09','tags':['PC']}
+  p.write('data/sources.json',[{'id':'official'}]);p.write('data/candidates.json',[self.add_media({'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'})]);d={'title':'Expansão de um jogo recebe anúncio oficial','description':'Informações do anúncio oficial.','paragraphs':['A','B'],'eventKey':'game-expansion-2026-09','tags':['PC']}
   with patch.object(p,'evidence',return_value='Evidence'),patch.object(p,'generate',return_value=(d,{})):self.assertEqual(p.publish(force=True,dry_run=True)['approvedDrafts'],1)
   self.assertFalse(list((self.root/'content/news').glob('*.md')));self.assertEqual(p.read('data/candidates.json',[])[0]['status'],'candidate')
 if __name__=='__main__':unittest.main()

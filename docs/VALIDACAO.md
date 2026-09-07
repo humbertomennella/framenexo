@@ -5,7 +5,7 @@ Este registro separa verificações realmente executadas de etapas que dependem 
 ## Executado com sucesso
 
 - `npm ci` com Node.js 24 e lockfile presente.
-- `npm test`: 28 testes Python passaram. Cobertura inclui janela real de dez horas, primeira publicação, pausa, idempotência/atomicidade, URLs e SSRF, redirecionamento, HTML não confiável, prompt injection, XXE, RSS/Atom, deduplicação de eventos, rumores, conteúdo fraco, modelo remoto, números não sustentados, HTML na saída e detecção de cópia.
+- `npm test`: a suíte cobre janela real de uma hora, primeira publicação, pausa, mídia exclusiva com direitos registrados, idempotência/atomicidade, URLs e SSRF, redirecionamento, HTML não confiável, prompt injection, XXE, RSS/Atom, deduplicação de eventos, rumores, conteúdo fraco, modelo remoto, números não sustentados, HTML na saída e detecção de cópia.
 - `astro build`: 27 páginas estáticas geradas.
 - `npm run check:site`: passou com homepage, artigos, categorias, arquivo, 404, links internos, imagens, alt/dimensões, canonical, descriptions, JSON-LD, RSS, sitemap, robots e índice de busca.
 - Busca visual: `exodus` retornou uma matéria, abriu a página correspondente e exibiu a origem. Busca sem resultados retornou estado vazio sem inserir HTML não confiável.

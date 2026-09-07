@@ -110,7 +110,20 @@ def clusters(items):
  return groups
 def due(state,at=None):
  if state.get('paused'):return False
- last=date(state.get('lastPublishedAt'));return last is None or ((at or now())-last).total_seconds()>=36000
+ last=date(state.get('lastPublishedAt'));return last is None or ((at or now())-last).total_seconds()>=3600
+
+def approved_media(candidate,used_images=()):
+ media=candidate.get('media')
+ if not isinstance(media,dict):raise ValueError('approved_media_required')
+ path=media.get('path','')
+ if not isinstance(path,str) or not re.fullmatch(r'/images/news/[a-z0-9][a-z0-9._-]*\.(?:webp|png|jpe?g)',path):raise ValueError('invalid_media_path')
+ if path in set(used_images):raise ValueError('media_must_be_unique')
+ asset=(ROOT/'public'/path.lstrip('/')).resolve();public=(ROOT/'public').resolve()
+ if public not in asset.parents or not asset.is_file():raise ValueError('media_asset_missing')
+ rights=next((x for x in read('data/image-rights.json',[]) if x.get('path')==path),None)
+ if not rights or any(k not in rights for k in ('origin','credit','license','sourceURL','proof')):raise ValueError('media_rights_incomplete')
+ if not all(isinstance(media.get(k),str) and media[k].strip() for k in ('alt','credit')):raise ValueError('media_metadata_incomplete')
+ return dict(path=path,alt=media['alt'].strip(),credit=media['credit'].strip())
 def collect():
  start=time.monotonic();sources=[s for s in read('data/sources.json',[]) if s['enabled'] and s.get('feed')];old=read('data/candidates.json',[]);known={c['url'] for c in old};added=[];errors=[];counts={};discarded=0
  def one(s):return s,parse_feed(fetch(s['feed'],s['hosts']))
@@ -211,19 +224,22 @@ def published():
   raw=p.read_text();parts=raw.split('---',2)
   if len(parts)<3:raise ValueError('invalid_existing_frontmatter')
   item=json.loads(parts[1])
-  if item['status']=='published':records.append(dict(slug=item['slug'],title=item['title'],eventKey=item.get('eventKey'),publishedAt=item['publishedAt'],sourceUrls=[canonical_url(s['url']) for s in item['sources']]))
+  if item['status']=='published':records.append(dict(slug=item['slug'],title=item['title'],eventKey=item.get('eventKey'),publishedAt=item['publishedAt'],image=item.get('image'),sourceUrls=[canonical_url(s['url']) for s in item['sources']]))
  return records
 def publish(force=False,dry_run=False,limit=15):
  start=time.monotonic();state=read('data/publishing-state.json',{});history=published()
  # Recover a file written before an interrupted state update; never publish its event twice.
  if history:state['lastPublishedAt']=max([h['publishedAt'] for h in history]+([state['lastPublishedAt']] if state.get('lastPublishedAt') else []))
  if state.get('paused') or (not force and not due(state)):return dict(published=0,reason='paused_or_not_due')
- all_items=read('data/candidates.json',[]);sources={s['id']:s for s in read('data/sources.json',[])};urls={u for h in history for u in h['sourceUrls']};eligible=[]
+ all_items=read('data/candidates.json',[]);sources={s['id']:s for s in read('data/sources.json',[])};urls={u for h in history for u in h['sourceUrls']};used_images={h.get('image') for h in history if h.get('image')};reserved_images=set();eligible=[];media_by_id={}
  for c in all_items:
   if c['url'] in urls:
    if c['status']=='candidate':c['status']='published'
    continue
-  if c['status']=='candidate' and c['sourceType']=='primary' and c['relevance']>=65 and not needs_editor(c['title']) and date(c['publishedAt']) and now()-dt.timedelta(days=7)<=date(c['publishedAt'])<=now():eligible.append(c)
+  if c['status']=='candidate' and c['sourceType']=='primary' and c['relevance']>=65 and not needs_editor(c['title']) and date(c['publishedAt']) and now()-dt.timedelta(days=7)<=date(c['publishedAt'])<=now():
+   try:
+    media_by_id[c['id']]=approved_media(c,used_images|reserved_images);reserved_images.add(media_by_id[c['id']]['path']);eligible.append(c)
+   except ValueError:pass
  groups=clusters(eligible);count=0;held=0
  for group in groups[:max(0,min(limit,15))]:
   if time.monotonic()-start>1800:break
@@ -231,8 +247,8 @@ def publish(force=False,dry_run=False,limit=15):
   try:
    body=evidence(c,sources[c['sourceId']]);draft,review=generate(c,body,[{'title':h['title'],'eventKey':h['eventKey']} for h in history])
    if any(h.get('eventKey')==draft['eventKey'] for h in history):raise ValueError('duplicate_published_event')
-   slug=re.sub(r'[^a-z0-9]+','-',normalized(draft['title'])).strip('-')[:80].rstrip('-')+'-'+c['id'][:6];stamp=iso();image='/images/cathedral.webp' if c['category'] in ('RPG','Indies','PlayStation') else '/og.png'
-   meta=dict(title=draft['title'],slug=slug,description=draft['description'],publishedAt=stamp,updatedAt=stamp,category=c['category'],tags=list(dict.fromkeys([c['category']]+draft['tags'])),image=image,imageAlt='Ilustração editorial do FrameNexo.',imageCredit='Ilustração editorial original do FrameNexo, produzida com IA. Não é captura do jogo.',status='published',confidence='CONFIRMADO',relevance=c['relevance'],eventKey=draft['eventKey'],sources=[dict(name=x['sourceName'],url=x['url'],publishedAt=x['publishedAt'],type=x['sourceType']) for x in group],corrections=[],author='Redação FrameNexo',production='Local Qwen3-4B with deterministic checks and same-model factual verification')
+   slug=re.sub(r'[^a-z0-9]+','-',normalized(draft['title'])).strip('-')[:80].rstrip('-')+'-'+c['id'][:6];stamp=iso();media=media_by_id[c['id']]
+   meta=dict(title=draft['title'],slug=slug,description=draft['description'],publishedAt=stamp,updatedAt=stamp,category=c['category'],tags=list(dict.fromkeys([c['category']]+draft['tags'])),image=media['path'],imageAlt=media['alt'],imageCredit=media['credit'],status='published',confidence='CONFIRMADO',relevance=c['relevance'],eventKey=draft['eventKey'],sources=[dict(name=x['sourceName'],url=x['url'],publishedAt=x['publishedAt'],type=x['sourceType']) for x in group],corrections=[],author='Redação FrameNexo',production='Local Qwen3-4B with deterministic checks and same-model factual verification')
    if dry_run:
     write(f'.cache/drafts/{c["id"]}.json',dict(metadata=meta,paragraphs=draft['paragraphs'],review=review));count+=1;continue
    target=ROOT/'content/news'/f'{slug}.md'
