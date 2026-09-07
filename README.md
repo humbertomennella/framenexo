@@ -7,7 +7,7 @@
 - Primeira edição: seis notas sobre acontecimentos reais, redigidas com IA e conferidas nas fontes oficiais em 7 de setembro de 2026.
 - Frontend completo, busca, categorias, arquivo, RSS, sitemap e painel de status.
 - Coleta real: 170 candidatos, sete feeds responderam; o feed da IGN apresentou timeout.
-- Código dos workflows preparado. **GitHub Actions e GitHub Pages ainda não foram ativados.** A conexão disponível nesta sessão não oferece criação de repositório nem configuração de Pages; o repositório `humbertomennella/framenexo` ainda não existia na consulta.
+- Código dos workflows enviado para [`humbertomennella/framenexo`](https://github.com/humbertomennella/framenexo). O repositório está público e a fonte do GitHub Pages já foi salva; a primeira execução de publicação precisa concluir para validar o endereço final.
 - A publicação de revisão em Sites é privada, acessível ao proprietário. Ela é um retrato estático e não recebe futuras edições do GitHub automaticamente.
 - Veja `docs/VALIDACAO.md` e `data/deployment-status.json` para distinguir verificações concluídas de etapas pendentes.
 
@@ -108,7 +108,7 @@ Há no máximo 15 candidatos por execução e um orçamento editorial de 30 minu
 
 ## GitHub e Pages
 
-A conta identificada nesta sessão foi `humbertomennella`. Para finalizar sem compartilhar credenciais no chat, existe um script de instalação local que cria **apenas um novo repositório público dedicado**, ativa Pages quando permitido e envia o projeto:
+A conta identificada nesta sessão foi `humbertomennella`. O repositório público dedicado já foi criado e recebeu o projeto. Para reinstalações em outra conta, existe um script de instalação local que cria **apenas um novo repositório público dedicado**, ativa Pages quando permitido e envia o projeto:
 
 ```bash
 # No seu computador, com GitHub CLI instalado
@@ -118,7 +118,7 @@ python3 scripts/bootstrap_github.py --owner humbertomennella --repo framenexo
 
 Ele aborta se a conta não corresponder ou se o repositório já existir. Não modifica outros repositórios, configurações globais, domínio ou planos. Se Pages não for ativado pela API, selecione **Settings → Pages → Build and deployment → Source → GitHub Actions** no novo repositório.
 
-Outra opção é criar `framenexo` público com README pela interface do GitHub, disponibilizá-lo à conexão do ChatGPT e retornar à conversa para envio dos arquivos. Após o primeiro deploy, confirme a URL retornada pela execução e registre a ativação em `data/deployment-status.json`.
+Após o primeiro deploy, confirme a URL retornada pela execução e registre a ativação em `data/deployment-status.json`.
 
 O endereço esperado de Pages, ainda **não ativo nem verificado**, é `https://humbertomennella.github.io/framenexo/`. O workflow configura `SITE_URL` com a origem do proprietário e `BASE_PATH` com o nome do repositório. `astro.config.mjs` admite as mesmas variáveis no ambiente local; `.env.example` documenta os valores. Para mudar domínio, obtenha autorização antes de alterar essa configuração.
 
