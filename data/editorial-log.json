@@ -62,5 +62,23 @@
     },
     "errors": [],
     "seconds": 3.38
+  },
+  {
+    "at": "2026-09-07T22:00:58Z",
+    "event": "collection",
+    "collected": 6,
+    "discarded": 2,
+    "sourceCounts": {
+      "xbox-en": 10,
+      "playstation-en": 10,
+      "playstation-br": 10,
+      "pcgamer": 50,
+      "vgc": 10,
+      "eurogamer": 80,
+      "ign": 20,
+      "cdprojekt": 2
+    },
+    "errors": [],
+    "seconds": 0.99
   }
 ]
