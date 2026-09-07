@@ -12,5 +12,12 @@
     "credit": "FrameNexo / IA",
     "sourceURL": null,
     "usage": "Original brand identity and social card"
+  },
+  {
+    "path": "component:EditorialCover",
+    "origin": "Generated from article metadata by FrameNexo source code",
+    "credit": "FrameNexo",
+    "sourceURL": null,
+    "usage": "Original typographic editorial cover; contains no third-party artwork, game screenshot, logo or character"
   }
 ]
