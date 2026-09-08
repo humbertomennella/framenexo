@@ -13,9 +13,9 @@
   "status": "published",
   "eventKey": "nasa-ceu-setembro-2026",
   "sources": [{"name":"NASA Science","url":"https://science.nasa.gov/solar-system/skywatching/whats-up-september-2026-skywatching-tips-from-nasa/","publishedAt":"2026-09-01","type":"primary"}],
-  "imageCredit": "Ilustração editorial original do FrameNexo, gerada por IA. Não é fotografia do céu nem imagem da NASA.",
+  "imageCredit": "Ilustração editorial original da Linha Zero, gerada por IA. Não é fotografia do céu nem imagem da NASA.",
   "imageAlt": "Ilustração editorial de laboratório, tecnologia e uma planta sob luz fria.",
-  "author": "Redação FrameNexo",
+  "author": "Redação Linha Zero",
   "production": "Texto original em português, baseado no guia oficial da NASA.",
   "corrections": []
 }

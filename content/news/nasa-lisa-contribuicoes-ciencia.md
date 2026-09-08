@@ -13,9 +13,9 @@
   "status": "published",
   "eventKey": "nasa-lisa-science-gaps-2026",
   "sources": [{"name":"NASA Science","url":"https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/community/reminder-lisa-science-gaps-2026/","publishedAt":"2026-09-04","type":"primary"}],
-  "imageCredit": "Ilustração editorial original do FrameNexo, gerada por IA. Não é fotografia nem representação do observatório.",
+  "imageCredit": "Ilustração editorial original da Linha Zero, gerada por IA. Não é fotografia nem representação do observatório.",
   "imageAlt": "Ilustração editorial de uma esfera luminosa conectando continentes e centros de pesquisa.",
-  "author": "Redação FrameNexo",
+  "author": "Redação Linha Zero",
   "production": "Texto original em português, baseado no comunicado oficial da NASA.",
   "corrections": []
 }
@@ -25,4 +25,4 @@ A NASA informou que está recebendo contribuições da comunidade científica pa
 
 O processo busca identificar perguntas científicas que ainda exigem investigação para orientar futuras propostas do programa LISA Preparatory Science. A agência descreve a iniciativa como uma etapa de preparação de pesquisa, não como o anúncio de uma missão já operacional.
 
-O prazo e o escopo pertencem ao comunicado da NASA e são direcionados à comunidade de pesquisadores. O FrameNexo não interpreta a chamada como confirmação de descobertas ou de cronograma de lançamento.
+O prazo e o escopo pertencem ao comunicado da NASA e são direcionados à comunidade de pesquisadores. A Linha Zero não interpreta a chamada como confirmação de descobertas ou de cronograma de lançamento.

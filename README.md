@@ -1,12 +1,12 @@
-# FrameNexo
+# Linha Zero
 
-**Games. Contexto. Próximo frame.** Portal estático de notícias gamer com fontes identificadas, conteúdo original e automação editorial conservadora.
+**O fato primeiro. O contexto importa.** Portal de notícias sobre o Brasil e o mundo, com fontes identificadas, texto original e automação editorial conservadora.
 
 ## Situação da entrega
 
-- Primeira edição: seis notas sobre acontecimentos reais, redigidas com IA e conferidas nas fontes oficiais em 7 de setembro de 2026.
+- Nova fase editorial: cobertura de Brasil, mundo, política, economia, tecnologia, ciência, cultura, esportes, saúde e meio ambiente.
 - Frontend completo, busca, categorias, arquivo, RSS, sitemap e painel de status.
-- Coleta real: 170 candidatos, sete feeds responderam; o feed da IGN apresentou timeout.
+- Fontes oficiais e veículos jornalísticos cadastrados para coleta e verificação.
 - Código dos workflows enviado para [`humbertomennella/framenexo`](https://github.com/humbertomennella/framenexo). O repositório está público, o GitHub Pages está configurado e o primeiro deploy foi concluído com sucesso.
 - A publicação de revisão em Sites é privada, acessível ao proprietário. Ela é um retrato estático e não recebe futuras edições do GitHub automaticamente.
 - Veja `docs/VALIDACAO.md` e `data/deployment-status.json` para distinguir verificações concluídas de etapas pendentes.
@@ -88,7 +88,7 @@ Para usar `npm run publish` separadamente, inicie `python3 scripts/local_model.p
 
 ## Fontes e coleta
 
-Há 15 fontes cadastradas, oito com feed: PlayStation Blog global e Brasil, Xbox Wire, CD Projekt, PC Gamer, VGC, Eurogamer e IGN. Nintendo, Steam, Epic, Larian, Rockstar, Xbox Wire Brasil e GamesIndustry.biz são referências sem coleta automática habilitada nesta versão. Habilitar o cadastro não prova disponibilidade de uma fonte; os logs registram quais responderam.
+Há 12 fontes cadastradas, seis com feed: IBGE, NASA Science, Nações Unidas, Organização Mundial da Saúde, Agência Brasil e DW Brasil. Portal Gov.br, Banco Central, Câmara, Senado, UNESCO e Ministério do Meio Ambiente permanecem como referências editoriais. Habilitar o cadastro não prova disponibilidade de uma fonte; os registros informam quais responderam.
 
 A rotina aceita RSS/Atom, mantém até 2.000 candidatos e ignora itens sem data, futuros ou com mais de sete dias. Links só podem usar HTTPS e hosts previamente aprovados. Não existe contorno de bloqueio, autenticação, paywall ou CAPTCHA. Falhas temporárias recebem até três tentativas limitadas; uma fonte indisponível não invalida as outras.
 
@@ -178,6 +178,6 @@ O modelo usa CPU, download público e arquivos locais. Ele pode levar minutos po
 
 ## Limites atuais
 
-Automação factual pode errar; ranking e deduplicação não substituem uma redação. Há cobertura desigual entre editorias porque apenas oito feeds estão habilitados. A primeira edição não inventa notícias para preencher categorias vazias. Capas próprias são ilustrações, não screenshots dos jogos. Não há garantia de indexação, participação no Google News/Discover ou resultado de Core Web Vitals sem medição em produção.
+Automação factual pode errar; ranking e deduplicação não substituem uma redação. Há cobertura desigual entre editorias porque seis feeds estão habilitados. A publicação não inventa notícias para preencher categorias vazias. Capas próprias são ilustrações editoriais, não fotografias dos acontecimentos. Não há garantia de indexação, participação no Google News/Discover ou resultado de Core Web Vitals sem medição em produção.
 
 GitHub, Pages, notificações e execução horária só podem ser considerados operacionais depois da criação do repositório, ativação e validação de uma execução real. Não há integração secreta, credencial embutida ou serviço pago oculto.

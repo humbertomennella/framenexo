@@ -13,9 +13,9 @@
   "status": "published",
   "eventKey": "ibge-mapas-mundi-brasil-2026",
   "sources": [{"name":"Agência de Notícias IBGE","url":"https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47986-dia-da-independencia-ibge-libera-acesso-aos-mapas-mundi-do-brasil","publishedAt":"2026-09-06","type":"primary"}],
-  "imageCredit": "Ilustração editorial original do FrameNexo, gerada por IA. Não é fotografia nem reprodução dos mapas do IBGE.",
+  "imageCredit": "Ilustração editorial original da Linha Zero, gerada por IA. Não é fotografia nem reprodução dos mapas do IBGE.",
   "imageAlt": "Ilustração de uma redação diante de uma paisagem urbana brasileira ao amanhecer.",
-  "author": "Redação FrameNexo",
+  "author": "Redação Linha Zero",
   "production": "Texto original em português, baseado no anúncio do IBGE.",
   "corrections": []
 }
@@ -25,4 +25,4 @@ O Instituto Brasileiro de Geografia e Estatística anunciou a liberação de ace
 
 Os mapas apresentam o território brasileiro em uma coleção voltada à consulta pública e à circulação de informação geográfica. A iniciativa amplia o acesso a materiais cartográficos produzidos pelo instituto, mas não substitui a consulta às bases estatísticas e metodologias oficiais.
 
-O FrameNexo trata a publicação como recurso de informação pública. A utilidade dos mapas depende da forma como cada leitor interpreta escala, projeção e data de produção; por isso, o material original do IBGE continua sendo a referência para uso técnico.
+A Linha Zero trata a publicação como recurso de informação pública. A utilidade dos mapas depende da forma como cada leitor interpreta escala, projeção e data de produção; por isso, o material original do IBGE continua sendo a referência para uso técnico.
