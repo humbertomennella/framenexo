@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/cmn-amplia-renegociacao-de-dividas-rurais-ligadas-eventos-climaticos.webp",
   "imageAlt": "Ilustração editorial original sobre: CMN amplia renegociação de dívidas rurais afetadas por eventos climáticos. Não é fotografia do fato.",
-  "imageCredit": "Base Um / Estúdio Meridiano",
+  "imageCredit": "Vértice Factual / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Base Um",
+  "author": "Redação Vértice Factual",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

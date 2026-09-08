@@ -9,7 +9,7 @@ const recent=articles.filter(a=>!featuredSlugs.has(a.slug)).slice(0,3);
 const sections=categories.map(category=>({category,items:articles.filter(a=>inCategory(a,category))})).filter(section=>section.items.length);
 ---
 <Base>
- <h1 class="sr-only">Base Um — notícias do Brasil e do mundo</h1>
+ <h1 class="sr-only">Vértice Factual — notícias do Brasil e do mundo</h1>
  <Headlines articles={featured}/>
  {recent.length>0&&<section class="section"><div class="section-heading"><h2>Mais recentes</h2><a href={href('ultimas/')}>Todas as notícias ↗</a></div><div class="cards">{recent.map(a=><Card article={a}/>)}</div></section>}
  <div class="editorial-strip"><div><strong>Brasil e mundo, com contexto.</strong><p>Fontes identificadas, informação atribuída e transparência sobre o uso de IA.</p></div><a href={href('politica-editorial/')}>Conheça nossa política editorial ↗</a></div>

@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/reino-unido-anuncia-ps400-milhoes-para-fundo-florestas-tropicais.webp",
   "imageAlt": "Ilustração editorial original sobre: Reino Unido anuncia 400 milhões de libras para fundo de florestas tropicais. Não é fotografia do fato.",
-  "imageCredit": "Base Um / Estúdio Meridiano",
+  "imageCredit": "Vértice Factual / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Base Um",
+  "author": "Redação Vértice Factual",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

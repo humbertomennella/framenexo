@@ -1,6 +1,6 @@
 # Identidade editorial
 
-**Base Um** é a identidade do portal de notícias do Brasil e do mundo. “Base” representa a evidência verificável que sustenta cada publicação; “Um” expressa uma central única que reúne fontes diversas sem apagar suas diferenças. A assinatura visual é **BASE/UM** e o lema é **Informação com base. Contexto por inteiro.**
+**Vértice Factual** é a identidade do portal de notícias do Brasil e do mundo. “Vértice” representa o ponto em que rotas independentes de informação se encontram; “Factual” explicita que a convergência precisa estar sustentada por evidência verificável. A assinatura visual é **VÉRTICE/FACTUAL** e o lema é **Fontes que convergem. Contexto que esclarece.**
 
 A escolha editorial não equivale, por si só, a registro de marca ou reserva de domínio. Antes de contratar um domínio próprio ou iniciar exploração comercial, a disponibilidade deve ser confirmada nos serviços oficiais do Registro.br e do INPI.
 
@@ -13,8 +13,8 @@ A escolha editorial não equivale, por si só, a registro de marca ou reserva de
 | Texto | `#F1F2F4` |
 | Texto secundário | `#A0A5AF` |
 | Tipografia | Arial / Helvetica / sans-serif, sem fonte remota |
-| Wordmark | BASE/UM, peso forte e barra verde |
-| Favicon | B, barra verde e U |
+| Wordmark | VÉRTICE/FACTUAL, peso forte e barra verde |
+| Favicon | V geométrico atravessado pela barra verde |
 
 A hierarquia visual combina um carrossel compacto, cards editoriais e listas cronológicas. No celular, o conteúdo é empilhado em uma coluna, com navegação horizontal pelas editorias, alvos de toque amplos e leitura sem rolagem lateral.
 

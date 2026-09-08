@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/fiocruz-vai-iniciar-testes-da-primeira-vacina-rnam-contra-covid-19.webp",
   "imageAlt": "Ilustração editorial original sobre: Fiocruz inicia testes da primeira vacina brasileira de RNA mensageiro contra covid-19. Não é fotografia do fato.",
-  "imageCredit": "Base Um / Estúdio Meridiano",
+  "imageCredit": "Vértice Factual / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Base Um",
+  "author": "Redação Vértice Factual",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

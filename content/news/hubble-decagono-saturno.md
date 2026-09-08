@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/hubble-decagono-saturno.webp",
   "imageAlt": "Ilustração editorial original sobre Hubble identifica onda de dez lados no polo sul de Saturno. Não é fotografia da NASA.",
-  "imageCredit": "Base Um / Estúdio Meridiano",
+  "imageCredit": "Vértice Factual / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 82,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Base Um",
+  "author": "Redação Vértice Factual",
   "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial."
 }
 ---

@@ -1,6 +1,6 @@
-# Base Um
+# Vértice Factual
 
-**O fato primeiro. O contexto importa.** Portal de notícias sobre o Brasil e o mundo, com fontes identificadas, texto original e automação editorial conservadora.
+**Fontes que convergem. Contexto que esclarece.** Central de notícias sobre o Brasil e o mundo, com múltiplas rotas de apuração, fontes identificadas, texto original e automação editorial conservadora.
 
 ## Situação da entrega
 
@@ -88,7 +88,9 @@ Para usar `npm run publish` separadamente, inicie `python3 scripts/local_model.p
 
 ## Fontes e coleta
 
-Há 12 fontes cadastradas, seis com feed: IBGE, NASA Science, Nações Unidas, Organização Mundial da Saúde, Agência Brasil e DW Brasil. Portal Gov.br, Banco Central, Câmara, Senado, UNESCO e Ministério do Meio Ambiente permanecem como referências editoriais. Habilitar o cadastro não prova disponibilidade de uma fonte; os registros informam quais responderam.
+O cadastro separa organizações de canais técnicos. A Câmara dos Deputados, por exemplo, possui sete feeds temáticos, mas conta como uma única instituição. A rede combina documentos públicos, organismos científicos, agências e redações nacionais e internacionais. CNN Brasil, UOL, Terra, g1, Folha, Estadão, Valor, Reuters, AP, AFP, BBC, DW, The New York Times, Financial Times e outras referências entram por função editorial, sem receber aval irrestrito.
+
+Somente feeds cuja disponibilidade técnica foi validada ficam ativos. As demais organizações permanecem em consulta editorial: a rotina pode usá-las durante apuração específica, mas não contorna bloqueio, autenticação, paywall, CAPTCHA ou termos de uso. Quantidade de cadastros não substitui diversidade real.
 
 A rotina aceita RSS/Atom, mantém até 2.000 candidatos e ignora itens sem data, futuros ou com mais de sete dias. Links só podem usar HTTPS e hosts previamente aprovados. Não existe contorno de bloqueio, autenticação, paywall ou CAPTCHA. Falhas temporárias recebem até três tentativas limitadas; uma fonte indisponível não invalida as outras.
 
@@ -96,11 +98,11 @@ Cada candidato registra título original, fonte, URL, datas em UTC, assunto, cat
 
 ## Publicação e qualidade
 
-O cron `17 * * * *` apenas desperta o processo aproximadamente a cada hora. A condição real é `agora - lastPublishedAt >= 36.000 segundos`. Uma edição vazia não avança esse horário. O tempo é medido em UTC e apresentado no site em horário de Brasília. Datas de fontes sem horário são tratadas como datas, sem inventar uma hora.
+O cron `17 * * * *` apenas desperta o processo aproximadamente a cada hora. A condição real é `agora - lastPublishedAt >= 3.600 segundos`. Uma edição vazia não avança esse horário. O tempo é medido em UTC e apresentado no site em horário de Brasília. Datas de fontes sem horário são tratadas como datas, sem inventar uma hora.
 
 Duplicatas são agrupadas por URL normalizada e semelhança de acontecimento. Uma segunda avaliação do modelo compara o evento com o histórico publicado. Matérias existentes também são lidas diretamente para impedir repetição após uma interrupção entre gravação de arquivo e estado. Comparação semântica por IA é imperfeita; revisão posterior continua necessária.
 
-Somente candidatos de fonte primária, com relevância mínima de 65 e evidência suficiente podem entrar na publicação automática. Rumores, análises, prévias e relatos de experiência ficam para revisão. Imprensa especializada é coletada, mas não publicada automaticamente sem uma etapa editorial adicional.
+Uma matéria completa nova exige duas organizações independentes sustentando o mesmo acontecimento. Canais diferentes da mesma instituição e republicações da mesma agência contam como uma única rota. Quando existe documento primário, ele integra a apuração; sem confirmação independente suficiente, a pauta é retida ou tratada como nota em desenvolvimento. Rumores, análises, prévias e relatos de experiência ficam para revisão.
 
 O modelo recebe texto isolado como dado não confiável, sem ferramentas. A redação tem título, resumo, parágrafos, referências factuais e tags. Verificações controlam formato, extensão, números sem apoio na fonte, cópia de trechos e saída potencialmente executável. Uma segunda passagem avalia sustentação factual, português, originalidade e duplicação. **Essa passagem usa o mesmo modelo: não é confirmação independente nem garantia de precisão.**
 
@@ -150,7 +152,7 @@ O modelo usa CPU, download público e arquivos locais. Ele pode levar minutos po
 
 **Publicação manual:** use Actions → Publicação manual → Run workflow. A opção `force` antecipa apenas o relógio; não ignora pausa nem critérios de qualidade.
 
-**Adicionar fonte:** inclua identificador único, nome, tipo, URL, feed, hosts exatos e categoria em `data/sources.json`. Verifique a origem, disponibilidade do feed e permissões de uso antes de habilitar. Faça uma coleta local e inspecione o log. Não acrescente domínios genéricos ou hosts de usuário à lista de confiança.
+**Adicionar fonte:** inclua identificador único, organização, nome, tipo, função editorial, cobertura, URL, feed, hosts exatos e categoria em `data/sources.json`. Verifique origem, disponibilidade do feed, autoria e permissões de uso antes de habilitar. Faça uma coleta local e inspecione o log. Não acrescente domínios genéricos ou hosts de usuário à lista de confiança.
 
 **Corrigir matéria:** edite o Markdown existente, preserve `publishedAt`, altere `updatedAt` e acrescente uma nota em `corrections` quando a mudança for factual. Rode testes, build e verificação de site antes de enviar. Não apague o histórico.
 
@@ -178,6 +180,6 @@ O modelo usa CPU, download público e arquivos locais. Ele pode levar minutos po
 
 ## Limites atuais
 
-Automação factual pode errar; ranking e deduplicação não substituem uma redação. Há cobertura desigual entre editorias porque seis feeds estão habilitados. A publicação não inventa notícias para preencher categorias vazias. Capas próprias são ilustrações editoriais, não fotografias dos acontecimentos. Não há garantia de indexação, participação no Google News/Discover ou resultado de Core Web Vitals sem medição em produção.
+Automação factual pode errar; ranking e deduplicação não substituem uma redação. A coleta automática ainda cobre menos organizações que a rede de consulta editorial, e a distribuição entre editorias pode ser desigual. A publicação não inventa notícias para preencher categorias vazias. Capas próprias são ilustrações editoriais, não fotografias dos acontecimentos. Não há garantia de indexação, participação no Google News/Discover ou resultado de Core Web Vitals sem medição em produção.
 
 GitHub, Pages, notificações e execução horária só podem ser considerados operacionais depois da criação do repositório, ativação e validação de uma execução real. Não há integração secreta, credencial embutida ou serviço pago oculto.

@@ -51,6 +51,12 @@ for file,page in pages.items():
   if target is None:continue
   check(target.exists(),f'{file.relative_to(DIST)}: broken link {url}')
   if fragment and target in pages:check(urllib.parse.unquote(fragment) in pages[target].ids,f'{file.name}: missing anchor {url}')
+source_registry=json.loads((ROOT/'data/sources.json').read_text());source_ids=set();source_orgs=set()
+for source in source_registry:
+ for key in ['id','organization','name','type','role','coverage','url','hosts','category','enabled']:check(key in source,f'source {source.get("id","unknown")}: missing {key}')
+ check(source.get('id') not in source_ids,f'source {source.get("id")}: duplicate id');source_ids.add(source.get('id'));source_orgs.add(source.get('organization'))
+ check(source.get('type') in ('primary','press'),f'source {source.get("id")}: invalid type');check(source.get('role') in ('evidence','wire','reporting','specialist','discovery'),f'source {source.get("id")}: invalid role')
+ check(not source.get('enabled') or bool(source.get('feed')),f'source {source.get("id")}: enabled without feed')
 records=[]
 used_image_paths=set();used_image_hashes=set();now=dt.datetime.now(dt.timezone.utc)
 for file in (ROOT/'content/news').glob('*.md'):
@@ -60,6 +66,8 @@ for file in (ROOT/'content/news').glob('*.md'):
  for key in ['title','slug','description','publishedAt','updatedAt','category','tags','image','imageCredit','status','sources','confidence']:check(key in a,f'{file.name}: missing {key}')
  if a.get('status')!='published':continue
  records.append(a);check(bool(a.get('sources')),f'{file.name}: sources missing');image_file=DIST/a['image'].lstrip('/');check(image_file.is_file(),f'{file.name}: image missing');check('<script' not in parts[2].lower(),f'{file.name}: unsafe body');check(len(parts[2].split())>=450,f'{file.name}: full article is too short')
+ if a.get('verificationPolicyVersion',0)>=2:
+  organizations={source.get('organization') or urllib.parse.urlsplit(source['url']).hostname for source in a['sources']};check(len(organizations)>=2,f'{file.name}: policy v2 requires two independent organizations')
  try:published=dt.datetime.fromisoformat(a['publishedAt'].replace('Z','+00:00'));check(published<=now+dt.timedelta(minutes=5),f'{file.name}: publication date is in the future')
  except Exception:errors.append(f'{file.name}: invalid publication date')
  check(a['image'] not in used_image_paths,f'{file.name}: duplicate image path');used_image_paths.add(a['image'])

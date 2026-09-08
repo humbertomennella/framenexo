@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Card from '../../components/Card.astro';
-import {articles,articleUrl,href,date,time,reading,categorySlug,jsonld,usesEditorialCover} from '../../lib/news';
+import {articles,articleUrl,href,date,time,reading,categorySlug,jsonld,usesEditorialCover,independentSourceCount,displayedConfidence} from '../../lib/news';
 import EditorialCover from '../../components/EditorialCover.astro';
 
 export function getStaticPaths(){return articles.map(a=>({params:{slug:a.slug},props:{article:a}}))}
@@ -9,9 +9,12 @@ const {article:a}=Astro.props;
 const Content=a.Content;
 const url=new URL(articleUrl(a),Astro.site).href;
 const useEditorialCover=usesEditorialCover(a);
-const newsSchema:any={'@context':'https://schema.org','@type':'NewsArticle',headline:a.title,description:a.description,datePublished:a.publishedAt,dateModified:a.updatedAt,mainEntityOfPage:url,author:{'@type':'Organization',name:'Redação Base Um',url:new URL(href('sobre/'),Astro.site).href},publisher:{'@type':'Organization',name:'Base Um'},articleSection:a.category,keywords:a.tags.join(', '),citation:a.sources.map(s=>s.url)};
+const newsSchema:any={'@context':'https://schema.org','@type':'NewsArticle',headline:a.title,description:a.description,datePublished:a.publishedAt,dateModified:a.updatedAt,mainEntityOfPage:url,author:{'@type':'Organization',name:'Redação Vértice Factual',url:new URL(href('sobre/'),Astro.site).href},publisher:{'@type':'Organization',name:'Vértice Factual'},articleSection:a.category,keywords:a.tags.join(', '),citation:a.sources.map(s=>s.url)};
 if(!useEditorialCover)newsSchema.image=[new URL(href(a.image),Astro.site).href];
 const related=articles.filter(b=>b.slug!==a.slug&&(b.category===a.category||b.tags.some(t=>a.tags.includes(t)))).slice(0,3);
+const sourceRoutes=independentSourceCount(a);
+const confidence=displayedConfidence(a);
+const sourceRole=(source:any)=>source.role==='wire'?'Agência de notícias':source.role==='specialist'?'Cobertura especializada':source.role==='discovery'?'Descoberta de pauta':source.type==='primary'?'Fonte primária':'Imprensa / contexto';
 ---
 <Base title={a.title} description={a.description} image={useEditorialCover?'':a.image} article>
  <Fragment slot="head">
@@ -22,18 +25,18 @@ const related=articles.filter(b=>b.slug!==a.slug&&(b.category===a.category||b.ta
  <article>
   <header class="article-head">
    <nav class="breadcrumbs" aria-label="Caminho de navegação"><a href={href()}>Início</a><span aria-hidden="true">/</span><a href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><span aria-hidden="true">/</span><span>Notícia</span></nav>
-   <a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><span class="badge">{a.confidence}</span>
+   <a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><span class="badge">{confidence}</span>
    <h1>{a.title}</h1><p class="dek">{a.description}</p>
-   <div class="article-byline"><strong>Redação Base Um</strong> · <time datetime={a.publishedAt}>{date(a.publishedAt)}, {time(a.publishedAt)} BRT</time> · {reading(a)} min de leitura{a.updatedAt!==a.publishedAt&&<span> · Atualizado em {date(a.updatedAt)}, {time(a.updatedAt)} BRT</span>}</div>
+   <div class="article-byline"><strong>Redação Vértice Factual</strong> · <time datetime={a.publishedAt}>{date(a.publishedAt)}, {time(a.publishedAt)} BRT</time> · {reading(a)} min de leitura{a.updatedAt!==a.publishedAt&&<span> · Atualizado em {date(a.updatedAt)}, {time(a.updatedAt)} BRT</span>}</div>
   </header>
-  <figure class="article-figure">{useEditorialCover?<EditorialCover article={a}/>:<img src={href(a.image)} alt={a.imageAlt} width="1440" height="810" fetchpriority="high"/>}<figcaption>{useEditorialCover?'Capa editorial tipográfica do Base Um. Não representa fotografia do acontecimento.':a.imageCredit}</figcaption></figure>
+  <figure class="article-figure">{useEditorialCover?<EditorialCover article={a}/>:<img src={href(a.image)} alt={a.imageAlt} width="1440" height="810" fetchpriority="high"/>}<figcaption>{useEditorialCover?'Capa editorial tipográfica do Vértice Factual. Não representa fotografia do acontecimento.':a.imageCredit}</figcaption></figure>
   <nav class="reading-choices" aria-label="Escolha o modo de leitura"><a href="#rapida">Resumo em 30 segundos</a><a href="#materia">Matéria completa · {reading(a)} min</a></nav>
   <div class="article-reading">
    <aside class="quick-read" id="rapida"><span class="eyebrow">Leitura rápida</span><h2>Em 30 segundos</h2><p>{a.description}</p><ul>{(a.quickTakeaways||[a.description]).map(item=><li>{item}</li>)}</ul><a href="#materia" class="quick-jump">Ir para a matéria completa ↓</a></aside>
    <div class="article-text">
     <div id="materia" class="article-context"><span class="eyebrow">Matéria completa</span><Content/></div>
-    <aside class="source-box"><div class="source-box-head"><h2>Fontes desta matéria</h2><span>{a.sources.length} {a.sources.length===1?'fonte':'fontes'}</span></div><p>Os links abaixo sustentam os fatos descritos. Fonte primária confirma um documento ou anúncio; imprensa serve para contexto e checagem cruzada.</p><ol>{a.sources.map(s=><li><a href={s.url} rel="noopener noreferrer">{s.name} ↗</a><span class="source-kind">{s.type==='primary'?'Fonte primária':'Imprensa / contexto'}</span><time datetime={s.publishedAt}>{date(s.publishedAt)}</time></li>)}</ol></aside>
-    <p class="disclosure">Texto produzido com apoio do sistema editorial Base. Imagem assinada pelo Estúdio Meridiano quando indicada no crédito. Automação reduz erros repetitivos, mas não garante infalibilidade; consulte as fontes e a <a href={href('politica-editorial/')}>política editorial</a>.</p>
+    <aside class="source-box"><div class="source-box-head"><h2>Fontes desta matéria</h2><span>{sourceRoutes} {sourceRoutes===1?'rota independente':'rotas independentes'}</span></div><p>Os links abaixo sustentam os fatos descritos. Documento primário, agência e redação são funções diferentes; republicações da mesma apuração contam como uma única rota.</p>{sourceRoutes<2&&<p class="source-warning"><strong>Transparência:</strong> esta publicação do acervo anterior possui somente uma rota identificada. Ela permanece disponível, mas não atende à regra atual para novas matérias completas.</p>}<ol>{a.sources.map(s=><li><a href={s.url} rel="noopener noreferrer">{s.name} ↗</a><span class="source-kind">{sourceRole(s)}</span><time datetime={s.publishedAt}>{date(s.publishedAt)}</time></li>)}</ol></aside>
+    <p class="disclosure">Texto produzido com apoio do Núcleo Vértice. Imagem assinada pelo Estúdio Meridiano quando indicada no crédito. Automação reduz erros repetitivos, mas não garante infalibilidade; consulte as fontes e a <a href={href('politica-editorial/')}>política editorial</a>.</p>
     {a.corrections?.length>0&&<section><h2>Correções</h2>{a.corrections.map(c=><p class="disclosure"><time datetime={c.date}>{date(c.date)}</time> — {c.text}</p>)}</section>}
     <nav class="tags" aria-label="Tags">{a.tags.map(t=><a href={`${href('busca/')}?q=${encodeURIComponent(t)}`}>{t}</a>)}</nav>
    </div>

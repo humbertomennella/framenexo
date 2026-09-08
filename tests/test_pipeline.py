@@ -30,6 +30,23 @@ class Rules(unittest.TestCase):
   r=p.parse_feed(b'<feed xmlns="http://www.w3.org/2005/Atom"><entry><title>Game</title><link href="https://example.com/a"/><updated>2026-09-01T12:00:00Z</updated><summary>News</summary></entry></feed>');self.assertEqual(r[0]['url'],'https://example.com/a')
  def test_event_cluster(self):
   a={'title':'Studio announces new RPG expansion','url':'https://example.com/a','relevance':80};b={'title':'Studio announces new RPG expansion trailer','url':'https://another.test/b','relevance':60};self.assertEqual(len(p.clusters([a,b])),1)
+ def test_channels_from_same_organization_are_not_independent(self):
+  sources={'politics':{'id':'politics','organization':'parliament'},'economy':{'id':'economy','organization':'parliament'}}
+  group=[{'sourceId':'politics'},{'sourceId':'economy'}]
+  self.assertFalse(p.corroborated(group,sources));self.assertEqual(p.independent_organizations(group,sources),{'parliament'})
+ def test_two_organizations_are_independent(self):
+  sources={'official':{'id':'official','organization':'official-body'},'press':{'id':'press','organization':'newsroom'}}
+  group=[{'sourceId':'official','sourceType':'primary'},{'sourceId':'press','sourceType':'press'}]
+  self.assertTrue(p.corroborated(group,sources));self.assertEqual(p.publication_confidence(group,sources),'CONFIRMADO')
+ def test_syndicated_story_counts_as_one_route(self):
+  sources={'portal-a':{'id':'portal-a','organization':'portal-a'},'portal-b':{'id':'portal-b','organization':'portal-b'}}
+  group=[{'sourceId':'portal-a','originalOrganization':'reuters'},{'sourceId':'portal-b','originalOrganization':'reuters'}]
+  self.assertFalse(p.corroborated(group,sources));self.assertEqual(p.independent_organizations(group,sources),{'reuters'})
+ def test_lead_source_is_balanced_across_recent_coverage(self):
+  sources={'official':{'id':'official','organization':'official-body'},'press':{'id':'press','organization':'newsroom'}}
+  group=[{'sourceId':'official','sourceType':'primary','relevance':90},{'sourceId':'press','sourceType':'press','relevance':80}]
+  history=[{'leadSourceOrganization':'official-body'} for _ in range(5)]
+  self.assertEqual(p.choose_lead(group,sources,history)['sourceId'],'press')
  def test_different_events_remain_separate(self):
   a={'title':'Game Pass September additions','url':'https://example.com/a'};b={'title':'Game Pass cloud changes November','url':'https://example.com/b'};self.assertFalse(p.same_event(a,b))
  def test_rumors_and_reviews_held(self):
@@ -58,27 +75,27 @@ class Publication(unittest.TestCase):
   self.assertTrue(p.write('data/test.json',{'a':1}));self.assertFalse(p.write('data/test.json',{'a':1}));self.assertEqual(p.read('data/test.json',{}),{'a':1});self.assertFalse(list(self.root.rglob('*.tmp')))
  def add_media(self,c):
   path='/images/news/test.webp';asset=self.root/'public/images/news/test.webp';asset.parent.mkdir(parents=True,exist_ok=True);asset.write_bytes(b'webp')
-  p.write('data/image-rights.json',[{'path':path,'origin':'generated','credit':'Base Um','license':'original','sourceURL':None,'proof':'test fixture'}])
-  c['media']={'path':path,'alt':'Ilustração editorial de teste.','credit':'Base Um — ilustração editorial original.'};return c
+  p.write('data/image-rights.json',[{'path':path,'origin':'generated','credit':'Vértice Factual','license':'original','sourceURL':None,'proof':'test fixture'}])
+  c['media']={'path':path,'alt':'Ilustração editorial de teste.','credit':'Vértice Factual — ilustração editorial original.'};return c
  def test_candidate_without_approved_media_is_not_published(self):
   p.write('data/sources.json',[{'id':'official'}]);p.write('data/candidates.json',[{'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'}])
   self.assertEqual(p.publish(force=True)['published'],0)
  def test_duplicate_media_content_is_rejected_even_with_another_filename(self):
   first=self.add_media({});second_path='/images/news/copy.webp';second_asset=self.root/'public/images/news/copy.webp';second_asset.write_bytes(b'webp')
-  rights=p.read('data/image-rights.json',[]);rights.append({'path':second_path,'origin':'generated','credit':'Base Um','license':'original','sourceURL':None,'proof':'test fixture'});p.write('data/image-rights.json',rights)
-  candidate={'media':{'path':second_path,'alt':'Ilustração editorial de teste.','credit':'Base Um — ilustração editorial original.'}}
+  rights=p.read('data/image-rights.json',[]);rights.append({'path':second_path,'origin':'generated','credit':'Vértice Factual','license':'original','sourceURL':None,'proof':'test fixture'});p.write('data/image-rights.json',rights)
+  candidate={'media':{'path':second_path,'alt':'Ilustração editorial de teste.','credit':'Vértice Factual — ilustração editorial original.'}}
   with self.assertRaisesRegex(ValueError,'media_content_must_be_unique'):p.approved_media(candidate,[first['media']['path']])
  def test_empty_batch_does_not_advance_clock(self):
   state={'lastPublishedAt':'2026-01-01T00:00:00Z','editionCount':2};p.write('data/publishing-state.json',state);p.write('data/candidates.json',[]);self.assertEqual(p.publish(force=True)['published'],0);self.assertEqual(p.read('data/publishing-state.json',{}),state)
  def test_pause_even_when_forced(self):
   p.write('data/publishing-state.json',{'paused':True});self.assertEqual(p.publish(force=True)['published'],0)
  def test_publication_is_immutable_and_idempotent(self):
-  p.write('data/sources.json',[{'id':'official','hosts':['example.com']}]);c=self.add_media({'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'});p.write('data/candidates.json',[c]);draft={'title':'Jogo recebe expansão anunciada oficialmente','description':'Novas informações divulgadas em anúncio oficial.','paragraphs':['Parágrafo factual aprovado.','Outro parágrafo factual aprovado.'],'eventKey':'game-expansion-2026-09','tags':['PC'],'facts':[{'claim':'Anúncio oficial','quote':'announcement'}]};review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
+  p.write('data/sources.json',[{'id':'official','organization':'studio','hosts':['example.com']},{'id':'press','organization':'newsroom','hosts':['news.test']}]);c=self.add_media({'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'});c2={'id':'fedcba654321','title':'Official game expansion announced','sourceId':'press','sourceName':'Newsroom','sourceType':'press','url':'https://news.test/report','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'};p.write('data/candidates.json',[c,c2]);draft={'title':'Jogo recebe expansão anunciada oficialmente','description':'Novas informações divulgadas em anúncio oficial.','paragraphs':['Parágrafo factual aprovado.','Outro parágrafo factual aprovado.'],'eventKey':'game-expansion-2026-09','tags':['PC'],'facts':[{'claim':'Anúncio oficial','quote':'announcement'}]};review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
   with patch.object(p,'evidence',return_value='Official announcement.'),patch.object(p,'generate',return_value=(draft,review)):
    self.assertEqual(p.publish(force=True)['published'],1);self.assertEqual(p.publish(force=True)['published'],0)
   self.assertEqual(len(list((self.root/'content/news').glob('*.md'))),1);self.assertEqual(p.read('data/publishing-state.json',{})['editionCount'],1)
  def test_dry_run_does_not_publish(self):
-  p.write('data/sources.json',[{'id':'official'}]);p.write('data/candidates.json',[self.add_media({'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'})]);d={'title':'Expansão de um jogo recebe anúncio oficial','description':'Informações do anúncio oficial.','paragraphs':['A','B'],'eventKey':'game-expansion-2026-09','tags':['PC']}
+  p.write('data/sources.json',[{'id':'official','organization':'studio'},{'id':'press','organization':'newsroom'}]);p.write('data/candidates.json',[self.add_media({'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'}),{'id':'fedcba654321','title':'Official game expansion announced','sourceId':'press','sourceName':'Newsroom','sourceType':'press','url':'https://news.test/report','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'}]);d={'title':'Expansão de um jogo recebe anúncio oficial','description':'Informações do anúncio oficial.','paragraphs':['A','B'],'eventKey':'game-expansion-2026-09','tags':['PC']}
   with patch.object(p,'evidence',return_value='Evidence'),patch.object(p,'generate',return_value=(d,{})):self.assertEqual(p.publish(force=True,dry_run=True)['approvedDrafts'],1)
   self.assertFalse(list((self.root/'content/news').glob('*.md')));self.assertEqual(p.read('data/candidates.json',[])[0]['status'],'candidate')
 if __name__=='__main__':unittest.main()

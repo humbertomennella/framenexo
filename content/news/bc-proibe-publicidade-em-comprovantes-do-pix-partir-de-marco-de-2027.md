@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/bc-proibe-publicidade-em-comprovantes-do-pix-partir-de-marco-de-2027.webp",
   "imageAlt": "Ilustração editorial original sobre: Banco Central proibirá publicidade em comprovantes do Pix a partir de 2027. Não é fotografia do fato.",
-  "imageCredit": "Base Um / Estúdio Meridiano",
+  "imageCredit": "Vértice Factual / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Base Um",
+  "author": "Redação Vértice Factual",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

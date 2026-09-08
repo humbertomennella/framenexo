@@ -14,7 +14,7 @@
   "tags": ["Saúde", "OMS", "tabaco", "fertilidade", "saúde pública"],
   "image": "/images/news/tabaco-fertilidade-oms-editorial.webp",
   "imageAlt": "Ilustração editorial abstrata de fumaça sendo interrompida antes de estruturas celulares, em ambiente científico. Não é fotografia nem imagem clínica.",
-  "imageCredit": "Base Um / Estúdio Meridiano — ilustração editorial original",
+  "imageCredit": "Vértice Factual / Estúdio Meridiano — ilustração editorial original",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 92,
@@ -24,7 +24,7 @@
     {"name": "Organização Mundial da Saúde — ficha técnica sobre tabaco", "url": "https://www.who.int/news-room/fact-sheets/detail/tobacco", "publishedAt": "2026-06-26", "type": "primary"}
   ],
   "corrections": [],
-  "author": "Redação Base Um",
+  "author": "Redação Vértice Factual",
   "production": "Texto original baseado em publicações da OMS e da OPAS. Imagem original do Estúdio Meridiano."
 }
 ---

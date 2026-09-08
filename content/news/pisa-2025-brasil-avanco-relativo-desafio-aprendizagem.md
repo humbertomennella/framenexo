@@ -14,7 +14,7 @@
   "tags": ["Brasil", "educação", "PISA 2025", "OCDE", "aprendizagem"],
   "image": "/images/news/pisa-2025-resultados-editorial.webp",
   "imageAlt": "Ilustração editorial de uma sala de aula com livros, formas de dados e referências abstratas a ciência, leitura e matemática. Não é fotografia do PISA.",
-  "imageCredit": "Base Um / Estúdio Meridiano — ilustração editorial original",
+  "imageCredit": "Vértice Factual / Estúdio Meridiano — ilustração editorial original",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 94,
@@ -25,7 +25,7 @@
     {"name": "Agência Brasil", "url": "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-09/pisa-brasil-reduz-diferenca-para-paises-ricos-no-desempenho-escolar", "publishedAt": "2026-09-08", "type": "press"}
   ],
   "corrections": [],
-  "author": "Redação Base Um",
+  "author": "Redação Vértice Factual",
   "production": "Texto original baseado no relatório da OCDE e conferido com a cobertura da Agência Brasil. Imagem original do Estúdio Meridiano."
 }
 ---

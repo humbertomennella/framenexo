@@ -16,7 +16,7 @@ with tempfile.TemporaryDirectory(prefix='framenexo-github-') as temp:
  shutil.copytree(ROOT,target,ignore=shutil.ignore_patterns('.git','.openai','node_modules','dist','.astro','.cache','__pycache__','.venv','.env','.env.local','downloads','*.pyc','*.tar.gz'))
  # The initial scheduled job will record real operational status after it executes.
  status=json.loads((target/'data/deployment-status.json').read_text());status.update(repository=full,notes='Repositório criado. Consulte as execuções para confirmar a ativação da rotina.');(target/'data/deployment-status.json').write_text(json.dumps(status,ensure_ascii=False,indent=2)+'\n')
- run(['git','init','-b','main'],target);run(['git','config','user.name',login],target);run(['git','config','user.email',f'{login}@users.noreply.github.com'],target);run(['git','add','.'],target);run(['git','commit','-m','feat: launch Base Um editorial portal'],target)
+ run(['git','init','-b','main'],target);run(['git','config','user.name',login],target);run(['git','config','user.email',f'{login}@users.noreply.github.com'],target);run(['git','add','.'],target);run(['git','commit','-m','feat: launch Vértice Factual editorial portal'],target)
  run(['gh','repo','create',full,'--public','--source',str(target),'--remote','origin','--description','Brasil, mundo e contexto.'])
  # Enable Pages before the first push triggers the deployment workflow.
  try:run(['gh','api','--method','POST',f'repos/{full}/pages','-f','build_type=workflow'])
