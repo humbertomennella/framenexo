@@ -1,4 +1,4 @@
 ---
 import Base from '../layouts/Base.astro';import Card from '../components/Card.astro';import Headlines from '../components/Headlines.astro';import {articles} from '../lib/news';
 ---
-<Base title="Últimas notícias" description="As publicações mais recentes da Verídia, com contexto e fontes identificadas."><header class="page-head"><span class="eyebrow">O fato em movimento</span><h1>Últimas notícias</h1><p>Acompanhe os acontecimentos que estão movendo o Brasil e o mundo.</p></header>{articles.length>0&&<Headlines articles={articles.slice(0,6)}/>}<section class="cards page-section" aria-label="Notícias recentes">{articles.map(a=><Card article={a}/>)}</section></Base>
+<Base title="Últimas notícias" description="As publicações mais recentes do Eixo Fato, com contexto e fontes identificadas."><header class="page-head"><span class="eyebrow">O fato em movimento</span><h1>Últimas notícias</h1><p>Acompanhe os acontecimentos que estão movendo o Brasil e o mundo.</p></header>{articles.length>0&&<Headlines articles={articles.slice(0,6)}/>}<section class="cards page-section" aria-label="Notícias recentes">{articles.map(a=><Card article={a}/>)}</section></Base>

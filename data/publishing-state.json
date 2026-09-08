@@ -1,9 +1,41 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-08T02:00:00Z",
-  "lastCollectedAt": "2026-09-08T09:38:24Z",
-  "editionCount": 1,
+  "lastPublishedAt": "2026-09-08T13:50:00Z",
+  "lastCollectedAt": "2026-09-08T13:49:17Z",
+  "editionCount": 2,
   "history": [
+    {
+      "slug": "pisa-2025-brasil-avanco-relativo-desafio-aprendizagem",
+      "title": "PISA 2025 mostra avanço relativo do Brasil, mas distância educacional permanece",
+      "eventKey": "pisa-2025-resultados-brasil-2026-09",
+      "publishedAt": "2026-09-08T13:50:00Z",
+      "sourceUrls": [
+        "https://www.oecd.org/en/publications/2026/09/pisa-2025-results-volume-i_5265bfb1.html",
+        "https://www.oecd.org/en/about/news/press-releases/2026/09/pisa-2025-students-reading-and-mathematics-performance-declined-sharply-across-the-oecd.html",
+        "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-09/pisa-brasil-reduz-diferenca-para-paises-ricos-no-desempenho-escolar"
+      ]
+    },
+    {
+      "slug": "oms-tabaco-fertilidade-riscos-evidencias",
+      "title": "OMS reúne evidências sobre tabaco e riscos à fertilidade",
+      "eventKey": "oms-tabaco-fertilidade-sintese-2026-09",
+      "publishedAt": "2026-09-08T13:45:00Z",
+      "sourceUrls": [
+        "https://www.who.int/news/item/08-09-2026-tobacco-smoking-may-be-harming-your-chances-of-having-a-baby",
+        "https://www.who.int/news-room/fact-sheets/detail/tobacco"
+      ]
+    },
+    {
+      "slug": "focus-inflacao-2026-recua-cinco-por-cento",
+      "title": "Focus reduz projeção de inflação de 2026 para 5% e eleva estimativa do PIB",
+      "eventKey": "focus-2026-09-08-inflacao-pib-selic",
+      "publishedAt": "2026-09-08T13:40:00Z",
+      "sourceUrls": [
+        "https://www.bcb.gov.br/publicacoes/focus",
+        "https://www.bcb.gov.br/controleinflacao/metainflacao",
+        "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mercado-financeiro-reduz-previsao-da-inflacao-para-5-este-ano"
+      ]
+    },
     {
       "slug": "ibge-mapas-mundi-brasil-acesso",
       "title": "IBGE libera série de mapas-múndi com o Brasil no centro",

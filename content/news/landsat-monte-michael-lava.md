@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/landsat-monte-michael-lava.webp",
   "imageAlt": "Ilustração editorial original sobre Satélite registra calor de lago de lava em ilha do Atlântico Sul. Não é fotografia da NASA.",
-  "imageCredit": "Verídia / Núcleo Lumen",
+  "imageCredit": "Eixo Fato / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 82,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Verídia",
+  "author": "Redação Eixo Fato",
   "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial."
 }
 ---

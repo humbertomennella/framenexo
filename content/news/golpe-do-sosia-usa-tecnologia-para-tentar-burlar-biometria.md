@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/golpe-do-sosia-usa-tecnologia-para-tentar-burlar-biometria.webp",
   "imageAlt": "Ilustração editorial original sobre: Golpe do sósia usa tecnologia para tentar burlar a biometria. Não é fotografia do fato.",
-  "imageCredit": "Verídia / Núcleo Lumen",
+  "imageCredit": "Eixo Fato / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Verídia",
+  "author": "Redação Eixo Fato",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

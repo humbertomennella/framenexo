@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/seca-na-amazonia-atingiu-38-das-areas-habitadas-no-ultimo-el-nino.webp",
   "imageAlt": "Ilustração editorial original sobre: Seca atingiu 38% das áreas habitadas da Amazônia no último El Niño. Não é fotografia do fato.",
-  "imageCredit": "Verídia / Núcleo Lumen",
+  "imageCredit": "Eixo Fato / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Verídia",
+  "author": "Redação Eixo Fato",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

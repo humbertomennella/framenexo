@@ -23,5 +23,22 @@
   {"id":"fiocruz","name":"Fiocruz","type":"primary","url":"https://portal.fiocruz.br/noticias","feed":null,"hosts":["fiocruz.br"],"category":"Saúde","enabled":false},
   {"id":"inpe","name":"Instituto Nacional de Pesquisas Espaciais","type":"primary","url":"https://www.gov.br/inpe/pt-br/assuntos/noticias","feed":null,"hosts":["gov.br","inpe.br"],"category":"Ciência","enabled":false},
   {"id":"saude-gov","name":"Ministério da Saúde","type":"primary","url":"https://www.gov.br/saude/pt-br/assuntos/noticias","feed":null,"hosts":["gov.br"],"category":"Saúde","enabled":false},
-  {"id":"ibama","name":"IBAMA","type":"primary","url":"https://www.gov.br/ibama/pt-br/assuntos/noticias","feed":null,"hosts":["gov.br"],"category":"Meio Ambiente","enabled":false}
+  {"id":"ibama","name":"IBAMA","type":"primary","url":"https://www.gov.br/ibama/pt-br/assuntos/noticias","feed":null,"hosts":["gov.br"],"category":"Meio Ambiente","enabled":false},
+  {"id":"ipea","name":"Ipea — Instituto de Pesquisa Econômica Aplicada","type":"primary","url":"https://www.ipea.gov.br/portal/","feed":null,"hosts":["ipea.gov.br"],"category":"Economia","enabled":false},
+  {"id":"inep","name":"Inep — Estudos e Pesquisas Educacionais","type":"primary","url":"https://www.gov.br/inep/pt-br","feed":null,"hosts":["gov.br"],"category":"Brasil","enabled":false},
+  {"id":"anvisa","name":"Anvisa","type":"primary","url":"https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa","feed":null,"hosts":["gov.br"],"category":"Saúde","enabled":false},
+  {"id":"inmet","name":"Instituto Nacional de Meteorologia","type":"primary","url":"https://portal.inmet.gov.br/noticias","feed":null,"hosts":["inmet.gov.br"],"category":"Meio Ambiente","enabled":false},
+  {"id":"ana","name":"Agência Nacional de Águas e Saneamento Básico","type":"primary","url":"https://www.gov.br/ana/pt-br/assuntos/noticias-e-eventos/noticias","feed":null,"hosts":["gov.br"],"category":"Meio Ambiente","enabled":false},
+  {"id":"icmbio","name":"Instituto Chico Mendes de Conservação da Biodiversidade","type":"primary","url":"https://www.gov.br/icmbio/pt-br/assuntos/noticias","feed":null,"hosts":["gov.br"],"category":"Meio Ambiente","enabled":false},
+  {"id":"oecd","name":"OCDE","type":"primary","url":"https://www.oecd.org/","feed":null,"hosts":["oecd.org","www.oecd.org"],"category":"Mundo","enabled":false},
+  {"id":"imf","name":"Fundo Monetário Internacional","type":"primary","url":"https://www.imf.org/en/News","feed":null,"hosts":["imf.org","www.imf.org"],"category":"Economia","enabled":false},
+  {"id":"world-bank","name":"Banco Mundial","type":"primary","url":"https://www.worldbank.org/en/news","feed":null,"hosts":["worldbank.org","www.worldbank.org"],"category":"Mundo","enabled":false},
+  {"id":"cepal","name":"CEPAL — Comissão Econômica para a América Latina e o Caribe","type":"primary","url":"https://www.cepal.org/pt-br/noticias","feed":null,"hosts":["cepal.org","www.cepal.org"],"category":"Economia","enabled":false},
+  {"id":"paho","name":"Organização Pan-Americana da Saúde","type":"primary","url":"https://www.paho.org/pt/noticias","feed":null,"hosts":["paho.org","www.paho.org"],"category":"Saúde","enabled":false},
+  {"id":"esa","name":"Agência Espacial Europeia","type":"primary","url":"https://www.esa.int/Newsroom","feed":null,"hosts":["esa.int","www.esa.int"],"category":"Ciência","enabled":false},
+  {"id":"noaa","name":"NOAA — Administração Oceânica e Atmosférica dos EUA","type":"primary","url":"https://www.noaa.gov/news","feed":null,"hosts":["noaa.gov","www.noaa.gov"],"category":"Meio Ambiente","enabled":false},
+  {"id":"ipcc","name":"Painel Intergovernamental sobre Mudanças Climáticas","type":"primary","url":"https://www.ipcc.ch/news/","feed":null,"hosts":["ipcc.ch","www.ipcc.ch"],"category":"Meio Ambiente","enabled":false},
+  {"id":"reuters","name":"Reuters","type":"press","url":"https://www.reuters.com/","feed":null,"hosts":["reuters.com","www.reuters.com"],"category":"Mundo","enabled":false},
+  {"id":"ap-news","name":"Associated Press","type":"press","url":"https://apnews.com/","feed":null,"hosts":["apnews.com"],"category":"Mundo","enabled":false},
+  {"id":"afp","name":"Agence France-Presse","type":"press","url":"https://www.afp.com/","feed":null,"hosts":["afp.com","www.afp.com"],"category":"Mundo","enabled":false}
 ]

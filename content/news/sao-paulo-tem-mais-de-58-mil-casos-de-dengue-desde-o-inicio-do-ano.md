@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/sao-paulo-tem-mais-de-58-mil-casos-de-dengue-desde-o-inicio-do-ano.webp",
   "imageAlt": "Ilustração editorial original sobre: São Paulo supera 58 mil casos de dengue em 2026. Não é fotografia do fato.",
-  "imageCredit": "Verídia / Núcleo Lumen",
+  "imageCredit": "Eixo Fato / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Verídia",
+  "author": "Redação Eixo Fato",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

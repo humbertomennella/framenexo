@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/brasil-tem-2-milhoes-de-pessoas-que-trabalham-por-meio-de-aplicativos.webp",
   "imageAlt": "Ilustração editorial original sobre: IBGE registra 2 milhões de trabalhadores por meio de aplicativos. Não é fotografia do fato.",
-  "imageCredit": "Verídia / Núcleo Lumen",
+  "imageCredit": "Eixo Fato / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Verídia",
+  "author": "Redação Eixo Fato",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

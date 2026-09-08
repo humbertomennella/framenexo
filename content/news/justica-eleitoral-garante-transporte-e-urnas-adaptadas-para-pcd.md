@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/justica-eleitoral-garante-transporte-e-urnas-adaptadas-para-pcd.webp",
   "imageAlt": "Ilustração editorial original sobre: Justiça Eleitoral prepara transporte e urnas acessíveis para pessoas com deficiência. Não é fotografia do fato.",
-  "imageCredit": "Verídia / Núcleo Lumen",
+  "imageCredit": "Eixo Fato / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Verídia",
+  "author": "Redação Eixo Fato",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

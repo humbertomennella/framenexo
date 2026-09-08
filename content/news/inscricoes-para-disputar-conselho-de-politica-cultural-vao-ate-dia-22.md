@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/inscricoes-para-disputar-conselho-de-politica-cultural-vao-ate-dia-22.webp",
   "imageAlt": "Ilustração editorial original sobre: Inscrições para o Conselho de Política Cultural vão até dia 22. Não é fotografia do fato.",
-  "imageCredit": "Verídia / Núcleo Lumen",
+  "imageCredit": "Eixo Fato / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Verídia",
+  "author": "Redação Eixo Fato",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---
