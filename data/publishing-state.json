@@ -1,9 +1,21 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-08T13:50:00Z",
+  "lastPublishedAt": "2026-09-08T21:00:00Z",
   "lastCollectedAt": "2026-09-08T19:54:29Z",
-  "editionCount": 2,
+  "editionCount": 3,
   "history": [
+    {
+      "slug": "afastamento-direcao-pf-amplia-crise-institucional-stf",
+      "title": "Afastamento da direção da PF amplia crise institucional; julgamento é suspenso",
+      "eventKey": "stf-pf-afastamento-direcao-2026-09-08",
+      "publishedAt": "2026-09-08T21:00:00Z",
+      "sourceUrls": [
+        "https://www.reuters.com/world/americas/brazil-court-crisis-deepens-justice-orders-federal-police-chief-suspended-2026-09-08/",
+        "https://www.cnnbrasil.com.br/politica/entenda-a-decisao-de-mendonca-que-afastou-andrei-rodrigues-da-pf/",
+        "https://www1.folha.uol.com.br/poder/2026/09/mendonca-determina-afastamento-de-andrei-rodrigues-do-comando-da-pf.shtml",
+        "https://noticias.uol.com.br/politica/ultimas-noticias/2026/09/08/decisao-de-mendonca-ocorre-em-acao-do-partido-de-zema-contra-chefe-da-pf.ghtm"
+      ]
+    },
     {
       "slug": "pisa-2025-brasil-avanco-relativo-desafio-aprendizagem",
       "title": "PISA 2025 mostra avanço relativo do Brasil, mas distância educacional permanece",
