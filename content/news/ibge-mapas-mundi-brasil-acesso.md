@@ -28,4 +28,8 @@ O primeiro mapa foi produzido no contexto do G20, em 2024. O segundo, divulgado 
 
 As três peças fazem parte de uma sequência de experiências cartográficas do instituto. Centralizar um país ou inverter a orientação norte-sul não muda os dados geográficos; muda a convenção visual usada para apresentar o planeta. Essa distinção é importante para que o material seja lido como cartografia temática e comunicação pública, e não como um novo mapa político do mundo.
 
+Na prática, a escolha da projeção interfere na leitura de distâncias, tamanhos e posições relativas. Um planisfério é sempre uma interpretação de uma superfície curva em uma folha ou tela plana. Ao deslocar o centro para o Brasil, o IBGE convida o leitor a perceber as conexões do país com os oceanos, os demais países sul-americanos e as rotas globais, sem sugerir que exista uma orientação única ou neutra para representar o planeta.
+
+O lançamento também aproxima um material produzido para divulgação institucional do público que procura referências cartográficas para estudo, planejamento e curiosidade. A série pode ser lida junto com mapas temáticos, dados estatísticos e notas metodológicas do próprio instituto, que explicam escala, projeção e fonte. Esses elementos ajudam a evitar que a imagem seja interpretada como uma fotografia da Terra ou como uma atualização de fronteiras.
+
 A Linha Zero trata a publicação como recurso de informação pública. A utilidade dos mapas depende da forma como cada leitor interpreta escala, projeção e data de produção; por isso, o material original do IBGE continua sendo a referência para uso técnico.

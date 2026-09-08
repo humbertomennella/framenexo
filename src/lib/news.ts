@@ -15,5 +15,5 @@ export const usesEditorialCover = (a:Article) => genericEditorialImages.has(a.im
 export const inCategory = (a:Article,c:string) => a.category===c || a.tags.includes(c);
 export const date = (s:string) => new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',year:'numeric',timeZone:s.length===10?'UTC':'America/Sao_Paulo'}).format(new Date(s));
 export const time = (s:string) => new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}).format(new Date(s));
-export const reading = (a:Article) => Math.max(1,Math.ceil(a.body.split(/\s+/).length/200));
+export const reading = (a:Article) => Math.max(2,Math.ceil(a.body.split(/\s+/).length/180));
 export const jsonld = (x:unknown) => JSON.stringify(x).replace(/</g,'\\u003c');

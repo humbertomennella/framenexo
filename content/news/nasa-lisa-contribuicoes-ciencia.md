@@ -28,4 +28,8 @@ O processo busca identificar perguntas científicas que ainda exigem investigaç
 
 O LISA é planejado como um observatório espacial de interferometria a laser. Em vez de observar ondas gravitacionais com um único instrumento no solo, a arquitetura prevista mede pequenas mudanças na distância entre naves separadas no espaço. A chamada discutida pela NASA trata das perguntas e prioridades que podem orientar a comunidade científica durante a preparação desse trabalho.
 
+Esse tipo de observatório complementaria os detectores terrestres, que são mais sensíveis a determinadas faixas de frequência. A proposta espacial foi pensada para acompanhar sinais muito longos e fracos, que exigem medir variações minúsculas entre os braços do arranjo. A explicação ajuda a entender por que a etapa de planejamento científico é importante: diferentes perguntas exigem modelos, simulações e instrumentos de análise preparados com antecedência.
+
+As contribuições solicitadas pela NASA não equivalem a uma descoberta, a uma detecção ou a uma data de lançamento. Elas organizam prioridades para pesquisadores que trabalham em áreas como fontes astrofísicas, métodos de análise e desempenho instrumental. O resultado esperado é uma lista de problemas e oportunidades que possa orientar chamadas e propostas futuras do programa preparatório.
+
 O prazo e o escopo pertencem ao comunicado da NASA e são direcionados à comunidade de pesquisadores. A Linha Zero não interpreta a chamada como confirmação de descobertas ou de cronograma de lançamento.

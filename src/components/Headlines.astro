@@ -3,11 +3,11 @@ import {articleUrl,href,date,time,categorySlug} from '../lib/news';
 const {articles:items=[]}=Astro.props;
 ---
 <section class="headlines" aria-label="Notícias em destaque" aria-roledescription="carrossel" data-headlines>
- <div class="headlines-bar"><span><i class="live-dot"></i><strong>Em foco</strong></span><span class="headlines-position"><b data-position>01</b> / {String(items.length).padStart(2,'0')}</span><div class="headlines-controls"><button type="button" data-previous aria-label="Notícia anterior">←</button><button type="button" data-pause aria-label="Pausar troca automática de notícias">Pausar</button><button type="button" data-next aria-label="Próxima notícia">→</button></div></div>
+ <div class="headlines-bar"><span><i class="live-dot"></i><strong>Em foco</strong></span><span class="headlines-position"><b data-position>01</b> / {String(items.length).padStart(2,'0')}</span></div>
  <div class="headlines-track">{items.map((a:any,i:number)=><article class:list={['headline-slide',i===0&&'is-current']} data-slide aria-label={`${i+1} de ${items.length}`} aria-roledescription="slide" aria-hidden={i===0?'false':'true'}>
   <figure class="headline-photo"><a href={articleUrl(a)} tabindex="-1" aria-hidden="true"><img src={href(a.image)} alt={a.imageAlt} width="1600" height="900" loading={i===0?'eager':'lazy'} fetchpriority={i===0?'high':'auto'} decoding="async"/></a><figcaption>{a.imageCredit}</figcaption></figure>
   <div class="headline-content"><a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><h2><a href={articleUrl(a)}>{a.title}</a></h2><p>{a.description}</p><div class="meta"><time datetime={a.publishedAt}>{date(a.publishedAt)} · {time(a.publishedAt)} BRT</time></div><a class="headline-read" href={articleUrl(a)}>Ler a matéria <span aria-hidden="true">↗</span></a></div>
- </article>)}</div>
+ </article>)}<div class="headlines-controls" aria-label="Controles do destaque"><button type="button" data-previous aria-label="Notícia anterior">←</button><button type="button" data-pause aria-label="Pausar troca automática de notícias">Pausar</button><button type="button" data-next aria-label="Próxima notícia">→</button></div></div>
  <div class="headlines-dots" role="group" aria-label="Selecionar destaque">{items.map((a:any,i:number)=><button type="button" data-go={i} aria-label={`Destaque ${i+1}: ${a.title}`} aria-current={i===0?'true':undefined}><span></span></button>)}</div>
  <p class="sr-only" role="status" data-carousel-status></p>
 </section>
