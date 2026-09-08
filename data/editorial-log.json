@@ -173,5 +173,70 @@
       }
     ],
     "seconds": 2.12
+  },
+  {
+    "at": "2026-09-08T11:18:24Z",
+    "event": "collection",
+    "collected": 6,
+    "discarded": 2,
+    "sourceCounts": {
+      "ap": 10,
+      "nasa": 10
+    },
+    "errors": [
+      {
+        "source": "camara-saude",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-esportes",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-cultura",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "ValueError"
+      },
+      {
+        "source": "senado",
+        "code": "ValueError"
+      },
+      {
+        "source": "who",
+        "code": "ValueError"
+      },
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "dw",
+        "code": "ValueError"
+      },
+      {
+        "source": "bbc-portugues",
+        "code": "ValueError"
+      },
+      {
+        "source": "un",
+        "code": "ParseError"
+      }
+    ],
+    "seconds": 1.61
   }
 ]
