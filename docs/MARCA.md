@@ -1,8 +1,8 @@
-# Identidade provisória
+# Identidade editorial
 
-**FrameNexo** combina o frame do jogo com o nexo entre fato e contexto. Repositório proposto: `framenexo`. Assinatura: **Games. Contexto. Próximo frame.**
+**Verídia** é a identidade do portal de notícias do Brasil e do mundo. O nome combina a ideia de informação verídica com a cadência diária do noticiário. A assinatura visual é **VERÍ/DIA** e o lema é **O fato primeiro. O contexto completo.**
 
-Alternativas documentadas: **Modo Crítico**, **Checkpoint Zero** e **Vértice Play**. A escolha é provisória; pesquisa preliminar de nomes não equivale a verificação de marca registrada ou disponibilidade jurídica.
+A escolha editorial não equivale, por si só, a registro de marca ou reserva de domínio. Antes de contratar um domínio próprio ou iniciar exploração comercial, a disponibilidade deve ser confirmada nos serviços oficiais do Registro.br e do INPI.
 
 | Elemento | Definição |
 |---|---|
@@ -13,10 +13,9 @@ Alternativas documentadas: **Modo Crítico**, **Checkpoint Zero** e **Vértice P
 | Texto | `#F1F2F4` |
 | Texto secundário | `#A0A5AF` |
 | Tipografia | Arial / Helvetica / sans-serif, sem fonte remota |
-| Logo | FRAME/NEXO, peso forte e barra verde |
-| Favicon | F e barra verde |
-| Compartilhamento | `public/og.png`, identidade produzida para o projeto |
+| Wordmark | VERÍ/DIA, peso forte e barra verde |
+| Favicon | V, barra verde e D |
 
-A hierarquia usa um destaque amplo, radar lateral, três cards e uma lista cronológica. Mobile empilha o destaque e o radar e mantém navegação horizontal pelas editorias. Bordas sutis, espaçamento generoso e foco visível substituem excesso de cor ou decoração.
+A hierarquia visual combina um carrossel compacto, cards editoriais e listas cronológicas. No celular, o conteúdo é empilhado em uma coluna, com navegação horizontal pelas editorias, alvos de toque amplos e leitura sem rolagem lateral.
 
-As imagens utilizadas foram produzidas com IA para o FrameNexo. Seus créditos e limites de representação constam de `data/image-rights.json`. Uma cópia local corrompida da arte espacial da etapa inicial foi excluída da versão entregue; a capa utiliza a ilustração íntegra de arquitetura fantástica. Não são imagens oficiais dos jogos.
+As imagens editoriais originais são produzidas pelo Núcleo Lumen e identificadas como ilustrações, nunca como fotografias do acontecimento. Créditos, licença, finalidade e prova de origem constam de `data/image-rights.json`.

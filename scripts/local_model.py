@@ -11,7 +11,7 @@ def digest(path):
 def download(url,path,expected):
  if path.exists() and digest(path)==expected:return
  tmp=path.with_suffix('.part')
- with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'LinhaZeroSetup/1.0'}),timeout=90) as src,open(tmp,'wb') as dst:
+ with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'VeridiaSetup/1.0'}),timeout=90) as src,open(tmp,'wb') as dst:
   for block in iter(lambda:src.read(1024*1024),b''):dst.write(block)
  if digest(tmp)!=expected:
   tmp.unlink(missing_ok=True);raise ValueError('download_checksum_mismatch')

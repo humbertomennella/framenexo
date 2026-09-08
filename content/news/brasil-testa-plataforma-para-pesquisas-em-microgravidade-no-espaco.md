@@ -9,7 +9,7 @@
     "Acompanhe a fonte original para atualizações e documentos."
   ],
   "publishedAt": "2026-09-08T03:50:00Z",
-  "updatedAt": "2026-09-08T03:50:00Z",
+  "updatedAt": "2026-09-08T09:33:52Z",
   "category": "Tecnologia",
   "tags": [
     "Tecnologia",
@@ -18,11 +18,11 @@
   ],
   "image": "/images/news/brasil-testa-plataforma-para-pesquisas-em-microgravidade-no-espaco.webp",
   "imageAlt": "Ilustração editorial original sobre: Brasil testa plataforma para pesquisas em microgravidade no espaço. Não é fotografia do fato.",
-  "imageCredit": "Linha Zero / Núcleo Lumen",
+  "imageCredit": "Verídia / Núcleo Lumen",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
-  "eventKey": "linha-zero-brasil-testa-plataforma-para-pesquisas-em-microgravidade-no-espaco",
+  "eventKey": "veridia-brasil-testa-plataforma-para-pesquisas-em-microgravidade-no-espaco",
   "sources": [
     {
       "name": "Agência Brasil",
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Linha Zero",
+  "author": "Redação Verídia",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---
@@ -51,3 +51,21 @@ A plataforma será lançada pelo veículo de sondagem VS-30 V16, desenvolvido pe
 ## Por que importa
 
 Para o leitor, o efeito mais imediato está em tecnologia: acompanhar prazos, resultados, impactos e próximos passos sem transformar uma declaração isolada em conclusão. A fonte original permanece indicada para consulta integral e atualização do caso.
+
+## Como ler esta notícia
+
+O núcleo factual desta publicação é: O Brasil executa, até 19 setembro, uma nova etapa para ampliar a capacidade de fazer pesquisas científicas em microgravidade no espaço. A redação conferiu esse enunciado com a fonte identificada — Agência Brasil — e manteve no texto apenas informações compatíveis com o material consultado. A referência mais antiga usada nesta edição está datada de 2026-09-05; fatos posteriores precisam de uma atualização separada.
+
+O selo **CONFIRMADO** descreve o nível de sustentação editorial, não uma garantia de que o assunto esteja encerrado. Ele indica que a afirmação central está apoiada na origem listada ao fim da página. Quando a fonte registra uma fala, uma previsão ou uma decisão ainda não executada, essa natureza deve permanecer explícita: declaração não é resultado, previsão não é medição e anúncio não é entrega concluída.
+
+## Contexto para interpretar
+
+Anúncio, teste, disponibilidade limitada e lançamento amplo não são sinônimos. A matéria preserva o estágio descrito pela fonte e evita converter possibilidade técnica em produto já disponível.
+
+Por esse motivo, a matéria evita ampliar o alcance do fato além do que foi documentado. Números conservam a referência temporal apresentada; nomes de instituições e programas são mantidos; e relações de causa e consequência só devem ser tratadas como confirmadas quando aparecem sustentadas na fonte. Essa cautela é especialmente importante em notícias que continuam evoluindo depois da primeira publicação.
+
+## O que acompanhar agora
+
+Os próximos elementos relevantes são eventuais documentos complementares, alterações de prazo, detalhamento de alcance e confirmações emitidas pelos responsáveis citados. Se uma dessas informações mudar o entendimento do caso, a atualização deve aparecer com data própria e, quando necessário, com uma nota de correção. Até lá, o limite seguro é o que está descrito nesta edição.
+
+Para uma verificação independente, o leitor pode abrir os links em **De onde vem a informação**. Eles permitem comparar o resumo, os detalhes e a formulação original da fonte. Essa trilha de consulta faz parte da notícia: ela mostra o que sustenta o texto e também deixa claro o que ainda não pode ser concluído.

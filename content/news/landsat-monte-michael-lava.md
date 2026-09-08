@@ -9,7 +9,7 @@
     "A observação indica atividade persistente, sem anunciar uma nova grande erupção."
   ],
   "publishedAt": "2026-09-08T03:44:00Z",
-  "updatedAt": "2026-09-08T03:44:00Z",
+  "updatedAt": "2026-09-08T09:33:52Z",
   "category": "Ciência",
   "tags": [
     "Ciência",
@@ -18,11 +18,11 @@
   ],
   "image": "/images/news/landsat-monte-michael-lava.webp",
   "imageAlt": "Ilustração editorial original sobre Satélite registra calor de lago de lava em ilha do Atlântico Sul. Não é fotografia da NASA.",
-  "imageCredit": "Linha Zero / Núcleo Lumen",
+  "imageCredit": "Verídia / Núcleo Lumen",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 82,
-  "eventKey": "linha-zero-landsat-monte-michael-lava",
+  "eventKey": "veridia-landsat-monte-michael-lava",
   "sources": [
     {
       "name": "NASA Earth Observatory",
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Linha Zero",
+  "author": "Redação Verídia",
   "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial."
 }
 ---
@@ -51,3 +51,21 @@ A conclusão de que existe um lago de lava persistente não surgiu desta única 
 Segundo a NASA, o sistema de monitoramento MIROVA indica atividade de baixa intensidade no vulcão nos últimos anos. O satélite Aura também detecta emissões frequentes de dióxido de enxofre e outros gases. O registro mais recente acrescenta uma observação a essa série; não é, por si só, anúncio de uma erupção inédita ou de aumento excepcional do risco.
 
 Em 1º de setembro, o Landsat 9 encontrou outra cena: o vento, ao passar pelo relevo da ilha, formava nuvens em ondas, semelhantes a uma esteira. As duas imagens mostram como a combinação de relevo, calor e atmosfera produz sinais distintos, que precisam ser interpretados com dados e contexto.
+
+## Como ler esta notícia
+
+O núcleo factual desta publicação é: Imagem do Landsat mostra atividade no Monte Michael; dados térmicos ajudam a acompanhar um vulcão distante e de difícil acesso. A redação conferiu esse enunciado com a fonte identificada — NASA Earth Observatory — e manteve no texto apenas informações compatíveis com o material consultado. A referência mais antiga usada nesta edição está datada de 2026-09-07; fatos posteriores precisam de uma atualização separada.
+
+O selo **CONFIRMADO** descreve o nível de sustentação editorial, não uma garantia de que o assunto esteja encerrado. Ele indica que a afirmação central está apoiada na origem listada ao fim da página. Quando a fonte registra uma fala, uma previsão ou uma decisão ainda não executada, essa natureza deve permanecer explícita: declaração não é resultado, previsão não é medição e anúncio não é entrega concluída.
+
+## Contexto para interpretar
+
+Resultados científicos precisam ser lidos dentro do método, da amostra e do estágio da pesquisa. Observação, hipótese, teste e aplicação prática têm graus diferentes de evidência.
+
+Por esse motivo, a matéria evita ampliar o alcance do fato além do que foi documentado. Números conservam a referência temporal apresentada; nomes de instituições e programas são mantidos; e relações de causa e consequência só devem ser tratadas como confirmadas quando aparecem sustentadas na fonte. Essa cautela é especialmente importante em notícias que continuam evoluindo depois da primeira publicação.
+
+## O que acompanhar agora
+
+Os próximos elementos relevantes são eventuais documentos complementares, alterações de prazo, detalhamento de alcance e confirmações emitidas pelos responsáveis citados. Se uma dessas informações mudar o entendimento do caso, a atualização deve aparecer com data própria e, quando necessário, com uma nota de correção. Até lá, o limite seguro é o que está descrito nesta edição.
+
+Para uma verificação independente, o leitor pode abrir os links em **De onde vem a informação**. Eles permitem comparar o resumo, os detalhes e a formulação original da fonte. Essa trilha de consulta faz parte da notícia: ela mostra o que sustenta o texto e também deixa claro o que ainda não pode ser concluído.
