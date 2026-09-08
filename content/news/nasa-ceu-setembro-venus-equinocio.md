@@ -30,9 +30,9 @@
       "type": "primary"
     }
   ],
-  "imageCredit": "Ilustração editorial original do Eixo Fato, criada pelo Estúdio Meridiano. Não é fotografia do céu nem imagem da NASA.",
+  "imageCredit": "Ilustração editorial original do Base Um, criada pelo Estúdio Meridiano. Não é fotografia do céu nem imagem da NASA.",
   "imageAlt": "Ilustração editorial do céu antes do amanhecer, com Vênus brilhante no horizonte e um observatório em primeiro plano.",
-  "author": "Redação Eixo Fato",
+  "author": "Redação Base Um",
   "production": "Texto original em português, baseado no guia oficial da NASA.",
   "corrections": [
     {

@@ -30,9 +30,9 @@
       "type": "primary"
     }
   ],
-  "imageCredit": "Ilustração editorial original do Eixo Fato, criada pelo Estúdio Meridiano. Não é fotografia nem representação do observatório.",
+  "imageCredit": "Ilustração editorial original do Base Um, criada pelo Estúdio Meridiano. Não é fotografia nem representação do observatório.",
   "imageAlt": "Ilustração editorial de três observatórios espaciais formando um triângulo e trocando feixes de laser no espaço.",
-  "author": "Redação Eixo Fato",
+  "author": "Redação Base Um",
   "production": "Texto original em português, baseado no comunicado oficial da NASA.",
   "corrections": [
     {
@@ -52,7 +52,7 @@ Esse tipo de observatório complementaria os detectores terrestres, que são mai
 
 As contribuições solicitadas pela NASA não equivalem a uma descoberta, a uma detecção ou a uma data de lançamento. Elas organizam prioridades para pesquisadores que trabalham em áreas como fontes astrofísicas, métodos de análise e desempenho instrumental. O resultado esperado é uma lista de problemas e oportunidades que possa orientar chamadas e propostas futuras do programa preparatório.
 
-O prazo e o escopo pertencem ao comunicado da NASA e são direcionados à comunidade de pesquisadores. O Eixo Fato não interpreta a chamada como confirmação de descobertas ou de cronograma de lançamento.
+O prazo e o escopo pertencem ao comunicado da NASA e são direcionados à comunidade de pesquisadores. O Base Um não interpreta a chamada como confirmação de descobertas ou de cronograma de lançamento.
 
 ## Como ler esta notícia
 

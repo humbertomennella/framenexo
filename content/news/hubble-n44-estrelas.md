@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/hubble-n44-estrelas.webp",
   "imageAlt": "Ilustração editorial original sobre Imagem do Hubble mostra como estrelas remodelam a nebulosa N44. Não é fotografia da NASA.",
-  "imageCredit": "Eixo Fato / Estúdio Meridiano",
+  "imageCredit": "Base Um / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 82,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Eixo Fato",
+  "author": "Redação Base Um",
   "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial."
 }
 ---

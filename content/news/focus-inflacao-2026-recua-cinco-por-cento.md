@@ -14,7 +14,7 @@
   "tags": ["Economia", "Banco Central", "Focus", "inflação", "PIB", "Selic"],
   "image": "/images/news/focus-inflacao-2026-editorial.webp",
   "imageAlt": "Ilustração editorial de uma cesta de consumo, etiquetas abstratas e uma curva de expectativa em queda suave. Não é gráfico oficial.",
-  "imageCredit": "Eixo Fato / Estúdio Meridiano — ilustração editorial original",
+  "imageCredit": "Base Um / Estúdio Meridiano — ilustração editorial original",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 91,
@@ -25,7 +25,7 @@
     {"name": "Agência Brasil", "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mercado-financeiro-reduz-previsao-da-inflacao-para-5-este-ano", "publishedAt": "2026-09-08", "type": "press"}
   ],
   "corrections": [],
-  "author": "Redação Eixo Fato",
+  "author": "Redação Base Um",
   "production": "Texto original baseado no Relatório Focus e conferido com a cobertura da Agência Brasil. Imagem original do Estúdio Meridiano."
 }
 ---

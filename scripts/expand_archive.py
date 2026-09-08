@@ -60,7 +60,7 @@ Os próximos elementos relevantes são eventuais documentos complementares, alte
 Para uma verificação independente, o leitor pode abrir os links em **De onde vem a informação**. Eles permitem comparar o resumo, os detalhes e a formulação original da fonte. Essa trilha de consulta faz parte da notícia: ela mostra o que sustenta o texto e também deixa claro o que ainda não pode ser concluído.
 """
     meta["updatedAt"] = STAMP
-    meta["author"] = "Redação Eixo Fato"
+    meta["author"] = "Redação Base Um"
     parts[1] = "\n" + json.dumps(meta, ensure_ascii=False, indent=2) + "\n"
     path.write_text("---" + parts[1] + "---\n" + body + addition.rstrip() + "\n")
 

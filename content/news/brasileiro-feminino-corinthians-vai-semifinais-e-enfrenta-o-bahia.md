@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/brasileiro-feminino-corinthians-vai-semifinais-e-enfrenta-o-bahia.webp",
   "imageAlt": "Ilustração editorial original sobre: Corinthians avança às semifinais do Brasileiro Feminino e enfrenta o Bahia. Não é fotografia do fato.",
-  "imageCredit": "Eixo Fato / Estúdio Meridiano",
+  "imageCredit": "Base Um / Estúdio Meridiano",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Eixo Fato",
+  "author": "Redação Base Um",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

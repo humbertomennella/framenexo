@@ -30,9 +30,9 @@
       "type": "primary"
     }
   ],
-  "imageCredit": "Ilustração editorial original do Eixo Fato, criada pelo Estúdio Meridiano, com representação de Brasília. Não é fotografia nem reprodução dos mapas do IBGE.",
+  "imageCredit": "Ilustração editorial original do Base Um, criada pelo Estúdio Meridiano, com representação de Brasília. Não é fotografia nem reprodução dos mapas do IBGE.",
   "imageAlt": "Ilustração editorial de Brasília vista a partir do cerrado, com o Congresso Nacional e a Esplanada dos Ministérios ao entardecer.",
-  "author": "Redação Eixo Fato",
+  "author": "Redação Base Um",
   "production": "Texto original em português, baseado no anúncio do IBGE.",
   "corrections": [
     {
@@ -56,7 +56,7 @@ Na prática, a escolha da projeção interfere na leitura de distâncias, tamanh
 
 O lançamento também aproxima um material produzido para divulgação institucional do público que procura referências cartográficas para estudo, planejamento e curiosidade. A série pode ser lida junto com mapas temáticos, dados estatísticos e notas metodológicas do próprio instituto, que explicam escala, projeção e fonte. Esses elementos ajudam a evitar que a imagem seja interpretada como uma fotografia da Terra ou como uma atualização de fronteiras.
 
-O Eixo Fato trata a publicação como recurso de informação pública. A utilidade dos mapas depende da forma como cada leitor interpreta escala, projeção e data de produção; por isso, o material original do IBGE continua sendo a referência para uso técnico.
+O Base Um trata a publicação como recurso de informação pública. A utilidade dos mapas depende da forma como cada leitor interpreta escala, projeção e data de produção; por isso, o material original do IBGE continua sendo a referência para uso técnico.
 
 ## Como ler esta notícia
 

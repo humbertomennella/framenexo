@@ -1,4 +1,4 @@
-# Eixo Fato
+# Base Um
 
 **O fato primeiro. O contexto importa.** Portal de notícias sobre o Brasil e o mundo, com fontes identificadas, texto original e automação editorial conservadora.
 

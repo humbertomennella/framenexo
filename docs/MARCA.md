@@ -1,6 +1,6 @@
 # Identidade editorial
 
-**Eixo Fato** é a identidade do portal de notícias do Brasil e do mundo. “Eixo” representa a central que organiza diferentes fontes; “Fato” define o critério de entrada. A assinatura visual é **EIXO/FATO** e o lema é **O fato no centro. O contexto por inteiro.**
+**Base Um** é a identidade do portal de notícias do Brasil e do mundo. “Base” representa a evidência verificável que sustenta cada publicação; “Um” expressa uma central única que reúne fontes diversas sem apagar suas diferenças. A assinatura visual é **BASE/UM** e o lema é **Informação com base. Contexto por inteiro.**
 
 A escolha editorial não equivale, por si só, a registro de marca ou reserva de domínio. Antes de contratar um domínio próprio ou iniciar exploração comercial, a disponibilidade deve ser confirmada nos serviços oficiais do Registro.br e do INPI.
 
@@ -13,8 +13,8 @@ A escolha editorial não equivale, por si só, a registro de marca ou reserva de
 | Texto | `#F1F2F4` |
 | Texto secundário | `#A0A5AF` |
 | Tipografia | Arial / Helvetica / sans-serif, sem fonte remota |
-| Wordmark | EIXO/FATO, peso forte e barra verde |
-| Favicon | E, barra verde e F |
+| Wordmark | BASE/UM, peso forte e barra verde |
+| Favicon | B, barra verde e U |
 
 A hierarquia visual combina um carrossel compacto, cards editoriais e listas cronológicas. No celular, o conteúdo é empilhado em uma coluna, com navegação horizontal pelas editorias, alvos de toque amplos e leitura sem rolagem lateral.
 
