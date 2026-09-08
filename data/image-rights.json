@@ -1,4 +1,317 @@
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-IndexError: list index out of range
-/bin/bash: line 6: data/image-rights.json: Permission denied
+[
+  {
+    "path": "/og.png",
+    "origin": "Generated for the former FrameNexo identity",
+    "credit": "Arquivo legado / Núcleo Lumen",
+    "license": "Ativo original do projeto",
+    "sourceURL": null,
+    "usage": "Arquivo legado preservado; não utilizado nos metadados da identidade Linha Zero",
+    "proof": "Arquivo original da identidade anterior preservado no repositório."
+  },
+  {
+    "path": "component:EditorialCover",
+    "origin": "Generated from article metadata by Linha Zero source code",
+    "credit": "Linha Zero",
+    "license": "Código e composição originais da Linha Zero",
+    "sourceURL": null,
+    "usage": "Original typographic editorial cover; no third-party artwork",
+    "proof": "Componente src/components/EditorialCover.astro versionado no repositório."
+  },
+  {
+    "path": "/images/news/brasil-panoramica.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo original encomendado; direitos de publicação detidos pela Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica de Brasília para a matéria do IBGE; mostra o Congresso Nacional, a Esplanada e o cerrado. Não é fotografia nem reprodução de material do IBGE.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 dee0bc6f09ea34c0a4d4a803b090f62a300d5603a482e5f57cda669bcec98606."
+  },
+  {
+    "path": "/images/news/ceu-setembro-venus.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo original encomendado; direitos de publicação detidos pela Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica sobre observação de Vênus em setembro; não é fotografia nem imagem da NASA",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bedb0f725782d2b1b1c02bc55dbfe756b1a7c7efb8f9737a3e3fb8243e1a495c."
+  },
+  {
+    "path": "/images/news/lisa-interferometro.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo original encomendado; direitos de publicação detidos pela Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica do conceito de interferometria espacial do LISA; não é fotografia nem arte oficial da NASA ou ESA",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 61fe825ca58c776efaa87949a9513c17aa72e216b70239a4652d11a80a682f32."
+  },
+  {
+    "path": "/images/news/balanca-comercial-tem-superavit-de-us-74-bilhoes-em-agosto.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 40fad2e6332c8d6ec8f4b1f84215d9c6227d0a98141b2d90435938063103667a."
+  },
+  {
+    "path": "/images/news/bc-proibe-publicidade-em-comprovantes-do-pix-partir-de-marco-de-2027.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 22cfc63f3c55d1f72b773584aad6d1a5164294526e1e71778309df7d24789517."
+  },
+  {
+    "path": "/images/news/brasil-encerra-mundial-de-paraciclismo-de-estrada-com-cinco-medalhas.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 843d91f207bc1e304cd4bd65c8604d56c28a87794340c15f80226adbe13d338c."
+  },
+  {
+    "path": "/images/news/brasil-tem-2-milhoes-de-pessoas-que-trabalham-por-meio-de-aplicativos.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 51b667b49047506ac790324bac2af8b98242fb8fd1a2b8ffc77ab31d20684ed0."
+  },
+  {
+    "path": "/images/news/brasil-testa-plataforma-para-pesquisas-em-microgravidade-no-espaco.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bdf33ab0f26416175e388d39fa48ed749411d9a7ee9da391a6b60898e8cf0ce5."
+  },
+  {
+    "path": "/images/news/brasileiro-feminino-corinthians-vai-semifinais-e-enfrenta-o-bahia.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bb6d0b48a371622c4f3b15e1983866e95ff244da1aa51b8b521786265bbfa9b6."
+  },
+  {
+    "path": "/images/news/cbl-bienal-do-livro-de-sao-paulo-tera-maior-edicao-de-sua-historia.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 df3e21da94e31352ae72730331d190d1f72da66e4e6e4834643b13f481a03fad."
+  },
+  {
+    "path": "/images/news/cmn-amplia-renegociacao-de-dividas-rurais-ligadas-eventos-climaticos.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 861ba5795f0f37d8ac3698d4f786a5f9474a2444ebee28dd810e5b1b33a634c3."
+  },
+  {
+    "path": "/images/news/eleicoes-2026-candidaturas-de-autistas-aumentam-mais-de-cinco-vezes.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 eebe6cb7fcb330857868d29dd584956d9a21bf03e655a02d985c17c7f1d65b68."
+  },
+  {
+    "path": "/images/news/exposicao-no-ccbb-do-rio-traz-forca-da-arte-de-mulheres-da-amazonia.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 9ac66e9cb7d4b5cb9ede0cb994afd2e3226d533c7ed3d63830d1f8088207a278."
+  },
+  {
+    "path": "/images/news/fiocruz-vai-iniciar-testes-da-primeira-vacina-rnam-contra-covid-19.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 440fb048d7523d3258af8dd61280209f2caeb09d030fe7b4a970728dbf293827."
+  },
+  {
+    "path": "/images/news/golpe-do-sosia-usa-tecnologia-para-tentar-burlar-biometria.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 da790ac44e1a3e85158edc4e21e298c2bbe3d572ccda871b2f744d36f4523c31."
+  },
+  {
+    "path": "/images/news/grito-dos-excluidos-tem-atos-em-defesa-por-moradia-e-contra-violencia.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 87a651fdaab5705d6ac2b2dbe1d26f56f575ba81e813c930195c08d6efd70601."
+  },
+  {
+    "path": "/images/news/hubble-decagono-saturno.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 b513b19c45ac4b6b32aa1d7b9e24d8a184b2b876bbfb86f093680adecc7d59c2."
+  },
+  {
+    "path": "/images/news/hubble-n44-estrelas.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 0b59d9a19a07211b90d3ac848dfe5d47c5d367f52da7de0b1e7f14be8845730b."
+  },
+  {
+    "path": "/images/news/incendio-atinge-pavilhao-de-frutas-no-ceagesp-nao-ha-vitimas.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 8923ebf2d97e2ec38dd76e075f148130dda616fe4353a98b04ba5207d344ae07."
+  },
+  {
+    "path": "/images/news/inscricoes-para-disputar-conselho-de-politica-cultural-vao-ate-dia-22.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 5e18653287811256b1703f4dc1049bf57ab1dfa33000fc6ed0e0885f87da6e8e."
+  },
+  {
+    "path": "/images/news/italia-registra-verao-mais-quente-em-mais-de-75-anos-afirma-instituto.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 2bca9125aea943ee1a3c81de4164f9745edea61efce7f46ce2871209c16f9e5b."
+  },
+  {
+    "path": "/images/news/justica-eleitoral-garante-transporte-e-urnas-adaptadas-para-pcd.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 d7b28d462836a60b6cb2ad3a8b2aea495961847ba1c5ad29bebf8d56e413a594."
+  },
+  {
+    "path": "/images/news/landsat-monte-michael-lava.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 7a380a8cfd90e32101376fbc662da4caeccc22dda4b3acc0a269012b855110ad."
+  },
+  {
+    "path": "/images/news/luisa-stefani-vai-quartas-de-final-nas-duplas-femininas-do-us-open.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 601e55af77469fe6016fd3974eaebfca18b9d67c165f3377953ae9951ca4ce05."
+  },
+  {
+    "path": "/images/news/lula-defende-soberania-do-brasil-em-pronunciamento-pelo-7-de-setembro.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 c62a1df2f2142dea132ee0954ff3737774c63de7233b59c1241814fe56e2209a."
+  },
+  {
+    "path": "/images/news/reino-unido-anuncia-ps400-milhoes-para-fundo-florestas-tropicais.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 43ede1e1547b06ad42eece4a0bb626fcc168350d25bed11ba57af66f4e35de82."
+  },
+  {
+    "path": "/images/news/restaurar-confianca-e-tema-da-81a-assembleia-geral-da-onu.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 e504e73c7bd4815ab7f8dabbf3ec5c63d0dbe7aef54846f72b531da5763fbdac."
+  },
+  {
+    "path": "/images/news/resultado-oficial-confirma-extrema-direita-em-eleicao-regional-alema.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 875593d1cc2a4fee03de306516496f30a3c6d52ae916aa9445eacff885d190b5."
+  },
+  {
+    "path": "/images/news/rio-de-janeiro-tem-aviso-de-ressaca-ciclovia-tim-maia-e-fechada.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 d4858140622ea15d4d3b80cf5006df484a3c56caed2b6af696b74a2a970f0585."
+  },
+  {
+    "path": "/images/news/sao-paulo-tem-mais-de-58-mil-casos-de-dengue-desde-o-inicio-do-ano.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 94ca03b25bea639516686b61061504c57c696d7b39d8b42d4c3ad646e4105727."
+  },
+  {
+    "path": "/images/news/seca-na-amazonia-atingiu-38-das-areas-habitadas-no-ultimo-el-nino.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 b2a718b7688927e74aaa294a36f49c3b9803df21a46ac8d2569ebabb5c162b3a."
+  },
+  {
+    "path": "/images/news/sus-amplia-oferta-de-tromboliticos-para-infarto-e-avc-isquemico.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 51f8367aafeef7e76519b223500047b07d389ccff43a6e92860815f7adb83a63."
+  },
+  {
+    "path": "/images/news/trens-e-metro-terao-operacao-especial-durante-o-rock-rio.webp",
+    "origin": "Ilustração editorial original criada pelo Núcleo Lumen para a Linha Zero",
+    "credit": "Linha Zero / Núcleo Lumen",
+    "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador da Linha Zero",
+    "sourceURL": null,
+    "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 62838f44c8c88a6d70d0f32d3f20952efa44e5165856501e5368e470ed076f28."
+  }
+]
