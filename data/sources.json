@@ -1,20 +1,4 @@
-[
-  {"id":"ibge","name":"IBGE — Instituto Brasileiro de Geografia e Estatística","type":"primary","url":"https://www.ibge.gov.br/","feed":"https://agenciadenoticias.ibge.gov.br/agencia-noticias/rss","hosts":["ibge.gov.br","agenciadenoticias.ibge.gov.br"],"category":"Brasil","enabled":true},
-  {"id":"govbr","name":"Portal Gov.br","type":"primary","url":"https://www.gov.br/pt-br/noticias","feed":null,"hosts":["gov.br"],"category":"Brasil","enabled":false},
-  {"id":"bcb","name":"Banco Central do Brasil","type":"primary","url":"https://www.bcb.gov.br/","feed":null,"hosts":["bcb.gov.br"],"category":"Economia","enabled":false},
-  {"id":"camara","name":"Câmara dos Deputados — Política","type":"primary","url":"https://www.camara.leg.br/noticias/","feed":"https://www.camara.leg.br/noticias/rss/dinamico/POLITICA","hosts":["camara.leg.br"],"category":"Política","enabled":true},
-  {"id":"camara-economia","name":"Câmara dos Deputados — Economia","type":"primary","url":"https://www.camara.leg.br/noticias/","feed":"https://www.camara.leg.br/noticias/rss/dinamico/ECONOMIA","hosts":["camara.leg.br"],"category":"Economia","enabled":true},
-  {"id":"camara-tecnologia","name":"Câmara dos Deputados — Ciência e Tecnologia","type":"primary","url":"https://www.camara.leg.br/noticias/","feed":"https://www.camara.leg.br/noticias/rss/dinamico/CIENCIA-E-TECNOLOGIA","hosts":["camara.leg.br"],"category":"Tecnologia","enabled":true},
-  {"id":"camara-cultura","name":"Câmara dos Deputados — Educação e Cultura","type":"primary","url":"https://www.camara.leg.br/noticias/","feed":"https://www.camara.leg.br/noticias/rss/dinamico/EDUCACAO-E-CULTURA","hosts":["camara.leg.br"],"category":"Cultura","enabled":true},
-  {"id":"camara-esportes","name":"Câmara dos Deputados — Esportes","type":"primary","url":"https://www.camara.leg.br/noticias/","feed":"https://www.camara.leg.br/noticias/rss/dinamico/ESPORTES","hosts":["camara.leg.br"],"category":"Esportes","enabled":true},
-  {"id":"camara-saude","name":"Câmara dos Deputados — Saúde","type":"primary","url":"https://www.camara.leg.br/noticias/","feed":"https://www.camara.leg.br/noticias/rss/dinamico/SAUDE","hosts":["camara.leg.br"],"category":"Saúde","enabled":true},
-  {"id":"camara-meio-ambiente","name":"Câmara dos Deputados — Meio Ambiente","type":"primary","url":"https://www.camara.leg.br/noticias/","feed":"https://www.camara.leg.br/noticias/rss/dinamico/MEIO-AMBIENTE","hosts":["camara.leg.br"],"category":"Meio Ambiente","enabled":true},
-  {"id":"senado","name":"Senado Federal","type":"primary","url":"https://www12.senado.leg.br/noticias","feed":"https://www12.senado.leg.br/noticias/feed","hosts":["senado.leg.br"],"category":"Política","enabled":true},
-  {"id":"nasa","name":"NASA Science","type":"primary","url":"https://science.nasa.gov/","feed":"https://science.nasa.gov/feed/","hosts":["science.nasa.gov"],"category":"Ciência","enabled":true},
-  {"id":"un","name":"Nações Unidas","type":"primary","url":"https://news.un.org/pt/","feed":"https://news.un.org/feed/subscribe/pt/news/all/rss.xml","hosts":["news.un.org"],"category":"Mundo","enabled":true},
-  {"id":"who","name":"Organização Mundial da Saúde","type":"primary","url":"https://www.who.int/news","feed":"https://www.who.int/rss-feeds/news-english.xml","hosts":["who.int"],"category":"Saúde","enabled":true},
-  {"id":"unesco","name":"UNESCO","type":"primary","url":"https://www.unesco.org/pt","feed":null,"hosts":["unesco.org"],"category":"Cultura","enabled":false},
-  {"id":"mma","name":"Ministério do Meio Ambiente","type":"primary","url":"https://www.gov.br/mma/pt-br/assuntos/noticias","feed":null,"hosts":["gov.br"],"category":"Meio Ambiente","enabled":false},
-  {"id":"ap","name":"Agência Brasil","type":"press","url":"https://agenciabrasil.ebc.com.br/","feed":"https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml","hosts":["agenciabrasil.ebc.com.br"],"category":"Brasil","enabled":true},
-  {"id":"dw","name":"DW Brasil","type":"press","url":"https://www.dw.com/pt-br","feed":"https://rss.dw.com/rdf/rss-pt-br-all","hosts":["dw.com"],"category":"Mundo","enabled":true}
-]
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+IndexError: list index out of range
+/bin/bash: line 6: data/sources.json: Permission denied
