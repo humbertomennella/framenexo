@@ -6,18 +6,18 @@
   "category": "Mundo",
   "tags": ["Mundo", "Ciência", "NASA", "Astronomia"],
   "relevance": 90,
-  "image": "/images/news/mundo-conexoes.webp",
+  "image": "/images/news/lisa-interferometro.webp",
   "confidence": "CONFIRMADO",
-  "publishedAt": "2026-09-08T19:50:00Z",
-  "updatedAt": "2026-09-08T19:50:00Z",
+  "publishedAt": "2026-09-08T01:50:00Z",
+  "updatedAt": "2026-09-08T02:13:00Z",
   "status": "published",
   "eventKey": "nasa-lisa-science-gaps-2026",
   "sources": [{"name":"NASA Science","url":"https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/community/reminder-lisa-science-gaps-2026/","publishedAt":"2026-09-04","type":"primary"}],
   "imageCredit": "Ilustração editorial original da Linha Zero, gerada por IA. Não é fotografia nem representação do observatório.",
-  "imageAlt": "Ilustração editorial de uma esfera luminosa conectando continentes e centros de pesquisa.",
+  "imageAlt": "Ilustração editorial de três observatórios espaciais formando um triângulo e trocando feixes de laser no espaço.",
   "author": "Redação Linha Zero",
   "production": "Texto original em português, baseado no comunicado oficial da NASA.",
-  "corrections": []
+  "corrections": [{"date":"2026-09-08T02:13:00Z","text":"Horário de publicação corrigido para o fuso de Brasília e ilustração editorial substituída por uma arte específica da pauta."}]
 }
 ---
 

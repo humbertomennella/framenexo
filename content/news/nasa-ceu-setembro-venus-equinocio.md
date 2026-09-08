@@ -6,18 +6,18 @@
   "category": "Ciência",
   "tags": ["Ciência", "Astronomia", "NASA", "Observação do céu"],
   "relevance": 94,
-  "image": "/images/news/ciencia-tecnologia.webp",
+  "image": "/images/news/ceu-setembro-venus.webp",
   "confidence": "CONFIRMADO",
-  "publishedAt": "2026-09-08T19:55:00Z",
-  "updatedAt": "2026-09-08T19:55:00Z",
+  "publishedAt": "2026-09-08T01:55:00Z",
+  "updatedAt": "2026-09-08T02:13:00Z",
   "status": "published",
   "eventKey": "nasa-ceu-setembro-2026",
   "sources": [{"name":"NASA Science","url":"https://science.nasa.gov/solar-system/skywatching/whats-up-september-2026-skywatching-tips-from-nasa/","publishedAt":"2026-09-01","type":"primary"}],
   "imageCredit": "Ilustração editorial original da Linha Zero, gerada por IA. Não é fotografia do céu nem imagem da NASA.",
-  "imageAlt": "Ilustração editorial de laboratório, tecnologia e uma planta sob luz fria.",
+  "imageAlt": "Ilustração editorial do céu antes do amanhecer, com Vênus brilhante no horizonte e um observatório em primeiro plano.",
   "author": "Redação Linha Zero",
   "production": "Texto original em português, baseado no guia oficial da NASA.",
-  "corrections": []
+  "corrections": [{"date":"2026-09-08T02:13:00Z","text":"Horário de publicação corrigido para o fuso de Brasília e ilustração editorial substituída por uma arte específica da pauta."}]
 }
 ---
 

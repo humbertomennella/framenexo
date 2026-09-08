@@ -120,6 +120,11 @@ def approved_media(candidate,used_images=()):
  if path in set(used_images):raise ValueError('media_must_be_unique')
  asset=(ROOT/'public'/path.lstrip('/')).resolve();public=(ROOT/'public').resolve()
  if public not in asset.parents or not asset.is_file():raise ValueError('media_asset_missing')
+ asset_hash=hashlib.sha256(asset.read_bytes()).hexdigest()
+ for used in set(used_images):
+  if not isinstance(used,str):continue
+  existing=(ROOT/'public'/used.lstrip('/')).resolve()
+  if existing.is_file() and hashlib.sha256(existing.read_bytes()).hexdigest()==asset_hash:raise ValueError('media_content_must_be_unique')
  rights=next((x for x in read('data/image-rights.json',[]) if x.get('path')==path),None)
  if not rights or any(k not in rights for k in ('origin','credit','license','sourceURL','proof')):raise ValueError('media_rights_incomplete')
  if not all(isinstance(media.get(k),str) and media[k].strip() for k in ('alt','credit')):raise ValueError('media_metadata_incomplete')

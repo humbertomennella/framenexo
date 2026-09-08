@@ -1,7 +1,7 @@
 """Check the built public artifact, including base-path routing and SEO records."""
 from pathlib import Path
 from html.parser import HTMLParser
-import json,sys,urllib.parse,xml.etree.ElementTree as ET
+import datetime as dt,hashlib,json,sys,urllib.parse,xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';errors=[]
 class Page(HTMLParser):
  def __init__(self):super().__init__();self.h1=0;self.ids=set();self.links=[];self.images=[];self.title='';self.in_title=False;self.meta={};self.canonical=None;self.schemas=[];self.in_schema=False;self.buffer=''
@@ -52,13 +52,19 @@ for file,page in pages.items():
   check(target.exists(),f'{file.relative_to(DIST)}: broken link {url}')
   if fragment and target in pages:check(urllib.parse.unquote(fragment) in pages[target].ids,f'{file.name}: missing anchor {url}')
 records=[]
+used_image_paths=set();used_image_hashes=set();now=dt.datetime.now(dt.timezone.utc)
 for file in (ROOT/'content/news').glob('*.md'):
  parts=file.read_text().split('---',2);check(len(parts)==3,f'{file.name}: frontmatter missing')
  try:a=json.loads(parts[1])
  except Exception:errors.append(f'{file.name}: invalid frontmatter');continue
  for key in ['title','slug','description','publishedAt','updatedAt','category','tags','image','imageCredit','status','sources','confidence']:check(key in a,f'{file.name}: missing {key}')
  if a.get('status')!='published':continue
- records.append(a);check(bool(a.get('sources')),f'{file.name}: sources missing');check((DIST/a['image'].lstrip('/')).is_file(),f'{file.name}: image missing');check('<script' not in parts[2].lower(),f'{file.name}: unsafe body')
+ records.append(a);check(bool(a.get('sources')),f'{file.name}: sources missing');image_file=DIST/a['image'].lstrip('/');check(image_file.is_file(),f'{file.name}: image missing');check('<script' not in parts[2].lower(),f'{file.name}: unsafe body')
+ try:published=dt.datetime.fromisoformat(a['publishedAt'].replace('Z','+00:00'));check(published<=now+dt.timedelta(minutes=5),f'{file.name}: publication date is in the future')
+ except Exception:errors.append(f'{file.name}: invalid publication date')
+ check(a['image'] not in used_image_paths,f'{file.name}: duplicate image path');used_image_paths.add(a['image'])
+ if image_file.is_file():
+  image_hash=hashlib.sha256(image_file.read_bytes()).hexdigest();check(image_hash not in used_image_hashes,f'{file.name}: duplicate image content');used_image_hashes.add(image_hash)
  rendered=pages.get(DIST/'noticias'/a['slug']/'index.html');check(rendered is not None,f'{file.name}: article not rendered')
  if rendered:
   check(rendered.meta.get('og:title')==a['title'],f'{file.name}: OG mismatch');check(rendered.meta.get('twitter:description')==a['description'],f'{file.name}: social description mismatch');check(any(s.get('@type')=='NewsArticle' and s.get('headline')==a['title'] for s in rendered.schemas),f'{file.name}: NewsArticle missing')
