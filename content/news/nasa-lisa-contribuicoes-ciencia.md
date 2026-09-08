@@ -5,6 +5,7 @@
   "description": "Projeto da NASA abriu chamada para pesquisadores apontarem questões prioritárias ligadas ao futuro observatório de ondas gravitacionais.",
   "category": "Mundo",
   "tags": ["Mundo", "Ciência", "NASA", "Astronomia"],
+  "quickTakeaways": ["A NASA abriu uma chamada para pesquisadores apontarem lacunas de pesquisa do LISA.", "As contribuições ajudam a orientar futuras propostas do programa preparatório.", "O prazo informado no comunicado vai até 16 de setembro de 2026."],
   "relevance": 90,
   "image": "/images/news/lisa-interferometro.webp",
   "confidence": "CONFIRMADO",
@@ -24,5 +25,7 @@
 A NASA informou que está recebendo contribuições da comunidade científica para atualizar a lista de lacunas de pesquisa do projeto LISA, futuro observatório espacial voltado ao estudo de ondas gravitacionais. O lembrete publicado em 4 de setembro indica que a chamada permanece aberta até 16 de setembro.
 
 O processo busca identificar perguntas científicas que ainda exigem investigação para orientar futuras propostas do programa LISA Preparatory Science. A agência descreve a iniciativa como uma etapa de preparação de pesquisa, não como o anúncio de uma missão já operacional.
+
+O LISA é planejado como um observatório espacial de interferometria a laser. Em vez de observar ondas gravitacionais com um único instrumento no solo, a arquitetura prevista mede pequenas mudanças na distância entre naves separadas no espaço. A chamada discutida pela NASA trata das perguntas e prioridades que podem orientar a comunidade científica durante a preparação desse trabalho.
 
 O prazo e o escopo pertencem ao comunicado da NASA e são direcionados à comunidade de pesquisadores. A Linha Zero não interpreta a chamada como confirmação de descobertas ou de cronograma de lançamento.

@@ -1,9 +1,9 @@
 import {href} from './paths';
 export {href};
 export const categories = ['Brasil','Mundo','Política','Economia','Tecnologia','Ciência','Cultura','Esportes','Saúde','Meio Ambiente'];
-export const categorySlug = (s:string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+export const categorySlug = (s:string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,'-');
 export interface Article {
- title:string; slug:string; description:string; publishedAt:string; updatedAt:string; category:string; tags:string[];
+ title:string; slug:string; description:string; publishedAt:string; updatedAt:string; category:string; tags:string[]; quickTakeaways?:string[];
  image:string; imageAlt:string; imageCredit:string; status:string; confidence:string; relevance:number; eventKey:string;
  sources:{name:string;url:string;publishedAt:string;type:string}[]; corrections?:{date:string;text:string}[]; body:string; Content:any;
 }
