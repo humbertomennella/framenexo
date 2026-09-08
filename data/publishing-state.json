@@ -1,107 +1,11 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-07T21:09:00Z",
-  "lastCollectedAt": "2026-09-08T00:24:45Z",
-  "editionCount": 3,
+  "lastPublishedAt": "2026-09-08T20:00:00Z",
+  "lastCollectedAt": null,
+  "editionCount": 1,
   "history": [
-    {
-      "slug": "exodus-previa-combate-escolhas",
-      "title": "Exodus detalha combate e escolhas em nova prévia do Xbox",
-      "eventKey": "exodus-previa-combate-escolhas",
-      "publishedAt": "2026-09-07T13:45:17Z",
-      "sourceUrls": [
-        "https://news.xbox.com/en-us/2026/09/04/exodus-preview-hands-on"
-      ]
-    },
-    {
-      "slug": "xbox-cloud-limites-novembro",
-      "title": "Xbox anuncia limites mensais para Cloud Gaming a partir de novembro",
-      "eventKey": "xbox-cloud-limites-novembro",
-      "publishedAt": "2026-09-07T13:45:17Z",
-      "sourceUrls": [
-        "https://news.xbox.com/en-us/2026/09/03/xbox-cloud-gaming-changes"
-      ]
-    },
-    {
-      "slug": "state-of-play-setembro-calendario",
-      "title": "State of Play abre um novo capítulo no calendário do PS5",
-      "eventKey": "state-of-play-setembro-calendario",
-      "publishedAt": "2026-09-07T13:45:17Z",
-      "sourceUrls": [
-        "https://blog.playstation.com/2026/09/03/state-of-play-state-of-play-japan-all-announcements-trailers"
-      ]
-    },
-    {
-      "slug": "game-pass-setembro-primeira-onda",
-      "title": "Game Pass programa Dragonwilds e The Royal Writ para setembro",
-      "eventKey": "game-pass-setembro-primeira-onda",
-      "publishedAt": "2026-09-07T13:45:17Z",
-      "sourceUrls": [
-        "https://news.xbox.com/en-us/2026/09/01/xbox-game-pass-update-september-wave-1"
-      ]
-    },
-    {
-      "slug": "bioeden-gestao-restauracao",
-      "title": "BioEden transforma restauração ambiental em jogo de gestão",
-      "eventKey": "bioeden-gestao-restauracao",
-      "publishedAt": "2026-09-07T13:45:17Z",
-      "sourceUrls": [
-        "https://news.xbox.com/en-us/2026/09/03/bioeden-4x-to-4r"
-      ]
-    },
-    {
-      "slug": "ps-plus-setembro-chained-echoes",
-      "title": "PlayStation Plus de setembro inclui Chained Echoes e Sniper Elite",
-      "eventKey": "ps-plus-setembro-chained-echoes",
-      "publishedAt": "2026-09-07T13:45:17Z",
-      "sourceUrls": [
-        "https://blog.playstation.com/2026/08/26/playstation-plus-monthly-games-for-september-sniper-elite-resistance-mlb-the-show-26-wobbly-life-chained-echoes"
-      ]
-    },
-    {
-      "slug": "railbreak-dx-xbox-lancamento",
-      "title": "Railbreak DX chega ao Xbox com foco em pontuação e partidas rápidas",
-      "eventKey": "railbreak-dx-xbox-lancamento",
-      "publishedAt": "2026-09-07T14:00:00Z",
-      "sourceUrls": [
-        "https://news.xbox.com/en-us/2026/09/04/rack-up-points-in-arcade-hit-railbreak-dx"
-      ]
-    },
-    {
-      "slug": "xbox-tcl-app-tv",
-      "title": "Xbox anuncia aplicativo para televisores TCL em parceria com a fabricante",
-      "eventKey": "xbox-tcl-app-tv",
-      "publishedAt": "2026-09-07T14:05:00Z",
-      "sourceUrls": [
-        "https://news.xbox.com/en-us/2026/09/04/xbox-app-tcl-smart-tv"
-      ]
-    },
-    {
-      "slug": "wreck-runners-playtest-xbox-insiders",
-      "title": "Wreck Runners abre teste antecipado no Xbox Series X|S",
-      "eventKey": "wreck-runners-setembro-playtest",
-      "publishedAt": "2026-09-07T21:07:00Z",
-      "sourceUrls": [
-        "https://news.xbox.com/en-us/2026/09/04/play-the-wreck-runners-september-update-early-with-xbox-insiders"
-      ]
-    },
-    {
-      "slug": "rhapsody-in-scarlet-ps5-anuncio",
-      "title": "Rhapsody in Scarlet é anunciado para PS5",
-      "eventKey": "rhapsody-in-scarlet-ps5-anuncio",
-      "publishedAt": "2026-09-07T21:08:00Z",
-      "sourceUrls": [
-        "https://blog.br.playstation.com/2026/09/03/rhapsody-in-scarlet-anunciado-para-ps5"
-      ]
-    },
-    {
-      "slug": "gran-turismo-7-spec-iv-duas-etapas",
-      "title": "Gran Turismo 7 terá atualização Spec IV em duas etapas",
-      "eventKey": "gran-turismo-7-spec-iv-2026",
-      "publishedAt": "2026-09-07T21:09:00Z",
-      "sourceUrls": [
-        "https://blog.br.playstation.com/2026/09/03/atualizacao-spec-iv-de-gran-turismo-7-com-lancamento-em-duas-partes-este-ano"
-      ]
-    }
+    {"slug":"ibge-mapas-mundi-brasil-acesso","title":"IBGE libera acesso a mapas-múndi do Brasil em nova coleção digital","eventKey":"ibge-mapas-mundi-brasil-2026","publishedAt":"2026-09-08T20:00:00Z","sourceUrls":["https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47986-dia-da-independencia-ibge-libera-acesso-aos-mapas-mundi-do-brasil"]},
+    {"slug":"nasa-ceu-setembro-venus-equinocio","title":"NASA destaca Vênus, equinócio e Lua cheia no céu de setembro","eventKey":"nasa-ceu-setembro-2026","publishedAt":"2026-09-08T19:55:00Z","sourceUrls":["https://science.nasa.gov/solar-system/skywatching/whats-up-september-2026-skywatching-tips-from-nasa/"]},
+    {"slug":"nasa-lisa-contribuicoes-ciencia","title":"NASA recebe contribuições da comunidade para definir lacunas científicas do LISA","eventKey":"nasa-lisa-science-gaps-2026","publishedAt":"2026-09-08T19:50:00Z","sourceUrls":["https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/community/reminder-lisa-science-gaps-2026/"]}
   ]
 }

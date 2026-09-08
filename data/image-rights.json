@@ -1,56 +1,7 @@
 [
-  {
-    "path": "/images/cathedral.webp",
-    "origin": "Generated specifically for FrameNexo",
-    "credit": "FrameNexo / IA",
-    "license": "Ativo original; direitos de publicação detidos pelo FrameNexo",
-    "sourceURL": null,
-    "usage": "Original editorial illustration; not a game screenshot",
-    "proof": "Arquivo original gerado para o lançamento do portal e preservado no repositório."
-  },
-  {
-    "path": "/og.png",
-    "origin": "Generated specifically for FrameNexo",
-    "credit": "FrameNexo / IA",
-    "license": "Ativo original; direitos de publicação detidos pelo FrameNexo",
-    "sourceURL": null,
-    "usage": "Original brand identity and social card",
-    "proof": "Arquivo original de identidade visual preservado no repositório."
-  },
-  {
-    "path": "component:EditorialCover",
-    "origin": "Generated from article metadata by FrameNexo source code",
-    "credit": "FrameNexo",
-    "license": "Código e composição originais do FrameNexo",
-    "sourceURL": null,
-    "usage": "Original typographic editorial cover; contains no third-party artwork, game screenshot, logo or character",
-    "proof": "Componente src/components/EditorialCover.astro versionado no repositório."
-  },
-  {
-    "path": "/images/news/gran-turismo-7-spec-iv.webp",
-    "origin": "Generated specifically for FrameNexo with OpenAI image generation",
-    "credit": "FrameNexo / OpenAI image generation",
-    "license": "Ativo original encomendado; direitos de publicação detidos pelo FrameNexo",
-    "sourceURL": null,
-    "usage": "Ilustração conceitual editorial sobre atualização de jogo de corrida; não é captura do jogo, não contém logotipos nem modelos reais identificáveis",
-    "proof": "Gerada em 2026-09-07 a partir de prompt próprio: circuito fictício em duas fases, carros genéricos, outono e inverno; arquivo original com metadados C2PA preservado fora da versão WebP."
-  },
-  {
-    "path": "/images/news/rhapsody-in-scarlet.webp",
-    "origin": "Generated specifically for FrameNexo with OpenAI image generation",
-    "credit": "FrameNexo / OpenAI image generation",
-    "license": "Ativo original encomendado; direitos de publicação detidos pelo FrameNexo",
-    "sourceURL": null,
-    "usage": "Ilustração conceitual editorial sobre ação, jazz e magia na Nova York dos anos 1920; não é arte oficial nem captura do jogo",
-    "proof": "Gerada em 2026-09-07 a partir de prompt próprio: personagem anônima, rua art déco e energia musical abstrata; arquivo original com metadados C2PA preservado fora da versão WebP."
-  },
-  {
-    "path": "/images/news/wreck-runners-playtest.webp",
-    "origin": "Generated specifically for FrameNexo with OpenAI image generation",
-    "credit": "FrameNexo / OpenAI image generation",
-    "license": "Ativo original encomendado; direitos de publicação detidos pelo FrameNexo",
-    "sourceURL": null,
-    "usage": "Ilustração conceitual editorial sobre exploração cooperativa e salvamento subaquático; não é captura do jogo",
-    "proof": "Gerada em 2026-09-07 a partir de prompt próprio: quatro exploradores anônimos, templo submerso e submersível fictício; arquivo original com metadados C2PA preservado fora da versão WebP."
-  }
+  {"path":"/og.png","origin":"Generated specifically for FrameNexo","credit":"FrameNexo / IA","license":"Ativo original; direitos de publicação detidos pelo FrameNexo","sourceURL":null,"usage":"Original brand identity and social card","proof":"Arquivo original de identidade visual preservado no repositório."},
+  {"path":"component:EditorialCover","origin":"Generated from article metadata by FrameNexo source code","credit":"FrameNexo","license":"Código e composição originais do FrameNexo","sourceURL":null,"usage":"Original typographic editorial cover; no third-party artwork","proof":"Componente src/components/EditorialCover.astro versionado no repositório."},
+  {"path":"/images/news/brasil-panoramica.webp","origin":"Generated specifically for FrameNexo with OpenAI image generation","credit":"FrameNexo / OpenAI image generation","license":"Ativo original encomendado; direitos de publicação detidos pelo FrameNexo","sourceURL":null,"usage":"Ilustração editorial sobre notícia do Brasil; não é fotografia nem reprodução de material do IBGE","proof":"Gerada em 2026-09-08 a partir de prompt próprio; arquivo PNG original preservado fora da versão WebP."},
+  {"path":"/images/news/ciencia-tecnologia.webp","origin":"Generated specifically for FrameNexo with OpenAI image generation","credit":"FrameNexo / OpenAI image generation","license":"Ativo original encomendado; direitos de publicação detidos pelo FrameNexo","sourceURL":null,"usage":"Ilustração editorial sobre ciência; não é fotografia nem imagem da NASA","proof":"Gerada em 2026-09-08 a partir de prompt próprio; arquivo PNG original preservado fora da versão WebP."},
+  {"path":"/images/news/mundo-conexoes.webp","origin":"Generated specifically for FrameNexo with OpenAI image generation","credit":"FrameNexo / OpenAI image generation","license":"Ativo original encomendado; direitos de publicação detidos pelo FrameNexo","sourceURL":null,"usage":"Ilustração editorial sobre ciência internacional; não é fotografia nem representação de missão","proof":"Gerada em 2026-09-08 a partir de prompt próprio; arquivo PNG original preservado fora da versão WebP."}
 ]

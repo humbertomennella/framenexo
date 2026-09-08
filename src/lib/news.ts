@@ -1,6 +1,6 @@
 import {href} from './paths';
 export {href};
-export const categories = ['PC','PlayStation','Xbox','Nintendo','Indies','RPG','Indústria','Lançamentos','Análises','Rumores'];
+export const categories = ['Brasil','Mundo','Política','Economia','Tecnologia','Ciência','Cultura','Esportes','Saúde','Meio Ambiente'];
 export const categorySlug = (s:string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 export interface Article {
  title:string; slug:string; description:string; publishedAt:string; updatedAt:string; category:string; tags:string[];

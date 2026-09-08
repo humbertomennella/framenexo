@@ -3,12 +3,12 @@ const {article:a, compact=false, heading='strong'}=Astro.props;
 const variant=[...a.slug].reduce((sum:number,char:string)=>sum+char.charCodeAt(0),0)%4;
 const code=String([...a.slug].reduce((sum:number,char:string)=>sum+char.charCodeAt(0),0)%100).padStart(2,'0');
 const Heading=heading;
-const accents:Record<string,string>={Xbox:'#76d65f',PlayStation:'#70a9ff',RPG:'#c595ff',Indies:'#ffca68',PC:'#66d9c8',Lançamentos:'#ff837a'};
+const accents:Record<string,string>={Brasil:'#76d65f',Mundo:'#70a9ff',Política:'#c595ff',Economia:'#ffca68',Tecnologia:'#66d9c8',Ciência:'#ff837a',Cultura:'#f49ac2',Esportes:'#9bd5ff',Saúde:'#a7e8b0','Meio Ambiente':'#b6e36f'};
 const accent=accents[a.category]||'#b4f564';
 ---
 <div class:list={["editorial-cover",`cover-v${variant}`,compact&&"compact"]} style={`--cover-accent:${accent}`} role={compact?undefined:"img"} aria-label={compact?undefined:`Capa editorial tipográfica: ${a.title}`}>
   <span class="cover-code" aria-hidden="true">FN/{code}</span>
   <span class="cover-kicker">FrameNexo / {a.category}</span>
   <Heading>{a.title}</Heading>
-  <span class="cover-note">Capa editorial · não é imagem do jogo</span>
+  <span class="cover-note">Capa editorial · não é fotografia do acontecimento</span>
 </div>
