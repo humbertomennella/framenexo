@@ -12,7 +12,7 @@
     "category": "Xbox",
     "internalSummary": "Candidato de Xbox Wire; contexto factual será extraído antes da redação.",
     "relevance": 55,
-    "status": "candidate",
+    "status": "published",
     "confidence": "CONFIRMADO"
   },
   {
@@ -108,7 +108,7 @@
     "category": "Xbox",
     "internalSummary": "Candidato de Xbox Wire; contexto factual será extraído antes da redação.",
     "relevance": 55,
-    "status": "candidate",
+    "status": "published",
     "confidence": "CONFIRMADO"
   },
   {
@@ -124,7 +124,7 @@
     "category": "Xbox",
     "internalSummary": "Candidato de Xbox Wire; contexto factual será extraído antes da redação.",
     "relevance": 55,
-    "status": "candidate",
+    "status": "published",
     "confidence": "CONFIRMADO"
   },
   {
@@ -140,7 +140,7 @@
     "category": "Xbox",
     "internalSummary": "Candidato de Xbox Wire; contexto factual será extraído antes da redação.",
     "relevance": 55,
-    "status": "candidate",
+    "status": "published",
     "confidence": "CONFIRMADO"
   },
   {
@@ -1212,7 +1212,7 @@
     "category": "PlayStation",
     "internalSummary": "Candidato de PlayStation Blog; contexto factual será extraído antes da redação.",
     "relevance": 85,
-    "status": "candidate",
+    "status": "published",
     "confidence": "CONFIRMADO"
   },
   {
@@ -3400,6 +3400,70 @@
     "url": "https://www.ign.com/articles/is-gta-6-too-realistic-for-its-own-good-refueling-cars-and-gun-restrictions-spark-debate",
     "publishedAt": "2026-09-07T19:09:52Z",
     "collectedAt": "2026-09-07T22:00:58Z",
+    "subject": "Indústria",
+    "category": "Indústria",
+    "internalSummary": "Candidato de IGN; contexto factual será extraído antes da redação.",
+    "relevance": 30,
+    "status": "candidate",
+    "confidence": "RELATO"
+  },
+  {
+    "id": "145c2698ef4e9e3b5a7c",
+    "title": "NHL 27 Is Using AI-Generated Voiceover for In-Game Commentators, John Buccigross Says",
+    "sourceId": "ign",
+    "sourceName": "IGN",
+    "sourceType": "press",
+    "url": "https://www.ign.com/articles/nhl-27-is-using-ai-generated-voiceover-for-in-game-commentators-john-buccigross-says",
+    "publishedAt": "2026-09-07T22:25:49Z",
+    "collectedAt": "2026-09-08T00:24:45Z",
+    "subject": "Indústria",
+    "category": "Indústria",
+    "internalSummary": "Candidato de IGN; contexto factual será extraído antes da redação.",
+    "relevance": 30,
+    "status": "candidate",
+    "confidence": "RELATO"
+  },
+  {
+    "id": "91d01566801cc9ed3eb6",
+    "title": "Final Fantasy Resonance Mod Brings Back Classic FF Character Ariana Grande",
+    "sourceId": "ign",
+    "sourceName": "IGN",
+    "sourceType": "press",
+    "url": "https://www.ign.com/articles/final-fantasy-resonance-mod-brings-back-classic-ff-character-ariana-grande",
+    "publishedAt": "2026-09-07T22:04:56Z",
+    "collectedAt": "2026-09-08T00:24:45Z",
+    "subject": "Indústria",
+    "category": "Indústria",
+    "internalSummary": "Candidato de IGN; contexto factual será extraído antes da redação.",
+    "relevance": 30,
+    "status": "candidate",
+    "confidence": "RELATO"
+  },
+  {
+    "id": "6537334be238a470b651",
+    "title": "Pokémon TCG Prismatic Evolutions Super-Premium Collection Restocked at Amazon",
+    "sourceId": "ign",
+    "sourceName": "IGN",
+    "sourceType": "press",
+    "url": "https://www.ign.com/articles/pokemon-tcg-prismatic-evolutions-super-premium-amazon-restock",
+    "publishedAt": "2026-09-07T22:00:00Z",
+    "collectedAt": "2026-09-08T00:24:45Z",
+    "subject": "Indústria",
+    "category": "Indústria",
+    "internalSummary": "Candidato de IGN; contexto factual será extraído antes da redação.",
+    "relevance": 30,
+    "status": "candidate",
+    "confidence": "RELATO"
+  },
+  {
+    "id": "ec59595447d0652675b2",
+    "title": "Sebastian Stan Half-Jokingly Pitched a 'Sicario-esque' Bucky Barnes Movie to MCU Boss Kevin Feige",
+    "sourceId": "ign",
+    "sourceName": "IGN",
+    "sourceType": "press",
+    "url": "https://www.ign.com/articles/sebastian-stan-half-jokingly-pitched-a-sicario-esque-bucky-barnes-movie-to-mcu-boss-kevin-feige",
+    "publishedAt": "2026-09-07T21:43:49Z",
+    "collectedAt": "2026-09-08T00:24:45Z",
     "subject": "Indústria",
     "category": "Indústria",
     "internalSummary": "Candidato de IGN; contexto factual será extraído antes da redação.",

@@ -80,5 +80,33 @@
     },
     "errors": [],
     "seconds": 0.99
+  },
+  {
+    "at": "2026-09-08T00:24:45Z",
+    "event": "collection",
+    "collected": 4,
+    "discarded": 2,
+    "sourceCounts": {
+      "xbox-en": 10,
+      "playstation-br": 10,
+      "playstation-en": 10,
+      "pcgamer": 50,
+      "vgc": 10,
+      "cdprojekt": 2,
+      "eurogamer": 80,
+      "ign": 20
+    },
+    "errors": [],
+    "seconds": 1.44
+  },
+  {
+    "at": "2026-09-08T00:25:27Z",
+    "event": "publication",
+    "eligible": 0,
+    "duplicates": 0,
+    "held": 0,
+    "published": 0,
+    "dryRunApproved": 0,
+    "seconds": 0.13
   }
 ]

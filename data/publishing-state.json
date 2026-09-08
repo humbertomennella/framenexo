@@ -1,7 +1,7 @@
 {
   "paused": false,
   "lastPublishedAt": "2026-09-07T21:09:00Z",
-  "lastCollectedAt": "2026-09-07T22:00:58Z",
+  "lastCollectedAt": "2026-09-08T00:24:45Z",
   "editionCount": 3,
   "history": [
     {
@@ -81,21 +81,27 @@
       "title": "Wreck Runners abre teste antecipado no Xbox Series X|S",
       "eventKey": "wreck-runners-setembro-playtest",
       "publishedAt": "2026-09-07T21:07:00Z",
-      "sourceUrls": ["https://news.xbox.com/en-us/2026/09/04/play-the-wreck-runners-september-update-early-with-xbox-insiders"]
+      "sourceUrls": [
+        "https://news.xbox.com/en-us/2026/09/04/play-the-wreck-runners-september-update-early-with-xbox-insiders"
+      ]
     },
     {
       "slug": "rhapsody-in-scarlet-ps5-anuncio",
       "title": "Rhapsody in Scarlet é anunciado para PS5",
       "eventKey": "rhapsody-in-scarlet-ps5-anuncio",
       "publishedAt": "2026-09-07T21:08:00Z",
-      "sourceUrls": ["https://blog.br.playstation.com/2026/09/03/rhapsody-in-scarlet-anunciado-para-ps5"]
+      "sourceUrls": [
+        "https://blog.br.playstation.com/2026/09/03/rhapsody-in-scarlet-anunciado-para-ps5"
+      ]
     },
     {
       "slug": "gran-turismo-7-spec-iv-duas-etapas",
       "title": "Gran Turismo 7 terá atualização Spec IV em duas etapas",
       "eventKey": "gran-turismo-7-spec-iv-2026",
       "publishedAt": "2026-09-07T21:09:00Z",
-      "sourceUrls": ["https://blog.br.playstation.com/2026/09/03/atualizacao-spec-iv-de-gran-turismo-7-com-lancamento-em-duas-partes-este-ano"]
+      "sourceUrls": [
+        "https://blog.br.playstation.com/2026/09/03/atualizacao-spec-iv-de-gran-turismo-7-com-lancamento-em-duas-partes-este-ano"
+      ]
     }
   ]
 }
