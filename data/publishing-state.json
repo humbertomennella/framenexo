@@ -1,9 +1,31 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-09T04:04:21Z",
+  "lastPublishedAt": "2026-09-09T13:52:00Z",
   "lastCollectedAt": "2026-09-09T11:21:35Z",
-  "editionCount": 4,
+  "editionCount": 6,
   "history": [
+    {
+      "slug": "anvisa-amplia-vacina-meningococica-bebes-seis-semanas",
+      "title": "Anvisa amplia vacina meningocócica para bebês a partir de seis semanas",
+      "eventKey": "anvisa-menquadfi-seis-semanas-2026-09-09",
+      "publishedAt": "2026-09-09T13:52:00Z",
+      "sourceUrls": [
+        "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2026/anvisa-autoriza-ampliacao-de-uso-de-vacina-contra-meningite",
+        "https://agenciabrasil.ebc.com.br/saude/noticia/2026-09/anvisa-amplia-indicacao-de-vacina-contra-meningite"
+      ]
+    },
+    {
+      "slug": "dino-reintegra-direcao-pf-disputa-vai-plenario-stf",
+      "title": "Dino reintegra direção da PF e leva disputa ao plenário do STF",
+      "eventKey": "stf-pf-reintegracao-direcao-2026-09-09",
+      "publishedAt": "2026-09-09T13:50:00Z",
+      "sourceUrls": [
+        "https://www.reuters.com/world/americas/brazil-top-court-judge-orders-reinstatement-federal-police-chief-2026-09-09/",
+        "https://agenciabrasil.ebc.com.br/justica/noticia/2026-09/dino-determina-reintegracao-de-andrei-rodrigues-no-comando-da-pf",
+        "https://www1.folha.uol.com.br/poder/2026/09/dino-reintegra-andrei-rodrigues-no-comando-da-pf.shtml",
+        "https://noticias.uol.com.br/politica/ultimas-noticias/2026/09/09/dino-decisao-andrei-rodrigues-pf.ghtm"
+      ]
+    },
     {
       "slug": "anvisa-aprova-genericos-liraglutida-ems",
       "title": "Anvisa aprova dois genéricos de liraglutida; venda ainda não tem data",

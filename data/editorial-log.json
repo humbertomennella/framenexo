@@ -699,5 +699,44 @@
       }
     ],
     "seconds": 0.96
+  },
+  {
+    "at": "2026-09-09T13:50:00Z",
+    "event": "publication",
+    "slug": "dino-reintegra-direcao-pf-disputa-vai-plenario-stf",
+    "category": "Política",
+    "confidence": "CONFIRMADO",
+    "independentOrganizations": [
+      "reuters",
+      "agencia-brasil",
+      "folha",
+      "uol"
+    ],
+    "media": "/images/news/stf-pf-reintegracao-editorial.webp",
+    "mediaSha256": "9eddf6b22d7333408aa5c1979afb52ceee7a8d795b4854961eaeb050415e9415",
+    "published": 1,
+    "reason": "Desdobramento institucional com efeito imediato, confirmado por quatro organizações e sustentado pela decisão reproduzida integralmente."
+  },
+  {
+    "at": "2026-09-09T13:52:00Z",
+    "event": "publication",
+    "slug": "anvisa-amplia-vacina-meningococica-bebes-seis-semanas",
+    "category": "Saúde",
+    "confidence": "CONFIRMADO",
+    "independentOrganizations": [
+      "anvisa",
+      "agencia-brasil"
+    ],
+    "media": "/images/news/vacina-meningococica-seis-semanas-editorial.webp",
+    "mediaSha256": "7b0afb83f90aca2b74e107f7f8f8899045d3305393d95f356659addaa298c758",
+    "published": 1,
+    "reason": "Ampliação regulatória confirmada pela Anvisa e conferida em reportagem independente, com limites de acesso e cobertura vacinal explicitados."
+  },
+  {
+    "at": "2026-09-09T13:52:00Z",
+    "event": "site_correction",
+    "result": "corrected",
+    "articlesPublished": 2,
+    "reason": "Rotação automática dos carrosséis ajustada para 3,8 segundos, mantendo setas, gesto de deslizar e respeito à preferência de movimento reduzido; botão de pausa/reprodução permanece removido."
   }
 ]

@@ -39,6 +39,10 @@ focus=re.search(r'<section class="headlines[^>]*aria-label="Em foco".*?</section
 moments=re.search(r'<section class="headlines moment-panel[^>]*aria-label="Em Alta".*?</section>',home_html,re.S)
 check(bool(focus and moments),'Homepage carousels missing')
 check('data-pause' not in home_html and '>Pausar<' not in home_html and '>Reproduzir<' not in home_html,'Carousel play/pause control was not removed')
+headlines_source=(ROOT/'src/components/Headlines.astro').read_text(encoding='utf-8')
+check('data-interval="3800"' in headlines_source,'Carousel autoplay must remain between 3 and 4 seconds')
+check("addEventListener('touchstart'" in headlines_source and "addEventListener('touchend'" in headlines_source,'Carousel swipe gestures are missing')
+check("[data-previous]" in headlines_source and "[data-next]" in headlines_source,'Carousel arrow controls are missing')
 if focus and moments:
  focus_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',focus.group()))
  moment_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',moments.group()))
