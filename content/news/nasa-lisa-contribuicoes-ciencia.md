@@ -52,21 +52,21 @@ Esse tipo de observatório complementaria os detectores terrestres, que são mai
 
 As contribuições solicitadas pela NASA não equivalem a uma descoberta, a uma detecção ou a uma data de lançamento. Elas organizam prioridades para pesquisadores que trabalham em áreas como fontes astrofísicas, métodos de análise e desempenho instrumental. O resultado esperado é uma lista de problemas e oportunidades que possa orientar chamadas e propostas futuras do programa preparatório.
 
-O prazo e o escopo pertencem ao comunicado da NASA e são direcionados à comunidade de pesquisadores. O Vértice Factual não interpreta a chamada como confirmação de descobertas ou de cronograma de lançamento.
+O prazo e o escopo pertencem ao comunicado da NASA e são direcionados à comunidade de pesquisadores. O Apurante não interpreta a chamada como confirmação de descobertas ou de cronograma de lançamento.
 
-## Como ler esta notícia
+## Como a fonte sustenta este registro
 
 O núcleo factual desta publicação é: Projeto da NASA abriu chamada para pesquisadores apontarem questões prioritárias ligadas ao futuro observatório de ondas gravitacionais. A redação conferiu esse enunciado com a fonte identificada — NASA Science — e manteve no texto apenas informações compatíveis com o material consultado. A referência mais antiga usada nesta edição está datada de 2026-09-04; fatos posteriores precisam de uma atualização separada.
 
 O selo **CONFIRMADO** descreve o nível de sustentação editorial, não uma garantia de que o assunto esteja encerrado. Ele indica que a afirmação central está apoiada na origem listada ao fim da página. Quando a fonte registra uma fala, uma previsão ou uma decisão ainda não executada, essa natureza deve permanecer explícita: declaração não é resultado, previsão não é medição e anúncio não é entrega concluída.
 
-## Contexto para interpretar
+## Limites preservados pela apuração
 
 Em temas internacionais, uma decisão anunciada e sua implementação podem ocorrer em momentos diferentes. Também é importante distinguir a posição da instituição citada de uma conclusão válida para todos os países.
 
 Por esse motivo, a matéria evita ampliar o alcance do fato além do que foi documentado. Números conservam a referência temporal apresentada; nomes de instituições e programas são mantidos; e relações de causa e consequência só devem ser tratadas como confirmadas quando aparecem sustentadas na fonte. Essa cautela é especialmente importante em notícias que continuam evoluindo depois da primeira publicação.
 
-## O que acompanhar agora
+## Atualizações que podem mudar o quadro
 
 Os próximos elementos relevantes são eventuais documentos complementares, alterações de prazo, detalhamento de alcance e confirmações emitidas pelos responsáveis citados. Se uma dessas informações mudar o entendimento do caso, a atualização deve aparecer com data própria e, quando necessário, com uma nota de correção. Até lá, o limite seguro é o que está descrito nesta edição.
 

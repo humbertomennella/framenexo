@@ -36,8 +36,9 @@ base=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).path.rstrip('/')+
 origin=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).netloc
 home_html=(DIST/'index.html').read_text()
 focus=re.search(r'<section class="headlines[^>]*aria-label="Em foco".*?</section>',home_html,re.S)
-moments=re.search(r'<section class="headlines moment-panel[^>]*aria-label="Destaques do momento".*?</section>',home_html,re.S)
+moments=re.search(r'<section class="headlines moment-panel[^>]*aria-label="Em Alta".*?</section>',home_html,re.S)
 check(bool(focus and moments),'Homepage carousels missing')
+check('data-pause' not in home_html and '>Pausar<' not in home_html and '>Reproduzir<' not in home_html,'Carousel play/pause control was not removed')
 if focus and moments:
  focus_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',focus.group()))
  moment_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',moments.group()))
@@ -75,7 +76,12 @@ for file in (ROOT/'content/news').glob('*.md'):
  except Exception:errors.append(f'{file.name}: invalid frontmatter');continue
  for key in ['title','slug','description','publishedAt','updatedAt','category','tags','image','imageCredit','status','sources','confidence']:check(key in a,f'{file.name}: missing {key}')
  if a.get('status')!='published':continue
- records.append(a);check(bool(a.get('sources')),f'{file.name}: sources missing');image_file=DIST/a['image'].lstrip('/');check(image_file.is_file(),f'{file.name}: image missing');check('<script' not in parts[2].lower(),f'{file.name}: unsafe body');check(len(parts[2].split())>=450,f'{file.name}: full article is too short')
+ records.append(a);check(bool(a.get('sources')),f'{file.name}: sources missing');image_file=DIST/a['image'].lstrip('/');check(image_file.is_file(),f'{file.name}: image missing');check('<script' not in parts[2].lower(),f'{file.name}: unsafe body');check(len(parts[2].split())>=480,f'{file.name}: full article is too short')
+ if a.get('verificationPolicyVersion',0)>=2:
+  prose_paragraphs=[p for p in re.split(r'\n\s*\n',parts[2].strip()) if p and not p.startswith('#')]
+  check(len(prose_paragraphs)>=9,f'{file.name}: complete article needs at least nine useful paragraphs')
+  for heading in ['## O que aconteceu','## Contexto','## Por que importa','## Como ler esta notícia','## Contexto para interpretar','## O que acompanhar agora']:
+   check(heading not in parts[2],f'{file.name}: generic section remains: {heading}')
  if a.get('verificationPolicyVersion',0)>=2:
   organizations={source.get('organization') or urllib.parse.urlsplit(source['url']).hostname for source in a['sources']};check(len(organizations)>=2,f'{file.name}: policy v2 requires two independent organizations')
  try:published=dt.datetime.fromisoformat(a['publishedAt'].replace('Z','+00:00'));check(published<=now+dt.timedelta(minutes=5),f'{file.name}: publication date is in the future')

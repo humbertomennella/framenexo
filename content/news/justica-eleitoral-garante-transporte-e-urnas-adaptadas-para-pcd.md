@@ -38,33 +38,33 @@
 ---
 A notícia foi publicada pela Agência Brasil em 2026-09-07. O ponto central é justiça eleitoral prepara transporte e urnas acessíveis para pessoas com deficiência. Esta matéria resume o que está documentado na fonte e separa o fato confirmado do contexto necessário para entendê-lo.
 
-## O que aconteceu
+## Decisão, dado ou declaração registrada
 
 Justiça Eleitoral garante transporte e urnas adaptadas para PCD
 
 A apuração reúne os dados disponíveis até a data de publicação e não trata projeções ou declarações como resultado já comprovado.
 
-## Contexto
+## Situação institucional na data da publicação
 
 O tema se conecta a decisões públicas, dados oficiais ou resultados observáveis. Novas informações podem alterar a leitura do caso; por isso, o texto preserva a data e a origem da apuração.
 
-## Por que importa
+## Próximas etapas verificáveis
 
 Para o leitor, o efeito mais imediato está em política: acompanhar prazos, resultados, impactos e próximos passos sem transformar uma declaração isolada em conclusão. A fonte original permanece indicada para consulta integral e atualização do caso.
 
-## Como ler esta notícia
+## Como a fonte sustenta este registro
 
 O núcleo factual desta publicação é: Justiça Eleitoral prepara transporte e urnas acessíveis para pessoas com deficiência A redação conferiu esse enunciado com a fonte identificada — Agência Brasil — e manteve no texto apenas informações compatíveis com o material consultado. A referência mais antiga usada nesta edição está datada de 2026-09-07; fatos posteriores precisam de uma atualização separada.
 
 O selo **CONFIRMADO** descreve o nível de sustentação editorial, não uma garantia de que o assunto esteja encerrado. Ele indica que a afirmação central está apoiada na origem listada ao fim da página. Quando a fonte registra uma fala, uma previsão ou uma decisão ainda não executada, essa natureza deve permanecer explícita: declaração não é resultado, previsão não é medição e anúncio não é entrega concluída.
 
-## Contexto para interpretar
+## Situação institucional na data da publicação para interpretar
 
 Declarações, decisões institucionais e medidas efetivamente executadas são camadas diferentes. O texto identifica qual delas está documentada para evitar que intenção política seja apresentada como resultado consumado.
 
 Por esse motivo, a matéria evita ampliar o alcance do fato além do que foi documentado. Números conservam a referência temporal apresentada; nomes de instituições e programas são mantidos; e relações de causa e consequência só devem ser tratadas como confirmadas quando aparecem sustentadas na fonte. Essa cautela é especialmente importante em notícias que continuam evoluindo depois da primeira publicação.
 
-## O que acompanhar agora
+## Atualizações que podem mudar o quadro
 
 Os próximos elementos relevantes são eventuais documentos complementares, alterações de prazo, detalhamento de alcance e confirmações emitidas pelos responsáveis citados. Se uma dessas informações mudar o entendimento do caso, a atualização deve aparecer com data própria e, quando necessário, com uma nota de correção. Até lá, o limite seguro é o que está descrito nesta edição.
 

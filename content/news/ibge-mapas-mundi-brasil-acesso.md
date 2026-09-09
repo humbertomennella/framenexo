@@ -56,21 +56,21 @@ Na prática, a escolha da projeção interfere na leitura de distâncias, tamanh
 
 O lançamento também aproxima um material produzido para divulgação institucional do público que procura referências cartográficas para estudo, planejamento e curiosidade. A série pode ser lida junto com mapas temáticos, dados estatísticos e notas metodológicas do próprio instituto, que explicam escala, projeção e fonte. Esses elementos ajudam a evitar que a imagem seja interpretada como uma fotografia da Terra ou como uma atualização de fronteiras.
 
-O Vértice Factual trata a publicação como recurso de informação pública. A utilidade dos mapas depende da forma como cada leitor interpreta escala, projeção e data de produção; por isso, o material original do IBGE continua sendo a referência para uso técnico.
+O Apurante trata a publicação como recurso de informação pública. A utilidade dos mapas depende da forma como cada leitor interpreta escala, projeção e data de produção; por isso, o material original do IBGE continua sendo a referência para uso técnico.
 
-## Como ler esta notícia
+## Como a fonte sustenta este registro
 
 O núcleo factual desta publicação é: Coleção reúne três representações do planeta que centralizam o Brasil e propõem novas perspectivas cartográficas. A redação conferiu esse enunciado com a fonte identificada — Agência de Notícias IBGE — e manteve no texto apenas informações compatíveis com o material consultado. A referência mais antiga usada nesta edição está datada de 2026-09-06; fatos posteriores precisam de uma atualização separada.
 
 O selo **CONFIRMADO** descreve o nível de sustentação editorial, não uma garantia de que o assunto esteja encerrado. Ele indica que a afirmação central está apoiada na origem listada ao fim da página. Quando a fonte registra uma fala, uma previsão ou uma decisão ainda não executada, essa natureza deve permanecer explícita: declaração não é resultado, previsão não é medição e anúncio não é entrega concluída.
 
-## Contexto para interpretar
+## Limites preservados pela apuração
 
 A leitura deve separar o anúncio nacional de sua execução local. Alcance, prazo e aplicação podem variar conforme o órgão responsável e novas etapas divulgadas depois da publicação.
 
 Por esse motivo, a matéria evita ampliar o alcance do fato além do que foi documentado. Números conservam a referência temporal apresentada; nomes de instituições e programas são mantidos; e relações de causa e consequência só devem ser tratadas como confirmadas quando aparecem sustentadas na fonte. Essa cautela é especialmente importante em notícias que continuam evoluindo depois da primeira publicação.
 
-## O que acompanhar agora
+## Atualizações que podem mudar o quadro
 
 Os próximos elementos relevantes são eventuais documentos complementares, alterações de prazo, detalhamento de alcance e confirmações emitidas pelos responsáveis citados. Se uma dessas informações mudar o entendimento do caso, a atualização deve aparecer com data própria e, quando necessário, com uma nota de correção. Até lá, o limite seguro é o que está descrito nesta edição.
 

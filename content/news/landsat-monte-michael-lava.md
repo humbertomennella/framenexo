@@ -52,19 +52,19 @@ Segundo a NASA, o sistema de monitoramento MIROVA indica atividade de baixa inte
 
 Em 1º de setembro, o Landsat 9 encontrou outra cena: o vento, ao passar pelo relevo da ilha, formava nuvens em ondas, semelhantes a uma esteira. As duas imagens mostram como a combinação de relevo, calor e atmosfera produz sinais distintos, que precisam ser interpretados com dados e contexto.
 
-## Como ler esta notícia
+## Como a fonte sustenta este registro
 
 O núcleo factual desta publicação é: Imagem do Landsat mostra atividade no Monte Michael; dados térmicos ajudam a acompanhar um vulcão distante e de difícil acesso. A redação conferiu esse enunciado com a fonte identificada — NASA Earth Observatory — e manteve no texto apenas informações compatíveis com o material consultado. A referência mais antiga usada nesta edição está datada de 2026-09-07; fatos posteriores precisam de uma atualização separada.
 
 O selo **CONFIRMADO** descreve o nível de sustentação editorial, não uma garantia de que o assunto esteja encerrado. Ele indica que a afirmação central está apoiada na origem listada ao fim da página. Quando a fonte registra uma fala, uma previsão ou uma decisão ainda não executada, essa natureza deve permanecer explícita: declaração não é resultado, previsão não é medição e anúncio não é entrega concluída.
 
-## Contexto para interpretar
+## Limites preservados pela apuração
 
 Resultados científicos precisam ser lidos dentro do método, da amostra e do estágio da pesquisa. Observação, hipótese, teste e aplicação prática têm graus diferentes de evidência.
 
 Por esse motivo, a matéria evita ampliar o alcance do fato além do que foi documentado. Números conservam a referência temporal apresentada; nomes de instituições e programas são mantidos; e relações de causa e consequência só devem ser tratadas como confirmadas quando aparecem sustentadas na fonte. Essa cautela é especialmente importante em notícias que continuam evoluindo depois da primeira publicação.
 
-## O que acompanhar agora
+## Atualizações que podem mudar o quadro
 
 Os próximos elementos relevantes são eventuais documentos complementares, alterações de prazo, detalhamento de alcance e confirmações emitidas pelos responsáveis citados. Se uma dessas informações mudar o entendimento do caso, a atualização deve aparecer com data própria e, quando necessário, com uma nota de correção. Até lá, o limite seguro é o que está descrito nesta edição.
 

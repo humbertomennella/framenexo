@@ -25,6 +25,16 @@
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 97,
+  "highlight": {
+    "level": "important",
+    "reviewedAt": "2026-09-09T02:30:00Z",
+    "expiresAt": "2026-09-09T08:30:00Z",
+    "reason": "Crise institucional em desenvolvimento com medida judicial vigente e impacto no comando da Polícia Federal.",
+    "evidenceURLs": [
+      "https://www.reuters.com/world/americas/brazil-court-crisis-deepens-justice-orders-federal-police-chief-suspended-2026-09-08/",
+      "https://www.cnnbrasil.com.br/politica/entenda-a-decisao-de-mendonca-que-afastou-andrei-rodrigues-da-pf/"
+    ]
+  },
   "eventKey": "stf-pf-afastamento-direcao-2026-09-08",
   "verificationPolicyVersion": 2,
   "leadSourceOrganization": "reuters",
@@ -93,4 +103,4 @@ O caso ocorre em ambiente eleitoral e passou a ser usado por diferentes grupos p
 
 Os próximos marcos serão a devolução do processo por Gilmar Mendes, uma eventual análise pelo plenário, a apresentação de recurso pela AGU e possíveis manifestações da PGR e da corregedoria da PF. Documentos oficiais completos serão decisivos para esclarecer a base jurídica, o conteúdo dos relatórios e a extensão das condutas atribuídas a cada agente. Até que essas etapas avancem, acusações sobre monitoramento ilegal ou interferência política devem permanecer identificadas como alegações contestadas.
 
-A crise tem efeito institucional imediato porque envolve, ao mesmo tempo, ministros do Supremo, a direção da principal polícia judiciária da União e o Executivo responsável por sua estrutura administrativa. A cobertura responsável exige acompanhar o processo sem transformar votos provisórios em decisão final nem reações partidárias em prova. O Vértice Factual atualizará esta matéria quando houver decisão colegiada concluída, recurso protocolado ou novo documento oficial capaz de alterar o quadro confirmado.
+A crise tem efeito institucional imediato porque envolve, ao mesmo tempo, ministros do Supremo, a direção da principal polícia judiciária da União e o Executivo responsável por sua estrutura administrativa. A cobertura responsável exige acompanhar o processo sem transformar votos provisórios em decisão final nem reações partidárias em prova. O Apurante atualizará esta matéria quando houver decisão colegiada concluída, recurso protocolado ou novo documento oficial capaz de alterar o quadro confirmado.

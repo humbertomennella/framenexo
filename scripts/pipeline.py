@@ -231,7 +231,7 @@ def validate_draft(draft,body):
  words=normalized(written).split();source=normalized(body)
  if any(' '.join(words[i:i+12]) in source for i in range(max(0,len(words)-11))):raise ValueError('copied_passage')
  if not 9<=len(paras)<=12:raise ValueError('invalid_paragraphs')
- if not 480<=len(written.split())<=900:raise ValueError('invalid_length')
+ if not 520<=len(' '.join(paras).split())<=820:raise ValueError('invalid_length')
  subheads=draft.get('subheads')
  if not isinstance(subheads,list) or len(subheads)!=3 or any(not isinstance(h,str) or not 8<=len(h.strip())<=90 for h in subheads):raise ValueError('invalid_subheads')
  if any(re.fullmatch(r'(o que aconteceu|contexto|por que importa)',normalized(h).strip()) for h in subheads):raise ValueError('generic_subheads')

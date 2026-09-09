@@ -52,19 +52,19 @@ A onda está associada a uma corrente de jato e aparece em diferentes camadas da
 
 Os autores ainda precisam explicar por que a estrutura surgiu, o que a sustenta e quanto tempo pode durar. Novas observações com Hubble e James Webb, combinadas a modelos de computador, poderão testar essas hipóteses. A comparação com o hexágono do norte é uma pista de pesquisa, não uma conclusão de que as duas formações terão o mesmo comportamento.
 
-## Como ler esta notícia
+## Como a fonte sustenta este registro
 
 O núcleo factual desta publicação é: Observações desde 2023 revelam uma estrutura atmosférica em evolução; cientistas ainda investigam sua origem e duração. A redação conferiu esse enunciado com a fonte identificada — NASA / equipe Hubble — e manteve no texto apenas informações compatíveis com o material consultado. A referência mais antiga usada nesta edição está datada de 2026-09-02; fatos posteriores precisam de uma atualização separada.
 
 O selo **CONFIRMADO** descreve o nível de sustentação editorial, não uma garantia de que o assunto esteja encerrado. Ele indica que a afirmação central está apoiada na origem listada ao fim da página. Quando a fonte registra uma fala, uma previsão ou uma decisão ainda não executada, essa natureza deve permanecer explícita: declaração não é resultado, previsão não é medição e anúncio não é entrega concluída.
 
-## Contexto para interpretar
+## Limites preservados pela apuração
 
 Resultados científicos precisam ser lidos dentro do método, da amostra e do estágio da pesquisa. Observação, hipótese, teste e aplicação prática têm graus diferentes de evidência.
 
 Por esse motivo, a matéria evita ampliar o alcance do fato além do que foi documentado. Números conservam a referência temporal apresentada; nomes de instituições e programas são mantidos; e relações de causa e consequência só devem ser tratadas como confirmadas quando aparecem sustentadas na fonte. Essa cautela é especialmente importante em notícias que continuam evoluindo depois da primeira publicação.
 
-## O que acompanhar agora
+## Atualizações que podem mudar o quadro
 
 Os próximos elementos relevantes são eventuais documentos complementares, alterações de prazo, detalhamento de alcance e confirmações emitidas pelos responsáveis citados. Se uma dessas informações mudar o entendimento do caso, a atualização deve aparecer com data própria e, quando necessário, com uma nota de correção. Até lá, o limite seguro é o que está descrito nesta edição.
 
