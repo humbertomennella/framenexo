@@ -2,12 +2,16 @@
 import Base from '../layouts/Base.astro';
 import Card from '../components/Card.astro';
 import Headlines from '../components/Headlines.astro';
-import {selectHighlights} from '../lib/highlights.mjs';
-const highlights=selectHighlights(articles);
 import {articles,articleUrl,href,date,categories,categorySlug,inCategory} from '../lib/news';
-const featured=articles.slice(0,Math.min(6,articles.length));
+import {selectHighlights} from '../lib/highlights.mjs';
+// Keep the lead carousel concise and reserve three different recent stories
+// for the live-news panel beside it.
+const featured=articles.slice(0,Math.min(3,articles.length));
 const featuredSlugs=new Set(featured.map(a=>a.slug));
-const recent=articles.filter(a=>!featuredSlugs.has(a.slug)).slice(0,3);
+// “Destaques do momento” must add context, not repeat the main carousel.
+const highlights=selectHighlights(articles.filter(a=>!featuredSlugs.has(a.slug)));
+const highlightSlugs=new Set(highlights.map(a=>a.slug));
+const recent=articles.filter(a=>!featuredSlugs.has(a.slug)&&!highlightSlugs.has(a.slug)).slice(0,3);
 const sections=categories.map(category=>({category,items:articles.filter(a=>inCategory(a,category))})).filter(section=>section.items.length);
 ---
 <Base>

@@ -12,7 +12,7 @@ export function highlightFor(article, now = Date.now()) {
   const strong = ['CONFIRMADO', 'ALTA CONFIANÇA', 'ALTA_CONFIANCA'].includes(article.confidence);
   const valid = review && review.level in priorities && reviewed >= published && reviewed <= now && expires > now && expires <= reviewed + (review.level === 'urgent' ? 3 : 12) * HOUR && supported && independent && strong && review.reason?.trim().length >= 20;
   const level = valid ? review.level : 'normal';
-  return { ...article, highlightLevel: level, highlightLabel: { normal: 'No radar', important: 'Atenção', urgent: 'Urgente' }[level], highlightExpiresAt: new Date(Math.min(published + 24 * HOUR, valid ? expires : Infinity)).toISOString() };
+  return { ...article, highlightLevel: level, highlightLabel: { normal: 'Em alta', important: 'Atenção', urgent: 'Urgente' }[level], highlightExpiresAt: new Date(Math.min(published + 24 * HOUR, valid ? expires : Infinity)).toISOString() };
 }
 export function selectHighlights(articles, now = Date.now()) {
   return articles.map(article => highlightFor(article, now)).filter(Boolean)

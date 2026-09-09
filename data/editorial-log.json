@@ -542,6 +542,41 @@
     "notes": "Marca, assinatura e navegação atualizadas; arte preservada; RSS público removido. Sem mudança nas datas de publicação do acervo."
   },
   {
+    "at": "2026-09-09T05:02:00Z",
+    "event": "scheduled_review",
+    "result": "retained",
+    "articlesPublished": 0,
+    "reason": "A última matéria tinha menos de uma hora no momento da revisão. Nenhuma pauta inédita localizada reuniu, nesta janela, duas rotas jornalísticas independentes, documento primário suficiente e mídia específica validada.",
+    "retainedCandidates": [
+      {
+        "url": "https://www.reuters.com/sustainability/sustainable-finance-reporting/clock-ticking-brazils-ambitious-plan-fund-tropical-forests--ecmii-2026-09-08/",
+        "reason": "Análise atual sobre o TFFF, mas o núcleo recente se sobrepõe à matéria já publicada sobre o aporte britânico; não há fato novo suficiente para justificar duplicidade."
+      },
+      {
+        "url": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-09/amazonas-ganha-quatro-reservas-de-desenvolvimento-sustentavel",
+        "reason": "Permanece retida até a localização dos decretos estaduais e de uma segunda organização independente. Republicações da Agência Brasil contam como uma única rota."
+      }
+    ],
+    "checks": [
+      "38 testes aprovados",
+      "59 páginas geradas e 38 matérias verificadas pelo check:site",
+      "site público, sitemap, busca, fontes e robots responderam com HTTP 200"
+    ]
+  },
+  {
+    "at": "2026-09-09T06:00:00Z",
+    "event": "site_correction",
+    "result": "corrected",
+    "articlesPublished": 0,
+    "reason": "Correção editorial e visual solicitada pelo proprietário: separação integral entre Em foco e Destaques do momento, mídia completa no painel de destaques, proporção natural das imagens nas matérias e busca por etiquetas compatível com o caminho do GitHub Pages.",
+    "checks": [
+      "39 testes aprovados",
+      "59 páginas geradas e 38 matérias verificadas pelo check:site",
+      "inspeção visual em 1363 e 375 pixels sem overflow horizontal",
+      "etiqueta André Mendonça validada com uma matéria encontrada"
+    ]
+  },
+  {
     "at": "2026-09-09T06:00:04Z",
     "event": "collection",
     "collected": 5,

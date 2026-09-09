@@ -1,7 +1,7 @@
 """Check the built public artifact, including base-path routing and SEO records."""
 from pathlib import Path
 from html.parser import HTMLParser
-import datetime as dt,hashlib,json,sys,urllib.parse,xml.etree.ElementTree as ET
+import datetime as dt,hashlib,json,re,sys,urllib.parse,xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1];DIST=ROOT/'dist';errors=[]
 class Page(HTMLParser):
  def __init__(self):super().__init__();self.h1=0;self.ids=set();self.links=[];self.images=[];self.title='';self.in_title=False;self.meta={};self.canonical=None;self.schemas=[];self.in_schema=False;self.buffer=''
@@ -34,6 +34,16 @@ for file in DIST.rglob('*.html'):
 check(DIST/'index.html' in pages,'Missing homepage');check(bool(list(DIST.glob('404*'))),'Missing 404')
 base=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).path.rstrip('/')+'/'
 origin=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).netloc
+home_html=(DIST/'index.html').read_text()
+focus=re.search(r'<section class="headlines[^>]*aria-label="Em foco".*?</section>',home_html,re.S)
+moments=re.search(r'<section class="headlines moment-panel[^>]*aria-label="Destaques do momento".*?</section>',home_html,re.S)
+check(bool(focus and moments),'Homepage carousels missing')
+if focus and moments:
+ focus_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',focus.group()))
+ moment_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',moments.group()))
+ check(not focus_urls.intersection(moment_urls),'Homepage carousels repeat the same article')
+search_html=(DIST/'busca'/'index.html').read_text()
+check(f'data-index-url="{base}search-index.json"' in search_html,'Search index ignores deployment base path')
 def resolve(url,current):
  p=urllib.parse.urlsplit(url)
  if p.scheme or p.netloc:return None,p.fragment
