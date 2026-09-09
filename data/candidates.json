@@ -1111,8 +1111,11 @@
     "subject": "Brasil",
     "category": "Brasil",
     "internalSummary": "Candidato de Agência Brasil; contexto factual será extraído antes da redação.",
-    "relevance": 30,
-    "status": "candidate",
-    "confidence": "RELATO"
+    "relevance": 91,
+    "status": "published",
+    "confidence": "CONFIRMADO",
+    "eventKey": "anvisa-genericos-liraglutida-ems-2026-09-08",
+    "publishedSlug": "anvisa-aprova-genericos-liraglutida-ems",
+    "corroboratingOrganizations": ["uol", "folha", "anvisa"]
   }
 ]

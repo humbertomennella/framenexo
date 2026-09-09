@@ -502,5 +502,18 @@
       }
     ],
     "seconds": 1.28
+  },
+  {
+    "at": "2026-09-09T04:04:21Z",
+    "event": "publication",
+    "candidateId": "bf481ce0293cbf36f514",
+    "slug": "anvisa-aprova-genericos-liraglutida-ems",
+    "category": "Saúde",
+    "confidence": "CONFIRMADO",
+    "independentOrganizations": ["agencia-brasil", "uol", "folha", "anvisa"],
+    "media": "/images/news/anvisa-genericos-liraglutida-editorial.webp",
+    "mediaSha256": "0e3f6a0a4a8569ae9232b7d276632f84340773ea01bd4f7c0063db255605de14",
+    "published": 1,
+    "reason": "Núcleo factual confirmado por três organizações jornalísticas independentes; orientação regulatória primária incorporada e limites de disponibilidade e preço explicitados."
   }
 ]

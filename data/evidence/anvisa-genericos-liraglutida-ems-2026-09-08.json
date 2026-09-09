@@ -1,0 +1,18 @@
+{
+  "sourceUrls": [
+    "https://agenciabrasil.ebc.com.br/saude/noticia/2026-09/anvisa-aprova-genericos-de-medicamentos-contra-diabetes-e-obesidade",
+    "https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2026/09/08/canetas-de-liraglutida-ganham-genericos-para-obesidade-e-diabetes.ghtm",
+    "https://www1.folha.uol.com.br/equilibrioesaude/2026/09/anvisa-aprova-genericos-de-canetas-emagrecedoras-da-ems.shtml",
+    "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2025/entra-em-vigor-norma-que-preve-retencao-de-receita-para-medicamentos-agonistas-glp-1"
+  ],
+  "verifiedAt": "2026-09-09T04:04:21Z",
+  "confidence": "CONFIRMADO",
+  "duplicate": false,
+  "claims": [
+    "A Anvisa aprovou dois registros genéricos de liraglutida da EMS.",
+    "Os produtos têm concentração de 6 mg/mL e indicações distintas para obesidade e diabetes tipo 2.",
+    "Não havia data de lançamento nem preço divulgados no fechamento.",
+    "Agonistas de GLP-1 exigem receita em duas vias com retenção de uma delas pela farmácia."
+  ],
+  "checks": ["data", "três organizações independentes", "orientação regulatória primária", "duplicidade", "rumor", "indicações distintas", "texto original", "limites explicitados"]
+}

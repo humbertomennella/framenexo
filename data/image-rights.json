@@ -349,5 +349,14 @@
     "sourceURL": null,
     "usage": "Metáfora visual institucional; não é fotografia, reprodução de sede oficial ou retrato de pessoa real.",
     "proof": "Arquivo original gerado em 8 de setembro de 2026, sem logotipos, rostos identificáveis, selos ou símbolos partidários, e convertido localmente para WebP; SHA-256 8e1d0b89737b90b3571b39a65f96e56f80fbc787e4869eacdd201b8f97320d1f."
+  },
+  {
+    "path": "/images/news/anvisa-genericos-liraglutida-editorial.webp",
+    "origin": "Ilustração editorial original criada para a matéria sobre dois registros genéricos de liraglutida aprovados pela Anvisa",
+    "credit": "Estúdio Meridiano",
+    "license": "Ativo editorial original gerado exclusivamente para o projeto; publicação e adaptação autorizadas",
+    "sourceURL": null,
+    "usage": "Metáfora visual farmacêutica específica; não é fotografia, produto comercial, embalagem, orientação de uso ou reprodução de marca.",
+    "proof": "Arquivo original gerado em 9 de setembro de 2026, sem pessoas, logotipos, marcas ou texto, e convertido localmente para WebP; SHA-256 0e3f6a0a4a8569ae9232b7d276632f84340773ea01bd4f7c0063db255605de14."
   }
 ]
