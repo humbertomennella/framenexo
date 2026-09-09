@@ -18,7 +18,7 @@
   ],
   "image": "/images/news/italia-registra-verao-mais-quente-em-mais-de-75-anos-afirma-instituto.webp",
   "imageAlt": "Ilustração editorial original sobre: Itália registra o verão mais quente em mais de 75 anos. Não é fotografia do fato.",
-  "imageCredit": "Vértice Factual / Estúdio Meridiano",
+  "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 76,
@@ -32,7 +32,7 @@
     }
   ],
   "corrections": [],
-  "author": "Redação Vértice Factual",
+  "author": "Apurante Editorial",
   "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
 }
 ---

@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {highlightFor,selectHighlights} from '../src/lib/highlights.mjs';
+const now=Date.parse('2026-09-09T12:00:00Z');
+const story={slug:'a',status:'published',publishedAt:'2026-09-09T10:00:00Z',confidence:'CONFIRMADO',relevance:90,sources:[{url:'https://a.example/news'},{url:'https://b.example/news'}]};
+const review={level:'urgent',reviewedAt:'2026-09-09T11:00:00Z',expiresAt:'2026-09-09T13:00:00Z',reason:'Decisão confirmada com impacto imediato documentado.',evidenceURLs:story.sources.map(s=>s.url)};
+test('only recent published facts enter the moment panel',()=>{for(const change of [{status:'draft'},{confidence:'RUMOR'},{publishedAt:'invalid'},{publishedAt:'2026-09-10T10:00:00Z'},{publishedAt:'2026-09-08T12:00:00Z'}])assert.equal(highlightFor({...story,...change},now),null)});
+test('urgency requires a documented review and expires',()=>{assert.equal(highlightFor(story,now).highlightLevel,'normal');assert.equal(highlightFor({...story,highlight:review},now).highlightLevel,'urgent');for(const change of [{expiresAt:'2026-09-09T11:30:00Z'},{expiresAt:'2026-09-10T00:00:00Z'},{reviewedAt:'2026-09-09T13:00:00Z'},{evidenceURLs:['https://fake.example']},{reason:''}])assert.equal(highlightFor({...story,highlight:{...review,...change}},now).highlightLevel,'normal')});
+test('unconfirmed reports cannot be elevated',()=>{assert.equal(highlightFor({...story,confidence:'RELATO',highlight:review},now),null)});
+test('panel caps at three and prioritizes reviewed urgent events',()=>{const input=Array.from({length:5},(_,i)=>({...story,slug:String(i),relevance:100-i}));input[4].highlight=review;assert.deepEqual(selectHighlights(input,now).map(a=>a.slug),['4','0','1'])});

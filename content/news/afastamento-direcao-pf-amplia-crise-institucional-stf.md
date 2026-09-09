@@ -11,10 +11,17 @@
   "publishedAt": "2026-09-08T21:00:00Z",
   "updatedAt": "2026-09-08T21:00:00Z",
   "category": "Política",
-  "tags": ["Política", "STF", "Polícia Federal", "André Mendonça", "Andrei Rodrigues", "instituições"],
+  "tags": [
+    "Política",
+    "STF",
+    "Polícia Federal",
+    "André Mendonça",
+    "Andrei Rodrigues",
+    "instituições"
+  ],
   "image": "/images/news/stf-pf-crise-institucional-editorial.webp",
   "imageAlt": "Ilustração editorial de edifícios cívicos abstratos separados por um eixo luminoso, com documentos ao redor. Não é fotografia nem reprodução de sede oficial.",
-  "imageCredit": "Vértice Factual / Estúdio Meridiano — ilustração editorial original",
+  "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 97,
@@ -22,14 +29,42 @@
   "verificationPolicyVersion": 2,
   "leadSourceOrganization": "reuters",
   "sources": [
-    {"name": "Reuters", "url": "https://www.reuters.com/world/americas/brazil-court-crisis-deepens-justice-orders-federal-police-chief-suspended-2026-09-08/", "publishedAt": "2026-09-08", "type": "press", "organization": "reuters", "role": "wire"},
-    {"name": "CNN Brasil", "url": "https://www.cnnbrasil.com.br/politica/entenda-a-decisao-de-mendonca-que-afastou-andrei-rodrigues-da-pf/", "publishedAt": "2026-09-08", "type": "press", "organization": "cnn-brasil", "role": "reporting"},
-    {"name": "Folha de S.Paulo", "url": "https://www1.folha.uol.com.br/poder/2026/09/mendonca-determina-afastamento-de-andrei-rodrigues-do-comando-da-pf.shtml", "publishedAt": "2026-09-08", "type": "press", "organization": "folha", "role": "reporting"},
-    {"name": "UOL Notícias", "url": "https://noticias.uol.com.br/politica/ultimas-noticias/2026/09/08/decisao-de-mendonca-ocorre-em-acao-do-partido-de-zema-contra-chefe-da-pf.ghtm", "publishedAt": "2026-09-08", "type": "press", "organization": "uol", "role": "reporting"}
+    {
+      "name": "Reuters",
+      "url": "https://www.reuters.com/world/americas/brazil-court-crisis-deepens-justice-orders-federal-police-chief-suspended-2026-09-08/",
+      "publishedAt": "2026-09-08",
+      "type": "press",
+      "organization": "reuters",
+      "role": "wire"
+    },
+    {
+      "name": "CNN Brasil",
+      "url": "https://www.cnnbrasil.com.br/politica/entenda-a-decisao-de-mendonca-que-afastou-andrei-rodrigues-da-pf/",
+      "publishedAt": "2026-09-08",
+      "type": "press",
+      "organization": "cnn-brasil",
+      "role": "reporting"
+    },
+    {
+      "name": "Folha de S.Paulo",
+      "url": "https://www1.folha.uol.com.br/poder/2026/09/mendonca-determina-afastamento-de-andrei-rodrigues-do-comando-da-pf.shtml",
+      "publishedAt": "2026-09-08",
+      "type": "press",
+      "organization": "folha",
+      "role": "reporting"
+    },
+    {
+      "name": "UOL Notícias",
+      "url": "https://noticias.uol.com.br/politica/ultimas-noticias/2026/09/08/decisao-de-mendonca-ocorre-em-acao-do-partido-de-zema-contra-chefe-da-pf.ghtm",
+      "publishedAt": "2026-09-08",
+      "type": "press",
+      "organization": "uol",
+      "role": "reporting"
+    }
   ],
   "corrections": [],
-  "author": "Redação Vértice Factual",
-  "production": "Texto original verificado em quatro organizações independentes. Ilustração editorial original do Estúdio Meridiano."
+  "author": "Apurante Editorial",
+  "production": "Texto original verificado em quatro organizações independentes. Ilustração editorial original do Apurante Editorial."
 }
 ---
 O ministro André Mendonça, do Supremo Tribunal Federal, determinou nesta terça-feira, 8 de setembro, o afastamento preventivo do diretor-geral da Polícia Federal, Andrei Rodrigues, e do diretor de Inteligência Policial, Leandro Almada. A ordem foi submetida à Segunda Turma do STF, onde os votos de Mendonça, Luiz Fux e Kassio Nunes Marques formaram maioria para manter a medida. O julgamento, porém, foi interrompido por um pedido de vista de Gilmar Mendes, que solicitou mais tempo para examinar o processo.

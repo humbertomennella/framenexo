@@ -11,10 +11,17 @@
   "publishedAt": "2026-09-09T04:04:21Z",
   "updatedAt": "2026-09-09T04:04:21Z",
   "category": "Saúde",
-  "tags": ["Saúde", "Anvisa", "liraglutida", "medicamentos genéricos", "diabetes", "obesidade"],
+  "tags": [
+    "Saúde",
+    "Anvisa",
+    "liraglutida",
+    "medicamentos genéricos",
+    "diabetes",
+    "obesidade"
+  ],
   "image": "/images/news/anvisa-genericos-liraglutida-editorial.webp",
   "imageAlt": "Ilustração editorial de dois dispositivos injetores abstratos em trilhas luminosas diante de um documento regulatório. Não é fotografia nem reprodução de produto comercial.",
-  "imageCredit": "Estúdio Meridiano — ilustração editorial original",
+  "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 91,
@@ -22,14 +29,42 @@
   "verificationPolicyVersion": 2,
   "leadSourceOrganization": "agencia-brasil",
   "sources": [
-    {"name": "Agência Brasil", "url": "https://agenciabrasil.ebc.com.br/saude/noticia/2026-09/anvisa-aprova-genericos-de-medicamentos-contra-diabetes-e-obesidade", "publishedAt": "2026-09-08", "type": "press", "organization": "agencia-brasil", "role": "reporting"},
-    {"name": "UOL Notícias", "url": "https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2026/09/08/canetas-de-liraglutida-ganham-genericos-para-obesidade-e-diabetes.ghtm", "publishedAt": "2026-09-08", "type": "press", "organization": "uol", "role": "reporting"},
-    {"name": "Folha de S.Paulo", "url": "https://www1.folha.uol.com.br/equilibrioesaude/2026/09/anvisa-aprova-genericos-de-canetas-emagrecedoras-da-ems.shtml", "publishedAt": "2026-09-08", "type": "press", "organization": "folha", "role": "reporting"},
-    {"name": "Anvisa — retenção de receita para agonistas de GLP-1", "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2025/entra-em-vigor-norma-que-preve-retencao-de-receita-para-medicamentos-agonistas-glp-1", "publishedAt": "2025-06-23", "type": "primary", "organization": "anvisa", "role": "evidence"}
+    {
+      "name": "Agência Brasil",
+      "url": "https://agenciabrasil.ebc.com.br/saude/noticia/2026-09/anvisa-aprova-genericos-de-medicamentos-contra-diabetes-e-obesidade",
+      "publishedAt": "2026-09-08",
+      "type": "press",
+      "organization": "agencia-brasil",
+      "role": "reporting"
+    },
+    {
+      "name": "UOL Notícias",
+      "url": "https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2026/09/08/canetas-de-liraglutida-ganham-genericos-para-obesidade-e-diabetes.ghtm",
+      "publishedAt": "2026-09-08",
+      "type": "press",
+      "organization": "uol",
+      "role": "reporting"
+    },
+    {
+      "name": "Folha de S.Paulo",
+      "url": "https://www1.folha.uol.com.br/equilibrioesaude/2026/09/anvisa-aprova-genericos-de-canetas-emagrecedoras-da-ems.shtml",
+      "publishedAt": "2026-09-08",
+      "type": "press",
+      "organization": "folha",
+      "role": "reporting"
+    },
+    {
+      "name": "Anvisa — retenção de receita para agonistas de GLP-1",
+      "url": "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2025/entra-em-vigor-norma-que-preve-retencao-de-receita-para-medicamentos-agonistas-glp-1",
+      "publishedAt": "2025-06-23",
+      "type": "primary",
+      "organization": "anvisa",
+      "role": "evidence"
+    }
   ],
   "corrections": [],
-  "author": "Redação Vértice Factual",
-  "production": "Texto original verificado em três organizações jornalísticas independentes e em orientação regulatória da Anvisa. Ilustração editorial original do Estúdio Meridiano."
+  "author": "Apurante Editorial",
+  "production": "Texto original verificado em três organizações jornalísticas independentes e em orientação regulatória da Anvisa. Ilustração editorial original do Apurante Editorial."
 }
 ---
 A Agência Nacional de Vigilância Sanitária aprovou dois registros de medicamentos genéricos à base de liraglutida produzidos pela EMS. As autorizações apareceram no Diário Oficial da União de terça-feira, 8 de setembro, segundo informações coincidentes da Agência Brasil, do UOL e da Folha de S.Paulo. Um registro corresponde a uma versão destinada ao tratamento da obesidade; o outro, ao controle do diabetes tipo 2. Ambos têm concentração de 6 mg/mL em solução injetável para aplicação subcutânea.

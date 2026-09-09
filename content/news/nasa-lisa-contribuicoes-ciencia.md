@@ -30,9 +30,9 @@
       "type": "primary"
     }
   ],
-  "imageCredit": "Ilustração editorial original do Vértice Factual, criada pelo Estúdio Meridiano. Não é fotografia nem representação do observatório.",
+  "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "imageAlt": "Ilustração editorial de três observatórios espaciais formando um triângulo e trocando feixes de laser no espaço.",
-  "author": "Redação Vértice Factual",
+  "author": "Apurante Editorial",
   "production": "Texto original em português, baseado no comunicado oficial da NASA.",
   "corrections": [
     {

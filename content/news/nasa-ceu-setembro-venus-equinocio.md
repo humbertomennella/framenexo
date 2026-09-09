@@ -30,9 +30,9 @@
       "type": "primary"
     }
   ],
-  "imageCredit": "Ilustração editorial original do Vértice Factual, criada pelo Estúdio Meridiano. Não é fotografia do céu nem imagem da NASA.",
+  "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "imageAlt": "Ilustração editorial do céu antes do amanhecer, com Vênus brilhante no horizonte e um observatório em primeiro plano.",
-  "author": "Redação Vértice Factual",
+  "author": "Apurante Editorial",
   "production": "Texto original em português, baseado no guia oficial da NASA.",
   "corrections": [
     {

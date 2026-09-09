@@ -11,22 +11,43 @@
   "publishedAt": "2026-09-08T13:50:00Z",
   "updatedAt": "2026-09-08T13:50:00Z",
   "category": "Brasil",
-  "tags": ["Brasil", "educação", "PISA 2025", "OCDE", "aprendizagem"],
+  "tags": [
+    "Brasil",
+    "educação",
+    "PISA 2025",
+    "OCDE",
+    "aprendizagem"
+  ],
   "image": "/images/news/pisa-2025-resultados-editorial.webp",
   "imageAlt": "Ilustração editorial de uma sala de aula com livros, formas de dados e referências abstratas a ciência, leitura e matemática. Não é fotografia do PISA.",
-  "imageCredit": "Vértice Factual / Estúdio Meridiano — ilustração editorial original",
+  "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 94,
   "eventKey": "pisa-2025-resultados-brasil-2026-09",
   "sources": [
-    {"name": "OCDE — PISA 2025 Results, Volume I", "url": "https://www.oecd.org/en/publications/2026/09/pisa-2025-results-volume-i_5265bfb1.html", "publishedAt": "2026-09-08", "type": "primary"},
-    {"name": "OCDE — comunicado internacional", "url": "https://www.oecd.org/en/about/news/press-releases/2026/09/pisa-2025-students-reading-and-mathematics-performance-declined-sharply-across-the-oecd.html", "publishedAt": "2026-09-08", "type": "primary"},
-    {"name": "Agência Brasil", "url": "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-09/pisa-brasil-reduz-diferenca-para-paises-ricos-no-desempenho-escolar", "publishedAt": "2026-09-08", "type": "press"}
+    {
+      "name": "OCDE — PISA 2025 Results, Volume I",
+      "url": "https://www.oecd.org/en/publications/2026/09/pisa-2025-results-volume-i_5265bfb1.html",
+      "publishedAt": "2026-09-08",
+      "type": "primary"
+    },
+    {
+      "name": "OCDE — comunicado internacional",
+      "url": "https://www.oecd.org/en/about/news/press-releases/2026/09/pisa-2025-students-reading-and-mathematics-performance-declined-sharply-across-the-oecd.html",
+      "publishedAt": "2026-09-08",
+      "type": "primary"
+    },
+    {
+      "name": "Agência Brasil",
+      "url": "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-09/pisa-brasil-reduz-diferenca-para-paises-ricos-no-desempenho-escolar",
+      "publishedAt": "2026-09-08",
+      "type": "press"
+    }
   ],
   "corrections": [],
-  "author": "Redação Vértice Factual",
-  "production": "Texto original baseado no relatório da OCDE e conferido com a cobertura da Agência Brasil. Imagem original do Estúdio Meridiano."
+  "author": "Apurante Editorial",
+  "production": "Texto original baseado no relatório da OCDE e conferido com a cobertura da Agência Brasil. Imagem original do Apurante Editorial."
 }
 ---
 Os resultados iniciais do PISA 2025, divulgados pela Organização para a Cooperação e Desenvolvimento Econômico em 8 de setembro, colocam o desempenho brasileiro em uma perspectiva dupla. O país melhorou quando a comparação abrange cerca de duas décadas e reduziu parte da distância em relação às economias mais ricas, mas ainda permanece abaixo da média da OCDE nas competências avaliadas. Em ciências, área central desta edição, o Brasil registrou média de 409 pontos, enquanto a média da organização foi de 482.

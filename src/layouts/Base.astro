@@ -1,29 +1,29 @@
 ---
 import '../styles/global.css';
+import '../styles/apurante.css';
 import {href,categories,categorySlug,jsonld} from '../lib/news';
 const {title='Brasil. Mundo. Contexto.',description='Notícias do Brasil e do mundo com fontes identificadas, contexto e transparência editorial.',image='',article=false,noindex=false} = Astro.props;
 const canonical = new URL(Astro.url.pathname,Astro.site).href;
 const imageUrl = image?new URL(href(image),Astro.site).href:article?null:new URL(href('og.png'),Astro.site).href;
-const siteTitle = `${title} | Vértice Factual`;
+const siteTitle = `${title} | Apurante`;
 ---
 <!doctype html><html lang="pt-BR"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>{siteTitle}</title><meta name="description" content={description}/><meta name="theme-color" content="#090a0d"/>
+<title>{siteTitle}</title><meta name="description" content={description}/><meta name="theme-color" content="#111617"/>
 <link rel="canonical" href={canonical}/><link rel="icon" href={href('favicon.svg')} type="image/svg+xml"/>
-<link rel="alternate" type="application/rss+xml" title="Vértice Factual — RSS" href={href('rss.xml')}/>
-<meta property="og:site_name" content="Vértice Factual"/><meta property="og:locale" content="pt_BR"/><meta property="og:type" content={article?'article':'website'}/>
+<meta property="og:site_name" content="Apurante"/><meta property="og:locale" content="pt_BR"/><meta property="og:type" content={article?'article':'website'}/>
 <meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/>
 {imageUrl&&<meta property="og:image" content={imageUrl}/>}
 <meta name="twitter:card" content={imageUrl?'summary_large_image':'summary'}/><meta name="twitter:title" content={title}/><meta name="twitter:description" content={description}/>
 {imageUrl&&<meta name="twitter:image" content={imageUrl}/>}
 {noindex&&<meta name="robots" content="noindex,follow"/>}
-<script type="application/ld+json" set:html={jsonld({'@context':'https://schema.org','@type':'Organization',name:'Vértice Factual',url:new URL(href(),Astro.site).href,logo:new URL(href('favicon.svg'),Astro.site).href})}/>
+<script type="application/ld+json" set:html={jsonld({'@context':'https://schema.org','@type':'Organization',name:'Apurante',url:new URL(href(),Astro.site).href,logo:new URL(href('favicon.svg'),Astro.site).href})}/>
 <slot name="head"/>
 </head><body id="topo">
 <a class="skip" href="#conteudo">Ir para o conteúdo</a>
-<header class="site-header"><div class="wrap masthead"><a href={href()} class="wordmark" aria-label="Vértice Factual — início">VÉRTICE<span>/</span>FACTUAL</a><p class="motto">FONTES QUE CONVERGEM.<br/>CONTEXTO QUE ESCLARECE.</p><div class="header-actions"><a href={href('busca/')} aria-label="Buscar notícias"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="m15 15 6 6" stroke="currentColor" stroke-width="1.5"/></svg><span>Buscar</span></a><a class="rss-link" href={href('rss/')}>RSS ↗</a></div></div>
+<header class="site-header"><div class="wrap masthead"><a href={href()} class="wordmark" aria-label="Apurante — início">APURANTE<span class="brand-point" aria-hidden="true">.</span></a><p class="motto">INFORMAÇÃO QUE VAI<br/>ALÉM DA MANCHETE.</p><div class="header-actions"><a href={href('busca/')} aria-label="Buscar notícias"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="m15 15 6 6" stroke="currentColor" stroke-width="1.5"/></svg><span>Buscar</span></a></div></div>
 <nav class="wrap categories" aria-label="Editorias"><a href={href('ultimas/')} class:list={{active:Astro.url.pathname===href('ultimas/')}}>Últimas</a>{categories.map(c=><a href={href(`categoria/${categorySlug(c)}/`)} class:list={{active:Astro.url.pathname===href(`categoria/${categorySlug(c)}/`)}}>{c}</a>)}</nav></header>
 <main id="conteudo" class="wrap"><slot/></main>
-<footer class="site-footer"><div class="wrap footer-top"><div><a href={href()} class="wordmark small">VÉRTICE<span>/</span>FACTUAL</a><p>Fontes que convergem. Contexto que esclarece.</p></div><nav aria-label="Institucional"><a href={href('sobre/')}>Sobre</a><a href={href('politica-editorial/')}>Política editorial</a><a href={href('fontes/')}>Fontes</a><a href={href('arquivo/')}>Arquivo</a><a href={href('rss/')}>RSS</a></nav></div><div class="wrap footer-bottom"><p>© {new Date().getUTCFullYear()} Vértice Factual</p><p>Jornalismo assistido por tecnologia, sustentado por evidências e fontes identificadas.</p><a href="#topo" id="back-top">Voltar ao topo ↑</a></div></footer>
+<footer class="site-footer"><div class="wrap footer-top"><div><a href={href()} class="wordmark small">APURANTE<span class="brand-point" aria-hidden="true">.</span></a><p>Informação que vai além da manchete.</p></div><nav aria-label="Institucional"><a href={href('sobre/')}>Sobre</a><a href={href('politica-editorial/')}>Política editorial</a><a href={href('fontes/')}>Fontes</a><a href={href('arquivo/')}>Arquivo</a></nav></div><div class="wrap footer-bottom"><p>© {new Date().getUTCFullYear()} Apurante</p><p>Fatos em perspectiva. Fontes identificadas. Compromisso com a informação.</p><a href="#topo" id="back-top">Voltar ao topo ↑</a></div></footer>
 <script>document.getElementById('back-top')?.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});document.querySelector<HTMLAnchorElement>('.wordmark')?.focus();});</script>
 </body></html>

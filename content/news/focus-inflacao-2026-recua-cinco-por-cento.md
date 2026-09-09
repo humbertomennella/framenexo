@@ -11,22 +11,44 @@
   "publishedAt": "2026-09-08T13:40:00Z",
   "updatedAt": "2026-09-08T13:40:00Z",
   "category": "Economia",
-  "tags": ["Economia", "Banco Central", "Focus", "inflação", "PIB", "Selic"],
+  "tags": [
+    "Economia",
+    "Banco Central",
+    "Focus",
+    "inflação",
+    "PIB",
+    "Selic"
+  ],
   "image": "/images/news/focus-inflacao-2026-editorial.webp",
   "imageAlt": "Ilustração editorial de uma cesta de consumo, etiquetas abstratas e uma curva de expectativa em queda suave. Não é gráfico oficial.",
-  "imageCredit": "Vértice Factual / Estúdio Meridiano — ilustração editorial original",
+  "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
   "confidence": "CONFIRMADO",
   "relevance": 91,
   "eventKey": "focus-2026-09-08-inflacao-pib-selic",
   "sources": [
-    {"name": "Banco Central do Brasil — Relatório Focus", "url": "https://www.bcb.gov.br/publicacoes/focus", "publishedAt": "2026-09-08", "type": "primary"},
-    {"name": "Banco Central do Brasil — metas para a inflação", "url": "https://www.bcb.gov.br/controleinflacao/metainflacao", "publishedAt": "2026-09-08", "type": "primary"},
-    {"name": "Agência Brasil", "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mercado-financeiro-reduz-previsao-da-inflacao-para-5-este-ano", "publishedAt": "2026-09-08", "type": "press"}
+    {
+      "name": "Banco Central do Brasil — Relatório Focus",
+      "url": "https://www.bcb.gov.br/publicacoes/focus",
+      "publishedAt": "2026-09-08",
+      "type": "primary"
+    },
+    {
+      "name": "Banco Central do Brasil — metas para a inflação",
+      "url": "https://www.bcb.gov.br/controleinflacao/metainflacao",
+      "publishedAt": "2026-09-08",
+      "type": "primary"
+    },
+    {
+      "name": "Agência Brasil",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mercado-financeiro-reduz-previsao-da-inflacao-para-5-este-ano",
+      "publishedAt": "2026-09-08",
+      "type": "press"
+    }
   ],
   "corrections": [],
-  "author": "Redação Vértice Factual",
-  "production": "Texto original baseado no Relatório Focus e conferido com a cobertura da Agência Brasil. Imagem original do Estúdio Meridiano."
+  "author": "Apurante Editorial",
+  "production": "Texto original baseado no Relatório Focus e conferido com a cobertura da Agência Brasil. Imagem original do Apurante Editorial."
 }
 ---
 A mediana das expectativas para a inflação oficial de 2026 caiu de 5,01% para 5%, segundo a edição do Relatório Focus divulgada pelo Banco Central em 8 de setembro. Foi a segunda redução semanal consecutiva e o menor valor projetado desde maio. A estimativa continua, porém, acima do limite superior do sistema de metas: o centro da meta é 3%, com intervalo de tolerância de 1,5 ponto percentual para cima ou para baixo.

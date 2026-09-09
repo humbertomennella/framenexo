@@ -77,11 +77,11 @@ for file in (ROOT/'content/news').glob('*.md'):
  if rendered:
   check(rendered.meta.get('og:title')==a['title'],f'{file.name}: OG mismatch');check(rendered.meta.get('twitter:description')==a['description'],f'{file.name}: social description mismatch');check(any(s.get('@type')=='NewsArticle' and s.get('headline')==a['title'] for s in rendered.schemas),f'{file.name}: NewsArticle missing')
 try:
- rss=ET.parse(DIST/'rss.xml').getroot();check(len(rss.findall('./channel/item'))==len(records),'RSS article count mismatch');sitemap=ET.parse(DIST/'sitemap.xml').getroot()
+ check(not (DIST/'rss.xml').exists() and not (DIST/'rss/index.html').exists(),'Removed RSS still published');sitemap=ET.parse(DIST/'sitemap.xml').getroot()
  for loc in sitemap.iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc'):
   url=urllib.parse.urlsplit(loc.text);check(url.netloc==origin and url.path.startswith(base),'Sitemap origin/base mismatch')
  check('Sitemap: https://' in (DIST/'robots.txt').read_text(),'robots sitemap missing');index=json.loads((DIST/'search-index.json').read_text());check(len(index)==len(records),'Search index count mismatch')
-except Exception as e:errors.append('Feed/index validation: '+str(e))
+except Exception as e:errors.append('Sitemap/index validation: '+str(e))
 for forbidden in ['.git','.cache','data','scripts','__qa-mobile.html']:check(not (DIST/forbidden).exists(),'Private or QA artifact exposed: '+forbidden)
 if errors:print('\n'.join(errors));sys.exit(1)
-print(f'PASS: {len(pages)} HTML pages, {len(records)} articles, internal links, images, metadata, JSON-LD, RSS, sitemap, robots and search. Base: {base}')
+print(f'PASS: {len(pages)} HTML pages, {len(records)} articles, internal links, images, metadata, JSON-LD, sitemap, robots and search. Base: {base}')

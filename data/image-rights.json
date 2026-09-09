@@ -2,361 +2,401 @@
   {
     "path": "/og.png",
     "origin": "Composição gráfica original criada para a identidade Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Código, tipografia e composição originais do projeto",
     "sourceURL": null,
     "usage": "Imagem institucional de compartilhamento; não contém fotografia, logotipo ou ilustração de terceiros.",
-    "proof": "SVG vetorial original renderizado localmente em 8 de setembro de 2026; SHA-256 bd5745a9816860df90fc4403c05ccec0a322b291384713e2503883ae187fc5bf."
+    "proof": "SVG vetorial original renderizado localmente em 8 de setembro de 2026; SHA-256 bd5745a9816860df90fc4403c05ccec0a322b291384713e2503883ae187fc5bf.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "component:EditorialCover",
     "origin": "Generated from article metadata by Vértice Factual source code",
-    "credit": "Vértice Factual",
+    "credit": "Apurante Editorial",
     "license": "Código e composição originais do Vértice Factual",
     "sourceURL": null,
     "usage": "Original typographic editorial cover; no third-party artwork",
-    "proof": "Componente src/components/EditorialCover.astro versionado no repositório."
+    "proof": "Componente src/components/EditorialCover.astro versionado no repositório.",
+    "previousCredit": "Vértice Factual"
   },
   {
     "path": "/images/news/brasil-panoramica.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo original encomendado; direitos de publicação detidos pelo Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica de Brasília para a matéria do IBGE; mostra o Congresso Nacional, a Esplanada e o cerrado. Não é fotografia nem reprodução de material do IBGE.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 dee0bc6f09ea34c0a4d4a803b090f62a300d5603a482e5f57cda669bcec98606."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 dee0bc6f09ea34c0a4d4a803b090f62a300d5603a482e5f57cda669bcec98606.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/ceu-setembro-venus.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo original encomendado; direitos de publicação detidos pelo Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica sobre observação de Vênus em setembro; não é fotografia nem imagem da NASA",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bedb0f725782d2b1b1c02bc55dbfe756b1a7c7efb8f9737a3e3fb8243e1a495c."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bedb0f725782d2b1b1c02bc55dbfe756b1a7c7efb8f9737a3e3fb8243e1a495c.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/lisa-interferometro.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo original encomendado; direitos de publicação detidos pelo Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica do conceito de interferometria espacial do LISA; não é fotografia nem arte oficial da NASA ou ESA",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 61fe825ca58c776efaa87949a9513c17aa72e216b70239a4652d11a80a682f32."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 61fe825ca58c776efaa87949a9513c17aa72e216b70239a4652d11a80a682f32.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/balanca-comercial-tem-superavit-de-us-74-bilhoes-em-agosto.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 40fad2e6332c8d6ec8f4b1f84215d9c6227d0a98141b2d90435938063103667a."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 40fad2e6332c8d6ec8f4b1f84215d9c6227d0a98141b2d90435938063103667a.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/bc-proibe-publicidade-em-comprovantes-do-pix-partir-de-marco-de-2027.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 22cfc63f3c55d1f72b773584aad6d1a5164294526e1e71778309df7d24789517."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 22cfc63f3c55d1f72b773584aad6d1a5164294526e1e71778309df7d24789517.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/brasil-encerra-mundial-de-paraciclismo-de-estrada-com-cinco-medalhas.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 843d91f207bc1e304cd4bd65c8604d56c28a87794340c15f80226adbe13d338c."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 843d91f207bc1e304cd4bd65c8604d56c28a87794340c15f80226adbe13d338c.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/brasil-tem-2-milhoes-de-pessoas-que-trabalham-por-meio-de-aplicativos.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 51b667b49047506ac790324bac2af8b98242fb8fd1a2b8ffc77ab31d20684ed0."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 51b667b49047506ac790324bac2af8b98242fb8fd1a2b8ffc77ab31d20684ed0.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/brasil-testa-plataforma-para-pesquisas-em-microgravidade-no-espaco.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bdf33ab0f26416175e388d39fa48ed749411d9a7ee9da391a6b60898e8cf0ce5."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bdf33ab0f26416175e388d39fa48ed749411d9a7ee9da391a6b60898e8cf0ce5.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/brasileiro-feminino-corinthians-vai-semifinais-e-enfrenta-o-bahia.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bb6d0b48a371622c4f3b15e1983866e95ff244da1aa51b8b521786265bbfa9b6."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 bb6d0b48a371622c4f3b15e1983866e95ff244da1aa51b8b521786265bbfa9b6.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/cbl-bienal-do-livro-de-sao-paulo-tera-maior-edicao-de-sua-historia.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 df3e21da94e31352ae72730331d190d1f72da66e4e6e4834643b13f481a03fad."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 df3e21da94e31352ae72730331d190d1f72da66e4e6e4834643b13f481a03fad.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/cmn-amplia-renegociacao-de-dividas-rurais-ligadas-eventos-climaticos.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 861ba5795f0f37d8ac3698d4f786a5f9474a2444ebee28dd810e5b1b33a634c3."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 861ba5795f0f37d8ac3698d4f786a5f9474a2444ebee28dd810e5b1b33a634c3.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/eleicoes-2026-candidaturas-de-autistas-aumentam-mais-de-cinco-vezes.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 eebe6cb7fcb330857868d29dd584956d9a21bf03e655a02d985c17c7f1d65b68."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 eebe6cb7fcb330857868d29dd584956d9a21bf03e655a02d985c17c7f1d65b68.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/exposicao-no-ccbb-do-rio-traz-forca-da-arte-de-mulheres-da-amazonia.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 9ac66e9cb7d4b5cb9ede0cb994afd2e3226d533c7ed3d63830d1f8088207a278."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 9ac66e9cb7d4b5cb9ede0cb994afd2e3226d533c7ed3d63830d1f8088207a278.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/fiocruz-vai-iniciar-testes-da-primeira-vacina-rnam-contra-covid-19.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 440fb048d7523d3258af8dd61280209f2caeb09d030fe7b4a970728dbf293827."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 440fb048d7523d3258af8dd61280209f2caeb09d030fe7b4a970728dbf293827.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/golpe-do-sosia-usa-tecnologia-para-tentar-burlar-biometria.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 da790ac44e1a3e85158edc4e21e298c2bbe3d572ccda871b2f744d36f4523c31."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 da790ac44e1a3e85158edc4e21e298c2bbe3d572ccda871b2f744d36f4523c31.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/grito-dos-excluidos-tem-atos-em-defesa-por-moradia-e-contra-violencia.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 87a651fdaab5705d6ac2b2dbe1d26f56f575ba81e813c930195c08d6efd70601."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 87a651fdaab5705d6ac2b2dbe1d26f56f575ba81e813c930195c08d6efd70601.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/hubble-decagono-saturno.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 b513b19c45ac4b6b32aa1d7b9e24d8a184b2b876bbfb86f093680adecc7d59c2."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 b513b19c45ac4b6b32aa1d7b9e24d8a184b2b876bbfb86f093680adecc7d59c2.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/hubble-n44-estrelas.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 0b59d9a19a07211b90d3ac848dfe5d47c5d367f52da7de0b1e7f14be8845730b."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 0b59d9a19a07211b90d3ac848dfe5d47c5d367f52da7de0b1e7f14be8845730b.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/incendio-atinge-pavilhao-de-frutas-no-ceagesp-nao-ha-vitimas.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 8923ebf2d97e2ec38dd76e075f148130dda616fe4353a98b04ba5207d344ae07."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 8923ebf2d97e2ec38dd76e075f148130dda616fe4353a98b04ba5207d344ae07.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/inscricoes-para-disputar-conselho-de-politica-cultural-vao-ate-dia-22.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 5e18653287811256b1703f4dc1049bf57ab1dfa33000fc6ed0e0885f87da6e8e."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 5e18653287811256b1703f4dc1049bf57ab1dfa33000fc6ed0e0885f87da6e8e.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/italia-registra-verao-mais-quente-em-mais-de-75-anos-afirma-instituto.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 2bca9125aea943ee1a3c81de4164f9745edea61efce7f46ce2871209c16f9e5b."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 2bca9125aea943ee1a3c81de4164f9745edea61efce7f46ce2871209c16f9e5b.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/justica-eleitoral-garante-transporte-e-urnas-adaptadas-para-pcd.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 d7b28d462836a60b6cb2ad3a8b2aea495961847ba1c5ad29bebf8d56e413a594."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 d7b28d462836a60b6cb2ad3a8b2aea495961847ba1c5ad29bebf8d56e413a594.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/landsat-monte-michael-lava.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 7a380a8cfd90e32101376fbc662da4caeccc22dda4b3acc0a269012b855110ad."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 7a380a8cfd90e32101376fbc662da4caeccc22dda4b3acc0a269012b855110ad.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/luisa-stefani-vai-quartas-de-final-nas-duplas-femininas-do-us-open.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 601e55af77469fe6016fd3974eaebfca18b9d67c165f3377953ae9951ca4ce05."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 601e55af77469fe6016fd3974eaebfca18b9d67c165f3377953ae9951ca4ce05.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/lula-defende-soberania-do-brasil-em-pronunciamento-pelo-7-de-setembro.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 c62a1df2f2142dea132ee0954ff3737774c63de7233b59c1241814fe56e2209a."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 c62a1df2f2142dea132ee0954ff3737774c63de7233b59c1241814fe56e2209a.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/reino-unido-anuncia-ps400-milhoes-para-fundo-florestas-tropicais.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 43ede1e1547b06ad42eece4a0bb626fcc168350d25bed11ba57af66f4e35de82."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 43ede1e1547b06ad42eece4a0bb626fcc168350d25bed11ba57af66f4e35de82.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/restaurar-confianca-e-tema-da-81a-assembleia-geral-da-onu.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 e504e73c7bd4815ab7f8dabbf3ec5c63d0dbe7aef54846f72b531da5763fbdac."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 e504e73c7bd4815ab7f8dabbf3ec5c63d0dbe7aef54846f72b531da5763fbdac.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/resultado-oficial-confirma-extrema-direita-em-eleicao-regional-alema.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 875593d1cc2a4fee03de306516496f30a3c6d52ae916aa9445eacff885d190b5."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 875593d1cc2a4fee03de306516496f30a3c6d52ae916aa9445eacff885d190b5.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/rio-de-janeiro-tem-aviso-de-ressaca-ciclovia-tim-maia-e-fechada.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 d4858140622ea15d4d3b80cf5006df484a3c56caed2b6af696b74a2a970f0585."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 d4858140622ea15d4d3b80cf5006df484a3c56caed2b6af696b74a2a970f0585.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/sao-paulo-tem-mais-de-58-mil-casos-de-dengue-desde-o-inicio-do-ano.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 94ca03b25bea639516686b61061504c57c696d7b39d8b42d4c3ad646e4105727."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 94ca03b25bea639516686b61061504c57c696d7b39d8b42d4c3ad646e4105727.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/seca-na-amazonia-atingiu-38-das-areas-habitadas-no-ultimo-el-nino.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 b2a718b7688927e74aaa294a36f49c3b9803df21a46ac8d2569ebabb5c162b3a."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 b2a718b7688927e74aaa294a36f49c3b9803df21a46ac8d2569ebabb5c162b3a.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/sus-amplia-oferta-de-tromboliticos-para-infarto-e-avc-isquemico.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 51f8367aafeef7e76519b223500047b07d389ccff43a6e92860815f7adb83a63."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 51f8367aafeef7e76519b223500047b07d389ccff43a6e92860815f7adb83a63.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/trens-e-metro-terao-operacao-especial-durante-o-rock-rio.webp",
     "origin": "Ilustração editorial original criada pelo Estúdio Meridiano para o Vértice Factual",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração editorial específica para esta matéria. Não é fotografia do acontecimento, não representa uma captura real nem usa logotipo ou personagem protegido.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 62838f44c8c88a6d70d0f32d3f20952efa44e5165856501e5368e470ed076f28."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026 e convertido localmente para WebP; SHA-256 62838f44c8c88a6d70d0f32d3f20952efa44e5165856501e5368e470ed076f28.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/pisa-2025-resultados-editorial.webp",
     "origin": "Ilustração editorial original criada para a matéria sobre os resultados do PISA 2025",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Ilustração específica sobre avaliação educacional; não é fotografia de estudantes nem gráfico oficial da OCDE.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026, sem logotipos ou pessoas identificáveis, e convertido localmente para WebP; SHA-256 232a7e009301dd51ab8eb9c118f7b41b2b3f1e121b6296f6c929cb5f02001679."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026, sem logotipos ou pessoas identificáveis, e convertido localmente para WebP; SHA-256 232a7e009301dd51ab8eb9c118f7b41b2b3f1e121b6296f6c929cb5f02001679.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/tabaco-fertilidade-oms-editorial.webp",
     "origin": "Ilustração editorial original criada para a matéria sobre tabaco e fertilidade",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Metáfora visual científica e não clínica; não é fotografia, exame, embrião ou representação de paciente real.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026, sem marca de tabaco, logotipo ou pessoa identificável, e convertido localmente para WebP; SHA-256 5487d342c297d9dcf30a9e9f2b169ef395efe47530c2ee642314944e25b05c6b."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026, sem marca de tabaco, logotipo ou pessoa identificável, e convertido localmente para WebP; SHA-256 5487d342c297d9dcf30a9e9f2b169ef395efe47530c2ee642314944e25b05c6b.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/focus-inflacao-2026-editorial.webp",
     "origin": "Ilustração editorial original criada para a matéria sobre as expectativas do Relatório Focus",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Metáfora visual sobre expectativas econômicas; não é gráfico oficial, fotografia nem previsão numérica.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026, sem logotipos, cédulas ou símbolos institucionais, e convertido localmente para WebP; SHA-256 ccc103abc7124a6f2fe9acee73af5e2fcd6c16f583ff432560d149c0ae86dfbd."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026, sem logotipos, cédulas ou símbolos institucionais, e convertido localmente para WebP; SHA-256 ccc103abc7124a6f2fe9acee73af5e2fcd6c16f583ff432560d149c0ae86dfbd.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/stf-pf-crise-institucional-editorial.webp",
     "origin": "Ilustração editorial original criada para a matéria sobre a crise institucional entre STF e direção da Polícia Federal",
-    "credit": "Vértice Factual / Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado para o projeto; publicação autorizada pelo criador do Vértice Factual",
     "sourceURL": null,
     "usage": "Metáfora visual institucional; não é fotografia, reprodução de sede oficial ou retrato de pessoa real.",
-    "proof": "Arquivo original gerado em 8 de setembro de 2026, sem logotipos, rostos identificáveis, selos ou símbolos partidários, e convertido localmente para WebP; SHA-256 8e1d0b89737b90b3571b39a65f96e56f80fbc787e4869eacdd201b8f97320d1f."
+    "proof": "Arquivo original gerado em 8 de setembro de 2026, sem logotipos, rostos identificáveis, selos ou símbolos partidários, e convertido localmente para WebP; SHA-256 8e1d0b89737b90b3571b39a65f96e56f80fbc787e4869eacdd201b8f97320d1f.",
+    "previousCredit": "Vértice Factual / Estúdio Meridiano"
   },
   {
     "path": "/images/news/anvisa-genericos-liraglutida-editorial.webp",
     "origin": "Ilustração editorial original criada para a matéria sobre dois registros genéricos de liraglutida aprovados pela Anvisa",
-    "credit": "Estúdio Meridiano",
+    "credit": "Apurante Editorial",
     "license": "Ativo editorial original gerado exclusivamente para o projeto; publicação e adaptação autorizadas",
     "sourceURL": null,
     "usage": "Metáfora visual farmacêutica específica; não é fotografia, produto comercial, embalagem, orientação de uso ou reprodução de marca.",
-    "proof": "Arquivo original gerado em 9 de setembro de 2026, sem pessoas, logotipos, marcas ou texto, e convertido localmente para WebP; SHA-256 0e3f6a0a4a8569ae9232b7d276632f84340773ea01bd4f7c0063db255605de14."
+    "proof": "Arquivo original gerado em 9 de setembro de 2026, sem pessoas, logotipos, marcas ou texto, e convertido localmente para WebP; SHA-256 0e3f6a0a4a8569ae9232b7d276632f84340773ea01bd4f7c0063db255605de14.",
+    "previousCredit": "Estúdio Meridiano"
   }
 ]

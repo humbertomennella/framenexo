@@ -30,9 +30,9 @@
       "type": "primary"
     }
   ],
-  "imageCredit": "Ilustração editorial original do Vértice Factual, criada pelo Estúdio Meridiano, com representação de Brasília. Não é fotografia nem reprodução dos mapas do IBGE.",
+  "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "imageAlt": "Ilustração editorial de Brasília vista a partir do cerrado, com o Congresso Nacional e a Esplanada dos Ministérios ao entardecer.",
-  "author": "Redação Vértice Factual",
+  "author": "Apurante Editorial",
   "production": "Texto original em português, baseado no anúncio do IBGE.",
   "corrections": [
     {
