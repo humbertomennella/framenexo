@@ -540,5 +540,67 @@
       "sem overflow horizontal nas páginas testadas a 390 e 320 pixels"
     ],
     "notes": "Marca, assinatura e navegação atualizadas; arte preservada; RSS público removido. Sem mudança nas datas de publicação do acervo."
+  },
+  {
+    "at": "2026-09-09T06:00:04Z",
+    "event": "collection",
+    "collected": 5,
+    "discarded": 46,
+    "sourceCounts": {
+      "nasa": 10,
+      "bbc-portugues": 41,
+      "ap": 10
+    },
+    "errors": [
+      {
+        "source": "camara-saude",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-cultura",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-esportes",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "ValueError"
+      },
+      {
+        "source": "senado",
+        "code": "ValueError"
+      },
+      {
+        "source": "who",
+        "code": "ValueError"
+      },
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "un",
+        "code": "ParseError"
+      },
+      {
+        "source": "dw",
+        "code": "ParseError"
+      }
+    ],
+    "seconds": 0.86
   }
 ]
