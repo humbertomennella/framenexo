@@ -20,7 +20,7 @@
   "imageAlt": "Ilustração editorial original sobre: CMN amplia renegociação de dívidas rurais afetadas por eventos climáticos. Não é fotografia do fato.",
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "relevance": 76,
   "eventKey": "veridia-cmn-amplia-renegociacao-de-dividas-rurais-ligadas-eventos-climaticos",
   "sources": [
@@ -28,12 +28,19 @@
       "name": "Agência Brasil",
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/cmn-amplia-renegociacao-de-dividas-rurais-ligadas-eventos-climaticos",
       "publishedAt": "2026-09-04",
-      "type": "press"
+      "type": "press",
+      "organization": "agencia-brasil"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-10T13:25:54Z",
+      "text": "Classificação editorial ajustada para RELATO: o acervo registra somente uma rota jornalística independente para esta publicação até nova verificação."
+    }
+  ],
   "author": "Apurante Editorial",
-  "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
+  "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento.",
+  "leadSourceOrganization": "agencia-brasil"
 }
 ---
 A notícia foi publicada pela Agência Brasil em 2026-09-04. O ponto central é cmn amplia renegociação de dívidas rurais afetadas por eventos climáticos. Esta matéria resume o que está documentado na fonte e separa o fato confirmado do contexto necessário para entendê-lo.

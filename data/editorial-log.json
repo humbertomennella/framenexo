@@ -1207,5 +1207,18 @@
       }
     ],
     "seconds": 0.8
+  },
+  {
+    "at": "2026-09-10T13:33:29Z",
+    "event": "editorial_governance_correction",
+    "result": "validated_pending_deploy",
+    "changes": {
+      "historicalSourcesNormalized": 34,
+      "singlePressRouteDowngradedToRelato": 26,
+      "collectionCapPerOrganization": 8,
+      "statusPanelStaticLimitDisclosed": true,
+      "futureMetadataRegressionBlocked": true
+    },
+    "reason": "Correção da coerência entre evidência disponível, selo público, identificação da organização líder e transparência operacional. Nenhum fato histórico foi reescrito sem nova apuração."
   }
 ]

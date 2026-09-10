@@ -20,7 +20,7 @@
   "imageAlt": "Ilustração editorial original sobre: Balança comercial tem superávit de US$ 7,4 bilhões em agosto. Não é fotografia do fato.",
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "relevance": 76,
   "eventKey": "veridia-balanca-comercial-tem-superavit-de-us-74-bilhoes-em-agosto",
   "sources": [
@@ -28,12 +28,19 @@
       "name": "Agência Brasil",
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/balanca-comercial-tem-superavit-de-us-74-bilhoes-em-agosto",
       "publishedAt": "2026-09-04",
-      "type": "press"
+      "type": "press",
+      "organization": "agencia-brasil"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-10T13:25:54Z",
+      "text": "Classificação editorial ajustada para RELATO: o acervo registra somente uma rota jornalística independente para esta publicação até nova verificação."
+    }
+  ],
   "author": "Apurante Editorial",
-  "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
+  "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento.",
+  "leadSourceOrganization": "agencia-brasil"
 }
 ---
 A notícia foi publicada pela Agência Brasil em 2026-09-04. O ponto central é balança comercial tem superávit de us$ 7,4 bilhões em agosto. Esta matéria resume o que está documentado na fonte e separa o fato confirmado do contexto necessário para entendê-lo.

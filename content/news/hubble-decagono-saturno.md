@@ -28,12 +28,14 @@
       "name": "NASA / equipe Hubble",
       "url": "https://science.nasa.gov/missions/hubble/nasas-hubble-tracks-new-decagon-encircling-saturns-south-pole/",
       "publishedAt": "2026-09-02",
-      "type": "primary"
+      "type": "primary",
+      "organization": "nasa"
     }
   ],
   "corrections": [],
   "author": "Apurante Editorial",
-  "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial."
+  "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial.",
+  "leadSourceOrganization": "nasa"
 }
 ---
 Uma onda atmosférica de dez lados está se formando ao redor do polo sul de Saturno. A descoberta, divulgada pela NASA em 2 de setembro, reúne imagens do telescópio Hubble e observações feitas da Terra. Os resultados foram publicados na revista Science Advances.

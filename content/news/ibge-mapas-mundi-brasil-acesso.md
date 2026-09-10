@@ -27,7 +27,8 @@
       "name": "Agência de Notícias IBGE",
       "url": "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47986-dia-da-independencia-ibge-libera-acesso-aos-mapas-mundi-do-brasil",
       "publishedAt": "2026-09-06",
-      "type": "primary"
+      "type": "primary",
+      "organization": "ibge"
     }
   ],
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
@@ -43,7 +44,8 @@
       "date": "2026-09-08T02:20:00Z",
       "text": "Título e descrição ajustados para esclarecer que se trata de mapas do mundo com o Brasil centralizado."
     }
-  ]
+  ],
+  "leadSourceOrganization": "ibge"
 }
 ---
 O Instituto Brasileiro de Geografia e Estatística anunciou a liberação, por meio de sua loja, de uma série de três mapas do mundo lançados entre 2024 e 2026. Eles não retratam apenas o território nacional: são representações do planeta que colocam o Brasil no centro da projeção.

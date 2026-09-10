@@ -46,6 +46,8 @@ check("[data-previous]" in headlines_source and "[data-next]" in headlines_sourc
 if focus and moments:
  focus_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',focus.group()))
  moment_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',moments.group()))
+ check(len(focus_urls)==4,'Em foco must contain four distinct articles')
+ check(len(moment_urls)<=3,'Em Alta must never exceed three articles')
  check(not focus_urls.intersection(moment_urls),'Homepage carousels repeat the same article')
 search_html=(DIST/'busca'/'index.html').read_text()
 check(f'data-index-url="{base}search-index.json"' in search_html,'Search index ignores deployment base path')
@@ -80,14 +82,18 @@ for file in (ROOT/'content/news').glob('*.md'):
  except Exception:errors.append(f'{file.name}: invalid frontmatter');continue
  for key in ['title','slug','description','publishedAt','updatedAt','category','tags','image','imageCredit','status','sources','confidence']:check(key in a,f'{file.name}: missing {key}')
  if a.get('status')!='published':continue
- records.append(a);check(bool(a.get('sources')),f'{file.name}: sources missing');image_file=DIST/a['image'].lstrip('/');check(image_file.is_file(),f'{file.name}: image missing');check('<script' not in parts[2].lower(),f'{file.name}: unsafe body');check(len(parts[2].split())>=480,f'{file.name}: full article is too short')
+ records.append(a);check(bool(a.get('sources')),f'{file.name}: sources missing');check(a.get('confidence') in ('RUMOR','RELATO','CONFIRMADO','ALTA CONFIANÇA'),f'{file.name}: invalid confidence level');check(isinstance(a.get('quickTakeaways'),list) and 3<=len(a.get('quickTakeaways',[]))<=5,f'{file.name}: quick read must contain three to five points');image_file=DIST/a['image'].lstrip('/');check(image_file.is_file(),f'{file.name}: image missing');check('<script' not in parts[2].lower(),f'{file.name}: unsafe body');check(len(parts[2].split())>=480,f'{file.name}: full article is too short')
+ organizations={source.get('originalOrganization') or source.get('organization') for source in a['sources'] if source.get('originalOrganization') or source.get('organization')}
+ check(all(source.get('originalOrganization') or source.get('organization') for source in a['sources']),f'{file.name}: citation organization missing')
+ check(bool(a.get('leadSourceOrganization')),f'{file.name}: lead source organization missing')
+ check(a.get('leadSourceOrganization') in organizations,f'{file.name}: lead source is not one of the cited organizations')
+ if len(organizations)<2 and not any(source.get('type')=='primary' for source in a['sources']):check(a.get('confidence')=='RELATO',f'{file.name}: single press route must be labeled RELATO')
  if a.get('verificationPolicyVersion',0)>=2:
   prose_paragraphs=[p for p in re.split(r'\n\s*\n',parts[2].strip()) if p and not p.startswith('#')]
   check(len(prose_paragraphs)>=9,f'{file.name}: complete article needs at least nine useful paragraphs')
   for heading in ['## O que aconteceu','## Contexto','## Por que importa','## Como ler esta notícia','## Contexto para interpretar','## O que acompanhar agora']:
    check(heading not in parts[2],f'{file.name}: generic section remains: {heading}')
- if a.get('verificationPolicyVersion',0)>=2:
-  organizations={source.get('organization') or urllib.parse.urlsplit(source['url']).hostname for source in a['sources']};check(len(organizations)>=2,f'{file.name}: policy v2 requires two independent organizations')
+ if a.get('verificationPolicyVersion',0)>=2:check(len(organizations)>=2,f'{file.name}: policy v2 requires two independent organizations')
  try:published=dt.datetime.fromisoformat(a['publishedAt'].replace('Z','+00:00'));check(published<=now+dt.timedelta(minutes=5),f'{file.name}: publication date is in the future')
  except Exception:errors.append(f'{file.name}: invalid publication date')
  check(a['image'] not in used_image_paths,f'{file.name}: duplicate image path');used_image_paths.add(a['image'])
@@ -102,6 +108,8 @@ try:
   url=urllib.parse.urlsplit(loc.text);check(url.netloc==origin and url.path.startswith(base),'Sitemap origin/base mismatch')
  check('Sitemap: https://' in (DIST/'robots.txt').read_text(),'robots sitemap missing');index=json.loads((DIST/'search-index.json').read_text());check(len(index)==len(records),'Search index count mismatch')
 except Exception as e:errors.append('Sitemap/index validation: '+str(e))
+category_counts={category:sum(1 for article in records if article.get('category')==category) for category in ['Brasil','Mundo','Política','Economia','Tecnologia','Ciência','Cultura','Esportes','Saúde','Meio Ambiente']}
+for category,count in category_counts.items():check(count>=3,f'Editorial coverage regression: {category} has only {count} articles')
 for forbidden in ['.git','.cache','data','scripts','__qa-mobile.html']:check(not (DIST/forbidden).exists(),'Private or QA artifact exposed: '+forbidden)
 if errors:print('\n'.join(errors));sys.exit(1)
 print(f'PASS: {len(pages)} HTML pages, {len(records)} articles, internal links, images, metadata, JSON-LD, sitemap, robots and search. Base: {base}')

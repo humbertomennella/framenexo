@@ -28,12 +28,14 @@
       "name": "NASA Earth Observatory",
       "url": "https://science.nasa.gov/earth/earth-observatory/a-bright-spot-at-mount-michael/",
       "publishedAt": "2026-09-07",
-      "type": "primary"
+      "type": "primary",
+      "organization": "nasa"
     }
   ],
   "corrections": [],
   "author": "Apurante Editorial",
-  "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial."
+  "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial.",
+  "leadSourceOrganization": "nasa"
 }
 ---
 Uma abertura nas nuvens permitiu ao satélite Landsat 8 registrar sinais de atividade no Monte Michael, na ilha Saunders, no Atlântico Sul. A imagem foi obtida em 24 de agosto e divulgada pelo Observatório da Terra da NASA em 7 de setembro. O ponto de calor na cratera está associado ao lago de lava que costuma permanecer ativo no vulcão.

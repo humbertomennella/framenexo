@@ -26,24 +26,28 @@
   "confidence": "CONFIRMADO",
   "relevance": 91,
   "eventKey": "focus-2026-09-08-inflacao-pib-selic",
+  "leadSourceOrganization": "banco-central",
   "sources": [
     {
       "name": "Banco Central do Brasil — Relatório Focus",
       "url": "https://www.bcb.gov.br/publicacoes/focus",
       "publishedAt": "2026-09-08",
-      "type": "primary"
+      "type": "primary",
+      "organization": "banco-central"
     },
     {
       "name": "Banco Central do Brasil — metas para a inflação",
       "url": "https://www.bcb.gov.br/controleinflacao/metainflacao",
       "publishedAt": "2026-09-08",
-      "type": "primary"
+      "type": "primary",
+      "organization": "banco-central"
     },
     {
       "name": "Agência Brasil",
       "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mercado-financeiro-reduz-previsao-da-inflacao-para-5-este-ano",
       "publishedAt": "2026-09-08",
-      "type": "press"
+      "type": "press",
+      "organization": "agencia-brasil"
     }
   ],
   "corrections": [],

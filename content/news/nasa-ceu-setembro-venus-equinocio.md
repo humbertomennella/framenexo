@@ -27,7 +27,8 @@
       "name": "NASA Science",
       "url": "https://science.nasa.gov/solar-system/skywatching/whats-up-september-2026-skywatching-tips-from-nasa/",
       "publishedAt": "2026-09-01",
-      "type": "primary"
+      "type": "primary",
+      "organization": "nasa"
     }
   ],
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
@@ -39,7 +40,8 @@
       "date": "2026-09-08T02:13:00Z",
       "text": "Horário de publicação corrigido para o fuso de Brasília e ilustração editorial substituída por uma arte específica da pauta."
     }
-  ]
+  ],
+  "leadSourceOrganization": "nasa"
 }
 ---
 O guia mensal da NASA para setembro reúne quatro momentos de observação do céu: a passagem da Lua por Antares e pelo conjunto de estrelas conhecido como Teapot entre os dias 14 e 20, o brilho máximo de Vênus em 18 de setembro, o equinócio em 22 de setembro e a Lua cheia próxima de Saturno e Netuno em 26 de setembro.

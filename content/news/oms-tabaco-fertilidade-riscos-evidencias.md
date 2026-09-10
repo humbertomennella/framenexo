@@ -25,18 +25,21 @@
   "confidence": "CONFIRMADO",
   "relevance": 92,
   "eventKey": "oms-tabaco-fertilidade-sintese-2026-09",
+  "leadSourceOrganization": "oms",
   "sources": [
     {
       "name": "Organização Mundial da Saúde — síntese sobre tabaco e infertilidade",
       "url": "https://www.who.int/news/item/08-09-2026-tobacco-smoking-may-be-harming-your-chances-of-having-a-baby",
       "publishedAt": "2026-09-08",
-      "type": "primary"
+      "type": "primary",
+      "organization": "oms"
     },
     {
       "name": "Organização Mundial da Saúde — ficha técnica sobre tabaco",
       "url": "https://www.who.int/news-room/fact-sheets/detail/tobacco",
       "publishedAt": "2026-06-26",
-      "type": "primary"
+      "type": "primary",
+      "organization": "oms"
     }
   ],
   "corrections": [],

@@ -6,7 +6,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 UTC=dt.timezone.utc
-UA='VerticeFactualBot/1.0 (editorial RSS reader)'
+UA='ApuranteBot/1.0 (editorial feed reader; https://humbertomennella.github.io/framenexo/politica-editorial/)'
 MAX_BYTES=2_500_000
 def now():return dt.datetime.now(UTC)
 def iso(value=None):return (value or now()).astimezone(UTC).isoformat(timespec='seconds').replace('+00:00','Z')
@@ -137,6 +137,14 @@ def choose_lead(group,sources,history,window=20):
   org=source_organization(item,sources.get(item.get('sourceId'),{}))
   return (counts.get(org,0),0 if item.get('sourceType')=='primary' else 1,-item.get('relevance',0),item.get('publishedAt',''))
  return min(group,key=key)
+def limit_candidates_by_organization(items,max_per_organization=8):
+ """Keep discovery broad without letting one feed dominate a collection run."""
+ counts={};kept=[]
+ for item in sorted(items,key=lambda row:(row.get('relevance',0),row.get('publishedAt','')),reverse=True):
+  organization=item.get('originalOrganization') or item.get('sourceOrganization') or item.get('sourceId')
+  if counts.get(organization,0)>=max_per_organization:continue
+  counts[organization]=counts.get(organization,0)+1;kept.append(item)
+ return kept
 def due(state,at=None):
  if state.get('paused'):return False
  last=date(state.get('lastPublishedAt'));return last is None or ((at or now())-last).total_seconds()>=3600
@@ -178,6 +186,7 @@ def collect():
     c=dict(id=key,title=row['title'][:250],sourceId=source['id'],sourceName=source['name'],sourceType=source['type'],sourceOrganization=source.get('organization',source['id']),sourceRole=source.get('role','evidence' if source['type']=='primary' else 'reporting'),url=url,publishedAt=iso(stamp),collectedAt=iso(),subject=source['category'],category=source['category'],internalSummary=f"Candidato de {source['name']}; contexto factual será extraído antes da redação.",relevance=rank(row['title'],source['type']),status='blocked' if blocked else 'needs_review' if needs_editor(row['title']) else 'candidate',confidence='RUMOR' if rumor(row['title']) else 'CONFIRMADO' if source['type']=='primary' else 'RELATO')
     added.append(c)
     if not blocked:write(f'.cache/evidence/{key}.json',dict(url=url,text=row['text'][:18000],fetchedAt=iso()))
+ limited=limit_candidates_by_organization(added);discarded+=len(added)-len(limited);added=limited
  items=old+added
  for c in items:
   if c['status']=='candidate' and (not date(c['publishedAt']) or date(c['publishedAt'])<now()-dt.timedelta(days=7)):c['status']='expired'

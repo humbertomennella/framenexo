@@ -47,6 +47,11 @@ class Rules(unittest.TestCase):
   group=[{'sourceId':'official','sourceType':'primary','relevance':90},{'sourceId':'press','sourceType':'press','relevance':80}]
   history=[{'leadSourceOrganization':'official-body'} for _ in range(5)]
   self.assertEqual(p.choose_lead(group,sources,history)['sourceId'],'press')
+ def test_collection_limits_one_organization_without_blocking_others(self):
+  crowded=[{'sourceId':'a','sourceOrganization':'same','relevance':100-i,'publishedAt':f'2026-09-10T{i:02}:00:00Z'} for i in range(12)]
+  independent=[{'sourceId':'b','sourceOrganization':'other','relevance':20,'publishedAt':'2026-09-10T00:00:00Z'}]
+  kept=p.limit_candidates_by_organization(crowded+independent,8)
+  self.assertEqual(sum(x['sourceOrganization']=='same' for x in kept),8);self.assertIn(independent[0],kept)
  def test_different_events_remain_separate(self):
   a={'title':'Game Pass September additions','url':'https://example.com/a'};b={'title':'Game Pass cloud changes November','url':'https://example.com/b'};self.assertFalse(p.same_event(a,b))
  def test_rumors_and_reviews_held(self):
@@ -75,15 +80,15 @@ class Publication(unittest.TestCase):
   self.assertTrue(p.write('data/test.json',{'a':1}));self.assertFalse(p.write('data/test.json',{'a':1}));self.assertEqual(p.read('data/test.json',{}),{'a':1});self.assertFalse(list(self.root.rglob('*.tmp')))
  def add_media(self,c):
   path='/images/news/test.webp';asset=self.root/'public/images/news/test.webp';asset.parent.mkdir(parents=True,exist_ok=True);asset.write_bytes(b'webp')
-  p.write('data/image-rights.json',[{'path':path,'origin':'generated','credit':'Vértice Factual','license':'original','sourceURL':None,'proof':'test fixture'}])
-  c['media']={'path':path,'alt':'Ilustração editorial de teste.','credit':'Vértice Factual — ilustração editorial original.'};return c
+  p.write('data/image-rights.json',[{'path':path,'origin':'generated','credit':'Apurante Editorial','license':'original','sourceURL':None,'proof':'test fixture'}])
+  c['media']={'path':path,'alt':'Ilustração editorial de teste.','credit':'Apurante Editorial — ilustração editorial original.'};return c
  def test_candidate_without_approved_media_is_not_published(self):
   p.write('data/sources.json',[{'id':'official'}]);p.write('data/candidates.json',[{'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'}])
   self.assertEqual(p.publish(force=True)['published'],0)
  def test_duplicate_media_content_is_rejected_even_with_another_filename(self):
   first=self.add_media({});second_path='/images/news/copy.webp';second_asset=self.root/'public/images/news/copy.webp';second_asset.write_bytes(b'webp')
-  rights=p.read('data/image-rights.json',[]);rights.append({'path':second_path,'origin':'generated','credit':'Vértice Factual','license':'original','sourceURL':None,'proof':'test fixture'});p.write('data/image-rights.json',rights)
-  candidate={'media':{'path':second_path,'alt':'Ilustração editorial de teste.','credit':'Vértice Factual — ilustração editorial original.'}}
+  rights=p.read('data/image-rights.json',[]);rights.append({'path':second_path,'origin':'generated','credit':'Apurante Editorial','license':'original','sourceURL':None,'proof':'test fixture'});p.write('data/image-rights.json',rights)
+  candidate={'media':{'path':second_path,'alt':'Ilustração editorial de teste.','credit':'Apurante Editorial — ilustração editorial original.'}}
   with self.assertRaisesRegex(ValueError,'media_content_must_be_unique'):p.approved_media(candidate,[first['media']['path']])
  def test_empty_batch_does_not_advance_clock(self):
   state={'lastPublishedAt':'2026-01-01T00:00:00Z','editionCount':2};p.write('data/publishing-state.json',state);p.write('data/candidates.json',[]);self.assertEqual(p.publish(force=True)['published'],0);self.assertEqual(p.read('data/publishing-state.json',{}),state)

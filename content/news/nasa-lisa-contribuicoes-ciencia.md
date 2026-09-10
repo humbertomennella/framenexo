@@ -27,7 +27,8 @@
       "name": "NASA Science",
       "url": "https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/community/reminder-lisa-science-gaps-2026/",
       "publishedAt": "2026-09-04",
-      "type": "primary"
+      "type": "primary",
+      "organization": "nasa"
     }
   ],
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
@@ -39,7 +40,8 @@
       "date": "2026-09-08T02:13:00Z",
       "text": "Horário de publicação corrigido para o fuso de Brasília e ilustração editorial substituída por uma arte específica da pauta."
     }
-  ]
+  ],
+  "leadSourceOrganization": "nasa"
 }
 ---
 A NASA informou que está recebendo contribuições da comunidade científica para atualizar a lista de lacunas de pesquisa do projeto LISA, futuro observatório espacial voltado ao estudo de ondas gravitacionais. O lembrete publicado em 4 de setembro indica que a chamada permanece aberta até 16 de setembro.

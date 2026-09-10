@@ -20,7 +20,7 @@
   "imageAlt": "Ilustração editorial original sobre: Corinthians avança às semifinais do Brasileiro Feminino e enfrenta o Bahia. Não é fotografia do fato.",
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "relevance": 76,
   "eventKey": "veridia-brasileiro-feminino-corinthians-vai-semifinais-e-enfrenta-o-bahia",
   "sources": [
@@ -28,12 +28,19 @@
       "name": "Agência Brasil",
       "url": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-09/brasileiro-feminino-corinthians-vai-semifinais-e-enfrenta-o-bahia",
       "publishedAt": "2026-09-07",
-      "type": "press"
+      "type": "press",
+      "organization": "agencia-brasil"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-10T13:25:54Z",
+      "text": "Classificação editorial ajustada para RELATO: o acervo registra somente uma rota jornalística independente para esta publicação até nova verificação."
+    }
+  ],
   "author": "Apurante Editorial",
-  "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento."
+  "production": "Texto original em português baseado na fonte indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia do acontecimento.",
+  "leadSourceOrganization": "agencia-brasil"
 }
 ---
 A notícia foi publicada pela Agência Brasil em 2026-09-07. O ponto central é corinthians avança às semifinais do brasileiro feminino e enfrenta o bahia. Esta matéria resume o que está documentado na fonte e separa o fato confirmado do contexto necessário para entendê-lo.

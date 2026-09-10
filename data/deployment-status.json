@@ -1,7 +1,7 @@
 {
   "repository": "humbertomennella/framenexo",
   "githubPages": true,
-  "scheduleActive": true,
+  "repositoryScheduleActive": true,
   "generationValidated": true,
-  "notes": "Rotina executada no GitHub. O site mostra os dados do último build."
+  "notes": "O painel confirma somente o workflow versionado no GitHub e os horários gravados na última publicação. O estado da automação editorial externa não pode ser inferido por este arquivo estático."
 }
