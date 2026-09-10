@@ -1,0 +1,20 @@
+{
+  "sourceUrls": [
+    "https://academiabrasileiradecinema.com.br/",
+    "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-09/seis-filmes-continuam-disputa-para-representar-brasil-no-oscar",
+    "https://www1.folha.uol.com.br/ilustrada/2026/09/com-feito-pipa-academia-brasileira-anuncia-filmes-que-podem-concorrer-ao-oscar.shtml",
+    "https://www.infomoney.com.br/consumo/oscar-academia-brasileira-de-cinema-revela-os-6-filmes-que-podem-representar-brasil/"
+  ],
+  "sourceOrganizations": ["academia-brasileira-cinema", "agencia-brasil", "folha", "estadao"],
+  "verifiedAt": "2026-09-10T01:35:00Z",
+  "confidence": "ALTA CONFIANÇA",
+  "duplicate": false,
+  "claims": [
+    "Seis filmes avançaram entre 15 obras habilitadas.",
+    "O representante brasileiro será anunciado em 16 de setembro.",
+    "A escolha nacional não equivale a uma indicação ao Oscar.",
+    "A lista reúne cinco ficções e um documentário com trajetórias distintas."
+  ],
+  "checks": ["data", "fonte institucional", "três organizações de imprensa", "originalOrganization", "duplicidade", "rumor", "texto original", "imagem original com hash"],
+  "limitations": "A comissão ainda não anunciou o representante e a matéria não atribui favoritismo a nenhum filme."
+}

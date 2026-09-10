@@ -428,5 +428,35 @@
     "usage": "Metáfora visual sobre combustíveis, abastecimento e política fiscal; não é fotografia, documento oficial, posto real, refinaria identificável ou reprodução de marca.",
     "proof": "Arquivo original gerado em 9 de setembro de 2026, sem pessoas identificáveis, logotipos, marcas, preços ou texto legível, e convertido localmente para WebP; SHA-256 8f8da82aa17c89fbf69c5b7537a1c49550fcaebad8aecfda4f32446c6787a9ca.",
     "previousCredit": null
+  },
+  {
+    "path": "/images/news/congonhas-operacao-excepcional-editorial.webp",
+    "origin": "Ilustração editorial original criada para a matéria sobre a operação excepcional de Congonhas após as 23h",
+    "credit": "Apurante Editorial",
+    "license": "Ativo editorial original gerado exclusivamente para o projeto; publicação e adaptação autorizadas",
+    "sourceURL": null,
+    "usage": "Cena editorial de aeroporto urbano à noite; não é fotografia, aeroporto reproduzido com precisão cartográfica, aeronave identificável ou material de companhia aérea.",
+    "proof": "Arquivo original gerado em 9 de setembro de 2026, sem logotipos, marcas, pessoas identificáveis ou texto editorial, e convertido localmente para WebP; SHA-256 730740b358cd5db2c863e40ff741f1f241b7ca7b76093a7b469d377f2c31bf6d.",
+    "previousCredit": null
+  },
+  {
+    "path": "/images/news/selecao-renovacao-2030-editorial.webp",
+    "origin": "Ilustração editorial original criada para a matéria sobre a renovação da seleção brasileira",
+    "credit": "Apurante Editorial",
+    "license": "Ativo editorial original gerado exclusivamente para o projeto; publicação e adaptação autorizadas",
+    "sourceURL": null,
+    "usage": "Cena editorial esportiva com jogadores anônimos; não é fotografia, não retrata atleta ou treinador real e não reproduz uniforme, escudo ou estádio oficial.",
+    "proof": "Arquivo original gerado em 9 de setembro de 2026, sem logotipos, marcas ou pessoas reconhecíveis, e convertido localmente para WebP; SHA-256 b4d613ea85118a1e562d27deb72312cd6073e1aef9efa406235cfb69da1cbde7.",
+    "previousCredit": null
+  },
+  {
+    "path": "/images/news/cinema-brasileiro-finalistas-editorial.webp",
+    "origin": "Ilustração editorial original criada para a matéria sobre os seis finalistas brasileiros ao Oscar 2027",
+    "credit": "Apurante Editorial",
+    "license": "Ativo editorial original gerado exclusivamente para o projeto; publicação e adaptação autorizadas",
+    "sourceURL": null,
+    "usage": "Metáfora visual de cinema e seleção nacional; não é fotografia, cartaz, cena de filme, estatueta ou reprodução de obra protegida.",
+    "proof": "Arquivo original gerado em 9 de setembro de 2026, sem títulos, logotipos, atores reconhecíveis ou estatueta protegida, e convertido localmente para WebP; SHA-256 3797bcd0ab6cfb0291d055278dd6e4c4ec0a174689b62ec0a05962c64c9fe7ec.",
+    "previousCredit": null
   }
 ]

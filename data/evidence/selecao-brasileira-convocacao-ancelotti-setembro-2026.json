@@ -1,0 +1,20 @@
+{
+  "sourceUrls": [
+    "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-09/ancelotti-anuncia-26-convocados-para-amistosos-da-selecao-brasileira",
+    "https://www1.folha.uol.com.br/esporte/2026/09/ancelotti-faz-primeira-convocacao-da-selecao-no-pos-copa-veja-ao-vivo.shtml",
+    "https://ge.globo.com/futebol/selecao-brasileira/noticia/2026/09/09/ancelotti-inicia-ciclo-com-convocacao-cheia-de-novidades-veja-lista.ghtml",
+    "https://www.infomoney.com.br/esportes/convocacao-selecao-brasileira-ancelotti/"
+  ],
+  "sourceOrganizations": ["agencia-brasil", "folha", "globo", "infomoney"],
+  "verifiedAt": "2026-09-10T01:40:00Z",
+  "confidence": "ALTA CONFIANÇA",
+  "duplicate": false,
+  "claims": [
+    "A lista tem 26 jogadores e oito estreantes.",
+    "A média de idade caiu de 28,8 para 24,4 anos em relação ao elenco do Mundial.",
+    "Os amistosos serão contra a Austrália em 25 e 29 de setembro e contra a Índia em 3 de outubro.",
+    "Ancelotti declarou que veteranos ausentes ainda podem retornar."
+  ],
+  "checks": ["data", "quatro organizações", "lista cruzada", "duplicidade", "rumor", "separação entre fato e projeção", "texto original", "imagem original com hash"],
+  "limitations": "A convocação é um primeiro recorte do ciclo e não permite definir a equipe que disputará a Copa de 2030."
+}

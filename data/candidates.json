@@ -1749,8 +1749,8 @@
     "category": "Brasil",
     "internalSummary": "Candidato de Agência Brasil; contexto factual será extraído antes da redação.",
     "relevance": 30,
-    "status": "candidate",
-    "confidence": "RELATO"
+    "status": "published",
+    "confidence": "ALTA CONFIANÇA"
   },
   {
     "id": "ec4a6acfd7915c0876b5",
@@ -1767,8 +1767,8 @@
     "category": "Brasil",
     "internalSummary": "Candidato de Agência Brasil; contexto factual será extraído antes da redação.",
     "relevance": 30,
-    "status": "candidate",
-    "confidence": "RELATO"
+    "status": "published",
+    "confidence": "ALTA CONFIANÇA"
   },
   {
     "id": "ea9b3ea4e2af95d81990",
@@ -1839,8 +1839,8 @@
     "category": "Brasil",
     "internalSummary": "Candidato de Agência Brasil; contexto factual será extraído antes da redação.",
     "relevance": 40,
-    "status": "candidate",
-    "confidence": "RELATO"
+    "status": "published",
+    "confidence": "ALTA CONFIANÇA"
   },
   {
     "id": "758c7f9f28e98402d8e1",
