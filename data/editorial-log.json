@@ -1129,7 +1129,12 @@
     "slug": "aiea-encaminha-ira-conselho-seguranca-onu",
     "category": "Mundo",
     "confidence": "ALTA CONFIANÇA",
-    "independentOrganizations": ["associated-press", "reuters", "folha", "iaea"],
+    "independentOrganizations": [
+      "associated-press",
+      "reuters",
+      "folha",
+      "iaea"
+    ],
     "media": "/images/news/aiea-ira-conselho-seguranca-editorial.webp",
     "mediaSha256": "6a8d011c5e876c1241475eb36e02fdc5123150a65970378414e241c4b84acc0c",
     "published": 1,
@@ -1140,5 +1145,67 @@
     "event": "site_improvement",
     "result": "validated_pending_deploy",
     "reason": "Em Foco ampliado para quatro matérias; Em Alta limitado a três pautas revisadas; carrosséis mantêm troca automática em 3,8 segundos, gesto bidirecional, setas e barras com preenchimento sincronizado."
+  },
+  {
+    "at": "2026-09-10T11:18:09Z",
+    "event": "collection",
+    "collected": 4,
+    "discarded": 46,
+    "sourceCounts": {
+      "nasa": 10,
+      "bbc-portugues": 41,
+      "ap": 10
+    },
+    "errors": [
+      {
+        "source": "camara-esportes",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-cultura",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-saude",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "ValueError"
+      },
+      {
+        "source": "senado",
+        "code": "ValueError"
+      },
+      {
+        "source": "who",
+        "code": "ValueError"
+      },
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "un",
+        "code": "ParseError"
+      },
+      {
+        "source": "dw",
+        "code": "ParseError"
+      }
+    ],
+    "seconds": 0.8
   }
 ]
