@@ -1949,5 +1949,41 @@
     "relevance": 30,
     "status": "candidate",
     "confidence": "RELATO"
+  },
+  {
+    "id": "6ba2484a8133879d770e",
+    "title": "APOD: 2026 September 10 – LDN 1295: The Giraffe Nebula",
+    "sourceId": "nasa",
+    "sourceName": "NASA Science",
+    "sourceType": "primary",
+    "sourceOrganization": "nasa",
+    "sourceRole": "evidence",
+    "url": "https://science.nasa.gov/image-article/apod-2026-september-10-ldn-1295-the-giraffe-nebula",
+    "publishedAt": "2026-09-10T04:05:00Z",
+    "collectedAt": "2026-09-10T05:58:04Z",
+    "subject": "Ciência",
+    "category": "Ciência",
+    "internalSummary": "Candidato de NASA Science; contexto factual será extraído antes da redação.",
+    "relevance": 55,
+    "status": "candidate",
+    "confidence": "CONFIRMADO"
+  },
+  {
+    "id": "7e8707c2c4bd12ebd491",
+    "title": "Dust Storm Sweeps Over Mali",
+    "sourceId": "nasa",
+    "sourceName": "NASA Science",
+    "sourceType": "primary",
+    "sourceOrganization": "nasa",
+    "sourceRole": "evidence",
+    "url": "https://science.nasa.gov/earth/earth-observatory/dust-storm-sweeps-over-mali",
+    "publishedAt": "2026-09-10T04:00:00Z",
+    "collectedAt": "2026-09-10T05:58:04Z",
+    "subject": "Ciência",
+    "category": "Ciência",
+    "internalSummary": "Candidato de NASA Science; contexto factual será extraído antes da redação.",
+    "relevance": 55,
+    "status": "candidate",
+    "confidence": "CONFIRMADO"
   }
 ]

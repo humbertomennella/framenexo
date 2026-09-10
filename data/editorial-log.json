@@ -1017,7 +1017,12 @@
     "slug": "seis-filmes-finalistas-representar-brasil-oscar-2027",
     "category": "Cultura",
     "confidence": "ALTA CONFIANÇA",
-    "independentOrganizations": ["academia-brasileira-cinema", "agencia-brasil", "folha", "estadao"],
+    "independentOrganizations": [
+      "academia-brasileira-cinema",
+      "agencia-brasil",
+      "folha",
+      "estadao"
+    ],
     "media": "/images/news/cinema-brasileiro-finalistas-editorial.webp",
     "mediaSha256": "3797bcd0ab6cfb0291d055278dd6e4c4ec0a174689b62ec0a05962c64c9fe7ec",
     "published": 1,
@@ -1029,7 +1034,12 @@
     "slug": "ancelotti-renova-selecao-oito-estreantes-novo-ciclo",
     "category": "Esportes",
     "confidence": "ALTA CONFIANÇA",
-    "independentOrganizations": ["agencia-brasil", "folha", "globo", "infomoney"],
+    "independentOrganizations": [
+      "agencia-brasil",
+      "folha",
+      "globo",
+      "infomoney"
+    ],
     "media": "/images/news/selecao-renovacao-2030-editorial.webp",
     "mediaSha256": "b4d613ea85118a1e562d27deb72312cd6073e1aef9efa406235cfb69da1cbde7",
     "published": 1,
@@ -1041,10 +1051,76 @@
     "slug": "congonhas-regra-operacao-excepcional-apos-23h",
     "category": "Brasil",
     "confidence": "ALTA CONFIANÇA",
-    "independentOrganizations": ["anac", "agencia-brasil", "folha"],
+    "independentOrganizations": [
+      "anac",
+      "agencia-brasil",
+      "folha"
+    ],
     "media": "/images/news/congonhas-operacao-excepcional-editorial.webp",
     "mediaSha256": "730740b358cd5db2c863e40ff741f1f241b7ca7b76093a7b469d377f2c31bf6d",
     "published": 1,
     "reason": "A autorização foi confirmada pela Anac e por duas organizações de imprensa; a matéria ressalva que critérios finais dependem do acordo operacional."
+  },
+  {
+    "at": "2026-09-10T05:58:05Z",
+    "event": "collection",
+    "collected": 2,
+    "discarded": 48,
+    "sourceCounts": {
+      "nasa": 10,
+      "bbc-portugues": 41,
+      "ap": 10
+    },
+    "errors": [
+      {
+        "source": "camara-cultura",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-esportes",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-saude",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "ValueError"
+      },
+      {
+        "source": "senado",
+        "code": "ValueError"
+      },
+      {
+        "source": "who",
+        "code": "ValueError"
+      },
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "un",
+        "code": "ParseError"
+      },
+      {
+        "source": "dw",
+        "code": "ParseError"
+      }
+    ],
+    "seconds": 1.29
   }
 ]
