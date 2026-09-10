@@ -1,9 +1,22 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-09T13:52:00Z",
+  "lastPublishedAt": "2026-09-10T01:20:00Z",
   "lastCollectedAt": "2026-09-10T01:03:51Z",
-  "editionCount": 6,
+  "editionCount": 7,
   "history": [
+    {
+      "slug": "governo-reduz-tributos-combustiveis-amplia-subsidio-diesel",
+      "title": "Governo reduz tributos sobre combustíveis e amplia subsídio ao diesel",
+      "eventKey": "governo-pacote-combustiveis-setembro-2026",
+      "publishedAt": "2026-09-10T01:20:00Z",
+      "sourceUrls": [
+        "https://www.reuters.com/business/energy/brazil-government-releases-13-billion-fuel-subsidies-2026-09-09/",
+        "https://apnews.com/article/0dd4014d2bb5a5e7627ad8acb7cd1256",
+        "https://economia.uol.com.br/noticias/redacao/2026/09/09/governo-decreta-novas-medidas-para-combustiveis-apos-alta-no-petroleo.ghtm",
+        "https://www1.folha.uol.com.br/mercado/2026/09/defasagem-no-preco-do-diesel-dispara-e-governo-lula-libera-mais-verba-para-subsidio.shtml",
+        "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/novas-medidas-para-combustiveis-terao-impacto-de-r-7-bilhoes-por-mes"
+      ]
+    },
     {
       "slug": "anvisa-amplia-vacina-meningococica-bebes-seis-semanas",
       "title": "Anvisa amplia vacina meningocócica para bebês a partir de seis semanas",

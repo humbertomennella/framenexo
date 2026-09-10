@@ -986,5 +986,29 @@
       }
     ],
     "seconds": 1.29
+  },
+  {
+    "at": "2026-09-10T01:20:00Z",
+    "event": "publication",
+    "slug": "governo-reduz-tributos-combustiveis-amplia-subsidio-diesel",
+    "category": "Economia",
+    "confidence": "ALTA CONFIANÇA",
+    "independentOrganizations": [
+      "reuters",
+      "associated-press",
+      "agencia-brasil",
+      "uol",
+      "folha"
+    ],
+    "media": "/images/news/combustiveis-medidas-fiscais-editorial.webp",
+    "mediaSha256": "8f8da82aa17c89fbf69c5b7537a1c49550fcaebad8aecfda4f32446c6787a9ca",
+    "published": 1,
+    "reason": "Medidas nacionais de vigência imediata confirmadas por cinco organizações. A matéria separa valores anunciados, projeções fiscais, efeito na cadeia e divergência sobre a data final do decreto."
+  },
+  {
+    "at": "2026-09-10T01:20:00Z",
+    "event": "automation",
+    "result": "resumed",
+    "reason": "Rotina horária Operar Apurante reativada após diagnóstico de desativação sem próxima execução."
   }
 ]

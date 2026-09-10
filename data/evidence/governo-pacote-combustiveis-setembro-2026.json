@@ -1,0 +1,39 @@
+{
+  "sourceUrls": [
+    "https://www.reuters.com/business/energy/brazil-government-releases-13-billion-fuel-subsidies-2026-09-09/",
+    "https://apnews.com/article/0dd4014d2bb5a5e7627ad8acb7cd1256",
+    "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/novas-medidas-para-combustiveis-terao-impacto-de-r-7-bilhoes-por-mes",
+    "https://economia.uol.com.br/noticias/redacao/2026/09/09/governo-decreta-novas-medidas-para-combustiveis-apos-alta-no-petroleo.ghtm",
+    "https://www1.folha.uol.com.br/mercado/2026/09/defasagem-no-preco-do-diesel-dispara-e-governo-lula-libera-mais-verba-para-subsidio.shtml",
+    "https://economia.uol.com.br/noticias/redacao/2026/09/09/governo-libera-r-66-bilhoes-para-conter-precos-de-combustiveis.ghtm"
+  ],
+  "sourceOrganizations": [
+    "reuters",
+    "associated-press",
+    "agencia-brasil",
+    "uol",
+    "folha"
+  ],
+  "verifiedAt": "2026-09-10T01:20:00Z",
+  "confidence": "ALTA CONFIANÇA",
+  "duplicate": false,
+  "claims": [
+    "A redução federal anunciada é de R$ 0,63 por litro de gasolina e R$ 0,19 por litro de etanol hidratado.",
+    "A nova subvenção inicial do diesel rodoviário é de R$ 1 por litro e se sobrepõe temporariamente ao benefício anterior de aproximadamente R$ 1,12.",
+    "O impacto mensal estimado é de R$ 7 bilhões, dividido entre aproximadamente R$ 5 bilhões para o diesel e R$ 2 bilhões para gasolina e etanol.",
+    "A MP 1.389 abriu crédito extraordinário de R$ 6,6 bilhões para programas de subvenção já instituídos.",
+    "As fontes consultadas divergem sobre o último dia de vigência do decreto tributário; a matéria não apresenta uma data final como consolidada."
+  ],
+  "checks": [
+    "data",
+    "quatro organizações independentes",
+    "duplicidade",
+    "rumor",
+    "distinção entre estimativa e valor realizado",
+    "distinção entre preço na origem e preço ao consumidor",
+    "divergência de vigência explicitada",
+    "texto original",
+    "imagem original com hash"
+  ],
+  "limitations": "O texto integral dos atos oficiais não foi obtido diretamente durante o fechamento. A identificação da MP 1.389 e os valores foram conferidos em reportagens independentes; a divergência sobre a data final do decreto foi preservada."
+}

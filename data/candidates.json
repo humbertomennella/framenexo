@@ -1785,7 +1785,7 @@
     "category": "Brasil",
     "internalSummary": "Candidato de Agência Brasil; contexto factual será extraído antes da redação.",
     "relevance": 30,
-    "status": "candidate",
+    "status": "published",
     "confidence": "RELATO"
   },
   {
@@ -1911,7 +1911,7 @@
     "category": "Brasil",
     "internalSummary": "Candidato de Agência Brasil; contexto factual será extraído antes da redação.",
     "relevance": 30,
-    "status": "candidate",
+    "status": "published",
     "confidence": "RELATO"
   },
   {
