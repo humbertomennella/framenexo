@@ -1,4 +1,4 @@
-# Vértice Factual
+# APURANTE.
 
 **Fontes que convergem. Contexto que esclarece.** Central de notícias sobre o Brasil e o mundo, com múltiplas rotas de apuração, fontes identificadas, texto original e automação editorial conservadora.
 
