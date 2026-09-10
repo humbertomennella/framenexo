@@ -28,8 +28,8 @@
   "relevance": 99,
   "highlight": {
     "level": "important",
-    "reviewedAt": "2026-09-09T13:50:00Z",
-    "expiresAt": "2026-09-10T01:50:00Z",
+    "reviewedAt": "2026-09-10T06:58:00Z",
+    "expiresAt": "2026-09-10T14:58:00Z",
     "reason": "Decisão judicial com efeito imediato restabelece o comando da Polícia Federal e amplia uma controvérsia institucional ainda em curso.",
     "evidenceURLs": [
       "https://www.reuters.com/world/americas/brazil-top-court-judge-orders-reinstatement-federal-police-chief-2026-09-09/",

@@ -458,5 +458,15 @@
     "usage": "Metáfora visual de cinema e seleção nacional; não é fotografia, cartaz, cena de filme, estatueta ou reprodução de obra protegida.",
     "proof": "Arquivo original gerado em 9 de setembro de 2026, sem títulos, logotipos, atores reconhecíveis ou estatueta protegida, e convertido localmente para WebP; SHA-256 3797bcd0ab6cfb0291d055278dd6e4c4ec0a174689b62ec0a05962c64c9fe7ec.",
     "previousCredit": null
+  },
+  {
+    "path": "/images/news/aiea-ira-conselho-seguranca-editorial.webp",
+    "origin": "Ilustração editorial original criada para a matéria sobre o encaminhamento do caso nuclear iraniano ao Conselho de Segurança da ONU",
+    "credit": "Apurante Editorial",
+    "license": "Ativo editorial original gerado exclusivamente para o projeto; publicação e adaptação autorizadas",
+    "sourceURL": null,
+    "usage": "Metáfora visual de verificação nuclear e deliberação multilateral; não é fotografia, documento oficial, instalação nuclear, selo ou sala institucional reproduzida.",
+    "proof": "Arquivo original gerado em 10 de setembro de 2026, sem pessoas identificáveis, logotipos, bandeiras, marcas ou texto legível, e convertido localmente para WebP; SHA-256 6a8d011c5e876c1241475eb36e02fdc5123150a65970378414e241c4b84acc0c.",
+    "previousCredit": null
   }
 ]

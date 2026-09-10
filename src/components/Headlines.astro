@@ -20,8 +20,15 @@ document.querySelectorAll<HTMLElement>('[data-headlines]').forEach(root=>{
  const dots=[...root.querySelectorAll<HTMLButtonElement>('[data-go]')];
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const interval=Number(root.dataset.interval)||3800;
- let slides=allSlides,index=0,hover=false,focused=false,timer:ReturnType<typeof setTimeout>|undefined;
- const schedule=()=>{clearTimeout(timer);if(!reduced.matches&&!hover&&!focused&&!document.hidden&&slides.length>1)timer=setTimeout(()=>show(index+1),interval);};
+ root.style.setProperty('--carousel-interval',`${interval}ms`);
+ let slides=allSlides,index=0,hover=false,timer:ReturnType<typeof setTimeout>|undefined;
+ const restartProgress=()=>{const dot=dots[allSlides.indexOf(slides[index])];if(!dot)return;dot.removeAttribute('aria-current');void dot.offsetWidth;dot.setAttribute('aria-current','true');};
+ const schedule=()=>{
+  clearTimeout(timer);
+  const blocked=reduced.matches||hover||document.hidden||slides.length<2;
+  root.classList.toggle('is-timer-paused',blocked);
+  if(!blocked){restartProgress();timer=setTimeout(()=>show(index+1,false,1),interval);}
+ };
  const expire=()=>{
   if(!root.hasAttribute('data-moment'))return;
   const now=Date.now();
@@ -30,19 +37,27 @@ document.querySelectorAll<HTMLElement>('[data-headlines]').forEach(root=>{
   root.querySelector<HTMLElement>('[data-controls]')!.hidden=slides.length<2;
   root.querySelector('[data-total]')!.textContent=String(slides.length).padStart(2,'0');
  };
- const show=(next:number,manual=false)=>{
+ const show=(next:number,manual=false,direction=0)=>{
+  const outgoing=allSlides.find(slide=>slide.classList.contains('is-current'));
   expire();index=slides.length?(next+slides.length)%slides.length:0;
-  allSlides.forEach(slide=>{const current=slide===slides[index];slide.classList.toggle('is-current',current);slide.inert=!current;slide.setAttribute('aria-hidden',String(!current));});
+  const incoming=slides[index];
+  const travel=direction||1;
+  allSlides.forEach(slide=>slide.getAnimations().forEach(animation=>animation.cancel()));
+  allSlides.forEach(slide=>{const current=slide===incoming;slide.classList.toggle('is-current',current);slide.inert=!current;slide.setAttribute('aria-hidden',String(!current));});
+  if(outgoing&&incoming&&outgoing!==incoming&&!reduced.matches){
+   outgoing.animate([{opacity:1,transform:'translateX(0)'},{opacity:0,transform:`translateX(${-travel*7}%)`}],{duration:360,easing:'cubic-bezier(.22,.7,.22,1)'});
+   incoming.animate([{opacity:0,transform:`translateX(${travel*7}%)`},{opacity:1,transform:'translateX(0)'}],{duration:360,easing:'cubic-bezier(.22,.7,.22,1)'});
+  }
   dots.forEach((dot,i)=>allSlides[i]===slides[index]?dot.setAttribute('aria-current','true'):dot.removeAttribute('aria-current'));
   root.querySelector('[data-position]')!.textContent=slides.length?String(index+1).padStart(2,'0'):'00';
   if(manual)root.querySelector('[data-carousel-status]')!.textContent=`Destaque ${index+1} de ${slides.length}`;
   schedule();
  };
  show(0);
- root.querySelector('[data-previous]')?.addEventListener('click',()=>show(index-1,true));root.querySelector('[data-next]')?.addEventListener('click',()=>show(index+1,true));dots.forEach((dot,i)=>dot.addEventListener('click',()=>show(slides.indexOf(allSlides[i]),true)));
- root.addEventListener('mouseenter',()=>{hover=true;schedule();});root.addEventListener('mouseleave',()=>{hover=false;schedule();});root.addEventListener('focusin',()=>{focused=true;schedule();});root.addEventListener('focusout',()=>setTimeout(()=>{focused=root.contains(document.activeElement);schedule();},0));
- root.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();show(index+(event.key==='ArrowRight'?1:-1),true);}});
- let touchX=0,touchY=0;root.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY;},{passive:true});root.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy))show(index+(dx<0?1:-1),true);},{passive:true});
+ root.querySelector('[data-previous]')?.addEventListener('click',()=>show(index-1,true,-1));root.querySelector('[data-next]')?.addEventListener('click',()=>show(index+1,true,1));dots.forEach((dot,i)=>dot.addEventListener('click',()=>{const target=slides.indexOf(allSlides[i]);show(target,true,target<index?-1:1);}));
+ root.addEventListener('mouseenter',()=>{hover=true;schedule();});root.addEventListener('mouseleave',()=>{hover=false;schedule();});
+ root.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();const travel=event.key==='ArrowRight'?1:-1;show(index+travel,true,travel);}});
+ let touchX=0,touchY=0;root.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY;},{passive:true});root.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){const travel=dx<0?1:-1;show(index+travel,true,travel);}},{passive:true});
  document.addEventListener('visibilitychange',()=>show(index));reduced.addEventListener('change',schedule);
  // Expiry still applies while the page stays open.
  if(root.hasAttribute('data-moment'))setInterval(()=>show(index),30000);

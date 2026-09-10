@@ -1985,5 +1985,23 @@
     "relevance": 55,
     "status": "candidate",
     "confidence": "CONFIRMADO"
+  },
+  {
+    "id": "9a54afe25412217cda4d",
+    "title": "AIEA encaminha caso nuclear do Irã ao Conselho de Segurança da ONU",
+    "sourceId": "ap-news",
+    "sourceName": "Associated Press",
+    "sourceType": "press",
+    "sourceOrganization": "associated-press",
+    "sourceRole": "reporting",
+    "url": "https://apnews.com/article/607ecdffcd8ef88ddf8f33041e86b720",
+    "publishedAt": "2026-09-09T16:30:00Z",
+    "collectedAt": "2026-09-10T06:58:00Z",
+    "subject": "Irã",
+    "category": "Mundo",
+    "internalSummary": "Encaminhamento do caso nuclear iraniano ao Conselho de Segurança, cruzado com Reuters, Folha e documentação da AIEA.",
+    "relevance": 98,
+    "status": "published",
+    "confidence": "ALTA CONFIANÇA"
   }
 ]

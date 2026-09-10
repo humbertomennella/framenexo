@@ -1,0 +1,31 @@
+{
+  "sourceUrls": [
+    "https://apnews.com/article/607ecdffcd8ef88ddf8f33041e86b720",
+    "https://www.reuters.com/world/middle-east/iaea-reports-progress-syria-investigation-none-iran-2026-09-01/",
+    "https://www1.folha.uol.com.br/mundo/2026/09/agencia-nuclear-da-onu-denuncia-ira-ao-conselho-de-seguranca.shtml",
+    "https://www.iaea.org/topics/monitoring-and-verification-in-iran"
+  ],
+  "sourceOrganizations": ["associated-press", "reuters", "folha", "iaea"],
+  "verifiedAt": "2026-09-10T06:58:00Z",
+  "confidence": "ALTA CONFIANÇA",
+  "duplicate": false,
+  "claims": [
+    "O Conselho de Governadores da AIEA aprovou o encaminhamento do caso iraniano ao Conselho de Segurança da ONU.",
+    "A votação terminou com 23 votos favoráveis, três contrários, oito abstenções e um integrante sem votar.",
+    "A remessa não cria sanções automáticas; uma resposta coercitiva dependeria de nova deliberação do Conselho de Segurança.",
+    "A estimativa de 440,9 quilos de urânio enriquecido a até 60% descreve material conhecido antes dos ataques, não armas prontas.",
+    "O Irã nega buscar armamento nuclear e contesta a resolução; a matéria identifica essa posição como declaração do governo iraniano."
+  ],
+  "checks": [
+    "data",
+    "três organizações jornalísticas independentes",
+    "documentação institucional da AIEA",
+    "duplicidade",
+    "rumor",
+    "distinção entre material nuclear e arma pronta",
+    "limites jurídicos do encaminhamento",
+    "texto original",
+    "imagem original com hash"
+  ],
+  "limitations": "A resolução integral da sessão não estava indexada publicamente no fechamento; o resultado foi cruzado entre três organizações e a página documental da AIEA foi usada para delimitar o regime de salvaguardas."
+}

@@ -23,3 +23,12 @@ html{scroll-padding-top:1.5rem}body{overflow-x:visible}h1,h2,h3{letter-spacing:-
 .live-dot{background:#93a9b8;box-shadow:none}
 .card:hover{border-color:#657785}
 @media(max-width:760px){.moment-panel .headlines-bar{min-height:58px}.moment-panel .headlines-bar p{max-width:250px;font-size:.72rem}}
+
+/* O indicador ativo acompanha o ciclo automático sem remover os controles manuais. */
+.headlines-dots button span{display:block;position:relative;overflow:hidden;background:#697c7c!important}
+.headlines-dots button span:after{content:'';position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left center}
+.headlines-dots button[aria-current=true] span{background:#697c7c!important}
+.headlines-dots button[aria-current=true] span:after{animation:carousel-progress var(--carousel-interval,3800ms) linear forwards}
+.headlines.is-timer-paused .headlines-dots button[aria-current=true] span:after{animation-play-state:paused}
+@keyframes carousel-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){.headlines-dots button[aria-current=true] span:after{animation:none;transform:scaleX(1)}}

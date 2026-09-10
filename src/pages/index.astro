@@ -7,7 +7,7 @@ import {selectHighlights} from '../lib/highlights.mjs';
 // “Em Alta” is selected first; the lead carousel then uses different stories.
 const highlights=selectHighlights(articles);
 const highlightSlugs=new Set(highlights.map(a=>a.slug));
-const featured=articles.filter(a=>!highlightSlugs.has(a.slug)).slice(0,Math.min(3,articles.length));
+const featured=articles.filter(a=>!highlightSlugs.has(a.slug)).slice(0,Math.min(4,articles.length));
 const featuredSlugs=new Set(featured.map(a=>a.slug));
 const recent=articles.filter(a=>!featuredSlugs.has(a.slug)&&!highlightSlugs.has(a.slug)).slice(0,3);
 const sections=categories.map(category=>({category,items:articles.filter(a=>inCategory(a,category))})).filter(section=>section.items.length);

@@ -1122,5 +1122,23 @@
       }
     ],
     "seconds": 1.29
+  },
+  {
+    "at": "2026-09-10T06:58:00Z",
+    "event": "publication",
+    "slug": "aiea-encaminha-ira-conselho-seguranca-onu",
+    "category": "Mundo",
+    "confidence": "ALTA CONFIANÇA",
+    "independentOrganizations": ["associated-press", "reuters", "folha", "iaea"],
+    "media": "/images/news/aiea-ira-conselho-seguranca-editorial.webp",
+    "mediaSha256": "6a8d011c5e876c1241475eb36e02fdc5123150a65970378414e241c4b84acc0c",
+    "published": 1,
+    "reason": "Encaminhamento multilateral confirmado por três organizações independentes, com documentação institucional e distinção explícita entre remessa diplomática, sanções possíveis e armas não comprovadas."
+  },
+  {
+    "at": "2026-09-10T06:58:00Z",
+    "event": "site_improvement",
+    "result": "validated_pending_deploy",
+    "reason": "Em Foco ampliado para quatro matérias; Em Alta limitado a três pautas revisadas; carrosséis mantêm troca automática em 3,8 segundos, gesto bidirecional, setas e barras com preenchimento sincronizado."
   }
 ]

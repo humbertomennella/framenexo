@@ -1,9 +1,21 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-10T01:45:00Z",
-  "lastCollectedAt": "2026-09-10T05:58:05Z",
-  "editionCount": 10,
+  "lastPublishedAt": "2026-09-10T06:58:00Z",
+  "lastCollectedAt": "2026-09-10T06:58:00Z",
+  "editionCount": 11,
   "history": [
+    {
+      "slug": "aiea-encaminha-ira-conselho-seguranca-onu",
+      "title": "AIEA encaminha caso nuclear do Irã ao Conselho de Segurança da ONU",
+      "eventKey": "aiea-ira-conselho-seguranca-setembro-2026",
+      "publishedAt": "2026-09-10T06:58:00Z",
+      "sourceUrls": [
+        "https://apnews.com/article/607ecdffcd8ef88ddf8f33041e86b720",
+        "https://www.reuters.com/world/middle-east/iaea-reports-progress-syria-investigation-none-iran-2026-09-01/",
+        "https://www1.folha.uol.com.br/mundo/2026/09/agencia-nuclear-da-onu-denuncia-ira-ao-conselho-de-seguranca.shtml",
+        "https://www.iaea.org/topics/monitoring-and-verification-in-iran"
+      ]
+    },
     {
       "slug": "congonhas-regra-operacao-excepcional-apos-23h",
       "title": "Congonhas terá regra para concluir voos após as 23h em situações excepcionais",
