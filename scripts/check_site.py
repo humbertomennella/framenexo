@@ -36,7 +36,7 @@ base=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).path.rstrip('/')+
 origin=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).netloc
 home_html=(DIST/'index.html').read_text()
 focus=re.search(r'<section class="headlines[^>]*aria-label="Em foco".*?</section>',home_html,re.S)
-moments=re.search(r'<section class="headlines moment-panel[^>]*aria-label="Em Alta".*?</section>',home_html,re.S)
+moments=re.search(r'<section class="headlines moment-panel[^>]*aria-label="URGENTE".*?</section>',home_html,re.S)
 check(bool(focus and moments),'Homepage carousels missing')
 check('data-pause' not in home_html and '>Pausar<' not in home_html and '>Reproduzir<' not in home_html,'Carousel play/pause control was not removed')
 headlines_source=(ROOT/'src/components/Headlines.astro').read_text(encoding='utf-8')
@@ -47,7 +47,7 @@ if focus and moments:
  focus_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',focus.group()))
  moment_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',moments.group()))
  check(len(focus_urls)==4,'Em foco must contain four distinct articles')
- check(len(moment_urls)<=3,'Em Alta must never exceed three articles')
+ check(len(moment_urls)<=3,'URGENTE must never exceed three articles')
  check(not focus_urls.intersection(moment_urls),'Homepage carousels repeat the same article')
 search_html=(DIST/'busca'/'index.html').read_text()
 check(f'data-index-url="{base}search-index.json"' in search_html,'Search index ignores deployment base path')

@@ -1,0 +1,40 @@
+---
+import {articles,articleUrl,href,date,time} from '../lib/news';
+import {selectElections} from '../lib/elections.mjs';
+const {full=false}=Astro.props;
+const items=selectElections(articles);
+const shown=full?items:items.slice(0,3);
+const latest=items.length?items.map(a=>a.updatedAt||a.publishedAt).sort().at(-1):null;
+---
+<section class="elections-panel" aria-label="ELEIÇÕES 2026" data-elections>
+ <div class="section-heading"><h2>ELEIÇÕES 2026</h2>{!full&&<a href={href('eleicoes/')}>Toda a cobertura ↗</a>}</div>
+ <p class="elections-intro">Candidaturas, pesquisas e decisões eleitorais. Informação com fontes e limites da apuração.</p>
+ <p class="meta">{latest?<>Última atualização da cobertura: <time datetime={latest}>{date(latest)} · {time(latest)} BRT</time></>: 'Nenhuma matéria eleitoral verificada publicada nesta seção.'}</p>
+ <div class="elections-grid">{shown.map(a=><article class="election-story"><a href={articleUrl(a)} tabindex="-1" aria-hidden="true"><img src={href(a.image)} alt="" width="1200" height="675" loading="lazy"/></a><div><time class="meta" datetime={a.publishedAt}>{date(a.publishedAt)} · {time(a.publishedAt)} BRT</time><h3><a href={articleUrl(a)}>{a.title}</a></h3><p>{a.description}</p></div></article>)}</div>
+ <div class="elections-sources"><strong>Consulta oficial</strong><a href="https://www.tse.jus.br/eleicoes/eleicoes-2026">TSE — Eleições 2026 ↗</a><a href="https://divulgacandcontas.tse.jus.br/divulga/">Candidaturas e contas ↗</a></div>
+ <p class="elections-note">Pesquisas retratam o período de coleta e não antecipam o resultado. Novas publicações dependem da verificação dos fatos.</p>
+ <p class="elections-refresh" role="status" data-election-update></p>
+</section>
+<script>
+document.querySelectorAll<HTMLElement>('[data-elections]').forEach(root=>{
+ const initial=root.querySelector('time')?.dateTime;
+ let busy=false;
+ const check=async()=>{
+  if(document.hidden||busy)return;
+  busy=true;
+  try {
+   const response=await fetch(location.href,{cache:'no-store',signal:AbortSignal.timeout(10000)});
+   if(!response.ok)return;
+   const parsed=new DOMParser().parseFromString(await response.text(),'text/html');
+   const next=parsed.querySelector('[data-elections] time')?.getAttribute('datetime');
+   if(next&&next!==initial){
+    const target=root.querySelector<HTMLElement>('[data-election-update]')!;
+    if(!target.childElementCount){const link=document.createElement('a');link.href=location.href;link.textContent='Há uma atualização publicada. Atualizar a cobertura ↗';target.append(link);}
+   }
+  }catch{/* Preserve the readable, dated version if checking is unavailable. */}
+  finally{busy=false;}
+ };
+ setInterval(check,60000);
+ document.addEventListener('visibilitychange',check);
+});
+</script>
