@@ -44,12 +44,12 @@ test('interests, saved articles and followed topics persist locally',async({page
 });
 
 test('APURANTE+ remains usable without horizontal overflow on mobile',async({page})=>{
-  await page.setViewportSize({width:360,height:800});
-  await page.goto('./');
-  await expect(page.getByRole('link',{name:'Conhecer o APURANTE+'})).toBeVisible();
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await page.goto('./mais/');
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await page.goto('./meu-apurante/');
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  for(const width of [1440,1366,768,390,360]){
+    await page.setViewportSize({width,height:width<=390?800:900});
+    for(const route of ['./','./mais/','./meu-apurante/']){
+      await page.goto(route);
+      await expect(page.getByRole('link',{name:'Conhecer o APURANTE+'}).first()).toBeVisible();
+      expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${route} overflows at ${width}px`).toBe(true);
+    }
+  }
 });
