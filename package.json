@@ -10,6 +10,7 @@
     "test": "python3 -m unittest discover -s tests -v && node --test tests/*.test.mjs",
     "check:site": "python3 scripts/check_site.py",
     "collect": "python3 scripts/pipeline.py collect",
+    "scout": "python3 scripts/run_scout.py",
     "publish": "python3 scripts/pipeline.py publish",
     "pipeline": "python3 scripts/run_editorial.py",
     "test:ui": "playwright test"

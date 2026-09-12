@@ -1,13 +1,15 @@
-import datetime as dt,json,sys,tempfile,unittest
+import datetime as dt,gzip,json,sys,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import pipeline as p
+import run_scout
 class Rules(unittest.TestCase):
  def test_one_hour_across_midnight(self):
   s={'lastPublishedAt':'2026-09-01T20:30:00Z'}
   self.assertFalse(p.due(s,p.date('2026-09-01T21:29:59Z')));self.assertTrue(p.due(s,p.date('2026-09-01T21:30:00Z')))
  def test_first_edition_is_due(self):self.assertTrue(p.due({}))
+ def test_portuguese_rss_date(self):self.assertEqual(p.date('Sáb, 12 Set 2026 11:10:26 -0300').isoformat(),'2026-09-12T14:10:26+00:00')
  def test_pause_wins(self):self.assertFalse(p.due({'paused':True}))
  def test_tracking_removed(self):self.assertEqual(p.canonical_url('https://host.test/a/?utm_source=x&x=2#section'),'https://host.test/a?x=2')
  def test_meaningful_query_preserved(self):self.assertNotEqual(p.canonical_url('https://host.test/?id=2'),p.canonical_url('https://host.test/?id=3'))
@@ -28,6 +30,14 @@ class Rules(unittest.TestCase):
   r=p.parse_feed(b'<rss><channel><item><title>Game announced</title><link>https://example.com/a</link><pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate><description><![CDATA[<p>News</p>]]></description></item></channel></rss>');self.assertEqual(r[0]['text'],'News');self.assertEqual(p.date(r[0]['date']).hour,12)
  def test_atom(self):
   r=p.parse_feed(b'<feed xmlns="http://www.w3.org/2005/Atom"><entry><title>Game</title><link href="https://example.com/a"/><updated>2026-09-01T12:00:00Z</updated><summary>News</summary></entry></feed>');self.assertEqual(r[0]['url'],'https://example.com/a')
+ def test_lowercase_rdf_feed(self):
+  r=p.parse_feed(b'<rdf:rdf xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><item><title>Election update</title><link>https://example.com/a</link></item></rdf:rdf>');self.assertEqual(r[0]['title'],'Election update')
+ def test_feed_without_encoding_declaration_accepts_latin1(self):
+  raw='<rss><channel><item><title>Últimas notícias</title><link>https://example.com/a</link><pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate></item></channel></rss>'.encode('iso-8859-1')
+  self.assertEqual(p.parse_feed(raw)[0]['title'],'Últimas notícias')
+ def test_gzip_feed_is_expanded_before_parsing(self):
+  payload=b'<rss><channel><item><title>News</title><link>https://example.com/a</link></item></channel></rss>'
+  self.assertEqual(p.parse_feed(gzip.decompress(gzip.compress(payload)))[0]['title'],'News')
  def test_event_cluster(self):
   a={'title':'Studio announces new RPG expansion','url':'https://example.com/a','relevance':80};b={'title':'Studio announces new RPG expansion trailer','url':'https://another.test/b','relevance':60};self.assertEqual(len(p.clusters([a,b])),1)
  def test_channels_from_same_organization_are_not_independent(self):
@@ -72,6 +82,14 @@ class Rules(unittest.TestCase):
  def test_copied_passage_rejected(self):
   d=self.good_draft()
   with self.assertRaisesRegex(ValueError,'copied_passage'):p.validate_draft(d,'official announcement public testing '+d['paragraphs'][0])
+class Scout(unittest.TestCase):
+ def test_scout_never_authorizes_publication(self):
+  with patch.object(p,'read',return_value=[{'status':'candidate'},{'status':'candidate'},{'status':'blocked'}]):
+   state=run_scout.summarize({'sourcesOK':7,'collected':2,'errors':[]})
+  self.assertFalse(state['publishingAllowed']);self.assertEqual(state['queueByStatus'],{'candidate':2,'blocked':1});self.assertEqual(state['status'],'healthy')
+ def test_partial_source_failure_is_visible(self):
+  with patch.object(p,'read',return_value=[]):state=run_scout.summarize({'sourcesOK':6,'collected':0,'errors':[{'source':'feed','code':'TimeoutError'}]})
+  self.assertEqual(state['status'],'degraded');self.assertEqual(state['sourceErrors'][0]['source'],'feed')
 class Publication(unittest.TestCase):
  def setUp(self):
   self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name);self.patch=patch.object(p,'ROOT',self.root);self.patch.start();(self.root/'content/news').mkdir(parents=True)

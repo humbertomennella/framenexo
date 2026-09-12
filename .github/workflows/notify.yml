@@ -1,7 +1,7 @@
 name: Aviso de falha
 on:
   workflow_run:
-    workflows: ['Coleta e edição', 'Publicação manual', 'Publicar site']
+    workflows: ['Escuta editorial', 'Coleta e edição', 'Publicação manual', 'Publicar site']
     types: [completed]
 permissions:
   contents: read

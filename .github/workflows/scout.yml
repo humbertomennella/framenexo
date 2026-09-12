@@ -1,0 +1,46 @@
+name: Escuta editorial
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: framenexo-editorial
+  cancel-in-progress: false
+jobs:
+  scout:
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Testar núcleo editorial
+        run: python3 -m unittest discover -s tests -v
+      - name: Observar fontes sem publicar
+        id: scout
+        continue-on-error: true
+        run: python3 scripts/run_scout.py
+      - name: Validar arquivos da fila
+        run: |
+          python3 -m json.tool data/candidates.json >/dev/null
+          python3 -m json.tool data/scout-state.json >/dev/null
+      - name: Salvar somente o estado da escuta
+        if: steps.scout.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/commit_scout.py
+      - name: Alertar falhas parciais
+        if: steps.scout.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/notify_collection.py
+      - name: Registrar falha da escuta
+        if: steps.scout.outcome == 'failure'
+        run: exit 1

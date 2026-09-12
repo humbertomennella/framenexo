@@ -1,6 +1,6 @@
 """Conservative editorial pipeline. Internet text is untrusted data, never code."""
 from __future__ import annotations
-import argparse,concurrent.futures,datetime as dt,difflib,fcntl,hashlib,html,ipaddress,json,os,re,socket,time,unicodedata
+import argparse,concurrent.futures,datetime as dt,difflib,fcntl,gzip,hashlib,html,ipaddress,json,os,re,socket,time,unicodedata
 import urllib.error,urllib.parse,urllib.request,urllib.robotparser,xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
@@ -15,7 +15,10 @@ def date(value):
  try:r=dt.datetime.fromisoformat(value.replace('Z','+00:00'))
  except (ValueError,TypeError):
   from email.utils import parsedate_to_datetime
-  try:r=parsedate_to_datetime(value)
+  localized=str(value)
+  for source,target in {'Seg':'Mon','Ter':'Tue','Qua':'Wed','Qui':'Thu','Sex':'Fri','Sáb':'Sat','Sab':'Sat','Dom':'Sun','Fev':'Feb','Abr':'Apr','Mai':'May','Ago':'Aug','Set':'Sep','Out':'Oct','Dez':'Dec'}.items():
+   localized=re.sub(rf'\b{source}\b',target,localized,flags=re.I)
+  try:r=parsedate_to_datetime(localized)
   except (ValueError,TypeError,IndexError):return None
  return r.replace(tzinfo=UTC) if r.tzinfo is None else r.astimezone(UTC)
 def read(name,default):
@@ -54,6 +57,11 @@ def fetch(url,hosts):
    with opener.open(urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'application/rss+xml, application/atom+xml, text/xml, text/html'}),timeout=22) as response:
     raw=response.read(MAX_BYTES+1)
     if len(raw)>MAX_BYTES:raise ValueError('source_too_large')
+    # A few institutional feeds send gzip bytes without the Content-Encoding
+    # header. Detect the format by its magic bytes and cap the expanded body.
+    if raw.startswith(b'\x1f\x8b'):
+     raw=gzip.decompress(raw)
+     if len(raw)>MAX_BYTES:raise ValueError('source_too_large')
     return raw
   except urllib.error.HTTPError as e:
    if e.code not in (429,500,502,503,504) or attempt==2:raise
@@ -74,8 +82,12 @@ def text_only(raw):
 def suspicious(text):return bool(re.search(r'ignore (all |previous |your )?instructions|reveal.{0,30}(secret|credential)|execute (this |the )?command|ignore.{0,20}instru[cç][oõ]es|revele.{0,20}(senha|credencia)|system prompt|developer message',text,re.I))
 def parse_feed(raw):
  if re.search(br'<!DOCTYPE|<!ENTITY',raw,re.I):raise ValueError('xml_entities_forbidden')
- root=ET.fromstring(raw);kind=root.tag.rsplit('}',1)[-1]
- if kind not in ('rss','feed','RDF'):raise ValueError('not_a_feed')
+ try:root=ET.fromstring(raw)
+ except ET.ParseError:
+  # Some long-running Brazilian feeds omit their ISO-8859-1 declaration.
+  root=ET.fromstring(raw.decode('iso-8859-1'))
+ kind=root.tag.rsplit('}',1)[-1].lower()
+ if kind not in ('rss','feed','rdf'):raise ValueError('not_a_feed')
  rows=[]
  for node in root.iter():
   if node.tag.rsplit('}',1)[-1] not in ('item','entry'):continue

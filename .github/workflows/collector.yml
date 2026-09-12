@@ -1,7 +1,7 @@
 name: Coleta e edição
 on:
   schedule:
-    - cron: '17 * * * *'
+    - cron: '2 * * * *'
   workflow_dispatch:
     inputs:
       force:

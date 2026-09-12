@@ -3,6 +3,6 @@
   "githubPages": true,
   "repositoryScheduleActive": true,
   "generationValidated": true,
-  "notes": "Rotina executada no GitHub. O site mostra os dados do último build.",
+  "notes": "Escuta editorial independente a cada 15 minutos e edição horária configuradas no GitHub. O site mostra os dados do último build.",
   "scheduleActive": true
 }
