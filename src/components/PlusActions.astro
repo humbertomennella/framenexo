@@ -19,12 +19,14 @@ const {slug,tags=[]}=Astro.props;
 </aside>
 <script>
   const KEY='apurante-plus-v1';
-  const root=document.currentScript?.previousElementSibling;
-  if(root instanceof HTMLElement){
+  const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
+  const normalize=(raw={})=>({categories:Array.isArray(raw.categories)?raw.categories:[],topics:Array.isArray(raw.topics)?raw.topics:[],saved:Array.isArray(raw.saved)?raw.saved:[]});
+  document.querySelectorAll('[data-plus-actions]').forEach(node=>{
+    if(!(node instanceof HTMLElement)||node.dataset.plusReady==='true')return;
+    node.dataset.plusReady='true';
+    const root=node;
     const slug=root.dataset.slug||'';
     const tags=JSON.parse(root.dataset.tags||'[]');
-    const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
-    const normalize=(raw={})=>({categories:Array.isArray(raw.categories)?raw.categories:[],topics:Array.isArray(raw.topics)?raw.topics:[],saved:Array.isArray(raw.saved)?raw.saved:[]});
     let state=normalize(read());
     const write=()=>localStorage.setItem(KEY,JSON.stringify(state));
     const save=root.querySelector('[data-save-article]');
@@ -32,13 +34,13 @@ const {slug,tags=[]}=Astro.props;
     const picker=root.querySelector('[data-topic-picker]');
     const sync=()=>{
       if(save){const active=state.saved.includes(slug);save.setAttribute('aria-pressed',String(active));save.textContent=active?'Salva ✓':'Salvar matéria'}
-      root.querySelectorAll('[data-topic]').forEach(button=>{const active=state.topics.includes(button.dataset.topic);button.setAttribute('aria-pressed',String(active));button.classList.toggle('is-active',active)});
+      root.querySelectorAll('[data-topic]').forEach(button=>{if(!(button instanceof HTMLElement))return;const active=state.topics.includes(button.dataset.topic);button.setAttribute('aria-pressed',String(active));button.classList.toggle('is-active',active)});
       if(follow)follow.textContent=tags.some(tag=>state.topics.includes(tag))?'Assuntos seguidos ✓':'Seguir assunto';
     };
     save?.addEventListener('click',()=>{state.saved=state.saved.includes(slug)?state.saved.filter(x=>x!==slug):[...state.saved,slug];write();sync()});
-    follow?.addEventListener('click',()=>{if(picker)picker.hidden=!picker.hidden});
-    picker?.addEventListener('click',event=>{const button=event.target.closest?.('[data-topic]');if(!button)return;const topic=button.dataset.topic;state.topics=state.topics.includes(topic)?state.topics.filter(x=>x!==topic):[...state.topics,topic];write();sync()});
+    follow?.addEventListener('click',()=>{if(picker instanceof HTMLElement)picker.hidden=!picker.hidden});
+    picker?.addEventListener('click',event=>{const target=event.target;if(!(target instanceof Element))return;const button=target.closest('[data-topic]');if(!(button instanceof HTMLElement))return;const topic=button.dataset.topic||'';state.topics=state.topics.includes(topic)?state.topics.filter(x=>x!==topic):[...state.topics,topic];write();sync()});
     window.addEventListener('storage',()=>{state=normalize(read());sync()});
     sync();
-  }
+  });
 </script>
