@@ -10,9 +10,11 @@ test('APURANTE+ stores preferences and saved stories locally',async({page})=>{
   await expect(page.locator('[data-plus-feed] article').first()).toBeVisible();
   await page.goto('./ultimas/');
   await page.locator('a[href*="/noticias/"]').first().click();
-  const save=page.getByRole('button',{name:'Salvar matéria',exact:true});
+  const save=page.locator('[data-save-article]');
+  await expect(save).toHaveText('Salvar matéria');
   await save.click();
   await expect(save).toHaveAttribute('aria-pressed','true');
+  await expect(save).toHaveText('Salva ✓');
   await page.goto('./mais/');
   await expect(page.locator('[data-saved-feed] article')).toHaveCount(1);
   expect(errors).toEqual([]);
