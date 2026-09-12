@@ -2294,5 +2294,109 @@
     "publishingAllowed": false,
     "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
     "startedAt": "2026-09-12T17:26:46Z"
+  },
+  {
+    "at": "2026-09-12T17:49:36Z",
+    "event": "collection",
+    "collected": 21,
+    "discarded": 137,
+    "sourceCounts": {
+      "nasa": 10,
+      "un": 30,
+      "who": 25,
+      "ap": 10,
+      "bbc-portugues": 41,
+      "cnn-brasil": 60,
+      "uol": 15,
+      "guardian": 45
+    },
+    "errors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-cultura",
+        "code": "URLError"
+      },
+      {
+        "source": "camara",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "URLError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-esportes",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-saude",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "URLError"
+      }
+    ],
+    "seconds": 404.54
+  },
+  {
+    "at": "2026-09-12T17:49:36Z",
+    "event": "runner_completed",
+    "result": {
+      "collection": {
+        "collected": 21,
+        "sourcesOK": 8,
+        "errors": [
+          {
+            "source": "ibge",
+            "code": "HTTPError"
+          },
+          {
+            "source": "camara-cultura",
+            "code": "URLError"
+          },
+          {
+            "source": "camara",
+            "code": "URLError"
+          },
+          {
+            "source": "camara-economia",
+            "code": "URLError"
+          },
+          {
+            "source": "camara-tecnologia",
+            "code": "URLError"
+          },
+          {
+            "source": "tse",
+            "code": "HTTPError"
+          },
+          {
+            "source": "camara-esportes",
+            "code": "URLError"
+          },
+          {
+            "source": "camara-saude",
+            "code": "URLError"
+          },
+          {
+            "source": "camara-meio-ambiente",
+            "code": "URLError"
+          }
+        ]
+      },
+      "publication": "held_missing_independent_evidence_or_media"
+    }
   }
 ]
