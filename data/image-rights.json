@@ -488,5 +488,15 @@
     "usage": "Cena editorial institucional com processo e equipamento eleitoral genérico desfocado; não é fotografia, documento do processo, reprodução do julgamento ou imagem de pessoa real.",
     "proof": "Arquivo original gerado em 12 de setembro de 2026, sem pessoas identificáveis, nomes, símbolos partidários, marcas ou texto legível, convertido localmente para WebP; SHA-256 054cd47ebbce5df9811610dde3393d7f747f756d7d90ec5818e275df3eea4a6a.",
     "previousCredit": null
+  },
+  {
+    "path": "/images/news/temporais-sao-paulo-alerta-editorial.webp",
+    "origin": "Ilustração editorial original criada para a matéria de serviço sobre temporais e alertas da Defesa Civil em São Paulo",
+    "credit": "Apurante Editorial",
+    "license": "Ativo editorial original gerado exclusivamente para o projeto; publicação e adaptação autorizadas",
+    "sourceURL": null,
+    "usage": "Cena urbana genérica de chuva, vento e isolamento preventivo; não é fotografia do temporal, registro de ocorrência real, local identificável ou veículo oficial.",
+    "proof": "Arquivo original gerado em 12 de setembro de 2026, sem pessoas identificáveis, logotipos, marcas ou texto, convertido localmente para WebP; SHA-256 3ae2f87588a35265b72221d9eb9dde0b319713f45544ca32f1d7cbc5e985f28d.",
+    "previousCredit": null
   }
 ]

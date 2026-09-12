@@ -1,9 +1,21 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-12T12:40:00Z",
-  "lastCollectedAt": "2026-09-12T14:06:46Z",
-  "editionCount": 13,
+  "lastPublishedAt": "2026-09-12T14:10:00Z",
+  "lastCollectedAt": "2026-09-12T10:44:32Z",
+  "editionCount": 14,
   "history": [
+    {
+      "slug": "temporais-sao-paulo-alertas-defesa-civil",
+      "title": "Temporais deixam 89 pessoas fora de casa em SP; alertas seguem ativos",
+      "eventKey": "temporais-sao-paulo-defesa-civil-12-setembro-2026",
+      "publishedAt": "2026-09-12T14:10:00Z",
+      "sourceUrls": [
+        "https://www.agenciasp.sp.gov.br/defesa-civil-de-sp-envia-15-alertas-cell-broadcast-e-registra-rajadas-de-vento-de-ate-926-km-h-na-madrugada-deste-sabado-12/",
+        "https://portal.inmet.gov.br/noticias/previs%C3%A3o-para-s%C3%A1bado-12-domingo-13-e-segunda-feira-14",
+        "https://cge.prefeitura.sp.gov.br/v3/noticias.jsp?data=2026-09-12",
+        "https://noticias.uol.com.br/cotidiano/ultimas-noticias/2026/09/12/defesa-civil-registra-25-ocorrencias-e-rajadas-de-926-kmh-em-sp.ghtm"
+      ]
+    },
     {
       "slug": "tse-rejeita-registro-candidatura-pablo-marcal-presidencia",
       "title": "TSE rejeita por unanimidade registro de candidatura de Pablo Marçal à Presidência",
