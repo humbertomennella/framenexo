@@ -2121,5 +2121,67 @@
       },
       "publication": "no_eligible_candidates"
     }
+  },
+  {
+    "at": "2026-09-12T14:38:16Z",
+    "event": "collection",
+    "collected": 41,
+    "discarded": 234,
+    "sourceCounts": {
+      "camara-cultura": 0,
+      "camara-economia": 10,
+      "camara": 10,
+      "camara-tecnologia": 10,
+      "nasa": 10,
+      "camara-esportes": 10,
+      "un": 30,
+      "camara-saude": 10,
+      "ap": 10,
+      "bbc-portugues": 41,
+      "who": 25,
+      "guardian": 45,
+      "cnn-brasil": 60,
+      "uol": 15,
+      "camara-meio-ambiente": 10
+    },
+    "errors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      }
+    ],
+    "seconds": 8.39
+  },
+  {
+    "at": "2026-09-12T14:38:16Z",
+    "event": "scout_completed",
+    "lastRunAt": "2026-09-12T14:38:16Z",
+    "status": "degraded",
+    "runId": "34699854164",
+    "sourcesReached": 15,
+    "newCandidates": 41,
+    "sourceErrors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      }
+    ],
+    "queueByStatus": {
+      "published": 17,
+      "candidate": 223,
+      "expired": 3,
+      "needs_review": 8
+    },
+    "publishingAllowed": false,
+    "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
+    "startedAt": "2026-09-12T14:38:08Z"
   }
 ]

@@ -1,9 +1,9 @@
 {
-  "lastRunAt": "2026-09-12T14:31:38Z",
+  "lastRunAt": "2026-09-12T14:38:16Z",
   "status": "degraded",
-  "runId": null,
-  "sourcesReached": 14,
-  "newCandidates": 33,
+  "runId": "34699854164",
+  "sourcesReached": 15,
+  "newCandidates": 41,
   "sourceErrors": [
     {
       "source": "ibge",
@@ -11,20 +11,16 @@
     },
     {
       "source": "tse",
-      "code": "ValueError"
-    },
-    {
-      "source": "camara-esportes",
       "code": "HTTPError"
     }
   ],
   "queueByStatus": {
     "published": 17,
-    "candidate": 268,
+    "candidate": 223,
     "expired": 3,
-    "needs_review": 10
+    "needs_review": 8
   },
   "publishingAllowed": false,
   "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
-  "startedAt": "2026-09-12T14:30:45Z"
+  "startedAt": "2026-09-12T14:38:08Z"
 }
