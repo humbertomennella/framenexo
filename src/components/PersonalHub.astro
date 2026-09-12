@@ -1,0 +1,64 @@
+---
+import Card from './Card.astro';
+import InterestSelector from './InterestSelector.astro';
+import {articles} from '../lib/news';
+const recommended=articles;
+---
+<div class="personal-hub" data-personal-hub>
+  <section class="plus-section" aria-labelledby="para-voce-title">
+    <div class="section-heading"><div><span class="eyebrow">Seleção local</span><h2 id="para-voce-title">Para você</h2></div></div>
+    <p class="plus-explainer">A ordem considera suas editorias e assuntos seguidos. Quando não há preferências, mostramos as publicações verificadas mais recentes.</p>
+    <div class="cards personal-feed" data-personal-feed>
+      {recommended.map(article=><div data-personal-article data-slug={article.slug} data-category={article.category} data-tags={JSON.stringify(article.tags)}><Card article={article}/></div>)}
+    </div>
+    <div class="plus-empty" data-personal-empty hidden><h3>Nenhuma matéria corresponde às preferências atuais.</h3><p>Escolha outras editorias ou acompanhe novos assuntos.</p></div>
+  </section>
+
+  <section class="plus-section" aria-labelledby="salvos-title">
+    <div class="section-heading"><div><span class="eyebrow">Sua biblioteca</span><h2 id="salvos-title">Salvos</h2></div></div>
+    <div class="cards saved-feed" data-saved-feed>
+      {articles.map(article=><div data-saved-article data-slug={article.slug} hidden><Card article={article}/><button class="plus-remove" type="button" data-remove-saved={article.slug}>Remover dos salvos</button></div>)}
+    </div>
+    <div class="plus-empty" data-saved-empty><h3>Você ainda não salvou nenhuma matéria.</h3><p>Use o botão “Salvar” nas notícias para encontrá-las aqui.</p></div>
+  </section>
+
+  <section class="plus-section" aria-labelledby="topics-title">
+    <div class="section-heading"><div><span class="eyebrow">Acompanhamento</span><h2 id="topics-title">Assuntos seguidos</h2></div></div>
+    <div class="followed-topics" data-followed-topics></div>
+    <div class="plus-empty" data-topics-empty><h3>Nenhum assunto acompanhado.</h3><p>Você pode acompanhar a editoria ou uma tag diretamente em cada matéria.</p></div>
+  </section>
+
+  <section class="plus-section" aria-labelledby="preferences-title">
+    <InterestSelector heading="Preferências" />
+  </section>
+</div>
+<script>
+  import {readPlusState,toggleSavedArticle,toggleFollowedTopic} from '../lib/plus';
+  const setupHub=()=>document.querySelectorAll<HTMLElement>('[data-personal-hub]').forEach(hub=>{
+    if(hub.dataset.ready==='true')return;hub.dataset.ready='true';
+    const render=()=>{
+      const state=readPlusState();
+      const feed=[...hub.querySelectorAll<HTMLElement>('[data-personal-article]')];
+      const ranked=feed.map((item,index)=>{
+        const category=item.dataset.category||'';
+        const tags=JSON.parse(item.dataset.tags||'[]') as string[];
+        const topicMatch=tags.filter(tag=>state.followedTopics.includes(tag)).length+(state.followedTopics.includes(category)?1:0);
+        return {item,index,score:(state.interests.includes(category)?3:0)+(topicMatch*2)};
+      }).sort((a,b)=>b.score-a.score||a.index-b.index);
+      ranked.forEach(({item},position)=>{item.style.order=String(position);item.hidden=position>=12;});
+      const visible=ranked.filter((_,position)=>position<12).length;
+      const personalEmpty=hub.querySelector<HTMLElement>('[data-personal-empty]');if(personalEmpty)personalEmpty.hidden=visible>0;
+
+      const saved=[...hub.querySelectorAll<HTMLElement>('[data-saved-article]')];
+      saved.forEach(item=>item.hidden=!state.savedArticles.includes(item.dataset.slug||''));
+      const savedEmpty=hub.querySelector<HTMLElement>('[data-saved-empty]');if(savedEmpty)savedEmpty.hidden=saved.some(item=>!item.hidden);
+
+      const topics=hub.querySelector<HTMLElement>('[data-followed-topics]');
+      if(topics){topics.replaceChildren(...state.followedTopics.map(topic=>{const button=document.createElement('button');button.type='button';button.className='topic-chip';button.textContent=`${topic} ×`;button.setAttribute('aria-label',`Deixar de acompanhar ${topic}`);button.addEventListener('click',()=>toggleFollowedTopic(topic,false));return button;}));}
+      const topicsEmpty=hub.querySelector<HTMLElement>('[data-topics-empty]');if(topicsEmpty)topicsEmpty.hidden=state.followedTopics.length>0;
+    };
+    hub.querySelectorAll<HTMLButtonElement>('[data-remove-saved]').forEach(button=>button.addEventListener('click',()=>toggleSavedArticle(button.dataset.removeSaved||'',false)));
+    window.addEventListener('apurante-plus:change',render);render();
+  });
+  setupHub();document.addEventListener('astro:page-load',setupHub);
+</script>

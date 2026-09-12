@@ -32,9 +32,13 @@ for file in DIST.rglob('*.html'):
  check(page.h1==1,f'{file.relative_to(DIST)}: expected one h1, got {page.h1}');check(bool(page.title),f'{file.name}: missing title');check(bool(page.meta.get('description')),f'{file.name}: missing description');check(bool(page.canonical and page.canonical.startswith('https://')),f'{file.name}: invalid canonical')
  for img in page.images:check('alt' in img,f'{file.name}: missing alt');check(img.get('width') and img.get('height'),f'{file.name}: image lacks dimensions')
 check(DIST/'index.html' in pages,'Missing homepage');check(bool(list(DIST.glob('404*'))),'Missing 404')
+check(DIST/'mais'/'index.html' in pages,'Missing APURANTE+ page');check(DIST/'meu-apurante'/'index.html' in pages,'Missing Meu APURANTE page')
 base=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).path.rstrip('/')+'/'
 origin=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).netloc
 home_html=(DIST/'index.html').read_text()
+check('Conhecer APURANTE+' in home_html,'Homepage APURANTE+ entry missing')
+plus_html=(DIST/'mais'/'index.html').read_text();my_html=(DIST/'meu-apurante'/'index.html').read_text()
+check('data-interest-selector' in plus_html,'APURANTE+ interest selector missing');check('noindex,follow' in my_html,'Meu APURANTE must be noindex')
 focus=re.search(r'<section class="headlines[^>]*aria-label="Em foco".*?</section>',home_html,re.S)
 moments=re.search(r'<section class="headlines moment-panel[^>]*aria-label="URGENTE".*?</section>',home_html,re.S)
 check(bool(focus and moments),'Homepage carousels missing')

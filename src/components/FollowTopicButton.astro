@@ -1,0 +1,27 @@
+---
+const {topic}=Astro.props;
+---
+<button class="plus-action" type="button" data-plus-follow={topic} aria-pressed="false">
+  <span aria-hidden="true" data-plus-follow-icon>＋</span><span data-plus-follow-label>Acompanhar {topic}</span>
+</button>
+<script>
+  import {readPlusState,toggleFollowedTopic} from '../lib/plus';
+  const setupFollowButtons=()=>document.querySelectorAll<HTMLButtonElement>('[data-plus-follow]').forEach(button=>{
+    if(button.dataset.ready==='true') return;
+    button.dataset.ready='true';
+    const topic=button.dataset.plusFollow!;
+    const render=()=>{
+      const active=readPlusState().followedTopics.includes(topic);
+      button.setAttribute('aria-pressed',String(active));
+      const label=button.querySelector<HTMLElement>('[data-plus-follow-label]');
+      const icon=button.querySelector<HTMLElement>('[data-plus-follow-icon]');
+      if(label) label.textContent=active?`Acompanhando ${topic}`:`Acompanhar ${topic}`;
+      if(icon) icon.textContent=active?'✓':'＋';
+    };
+    button.addEventListener('click',()=>{toggleFollowedTopic(topic);render();});
+    window.addEventListener('apurante-plus:change',render);
+    render();
+  });
+  setupFollowButtons();
+  document.addEventListener('astro:page-load',setupFollowButtons);
+</script>
