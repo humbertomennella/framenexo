@@ -1,11 +1,11 @@
 {
-  "startedAt": "2026-09-12T20:23:05Z",
-  "finishedAt": "2026-09-12T20:23:11Z",
+  "startedAt": "2026-09-12T22:55:18Z",
+  "finishedAt": "2026-09-12T22:55:22Z",
   "status": "degraded",
-  "runId": "34716919546",
+  "runId": "34723995372",
   "result": {
     "collection": {
-      "collected": 38,
+      "collected": 18,
       "sourcesOK": 15,
       "errors": [
         {
