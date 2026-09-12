@@ -1,26 +1,54 @@
 {
-  "lastRunAt": "2026-09-12T14:38:16Z",
+  "lastRunAt": "2026-09-12T17:33:30Z",
   "status": "degraded",
-  "runId": "34699854164",
-  "sourcesReached": 15,
-  "newCandidates": 41,
+  "runId": "34708243404",
+  "sourcesReached": 8,
+  "newCandidates": 46,
   "sourceErrors": [
     {
       "source": "ibge",
       "code": "HTTPError"
     },
     {
+      "source": "camara-cultura",
+      "code": "URLError"
+    },
+    {
+      "source": "camara-tecnologia",
+      "code": "URLError"
+    },
+    {
+      "source": "camara-economia",
+      "code": "URLError"
+    },
+    {
+      "source": "camara",
+      "code": "URLError"
+    },
+    {
       "source": "tse",
       "code": "HTTPError"
+    },
+    {
+      "source": "camara-saude",
+      "code": "URLError"
+    },
+    {
+      "source": "camara-esportes",
+      "code": "URLError"
+    },
+    {
+      "source": "camara-meio-ambiente",
+      "code": "URLError"
     }
   ],
   "queueByStatus": {
     "published": 17,
-    "candidate": 223,
+    "candidate": 269,
     "expired": 3,
     "needs_review": 8
   },
   "publishingAllowed": false,
   "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
-  "startedAt": "2026-09-12T14:38:08Z"
+  "startedAt": "2026-09-12T17:26:46Z"
 }
