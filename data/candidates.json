@@ -3659,5 +3659,41 @@
     "relevance": 55,
     "status": "candidate",
     "confidence": "CONFIRMADO"
+  },
+  {
+    "id": "bea33cef5f8ea2973d4a",
+    "title": "Gilmar reforça a Fachin pedido de acesso integral a celular de Vorcaro",
+    "sourceId": "ap",
+    "sourceName": "Agência Brasil",
+    "sourceType": "press",
+    "sourceOrganization": "agencia-brasil",
+    "sourceRole": "reporting",
+    "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-09/gilmar-reforca-fachin-pedido-de-acesso-integral-celular-de-vorcaro",
+    "publishedAt": "2026-09-12T13:13:00Z",
+    "collectedAt": "2026-09-12T14:06:45Z",
+    "subject": "Brasil",
+    "category": "Brasil",
+    "internalSummary": "Candidato de Agência Brasil; contexto factual será extraído antes da redação.",
+    "relevance": 30,
+    "status": "candidate",
+    "confidence": "RELATO"
+  },
+  {
+    "id": "8187fa1d01a623ac1bf2",
+    "title": "Devastação na Amazônia pode quebrar maior \"máquina de chuva\" do mundo",
+    "sourceId": "ap",
+    "sourceName": "Agência Brasil",
+    "sourceType": "press",
+    "sourceOrganization": "agencia-brasil",
+    "sourceRole": "reporting",
+    "url": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-09/devastacao-na-amazonia-pode-quebrar-maior-maquina-de-chuva-do-mundo",
+    "publishedAt": "2026-09-12T12:20:00Z",
+    "collectedAt": "2026-09-12T14:06:45Z",
+    "subject": "Brasil",
+    "category": "Brasil",
+    "internalSummary": "Candidato de Agência Brasil; contexto factual será extraído antes da redação.",
+    "relevance": 30,
+    "status": "candidate",
+    "confidence": "RELATO"
   }
 ]
