@@ -21,11 +21,11 @@ test('interests, saved articles and followed topics persist locally',async({page
   const articleLink=page.locator('section.headlines h3 a').first();
   const title=(await articleLink.textContent())?.trim();
   await articleLink.click();
-  const save=page.getByRole('button',{name:'Salvar',exact:true}).first();
+  const save=page.locator('[data-plus-save]').first();
   await save.click();
   await expect(save).toHaveAttribute('aria-pressed','true');
   await page.reload();
-  await expect(page.getByRole('button',{name:'Salva',exact:true}).first()).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('[data-plus-save]').first()).toHaveAttribute('aria-pressed','true');
 
   const follow=page.locator('[data-plus-follow]').first();
   const topic=await follow.getAttribute('data-plus-follow');
