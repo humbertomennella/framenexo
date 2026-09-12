@@ -59,7 +59,13 @@ test('header uses the A+ shortcut and the Plus wordmark in personalized pages',a
   const shortcut=page.getByRole('link',{name:'Abrir Meu APURANTE'});
   await expect(shortcut).toBeVisible();
   await expect(shortcut.locator('.plus-symbol')).toHaveText('A+');
+  await expect(page.getByRole('link',{name:'Voltar ao início do APURANTE'})).toHaveText('Início');
   await shortcut.click();
   await expect(page).toHaveURL(/\/meu-apurante\/$/);
   await expect(page.getByRole('link',{name:'APURANTE+ — início'})).toHaveText('APURANTE+');
+  await page.setViewportSize({width:390,height:800});
+  const card=page.locator('.personal-feed .card').first();
+  await expect(card).toBeVisible();
+  expect(await card.evaluate(element=>getComputedStyle(element).display)).toBe('block');
+  expect(await card.locator('.card-image').evaluate(element=>Math.round(element.getBoundingClientRect().width))).toBeGreaterThan(300);
 });
