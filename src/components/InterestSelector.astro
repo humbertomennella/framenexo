@@ -1,0 +1,32 @@
+---
+import {categories} from '../lib/news';
+const {heading='Escolha seus interesses',showSubmit=true}=Astro.props;
+---
+<section class="interest-selector" data-interest-selector aria-labelledby="interest-heading">
+  <div><span class="eyebrow">Preferências</span><h2 id="interest-heading">{heading}</h2><p>Selecione quantas editorias quiser. Você pode mudar isso a qualquer momento.</p></div>
+  <fieldset><legend class="sr-only">Editorias preferidas</legend><div class="interest-options">
+    {categories.map(category=><label><input type="checkbox" value={category}/><span>{category}</span></label>)}
+  </div></fieldset>
+  {showSubmit&&<button class="button" type="button" data-save-interests>Salvar interesses</button>}
+  <p class="plus-feedback" data-interest-feedback role="status" aria-live="polite"></p>
+</section>
+<script>
+  import {readPlusState,setInterests} from '../lib/plus';
+  const setupSelectors=()=>document.querySelectorAll<HTMLElement>('[data-interest-selector]').forEach(selector=>{
+    if(selector.dataset.ready==='true') return;
+    selector.dataset.ready='true';
+    const inputs=[...selector.querySelectorAll<HTMLInputElement>('input[type=checkbox]')];
+    const feedback=selector.querySelector<HTMLElement>('[data-interest-feedback]');
+    const render=()=>{const selected=readPlusState().interests;inputs.forEach(input=>input.checked=selected.includes(input.value));};
+    const save=()=>{setInterests(inputs.filter(input=>input.checked).map(input=>input.value));if(feedback)feedback.textContent='Interesses salvos neste dispositivo.';};
+    selector.querySelector('[data-save-interests]')?.addEventListener('click',save);
+    inputs.forEach(input=>input.addEventListener('change',()=>{if(!selector.querySelector('[data-save-interests]'))save();}));
+    selector.querySelector<HTMLButtonElement>('[data-save-interests]')?.addEventListener('click',()=>{
+      setInterests(inputs.filter(input=>input.checked).map(input=>input.value));
+      if(feedback)feedback.textContent='Interesses salvos neste dispositivo.';
+    });
+    window.addEventListener('apurante-plus:change',render);render();
+  });
+  setupSelectors();
+  document.addEventListener('astro:page-load',setupSelectors);
+</script>

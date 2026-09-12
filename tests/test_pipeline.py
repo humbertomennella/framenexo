@@ -60,8 +60,8 @@ class Rules(unittest.TestCase):
  def test_collection_limits_one_organization_without_blocking_others(self):
   crowded=[{'sourceId':'a','sourceOrganization':'same','relevance':100-i,'publishedAt':f'2026-09-10T{i:02}:00:00Z'} for i in range(12)]
   independent=[{'sourceId':'b','sourceOrganization':'other','relevance':20,'publishedAt':'2026-09-10T00:00:00Z'}]
-  kept=p.limit_candidates_by_organization(crowded+independent,8)
-  self.assertEqual(sum(x['sourceOrganization']=='same' for x in kept),8);self.assertIn(independent[0],kept)
+  kept=p.limit_candidates_by_organization(crowded+independent)
+  self.assertEqual(sum(x['sourceOrganization']=='same' for x in kept),4);self.assertIn(independent[0],kept)
  def test_different_events_remain_separate(self):
   a={'title':'Game Pass September additions','url':'https://example.com/a'};b={'title':'Game Pass cloud changes November','url':'https://example.com/b'};self.assertFalse(p.same_event(a,b))
  def test_rumors_and_reviews_held(self):

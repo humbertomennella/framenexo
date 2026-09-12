@@ -1,91 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
-import {articles,href,categories,articleUrl,date} from '../lib/news';
-const catalog = articles.map(a=>({slug:a.slug,title:a.title,description:a.description,category:a.category,tags:a.tags,url:articleUrl(a),publishedAt:a.publishedAt,image:href(a.image)}));
+import PlusBadge from '../components/PlusBadge.astro';
+import InterestSelector from '../components/InterestSelector.astro';
+import {href} from '../lib/news';
 ---
-<Base title="APURANTE+" description="Personalize sua leitura no APURANTE: salve matérias, siga assuntos e monte seu próprio feed." noindex>
+<Base title="APURANTE+" description="Personalize assuntos, salve matérias e organize sua leitura no APURANTE+.">
   <section class="plus-hero">
-    <div>
-      <span class="plus-badge"><img src={href('favicon.svg')} alt="" width="20" height="20" aria-hidden="true"/>APURANTE+</span>
-      <h1>Informação organizada para você.</h1>
-      <p>Escolha seus interesses, salve matérias e acompanhe assuntos sem alterar a experiência editorial do APURANTE.</p>
-    </div>
-    <div class="plus-hero-card">
-      <strong>Acesso gratuito</strong>
-      <p>Nesta fase, suas preferências ficam salvas somente neste dispositivo. Nenhum cadastro, senha ou dado pessoal é enviado ao APURANTE.</p>
-    </div>
+    <div><PlusBadge/><span class="eyebrow">Gratuito nesta fase</span><h1>Informação do seu jeito.</h1><p>Personalize seus assuntos, salve matérias e acompanhe histórias importantes sem perder o contexto.</p><div class="plus-cta"><a class="button" href={href('meu-apurante/')}>Abrir Meu APURANTE</a><a class="button secondary" href="#interesses">Escolher meus interesses</a></div></div>
+    <aside aria-label="Como funciona"><span class="plus-symbol large" aria-hidden="true">A+</span><strong>Seu espaço. Neste dispositivo.</strong><p>Sem cadastro, paywall ou coleta de e-mail. Suas escolhas ficam no navegador que você está usando.</p></aside>
   </section>
-
-  <section class="plus-grid" aria-label="Recursos do APURANTE+">
-    <article class="plus-panel">
-      <span class="eyebrow">01 · Preferências</span>
-      <h2>Escolha o que quer acompanhar</h2>
-      <p>Marque editorias para priorizá-las no seu feed personalizado.</p>
-      <div class="plus-topics" data-plus-categories>
-        {categories.map(category=><button type="button" data-category={category} aria-pressed="false">{category}</button>)}
-      </div>
-    </article>
-
-    <article class="plus-panel">
-      <span class="eyebrow">02 · Assuntos</span>
-      <h2>Assuntos seguidos</h2>
-      <p>Tags que você seguir nas matérias aparecem aqui e entram no seu feed.</p>
-      <div class="plus-empty" data-followed-empty>Nenhum assunto seguido ainda.</div>
-      <div class="plus-followed" data-followed-list></div>
-    </article>
-  </section>
-
-  <section class="plus-section">
-    <div class="section-heading"><h2>Meu APURANTE</h2><span data-plus-count></span></div>
-    <p class="plus-intro">Notícias relacionadas às editorias e aos assuntos que você escolheu.</p>
-    <div class="plus-empty" data-feed-empty>Escolha ao menos uma editoria ou siga um assunto para montar seu feed.</div>
-    <div class="plus-feed" data-plus-feed></div>
-  </section>
-
-  <section class="plus-section">
-    <div class="section-heading"><h2>Salvos para ler depois</h2><span data-saved-count></span></div>
-    <div class="plus-empty" data-saved-empty>Você ainda não salvou nenhuma matéria.</div>
-    <div class="plus-feed" data-saved-feed></div>
-  </section>
-
-  <section class="plus-roadmap">
-    <span class="eyebrow">Próximas etapas</span>
-    <h2>O que ainda não está sendo fingido aqui</h2>
-    <p>Login sincronizado, alertas entre dispositivos, newsletter personalizada e assinatura Premium exigem backend, autenticação e consentimento de dados. Eles entram numa fase posterior, não numa gambiarra com formulário decorativo.</p>
-  </section>
-
-  <script type="application/json" id="plus-catalog" set:html={JSON.stringify(catalog).replace(/</g,'\\u003c')}></script>
-  <script>
-    const KEY='apurante-plus-v1';
-    const catalog=JSON.parse(document.getElementById('plus-catalog')?.textContent||'[]');
-    const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
-    const normalize=(raw={})=>({categories:Array.isArray(raw.categories)?raw.categories:[],topics:Array.isArray(raw.topics)?raw.topics:[],saved:Array.isArray(raw.saved)?raw.saved:[]});
-    let state=normalize(read());
-    const write=()=>localStorage.setItem(KEY,JSON.stringify(state));
-    const esc=(value='')=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
-    const card=(a)=>`<article class="plus-story"><a href="${esc(a.url)}"><img src="${esc(a.image)}" alt="" loading="lazy" width="320" height="180"><div><span class="eyebrow">${esc(a.category)} · ${esc(new Date(a.publishedAt).toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}))}</span><h3>${esc(a.title)}</h3><p>${esc(a.description)}</p></div></a></article>`;
-    function render(){
-      document.querySelectorAll('[data-category]').forEach(button=>{const active=state.categories.includes(button.dataset.category);button.setAttribute('aria-pressed',String(active));button.classList.toggle('is-active',active)});
-      const followed=document.querySelector('[data-followed-list]');
-      const followedEmpty=document.querySelector('[data-followed-empty]');
-      if(followed){followed.innerHTML=state.topics.map(topic=>`<button type="button" data-remove-topic="${esc(topic)}">${esc(topic)} ×</button>`).join('')}
-      if(followedEmpty)followedEmpty.hidden=state.topics.length>0;
-      const feed=catalog.filter(a=>state.categories.includes(a.category)||a.tags.some(tag=>state.topics.includes(tag)));
-      const feedEl=document.querySelector('[data-plus-feed]');if(feedEl)feedEl.innerHTML=feed.slice(0,18).map(card).join('');
-      const feedEmpty=document.querySelector('[data-feed-empty]');if(feedEmpty)feedEmpty.hidden=feed.length>0;
-      const plusCount=document.querySelector('[data-plus-count]');if(plusCount)plusCount.textContent=feed.length?`${feed.length} notícias relacionadas`:'';
-      const saved=catalog.filter(a=>state.saved.includes(a.slug));
-      const savedEl=document.querySelector('[data-saved-feed]');if(savedEl)savedEl.innerHTML=saved.map(card).join('');
-      const savedEmpty=document.querySelector('[data-saved-empty]');if(savedEmpty)savedEmpty.hidden=saved.length>0;
-      const savedCount=document.querySelector('[data-saved-count]');if(savedCount)savedCount.textContent=saved.length?`${saved.length} salvas`:'';
-    }
-    document.addEventListener('click',event=>{
-      const category=event.target.closest?.('[data-category]');
-      if(category){const value=category.dataset.category;state.categories=state.categories.includes(value)?state.categories.filter(x=>x!==value):[...state.categories,value];write();render();return}
-      const remove=event.target.closest?.('[data-remove-topic]');
-      if(remove){state.topics=state.topics.filter(x=>x!==remove.dataset.removeTopic);write();render()}
-    });
-    window.addEventListener('storage',()=>{state=normalize(read());render()});
-    render();
-  </script>
+  <section class="plus-benefits" aria-labelledby="plus-benefits-title"><span class="eyebrow">Uma camada de organização</span><h2 id="plus-benefits-title">As notícias continuam abertas. O controle fica com você.</h2><div>
+    <article><strong>01</strong><h3>Salve para depois</h3><p>Monte uma biblioteca local com as matérias que merecem uma segunda leitura.</p></article>
+    <article><strong>02</strong><h3>Acompanhe assuntos</h3><p>Siga editorias e temas presentes na própria apuração, sem histórias artificiais.</p></article>
+    <article><strong>03</strong><h3>Priorize o que importa</h3><p>Uma ordem simples e transparente combina interesses, assuntos seguidos e atualidade.</p></article>
+  </div></section>
+  <div id="interesses"><InterestSelector/></div>
+  <p class="plus-privacy">Nesta fase, suas preferências ficam armazenadas somente neste dispositivo. Não existe conta na nuvem nem sincronização entre aparelhos.</p>
 </Base>

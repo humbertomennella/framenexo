@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import LiveOperations from '../components/LiveOperations.astro';
-import {articles,date,time,independentSourceCount} from '../lib/news';
+import {articles,date,time,independentSourceCount,prominenceEligible} from '../lib/news';
 import state from '../../data/publishing-state.json';
 import candidates from '../../data/candidates.json';
 import sources from '../../data/sources.json';
@@ -14,12 +14,16 @@ const errors=log.filter((x:any)=>x.event==='error'||x.errors?.length).slice(-5).
 const organizations=new Set(sources.map((source:any)=>source.organization||source.id));
 const activeOrganizations=new Set(sources.filter((source:any)=>source.enabled&&source.feed).map((source:any)=>source.organization||source.id));
 const multiSource=articles.filter(article=>independentSourceCount(article)>1).length;
+const reviewPending=articles.filter(article=>!prominenceEligible(article)).length;
+const primaryBacked=articles.filter(article=>article.sources.some((source:any)=>source.type==='primary')).length;
+const leadCounts=articles.slice(0,20).reduce((counts:Record<string,number>,article:any)=>{const key=article.leadSourceOrganization||'não identificado';counts[key]=(counts[key]||0)+1;return counts},{});
+const topLead=Object.entries(leadCounts).sort((a,b)=>b[1]-a[1])[0];
 const queued=(scout.queueByStatus as Record<string,number> | undefined)?.candidate||0;
 ---
 <Base title="Status das atualizações" description="Última coleta, última edição e situação técnica publicada do Apurante." noindex>
  <header class="page-head"><span class="eyebrow">Transparência operacional</span><h1>Status das atualizações</h1><p>Indicadores da versão publicada. Horários registrados são fatos; previsões de execução não são tratadas como garantia.</p></header>
  <LiveOperations/>
  <div class="notice"><strong>{state.paused?'Publicação editorial pausada no repositório':'Publicação editorial liberada no repositório'}</strong><br/>{deployment.notes}</div>
- <dl class="status-grid"><div class="stat"><dt>Última escuta independente</dt><dd>{stamp(scout.lastRunAt)}</dd></div><div class="stat"><dt>Estado da escuta</dt><dd>{scout.status==='healthy'?'Saudável':scout.status==='degraded'?'Parcial, com rotas alternativas':'Configurada'}</dd></div><div class="stat"><dt>Pautas aguardando cruzamento</dt><dd>{queued}</dd></div><div class="stat"><dt>Última publicação confirmada</dt><dd>{stamp(state.lastPublishedAt)}</dd></div><div class="stat"><dt>Nova edição pode ser considerada após</dt><dd>{next?stamp(next):'A definir'}</dd></div><div class="stat"><dt>Organizações cadastradas</dt><dd>{organizations.size}</dd></div><div class="stat"><dt>Matérias com múltiplas rotas</dt><dd>{multiSource} de {articles.length}</dd></div><div class="stat"><dt>Feeds técnicos ativos</dt><dd>{activeOrganizations.size} organizações</dd></div></dl>
+ <dl class="status-grid"><div class="stat"><dt>Última escuta independente</dt><dd>{stamp(scout.lastRunAt)}</dd></div><div class="stat"><dt>Estado da escuta</dt><dd>{scout.status==='healthy'?'Saudável':scout.status==='degraded'?'Parcial, com rotas alternativas':'Configurada'}</dd></div><div class="stat"><dt>Pautas aguardando cruzamento</dt><dd>{queued}</dd></div><div class="stat"><dt>Última publicação confirmada</dt><dd>{stamp(state.lastPublishedAt)}</dd></div><div class="stat"><dt>Acervo aguardando revisão</dt><dd>{reviewPending} matérias</dd></div><div class="stat"><dt>Matérias com múltiplas rotas</dt><dd>{multiSource} de {articles.length}</dd></div><div class="stat"><dt>Matérias com fonte primária</dt><dd>{primaryBacked} de {articles.length}</dd></div><div class="stat"><dt>Organizações cadastradas</dt><dd>{organizations.size}</dd></div><div class="stat"><dt>Organizações na coleta automática</dt><dd>{activeOrganizations.size}</dd></div><div class="stat"><dt>Maior presença entre as 20 recentes</dt><dd>{topLead?`${topLead[0]} · ${topLead[1]}`:'Sem dados'}</dd></div></dl>
  <div class="prose"><p>A escuta consulta as fontes a cada 15 minutos e apenas organiza candidatos. A janela editorial continua horária; publicação depende de pauta relevante, confirmação independente, texto validado e mídia autorizada.</p><h2>Implantação</h2><ul><li>Publicação web: {deployment.githubPages?'ativa':'pendente de ativação'}.</li><li>Validação da redação automatizada: {deployment.generationValidated?'aprovada':'pendente'}.</li><li>Workflow editorial do repositório: {deployment.repositoryScheduleActive?'configurado':'não configurado'}.</li></ul><p><strong>Limite deste painel:</strong> uma pauta na fila ainda não é uma notícia confirmada. A evidência editorial confiável continua sendo a data da última coleta, da última publicação e do build.</p><h2>Ocorrências recentes</h2>{errors.length?<div class="table-scroll"><table class="status-table"><thead><tr><th>Data</th><th>Etapa</th><th>Ocorrência</th></tr></thead><tbody>{errors.map((x:any)=><tr><td>{stamp(x.at)}</td><td>{x.stage||x.event}</td><td>{x.code||x.errors?.map((e:any)=>`${e.source}: ${e.code}`).join('; ')}</td></tr>)}</tbody></table></div>:<p>Não há erros registrados nesta versão.</p>}<p>Dados detalhados de candidatos, textos brutos e credenciais não são expostos neste painel.</p></div>
 </Base>

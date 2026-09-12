@@ -1,0 +1,27 @@
+---
+const {slug}=Astro.props;
+---
+<button class="plus-action" type="button" data-plus-save={slug} aria-pressed="false">
+  <span aria-hidden="true" data-plus-save-icon>＋</span><span data-plus-save-label>Salvar</span>
+</button>
+<script>
+  import {readPlusState,toggleSavedArticle} from '../lib/plus';
+  const setupSaveButtons=()=>document.querySelectorAll<HTMLButtonElement>('[data-plus-save]').forEach(button=>{
+    if(button.dataset.ready==='true') return;
+    button.dataset.ready='true';
+    const slug=button.dataset.plusSave!;
+    const render=()=>{
+      const active=readPlusState().savedArticles.includes(slug);
+      button.setAttribute('aria-pressed',String(active));
+      const label=button.querySelector<HTMLElement>('[data-plus-save-label]');
+      const icon=button.querySelector<HTMLElement>('[data-plus-save-icon]');
+      if(label) label.textContent=active?'Salva':'Salvar';
+      if(icon) icon.textContent=active?'✓':'＋';
+    };
+    button.addEventListener('click',()=>{toggleSavedArticle(slug);render();});
+    window.addEventListener('apurante-plus:change',render);
+    render();
+  });
+  setupSaveButtons();
+  document.addEventListener('astro:page-load',setupSaveButtons);
+</script>

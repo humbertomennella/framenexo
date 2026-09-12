@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import PlusBadge from '../components/PlusBadge.astro';
+import PersonalHub from '../components/PersonalHub.astro';
+---
+<Base title="Meu APURANTE" description="Sua área local de matérias salvas, assuntos seguidos e preferências no APURANTE+." noindex>
+  <header class="page-head plus-page-head"><PlusBadge/><span class="eyebrow">Organizado neste dispositivo</span><h1>Meu APURANTE</h1><p>Seu espaço para encontrar matérias salvas, acompanhar assuntos e ajustar as editorias que aparecem primeiro.</p></header>
+  <PersonalHub/>
+  <p class="plus-privacy"><strong>Sobre seus dados:</strong> as escolhas desta página permanecem no armazenamento local do navegador. Elas não são enviadas ao APURANTE e não aparecem em outros dispositivos.</p>
+</Base>

@@ -149,7 +149,7 @@ def choose_lead(group,sources,history,window=20):
   org=source_organization(item,sources.get(item.get('sourceId'),{}))
   return (counts.get(org,0),0 if item.get('sourceType')=='primary' else 1,-item.get('relevance',0),item.get('publishedAt',''))
  return min(group,key=key)
-def limit_candidates_by_organization(items,max_per_organization=8):
+def limit_candidates_by_organization(items,max_per_organization=4):
  """Keep discovery broad without letting one feed dominate a collection run."""
  counts={};kept=[]
  for item in sorted(items,key=lambda row:(row.get('relevance',0),row.get('publishedAt','')),reverse=True):
