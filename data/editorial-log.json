@@ -1889,5 +1889,106 @@
       }
     ],
     "seconds": 1.4
+  },
+  {
+    "at": "2026-09-12T10:44:32Z",
+    "event": "collection",
+    "collected": 8,
+    "discarded": 94,
+    "sourceCounts": {
+      "nasa": 10,
+      "un": 30,
+      "who": 25,
+      "ap": 10,
+      "bbc-portugues": 40
+    },
+    "errors": [
+      {
+        "source": "camara-cultura",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-esportes",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-saude",
+        "code": "ValueError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "ValueError"
+      },
+      {
+        "source": "senado",
+        "code": "ValueError"
+      },
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "dw",
+        "code": "ParseError"
+      }
+    ],
+    "seconds": 1.14
+  },
+  {
+    "at": "2026-09-12T10:44:44Z",
+    "event": "error",
+    "stage": "verification",
+    "candidate": "320326d4f2e78001e062",
+    "code": "independent_confirmation_required"
+  },
+  {
+    "at": "2026-09-12T10:44:44Z",
+    "event": "error",
+    "stage": "verification",
+    "candidate": "a189e81bc642587dce3a",
+    "code": "independent_confirmation_required"
+  },
+  {
+    "at": "2026-09-12T10:44:44Z",
+    "event": "error",
+    "stage": "verification",
+    "candidate": "b4d430a7aec598760fc8",
+    "code": "independent_confirmation_required"
+  },
+  {
+    "at": "2026-09-12T10:44:44Z",
+    "event": "error",
+    "stage": "verification",
+    "candidate": "63f2bce38a9c2758f5e5",
+    "code": "independent_confirmation_required"
+  },
+  {
+    "at": "2026-09-12T10:44:44Z",
+    "event": "error",
+    "stage": "verification",
+    "candidate": "c605d2a70d5c1ec2cc7f",
+    "code": "independent_confirmation_required"
+  },
+  {
+    "at": "2026-09-12T10:44:44Z",
+    "event": "publication",
+    "eligible": 5,
+    "duplicates": 0,
+    "held": 5,
+    "published": 0,
+    "dryRunApproved": 0,
+    "seconds": 0.19
   }
 ]
