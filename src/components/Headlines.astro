@@ -5,8 +5,8 @@ const moment=variant==='moment';
 const label=moment?'URGENTE':'Em foco';
 ---
 <section class:list={['headlines',moment&&'moment-panel']} aria-label={label} aria-roledescription="carrossel" data-headlines data-interval="3800" data-moment={moment||undefined}>
- <div class="headlines-bar"><div><h2><i class="live-dot" aria-hidden="true"></i>{label}</h2>{moment&&<p>Acontecimentos de grande impacto, verificados e com validade limitada.</p>}</div><span class="headlines-position" aria-hidden="true"><b data-position>{items.length?'01':'00'}</b> / <span data-total>{String(items.length).padStart(2,'0')}</span></span></div>
- <div class="headlines-track">{items.map((a:any,i:number)=><article class:list={['headline-slide',i===0&&'is-current']} data-slide data-level={a.highlightLevel||'normal'} data-expires={moment?a.highlightExpiresAt:undefined} aria-label={`${i+1} de ${items.length}`} aria-roledescription="slide" aria-hidden={i===0?'false':'true'} inert={i!==0}>
+ <div class="headlines-bar"><div><h2><i class="live-dot" aria-hidden="true"></i>{label}</h2>{moment&&<p>Monitoramento 24h · somente fatos urgentes verificados.</p>}</div><span class="headlines-position" aria-hidden="true"><b data-position>{items.length?'01':'00'}</b> / <span data-total>{String(items.length).padStart(2,'0')}</span></span></div>
+ <div class="headlines-track">{items.map((a:any,i:number)=><article class:list={['headline-slide',i===0&&'is-current']} data-slide data-article={a.slug} data-level={a.highlightLevel||'normal'} data-expires={moment?a.highlightExpiresAt:undefined} aria-label={`${i+1} de ${items.length}`} aria-roledescription="slide" aria-hidden={i===0?'false':'true'} inert={i!==0}>
   <figure class="headline-photo"><a href={articleUrl(a)} tabindex="-1" aria-hidden="true"><img src={href(a.image)} alt="" width="1200" height="675" loading={!moment&&i===0?'eager':'lazy'} fetchpriority={!moment&&i===0?'high':'auto'} decoding="async"/></a></figure>
   <div class="headline-content"><div class="headline-kicker"><a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a></div><h3><a href={articleUrl(a)}>{a.title}</a></h3>{!moment&&<p>{a.description}</p>}<div class="meta"><time datetime={a.publishedAt}>{date(a.publishedAt)} · {time(a.publishedAt)}</time></div><a class="headline-read" href={articleUrl(a)}>Ler a matéria <span aria-hidden="true">↗</span></a></div>
  </article>)}</div>
@@ -59,7 +59,26 @@ document.querySelectorAll<HTMLElement>('[data-headlines]').forEach(root=>{
  root.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();const travel=event.key==='ArrowRight'?1:-1;show(index+travel,true,travel);}});
  let touchX=0,touchY=0;root.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY;},{passive:true});root.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){const travel=dx<0?1:-1;show(index+travel,true,travel);}},{passive:true});
  document.addEventListener('visibilitychange',()=>show(index));reduced.addEventListener('change',schedule);
- // Expiry still applies while the page stays open.
- if(root.hasAttribute('data-moment'))setInterval(()=>show(index),30000);
+ // Urgent items expire locally and the public edition is checked every minute.
+ if(root.hasAttribute('data-moment')){
+  setInterval(()=>show(index),30000);
+  const initial=allSlides.map(slide=>`${slide.dataset.article}:${slide.dataset.expires}`).join('|');
+  let checking=false;
+  const checkPublishedEdition=async()=>{
+   if(document.hidden||checking)return;
+   checking=true;
+   try{
+    const response=await fetch(location.href,{cache:'no-store',signal:AbortSignal.timeout(10000)});
+    if(!response.ok)return;
+    const parsed=new DOMParser().parseFromString(await response.text(),'text/html');
+    const panel=parsed.querySelector('[data-headlines][data-moment]');
+    const next=[...panel?.querySelectorAll<HTMLElement>('[data-slide]')||[]].map(slide=>`${slide.dataset.article}:${slide.dataset.expires}`).join('|');
+    if(next!==initial)location.reload();
+   }catch{/* Keep the current verified edition if the network check is unavailable. */}
+   finally{checking=false;}
+  };
+  setInterval(checkPublishedEdition,60000);
+  document.addEventListener('visibilitychange',checkPublishedEdition);
+ }
 });
 </script>
