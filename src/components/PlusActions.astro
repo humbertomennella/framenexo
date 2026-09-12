@@ -1,0 +1,46 @@
+---
+import {href} from '../lib/news';
+const {slug,tags=[]}=Astro.props;
+---
+<aside class="plus-actions" data-plus-actions data-slug={slug} data-tags={JSON.stringify(tags)}>
+  <div>
+    <span class="eyebrow">APURANTE+ BETA</span>
+    <strong>Guarde ou acompanhe esta pauta</strong>
+  </div>
+  <div class="plus-action-buttons">
+    <button type="button" data-save-article aria-pressed="false">Salvar matéria</button>
+    <button type="button" data-follow-topic aria-haspopup="true">Seguir assunto</button>
+    <a href={href('mais/')}>Meu APURANTE ↗</a>
+  </div>
+  <div class="plus-topic-picker" data-topic-picker hidden>
+    <span>Escolha um assunto:</span>
+    {tags.map(tag=><button type="button" data-topic={tag} aria-pressed="false">{tag}</button>)}
+  </div>
+</aside>
+<script>
+  const KEY='apurante-plus-v1';
+  const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
+  const normalize=(raw={})=>({categories:Array.isArray(raw.categories)?raw.categories:[],topics:Array.isArray(raw.topics)?raw.topics:[],saved:Array.isArray(raw.saved)?raw.saved:[]});
+  document.querySelectorAll('[data-plus-actions]').forEach(node=>{
+    if(!(node instanceof HTMLElement)||node.dataset.plusReady==='true')return;
+    node.dataset.plusReady='true';
+    const root=node;
+    const slug=root.dataset.slug||'';
+    const tags=JSON.parse(root.dataset.tags||'[]');
+    let state=normalize(read());
+    const write=()=>localStorage.setItem(KEY,JSON.stringify(state));
+    const save=root.querySelector('[data-save-article]');
+    const follow=root.querySelector('[data-follow-topic]');
+    const picker=root.querySelector('[data-topic-picker]');
+    const sync=()=>{
+      if(save){const active=state.saved.includes(slug);save.setAttribute('aria-pressed',String(active));save.textContent=active?'Salva ✓':'Salvar matéria'}
+      root.querySelectorAll('[data-topic]').forEach(button=>{if(!(button instanceof HTMLElement))return;const active=state.topics.includes(button.dataset.topic);button.setAttribute('aria-pressed',String(active));button.classList.toggle('is-active',active)});
+      if(follow)follow.textContent=tags.some(tag=>state.topics.includes(tag))?'Assuntos seguidos ✓':'Seguir assunto';
+    };
+    save?.addEventListener('click',()=>{state.saved=state.saved.includes(slug)?state.saved.filter(x=>x!==slug):[...state.saved,slug];write();sync()});
+    follow?.addEventListener('click',()=>{if(picker instanceof HTMLElement)picker.hidden=!picker.hidden});
+    picker?.addEventListener('click',event=>{const target=event.target;if(!(target instanceof Element))return;const button=target.closest('[data-topic]');if(!(button instanceof HTMLElement))return;const topic=button.dataset.topic||'';state.topics=state.topics.includes(topic)?state.topics.filter(x=>x!==topic):[...state.topics,topic];write();sync()});
+    window.addEventListener('storage',()=>{state=normalize(read());sync()});
+    sync();
+  });
+</script>
