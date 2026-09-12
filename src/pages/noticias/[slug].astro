@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Card from '../../components/Card.astro';
 import ReadingTools from '../../components/ReadingTools.astro';
+import PlusActions from '../../components/PlusActions.astro';
 import Timeline from '../../components/Timeline.astro';
 import {articles,articleUrl,href,date,time,reading,categorySlug,jsonld,usesEditorialCover,independentSourceCount,displayedConfidence} from '../../lib/news';
 import EditorialCover from '../../components/EditorialCover.astro';
@@ -31,6 +32,7 @@ const sourceRole=(source:any)=>source.role==='wire'?'Agência de notícias':sour
    <h1>{a.title}</h1><p class="dek">{a.description}</p>
    <div class="article-byline"><strong>Apurante Editorial</strong> · <time datetime={a.publishedAt}>{date(a.publishedAt)}, {time(a.publishedAt)} BRT</time> · {reading(a)} min de leitura{a.updatedAt!==a.publishedAt&&<span> · Atualizado em {date(a.updatedAt)}, {time(a.updatedAt)} BRT</span>}</div>
   </header>
+  <PlusActions slug={a.slug} tags={a.tags}/>
   <ReadingTools summary={(a.quickTakeaways||[a.description]).join(" ")}/>
   <figure class="article-figure">{useEditorialCover?<EditorialCover article={a}/>:<img src={href(a.image)} alt={a.imageAlt} width="1440" height="810" fetchpriority="high"/>}<figcaption>{useEditorialCover?'Capa editorial tipográfica do Apurante. Não representa fotografia do acontecimento.':a.imageCredit}</figcaption></figure>
   <nav class="reading-choices" aria-label="Escolha o modo de leitura"><a href="#rapida">Resumo em 30 segundos</a><a href="#materia">Matéria completa · {reading(a)} min</a></nav>
