@@ -1,0 +1,32 @@
+import {test,expect} from '@playwright/test';
+test('search, carousel and reading preferences work',async({page})=>{
+ const errors=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('./');
+ const focus=page.getByRole('region',{name:'Em foco',exact:true});
+ await expect(focus.locator('[data-slide]')).toHaveCount(4);
+ await focus.getByRole('button',{name:'Próxima notícia',exact:true}).click();
+ await expect(focus.locator('[data-position]')).toHaveText('02');
+ await focus.getByRole('button',{name:'Notícia anterior',exact:true}).click();
+ await expect(focus.locator('[data-position]')).toHaveText('01');
+ await page.goto('./busca/?q=Brasil');
+ await expect(page.locator('#search-results article').first()).toBeVisible();
+ await page.getByRole('searchbox').fill('zzzzsemresultado999');
+ await page.getByRole('button',{name:'Buscar ↗'}).click();
+ await expect(page.locator('#search-status')).toHaveText('0 notícias encontradas.');
+ await page.getByRole('searchbox').fill('Brasil');await page.getByRole('button',{name:'Buscar ↗'}).click();
+ await page.locator('#search-results h2 a').first().click();
+ await page.getByText('Ajustar leitura',{exact:true}).click();
+ await page.getByRole('button',{name:'Aumentar texto'}).click();
+ await expect(page.locator('html')).toHaveAttribute('style',/--reading-scale: 1.1/);
+ await page.getByRole('button',{name:'Alto contraste'}).click();
+ await expect(page.getByRole('button',{name:'Alto contraste'})).toHaveAttribute('aria-pressed','true');
+ await page.reload();await expect(page.locator('html')).toHaveClass(/reading-contrast/);
+ await expect(page.locator('[data-speak]')).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ expect(errors).toEqual([]);
+});
+test('status never reports a failed request as live success',async({page})=>{
+ await page.route('https://api.github.com/**',route=>route.fulfill({status:503,body:'unavailable'}));
+ await page.goto('./status/');
+ await expect(page.locator('[data-operation-live]')).toContainText('Estado ao vivo indisponível');
+});

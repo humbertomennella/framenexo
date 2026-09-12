@@ -1,9 +1,19 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-10T06:58:00Z",
+  "lastPublishedAt": "2026-09-12T08:55:00Z",
   "lastCollectedAt": "2026-09-12T10:44:32Z",
-  "editionCount": 11,
+  "editionCount": 12,
   "history": [
+    {
+      "slug": "stf-investigacao-financiamento-filme-flavio-bolsonaro",
+      "title": "STF torna pública investigação sobre financiamento de filme ligado a Flávio Bolsonaro",
+      "eventKey": "stf-investigacao-flavio-bolsonaro-filme-banco-master-setembro-2026",
+      "publishedAt": "2026-09-12T08:55:00Z",
+      "sourceUrls": [
+        "https://apnews.com/article/brazil-flavio-bolsonaro-investigation-banco-master-movie-f534de4498df7d8b509127fcee2b535d",
+        "https://www.reuters.com/business/finance/brazilian-top-court-unseals-probe-into-multibillion-dollar-bank-fraud-2026-09-11/"
+      ]
+    },
     {
       "slug": "aiea-encaminha-ira-conselho-seguranca-onu",
       "title": "AIEA encaminha caso nuclear do Irã ao Conselho de Segurança da ONU",

@@ -1891,6 +1891,18 @@
     "seconds": 1.4
   },
   {
+    "at": "2026-09-12T08:55:00Z",
+    "event": "publication",
+    "slug": "stf-investigacao-financiamento-filme-flavio-bolsonaro",
+    "category": "Política",
+    "confidence": "ALTA CONFIANÇA",
+    "independentOrganizations": ["associated-press", "reuters"],
+    "media": "/images/news/investigacao-financiamento-filme-editorial.webp",
+    "mediaSha256": "84d2a90240a681d0b7e6b3751d2f753a981b1aca25278aa966641432fcb5e297",
+    "published": 1,
+    "reason": "A existência e o objeto da investigação foram confirmados por Associated Press e Reuters a partir de documentos judiciais tornados públicos. A matéria explicita o sigilo remanescente, as negativas dos citados e a ausência de condenação."
+  },
+  {
     "at": "2026-09-12T10:44:32Z",
     "event": "collection",
     "collected": 8,

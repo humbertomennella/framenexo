@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Card from '../../components/Card.astro';
+import ReadingTools from '../../components/ReadingTools.astro';
+import Timeline from '../../components/Timeline.astro';
 import {articles,articleUrl,href,date,time,reading,categorySlug,jsonld,usesEditorialCover,independentSourceCount,displayedConfidence} from '../../lib/news';
 import EditorialCover from '../../components/EditorialCover.astro';
 
@@ -29,12 +31,13 @@ const sourceRole=(source:any)=>source.role==='wire'?'Agência de notícias':sour
    <h1>{a.title}</h1><p class="dek">{a.description}</p>
    <div class="article-byline"><strong>Apurante Editorial</strong> · <time datetime={a.publishedAt}>{date(a.publishedAt)}, {time(a.publishedAt)} BRT</time> · {reading(a)} min de leitura{a.updatedAt!==a.publishedAt&&<span> · Atualizado em {date(a.updatedAt)}, {time(a.updatedAt)} BRT</span>}</div>
   </header>
+  <ReadingTools summary={(a.quickTakeaways||[a.description]).join(" ")}/>
   <figure class="article-figure">{useEditorialCover?<EditorialCover article={a}/>:<img src={href(a.image)} alt={a.imageAlt} width="1440" height="810" fetchpriority="high"/>}<figcaption>{useEditorialCover?'Capa editorial tipográfica do Apurante. Não representa fotografia do acontecimento.':a.imageCredit}</figcaption></figure>
   <nav class="reading-choices" aria-label="Escolha o modo de leitura"><a href="#rapida">Resumo em 30 segundos</a><a href="#materia">Matéria completa · {reading(a)} min</a></nav>
   <div class="article-reading">
    <aside class="quick-read" id="rapida"><span class="eyebrow">Leitura rápida</span><h2>Em 30 segundos</h2><p>{a.description}</p><ul>{(a.quickTakeaways||[a.description]).map(item=><li>{item}</li>)}</ul><a href="#materia" class="quick-jump">Ir para a matéria completa ↓</a></aside>
    <div class="article-text">
-    <div id="materia" class="article-context"><span class="eyebrow">Matéria completa</span><Content/></div>
+    <div id="materia" class="article-context"><span class="eyebrow">Matéria completa</span><Content/><Timeline entries={a.timeline||[]} sources={a.sources}/></div>
     <aside class="source-box"><div class="source-box-head"><h2>Fontes desta matéria</h2><span>{sourceRoutes} {sourceRoutes===1?'rota independente':'rotas independentes'}</span></div><p>Os links abaixo sustentam os fatos descritos. Documento primário, agência e redação são funções diferentes; republicações da mesma apuração contam como uma única rota.</p>{sourceRoutes<2&&<p class="source-warning"><strong>Transparência:</strong> esta publicação do acervo anterior possui somente uma rota identificada. Ela permanece disponível, mas não atende à regra atual para novas matérias completas.</p>}<ol>{a.sources.map(s=><li><a href={s.url} rel="noopener noreferrer">{s.name} ↗</a><span class="source-kind">{sourceRole(s)}</span><time datetime={s.publishedAt}>{date(s.publishedAt)}</time></li>)}</ol></aside>
     <p class="disclosure">Produção da Apurante Editorial com inteligência artificial. As ilustrações não são fotografias. Consulte as fontes, os limites da apuração e a <a href={href('politica-editorial/')}>política editorial</a>.</p>
     {a.corrections?.length>0&&<section><h2>Correções</h2>{a.corrections.map(c=><p class="disclosure"><time datetime={c.date}>{date(c.date)}</time> — {c.text}</p>)}</section>}

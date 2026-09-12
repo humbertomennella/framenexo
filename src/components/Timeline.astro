@@ -1,0 +1,6 @@
+---
+const {entries=[],sources=[]}=Astro.props;
+const allowed=new Set(sources.map((source:any)=>source.url));
+const valid=entries.filter((entry:any)=>entry.date&&Number.isFinite(Date.parse(entry.date))&&entry.text&&allowed.has(entry.sourceURL)).sort((a:any,b:any)=>a.date.localeCompare(b.date));
+---
+{valid.length>=2&&<section class="article-timeline" aria-label="Linha do tempo"><h2>Marcos desta história</h2><ol>{valid.map((entry:any)=><li><time datetime={entry.date}>{new Intl.DateTimeFormat('pt-BR',{dateStyle:'medium',timeZone:'UTC'}).format(new Date(entry.date))}</time><p>{entry.text}</p><a href={entry.sourceURL} rel="noopener noreferrer">Fonte do marco ↗</a></li>)}</ol></section>}

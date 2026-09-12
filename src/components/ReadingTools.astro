@@ -1,0 +1,30 @@
+---
+const {summary=''}=Astro.props;
+---
+<div class="summary-audio" data-audio data-summary={summary}>
+ <button type="button" data-speak disabled>Ouvir resumo</button><button type="button" data-stop hidden>Parar áudio</button>
+ <span role="status" data-audio-status>Verificando disponibilidade de voz…</span>
+</div>
+<details class="reading-tools"><summary>Ajustar leitura</summary><div role="group" aria-label="Preferências de leitura"><button type="button" data-font="-1" aria-label="Diminuir texto">A−</button><button type="button" data-font="1" aria-label="Aumentar texto">A+</button><button type="button" data-contrast aria-pressed="false">Alto contraste</button><button type="button" data-reset>Restaurar</button></div></details>
+<script>
+let size=0,contrast=false;
+try{const saved=JSON.parse(localStorage.getItem('apurante-reading')||'{}');size=Math.max(-1,Math.min(3,Number(saved.size)||0));contrast=saved.contrast===true;}catch{}
+const apply=()=>{document.documentElement.style.setProperty('--reading-scale',String(1+size*.1));document.documentElement.classList.toggle('reading-contrast',contrast);document.querySelector('[data-contrast]')?.setAttribute('aria-pressed',String(contrast));try{localStorage.setItem('apurante-reading',JSON.stringify({size,contrast}));}catch{}};
+apply();document.querySelectorAll<HTMLButtonElement>('[data-font]').forEach(button=>button.addEventListener('click',()=>{size=Math.max(-1,Math.min(3,size+Number(button.dataset.font)));apply();}));
+document.querySelector('[data-contrast]')?.addEventListener('click',()=>{contrast=!contrast;apply();});document.querySelector('[data-reset]')?.addEventListener('click',()=>{size=0;contrast=false;apply();});
+document.querySelectorAll<HTMLElement>('[data-audio]').forEach(root=>{
+ const play=root.querySelector<HTMLButtonElement>('[data-speak]')!,stop=root.querySelector<HTMLButtonElement>('[data-stop]')!,status=root.querySelector<HTMLElement>('[data-audio-status]')!;
+ if(!('speechSynthesis' in window)){status.textContent='Áudio indisponível neste navegador. O resumo está disponível em texto.';return;}
+ play.disabled=false;status.textContent='Voz sintetizada pelo navegador. A duração varia conforme a voz.';
+ let current:SpeechSynthesisUtterance|null=null;
+ const reset=()=>{current=null;play.disabled=false;stop.hidden=true;};
+ play.addEventListener('click',()=>{
+  speechSynthesis.cancel();current=new SpeechSynthesisUtterance(root.dataset.summary||'');current.lang='pt-BR';current.rate=1;
+  const voices=speechSynthesis.getVoices();current.voice=voices.find(v=>v.lang==='pt-BR'&&v.localService)||voices.find(v=>v.lang==='pt-BR')||null;
+  current.onend=()=>{status.textContent='Resumo concluído.';reset();};current.onerror=()=>{status.textContent='Não foi possível reproduzir o áudio. Use o resumo em texto.';reset();};
+  play.disabled=true;stop.hidden=false;status.textContent='Reproduzindo resumo…';speechSynthesis.speak(current);
+ });
+ stop.addEventListener('click',()=>{speechSynthesis.cancel();reset();status.textContent='Áudio interrompido.';});
+ window.addEventListener('pagehide',()=>speechSynthesis.cancel());
+});
+</script>

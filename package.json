@@ -11,12 +11,14 @@
     "check:site": "python3 scripts/check_site.py",
     "collect": "python3 scripts/pipeline.py collect",
     "publish": "python3 scripts/pipeline.py publish",
-    "pipeline": "python3 scripts/run_editorial.py"
+    "pipeline": "python3 scripts/run_editorial.py",
+    "test:ui": "playwright test"
   },
   "dependencies": {
     "astro": "7.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "typescript": "7.0.2"
   },
   "engines": {
