@@ -1,9 +1,9 @@
 {
-  "lastRunAt": "2026-09-12T21:41:49Z",
+  "lastRunAt": "2026-09-12T23:26:59Z",
   "status": "degraded",
-  "runId": "34720674241",
+  "runId": "34725433462",
   "sourcesReached": 15,
-  "newCandidates": 23,
+  "newCandidates": 15,
   "sourceErrors": [
     {
       "source": "ibge",
@@ -16,11 +16,11 @@
   ],
   "queueByStatus": {
     "published": 17,
-    "candidate": 375,
+    "candidate": 408,
     "expired": 3,
     "needs_review": 8
   },
   "publishingAllowed": false,
   "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
-  "startedAt": "2026-09-12T21:41:43Z"
+  "startedAt": "2026-09-12T23:26:52Z"
 }
