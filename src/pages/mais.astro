@@ -3,15 +3,15 @@ import Base from '../layouts/Base.astro';
 import {articles,href,categories,articleUrl,date} from '../lib/news';
 const catalog = articles.map(a=>({slug:a.slug,title:a.title,description:a.description,category:a.category,tags:a.tags,url:articleUrl(a),publishedAt:a.publishedAt,image:href(a.image)}));
 ---
-<Base title="APURANTE+ Beta" description="Personalize sua leitura no APURANTE: salve matérias, siga assuntos e monte seu próprio feed." noindex>
+<Base title="APURANTE+" description="Personalize sua leitura no APURANTE: salve matérias, siga assuntos e monte seu próprio feed." noindex>
   <section class="plus-hero">
     <div>
-      <span class="plus-badge">APURANTE+ BETA</span>
+      <span class="plus-badge"><img src={href('favicon.svg')} alt="" width="20" height="20" aria-hidden="true"/>APURANTE+</span>
       <h1>Informação organizada para você.</h1>
       <p>Escolha seus interesses, salve matérias e acompanhe assuntos sem alterar a experiência editorial do APURANTE.</p>
     </div>
     <div class="plus-hero-card">
-      <strong>Beta gratuito</strong>
+      <strong>Acesso gratuito</strong>
       <p>Nesta fase, suas preferências ficam salvas somente neste dispositivo. Nenhum cadastro, senha ou dado pessoal é enviado ao APURANTE.</p>
     </div>
   </section>
