@@ -23,6 +23,7 @@
   "confidence": "RELATO",
   "relevance": 76,
   "eventKey": "veridia-justica-eleitoral-garante-transporte-e-urnas-adaptadas-para-pcd",
+  "electionCoverage": true,
   "sources": [
     {
       "name": "Agência Brasil",

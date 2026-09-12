@@ -478,5 +478,15 @@
     "usage": "Natureza-morta editorial com processo, planilhas ilegíveis e claquete; não é fotografia, documento do caso, sede oficial, retrato, selo, logotipo ou reprodução de marca.",
     "proof": "Arquivo original gerado em 12 de setembro de 2026, sem pessoas, nomes, logotipos, selos ou texto legível, convertido localmente para WebP; SHA-256 84d2a90240a681d0b7e6b3751d2f753a981b1aca25278aa966641432fcb5e297.",
     "previousCredit": null
+  },
+  {
+    "path": "/images/news/tse-rejeita-registro-marcal-editorial.webp",
+    "origin": "Ilustração editorial original criada para a matéria sobre decisão do TSE em pedido de registro de candidatura",
+    "credit": "Apurante Editorial",
+    "license": "Ativo editorial original gerado exclusivamente para o projeto; publicação e adaptação autorizadas",
+    "sourceURL": null,
+    "usage": "Cena editorial institucional com processo e equipamento eleitoral genérico desfocado; não é fotografia, documento do processo, reprodução do julgamento ou imagem de pessoa real.",
+    "proof": "Arquivo original gerado em 12 de setembro de 2026, sem pessoas identificáveis, nomes, símbolos partidários, marcas ou texto legível, convertido localmente para WebP; SHA-256 054cd47ebbce5df9811610dde3393d7f747f756d7d90ec5818e275df3eea4a6a.",
+    "previousCredit": null
   }
 ]

@@ -20,6 +20,7 @@
   "relevance": 96,
   "eventKey": "stf-investigacao-flavio-bolsonaro-filme-banco-master-setembro-2026",
   "verificationPolicyVersion": 2,
+  "electionCoverage": false,
   "leadSourceOrganization": "associated-press",
   "sources": [
     {

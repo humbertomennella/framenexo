@@ -20,6 +20,7 @@
   "relevance": 92,
   "eventKey": "eleicoes-2026-candidaturas-autistas-tse",
   "verificationPolicyVersion": 2,
+  "electionCoverage": true,
   "leadSourceOrganization": "tse",
   "highlight": {
     "level": "important",
