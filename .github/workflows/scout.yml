@@ -1,5 +1,13 @@
 name: Escuta editorial
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/scout.yml'
+      - 'scripts/run_scout.py'
+      - 'scripts/commit_scout.py'
+      - 'scripts/pipeline.py'
+      - 'data/sources.json'
   schedule:
     - cron: '*/15 * * * *'
   workflow_dispatch:
