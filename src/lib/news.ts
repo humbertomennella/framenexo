@@ -17,7 +17,5 @@ export const date = (s:string) => new Intl.DateTimeFormat('pt-BR',{day:'2-digit'
 export const time = (s:string) => new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}).format(new Date(s));
 export const reading = (a:Article) => Math.max(1,Math.ceil(a.body.replace(/https?:\/\/\S+/g,'').replace(/[#*_>`]/g,'').trim().split(/\s+/).length/220));
 export const independentSourceCount = (a:Article) => new Set(a.sources.map(s=>s.originalOrganization||s.organization||(()=>{try{return new URL(s.url).hostname}catch{return s.name}})())).size;
-export const prominenceEligible = (a:Article) => a.status==='published' && independentSourceCount(a)>=2 && !['RUMOR','RELATO'].includes(a.confidence);
-export const historicalReviewPending = (a:Article) => !prominenceEligible(a);
 export const displayedConfidence = (a:Article) => independentSourceCount(a)<2&&a.sources.every(s=>s.type!=='primary')?'RELATO':a.confidence;
 export const jsonld = (x:unknown) => JSON.stringify(x).replace(/</g,'\\u003c');

@@ -1,8 +1,8 @@
 ---
 import Card from './Card.astro';
 import InterestSelector from './InterestSelector.astro';
-import {articles,prominenceEligible} from '../lib/news';
-const recommended=articles.filter(prominenceEligible);
+import {articles} from '../lib/news';
+const recommended=articles;
 ---
 <div class="personal-hub" data-personal-hub>
   <section class="plus-section" aria-labelledby="para-voce-title">

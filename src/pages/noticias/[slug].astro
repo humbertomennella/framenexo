@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Card from '../../components/Card.astro';
 import ReadingTools from '../../components/ReadingTools.astro';
 import Timeline from '../../components/Timeline.astro';
-import {articles,articleUrl,href,date,time,reading,categorySlug,jsonld,usesEditorialCover,independentSourceCount,displayedConfidence,prominenceEligible,historicalReviewPending} from '../../lib/news';
+import {articles,articleUrl,href,date,time,reading,categorySlug,jsonld,usesEditorialCover,independentSourceCount,displayedConfidence} from '../../lib/news';
 import EditorialCover from '../../components/EditorialCover.astro';
 import SaveArticleButton from '../../components/SaveArticleButton.astro';
 import FollowTopicButton from '../../components/FollowTopicButton.astro';
@@ -15,7 +15,7 @@ const url=new URL(articleUrl(a),Astro.site).href;
 const useEditorialCover=usesEditorialCover(a);
 const newsSchema:any={'@context':'https://schema.org','@type':'NewsArticle',headline:a.title,description:a.description,datePublished:a.publishedAt,dateModified:a.updatedAt,mainEntityOfPage:url,author:{'@type':'Organization',name:'Apurante Editorial',url:new URL(href('sobre/'),Astro.site).href},publisher:{'@type':'Organization',name:'Apurante'},articleSection:a.category,keywords:a.tags.join(', '),citation:a.sources.map(s=>s.url)};
 if(!useEditorialCover)newsSchema.image=[new URL(href(a.image),Astro.site).href];
-const related=articles.filter(b=>b.slug!==a.slug&&prominenceEligible(b)&&(b.category===a.category||b.tags.some(t=>a.tags.includes(t)))).slice(0,3);
+const related=articles.filter(b=>b.slug!==a.slug&&(b.category===a.category||b.tags.some(t=>a.tags.includes(t)))).slice(0,3);
 const sourceRoutes=independentSourceCount(a);
 const confidence=displayedConfidence(a);
 const sourceRole=(source:any)=>source.role==='wire'?'Agência de notícias':source.role==='specialist'?'Cobertura especializada':source.role==='discovery'?'Descoberta de pauta':source.type==='primary'?'Fonte primária':'Imprensa / contexto';
@@ -32,7 +32,6 @@ const sourceRole=(source:any)=>source.role==='wire'?'Agência de notícias':sour
    <a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><span class="badge">{confidence}</span>
    <h1>{a.title}</h1><p class="dek">{a.description}</p>
    <div class="article-byline"><strong>Apurante Editorial</strong> · <time datetime={a.publishedAt}>{date(a.publishedAt)}, {time(a.publishedAt)} BRT</time> · {reading(a)} min de leitura{a.updatedAt!==a.publishedAt&&<span> · Atualizado em {date(a.updatedAt)}, {time(a.updatedAt)} BRT</span>}</div>
-   {historicalReviewPending(a)&&<div class="archive-review" role="note"><strong>Acervo em revisão</strong><span>Esta matéria pertence ao padrão editorial anterior e ainda não possui duas rotas independentes identificadas. Permanece acessível por transparência, mas não participa dos destaques do portal.</span></div>}
    <div class="article-plus-actions" aria-label="Ações do APURANTE+"><span class="plus-action-heading"><span class="plus-symbol" aria-hidden="true">A+</span> Organize sua leitura</span><SaveArticleButton slug={a.slug}/><FollowTopicButton topic={a.tags[0]||a.category}/><a href={href('meu-apurante/')}>Abrir Meu APURANTE →</a></div>
   </header>
   <ReadingTools summary={(a.quickTakeaways||[a.description]).join(" ")}/>

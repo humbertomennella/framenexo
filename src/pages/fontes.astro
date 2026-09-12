@@ -25,7 +25,6 @@ const sections=[
  {type:'press',title:'Agências e redações jornalísticas',description:'Veículos usados para descobrir pautas, realizar checagem cruzada e acrescentar apuração ou contexto. A inclusão não representa confiança irrestrita.'}
 ];
 const activeOrganizations=new Set(sourceRecords.filter(source=>source.enabled&&source.feed).map(source=>source.organization||source.id)).size;
-const pendingReview=articles.filter(article=>independentSourceCount(article)<2).length;
 ---
 <Base title="Rede de fontes" description="Documentos, agências e redações jornalísticas usados pelo Apurante para evidência, apuração e checagem cruzada.">
  <header class="page-head"><span class="eyebrow">Informação com origem</span><h1>Rede de fontes</h1><p>Uma central confiável não depende de uma voz única. Cada referência tem uma função, e nenhuma recebe um selo permanente de verdade.</p></header>
@@ -33,7 +32,6 @@ const pendingReview=articles.filter(article=>independentSourceCount(article)<2).
   <div><strong>{organizations.length}</strong><span>organizações cadastradas</span></div>
   <div><strong>{activeOrganizations}</strong><span>organizações com coleta automática</span></div>
   <div><strong>{articles.filter(article=>independentSourceCount(article)>1).length}</strong><span>matérias com múltiplas rotas identificadas</span></div>
-  <div><strong>{pendingReview}</strong><span>matérias históricas aguardando revisão</span></div>
  </section>
  <div class="prose source-intro">
   <p>O cadastro separa organizações de seus canais. Por isso, os sete feeds temáticos da Câmara dos Deputados aparecem como uma única instituição. Uma republicação também não conta como confirmação nova: vale a redação ou agência que realizou a apuração original.</p>
