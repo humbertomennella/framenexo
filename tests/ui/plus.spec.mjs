@@ -8,7 +8,7 @@ test.beforeEach(async({page})=>{
 
 test('interests, saved articles and followed topics persist locally',async({page})=>{
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
-  await expect(page.getByRole('link',{name:'Conhecer o APURANTE+'}).first()).toBeVisible();
+  await expect(page.getByRole('link',{name:'Abrir Meu APURANTE'}).first()).toBeVisible();
   await page.getByLabel('Tecnologia').check();
   await page.getByLabel('Ciência').check();
   await page.getByRole('button',{name:'Salvar interesses'}).click();
@@ -48,8 +48,18 @@ test('APURANTE+ remains usable without horizontal overflow on mobile',async({pag
     await page.setViewportSize({width,height:width<=390?800:900});
     for(const route of ['./','./mais/','./meu-apurante/']){
       await page.goto(route);
-      await expect(page.getByRole('link',{name:'Conhecer o APURANTE+'}).first()).toBeVisible();
+      await expect(page.getByRole('link',{name:'Abrir Meu APURANTE'}).first()).toBeVisible();
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${route} overflows at ${width}px`).toBe(true);
     }
   }
+});
+
+test('header uses the A+ shortcut and the Plus wordmark in personalized pages',async({page})=>{
+  await page.goto('./');
+  const shortcut=page.getByRole('link',{name:'Abrir Meu APURANTE'});
+  await expect(shortcut).toBeVisible();
+  await expect(shortcut.locator('.plus-symbol')).toHaveText('A+');
+  await shortcut.click();
+  await expect(page).toHaveURL(/\/meu-apurante\/$/);
+  await expect(page.getByRole('link',{name:'APURANTE+ — início'})).toHaveText('APURANTE+');
 });
