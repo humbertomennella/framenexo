@@ -1,48 +1,20 @@
 {
-  "startedAt": "2026-09-12T17:42:51Z",
-  "finishedAt": "2026-09-12T17:49:36Z",
+  "startedAt": "2026-09-12T20:23:05Z",
+  "finishedAt": "2026-09-12T20:23:11Z",
   "status": "degraded",
-  "runId": "34709035744",
+  "runId": "34716919546",
   "result": {
     "collection": {
-      "collected": 21,
-      "sourcesOK": 8,
+      "collected": 38,
+      "sourcesOK": 15,
       "errors": [
         {
           "source": "ibge",
           "code": "HTTPError"
         },
         {
-          "source": "camara-cultura",
-          "code": "URLError"
-        },
-        {
-          "source": "camara",
-          "code": "URLError"
-        },
-        {
-          "source": "camara-economia",
-          "code": "URLError"
-        },
-        {
-          "source": "camara-tecnologia",
-          "code": "URLError"
-        },
-        {
           "source": "tse",
           "code": "HTTPError"
-        },
-        {
-          "source": "camara-esportes",
-          "code": "URLError"
-        },
-        {
-          "source": "camara-saude",
-          "code": "URLError"
-        },
-        {
-          "source": "camara-meio-ambiente",
-          "code": "URLError"
         }
       ]
     },
