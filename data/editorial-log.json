@@ -3503,5 +3503,28 @@
     "publishingAllowed": false,
     "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
     "startedAt": "2026-09-13T21:24:14Z"
+  },
+  {
+    "at": "2026-09-13T22:52:35Z",
+    "event": "runner_completed",
+    "result": {
+      "collection": {
+        "sourcesOK": 15,
+        "collected": 13,
+        "errors": [
+          {
+            "source": "ibge",
+            "code": "HTTPError"
+          },
+          {
+            "source": "tse",
+            "code": "HTTPError"
+          }
+        ],
+        "snapshotRunId": "34785417189",
+        "snapshotCompletedAt": "2026-09-13T21:59:34Z"
+      },
+      "publication": "held_missing_independent_evidence_or_media"
+    }
   }
 ]

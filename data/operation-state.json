@@ -1,12 +1,12 @@
 {
-  "startedAt": "2026-09-13T15:55:59Z",
-  "finishedAt": "2026-09-13T15:56:09Z",
+  "startedAt": "2026-09-13T22:52:35Z",
+  "finishedAt": "2026-09-13T22:52:35Z",
   "status": "degraded",
-  "runId": "34767056898",
+  "runId": "34788052480",
   "result": {
     "collection": {
-      "collected": 28,
       "sourcesOK": 15,
+      "collected": 13,
       "errors": [
         {
           "source": "ibge",
@@ -16,7 +16,9 @@
           "source": "tse",
           "code": "HTTPError"
         }
-      ]
+      ],
+      "snapshotRunId": "34785417189",
+      "snapshotCompletedAt": "2026-09-13T21:59:34Z"
     },
     "publication": "held_missing_independent_evidence_or_media"
   }

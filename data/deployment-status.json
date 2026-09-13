@@ -3,6 +3,6 @@
   "githubPages": true,
   "repositoryScheduleActive": true,
   "generationValidated": true,
-  "notes": "Rotina executada no GitHub. O site mostra os dados do último build.",
+  "notes": "Escuta contínua; edições regulares às 08h, 13h, 18h e 22h (America/Sao_Paulo). Urgências podem gerar edição extraordinária.",
   "scheduleActive": true
 }
