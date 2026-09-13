@@ -1,6 +1,6 @@
 """Edition-aware publisher built on the conservative editorial pipeline."""
 from __future__ import annotations
-import collections,datetime as dt,hashlib,re,time,urllib.error
+import collections,datetime as dt,hashlib,json,re,time,urllib.error
 import pipeline as p
 import edition_schedule as schedule
 
@@ -54,7 +54,7 @@ def publish(force=False,dry_run=False,limit=30):
    if dry_run:
     p.write(f'.cache/drafts/{c["id"]}.json',dict(metadata=meta,paragraphs=draft['paragraphs'],review=review));count+=1;continue
    target=p.ROOT/'content/news'/f'{slug}.md'
-   with target.open('x') as f:f.write('---\n'+p.json.dumps(meta,ensure_ascii=False,indent=2)+'\n---\n\n'+p.render_article(draft))
+   with target.open('x') as f:f.write('---\n'+json.dumps(meta,ensure_ascii=False,indent=2)+'\n---\n\n'+p.render_article(draft))
    for x in group:x['status']='published'
    record=dict(slug=slug,title=meta['title'],eventKey=meta['eventKey'],publishedAt=stamp,image=meta['image'],sourceUrls=[x['url'] for x in group],sourceOrganizations=list(p.independent_organizations(group,sources)),leadSourceOrganization=lead_org,editionId=edition_id,editionType=mode,editionSlot=edition_slot)
    history.append(record);published_stamps.append(stamp);edition_slugs.append(slug);category_counts[c['category']]+=1
