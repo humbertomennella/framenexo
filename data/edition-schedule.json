@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "timezone": "America/Sao_Paulo",
+  "slots": [8, 13, 18, 22],
+  "publicationWindowMinutes": 150,
+  "targetPerCategory": 3,
+  "maxPerCategory": 4,
+  "maxArticlesPerEdition": 30,
+  "qualityFirst": true,
+  "extraordinaryEditions": true,
+  "launchDate": "2026-09-13"
+}
