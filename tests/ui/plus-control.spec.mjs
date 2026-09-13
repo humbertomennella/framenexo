@@ -8,8 +8,9 @@ test.beforeEach(async({page})=>{
 
 test('favorite editorias reorder Home and activate personal feed',async({page})=>{
   await page.goto('./meu-apurante/');
-  await page.getByLabel('Tecnologia').check();
-  await page.getByRole('button',{name:'Aplicar ao meu APURANTE+'}).click();
+  const interests=page.locator('[data-interest-selector]');
+  await interests.getByLabel('Tecnologia').check();
+  await interests.getByRole('button',{name:'Aplicar ao meu APURANTE+'}).click();
   await page.goto('./');
   await expect(page.locator('[data-home-plus]')).toBeVisible();
   await expect(page.locator('[data-plus-interest-count]')).toHaveText('1');
