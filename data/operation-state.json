@@ -1,11 +1,11 @@
 {
-  "startedAt": "2026-09-13T00:43:11Z",
-  "finishedAt": "2026-09-13T00:43:18Z",
+  "startedAt": "2026-09-13T05:48:42Z",
+  "finishedAt": "2026-09-13T05:48:48Z",
   "status": "degraded",
-  "runId": "34728676052",
+  "runId": "34741205578",
   "result": {
     "collection": {
-      "collected": 15,
+      "collected": 20,
       "sourcesOK": 14,
       "errors": [
         {
@@ -17,7 +17,7 @@
           "code": "HTTPError"
         },
         {
-          "source": "camara-meio-ambiente",
+          "source": "camara-saude",
           "code": "HTTPError"
         }
       ]
