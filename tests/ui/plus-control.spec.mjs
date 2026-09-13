@@ -44,11 +44,12 @@ test('Meu APURANTE+ controls shelves, order and compact mode',async({page})=>{
   await expect(page.locator('[data-plus-home-badge]')).toBeVisible();
 });
 
-test('APURANTE+ landing states permanent free ownership model',async({page})=>{
+test('APURANTE+ landing states simple local ownership model',async({page})=>{
   await page.goto('./mais/');
-  await expect(page.getByText('Seu jornal de bolso · grátis para sempre')).toBeVisible();
+  await expect(page.getByText('Jornalismo independente · Gratuito e local')).toBeVisible();
+  await expect(page.getByRole('heading',{name:'O portal é público. O seu APURANTE+ é só seu.'})).toBeVisible();
   await expect(page.getByText('Sem assinatura',{exact:true})).toBeVisible();
   await expect(page.getByText('Sem paywall',{exact:true})).toBeVisible();
-  await expect(page.locator('.plus-control-card')).toContainText('APURANTE+');
+  await expect(page.getByText('Sem cadastro',{exact:true})).toBeVisible();
   await expect(page.getByRole('link',{name:'Abrir Meu APURANTE+'})).toBeVisible();
 });
