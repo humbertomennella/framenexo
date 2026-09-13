@@ -48,7 +48,7 @@ test('APURANTE+ remains usable without horizontal overflow on mobile',async({pag
     await page.setViewportSize({width,height:width<=390?800:900});
     for(const route of ['./','./mais/','./meu-apurante/']){
       await page.goto(route);
-      await expect(page.getByRole('link',{name:'Conhecer o APURANTE+'})).toBeVisible();
+      await expect(page.getByRole('banner').getByRole('link',{name:'Conhecer o APURANTE+'})).toBeVisible();
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${route} overflows at ${width}px`).toBe(true);
     }
   }
@@ -56,7 +56,7 @@ test('APURANTE+ remains usable without horizontal overflow on mobile',async({pag
 
 test('header uses the APURANTE+ wordmark and opens the explainer first',async({page})=>{
   await page.goto('./');
-  const shortcut=page.getByRole('link',{name:'Conhecer o APURANTE+'});
+  const shortcut=page.getByRole('banner').getByRole('link',{name:'Conhecer o APURANTE+'});
   await expect(shortcut).toBeVisible();
   await expect(shortcut).toContainText('APURANTE+');
   await expect(page.getByRole('link',{name:'Voltar ao início do APURANTE'})).toHaveText('Início');
