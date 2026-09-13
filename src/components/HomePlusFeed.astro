@@ -1,0 +1,103 @@
+---
+import Card from './Card.astro';
+import {articles,href} from '../lib/news';
+---
+<section class="home-plus-panel" data-home-plus hidden aria-labelledby="home-plus-title">
+  <header class="home-plus-header">
+    <div>
+      <span class="eyebrow">Seu jornal de bolso</span>
+      <h2 id="home-plus-title">Meu APURANTE+</h2>
+      <p data-home-plus-message>Esta área muda conforme as escolhas que você faz no seu APURANTE+.</p>
+    </div>
+    <div class="home-plus-summary" aria-label="Resumo das suas escolhas">
+      <span><strong data-plus-interest-count>0</strong> editorias</span>
+      <span><strong data-plus-topic-count>0</strong> assuntos</span>
+      <span><strong data-plus-saved-count>0</strong> salvos</span>
+    </div>
+    <a class="home-plus-manage" href={href('meu-apurante/')}>Gerenciar meu APURANTE+ →</a>
+  </header>
+
+  <div class="home-plus-block" data-plus-personal-block hidden>
+    <div class="section-heading"><div><span class="eyebrow">Escolhido por você</span><h3>Para você agora</h3></div></div>
+    <div class="cards home-plus-feed" data-plus-personal-feed>
+      {articles.map(article=><div data-plus-home-article data-slug={article.slug} data-category={article.category} data-tags={JSON.stringify(article.tags||[])} hidden><Card article={article}/></div>)}
+    </div>
+  </div>
+
+  <div class="home-plus-block" data-plus-saved-block hidden>
+    <div class="section-heading"><div><span class="eyebrow">Sua biblioteca</span><h3>Ler depois</h3></div><a href={href('meu-apurante/')}>Ver todos →</a></div>
+    <div class="cards home-plus-saved" data-plus-saved-feed>
+      {articles.map(article=><div data-plus-home-saved data-slug={article.slug} hidden><Card article={article}/></div>)}
+    </div>
+  </div>
+</section>
+
+<script>
+  import {readPlusState,PLUS_STORAGE_KEY} from '../lib/plus';
+
+  const setupHomePlus=()=>document.querySelectorAll<HTMLElement>('[data-home-plus]').forEach(root=>{
+    if(root.dataset.ready==='true')return;
+    root.dataset.ready='true';
+
+    const personalBlock=root.querySelector<HTMLElement>('[data-plus-personal-block]');
+    const savedBlock=root.querySelector<HTMLElement>('[data-plus-saved-block]');
+    const interestCount=root.querySelector<HTMLElement>('[data-plus-interest-count]');
+    const topicCount=root.querySelector<HTMLElement>('[data-plus-topic-count]');
+    const savedCount=root.querySelector<HTMLElement>('[data-plus-saved-count]');
+    const message=root.querySelector<HTMLElement>('[data-home-plus-message]');
+
+    const render=()=>{
+      const state=readPlusState();
+      const hasChoices=Boolean(state.interests.length||state.followedTopics.length||state.savedArticles.length||state.preferences.home.enabled||state.preferences.compactFeed);
+      root.hidden=!hasChoices;
+      document.documentElement.classList.toggle('plus-compact-home',state.preferences.compactFeed);
+      if(!hasChoices)return;
+
+      if(interestCount)interestCount.textContent=String(state.interests.length);
+      if(topicCount)topicCount.textContent=String(state.followedTopics.length);
+      if(savedCount)savedCount.textContent=String(state.savedArticles.length);
+
+      const candidates=[...root.querySelectorAll<HTMLElement>('[data-plus-home-article]')];
+      const ranked=candidates.map((item,index)=>{
+        const category=item.dataset.category||'';
+        const tags=JSON.parse(item.dataset.tags||'[]') as string[];
+        const categoryInterest=state.interests.includes(category)?5:0;
+        const followedCategory=state.followedTopics.includes(category)?4:0;
+        const topicMatches=tags.filter(tag=>state.followedTopics.includes(tag)).length*4;
+        return {item,index,score:categoryInterest+followedCategory+topicMatches};
+      }).sort((a,b)=>b.score-a.score||a.index-b.index);
+
+      const matching=ranked.filter(entry=>entry.score>0);
+      const personalVisible=state.preferences.home.showPersonalFeed&&matching.length>0;
+      if(personalBlock)personalBlock.hidden=!personalVisible;
+      ranked.forEach((entry,position)=>{
+        const visible=personalVisible&&entry.score>0&&position<(state.preferences.compactFeed?6:4);
+        entry.item.hidden=!visible;
+        entry.item.style.order=String(position);
+      });
+
+      const saved=[...root.querySelectorAll<HTMLElement>('[data-plus-home-saved]')];
+      let visibleSaved=0;
+      saved.forEach(item=>{
+        const selected=state.preferences.home.showSavedShelf&&state.savedArticles.includes(item.dataset.slug||'')&&visibleSaved<(state.preferences.compactFeed?4:3);
+        item.hidden=!selected;
+        if(selected)visibleSaved++;
+      });
+      if(savedBlock)savedBlock.hidden=visibleSaved===0;
+
+      if(message){
+        if(personalVisible&&visibleSaved)message.textContent='Assuntos que você acompanha e matérias salvas, direto na sua Home.';
+        else if(personalVisible)message.textContent='Sua Home está priorizando as editorias e assuntos que você escolheu.';
+        else if(visibleSaved)message.textContent='Suas matérias para ler depois estão a um toque de distância.';
+        else message.textContent='Sua organização pessoal já está sendo aplicada à Home.';
+      }
+    };
+
+    window.addEventListener('apurante-plus:change',render);
+    window.addEventListener('storage',event=>{if(event.key===PLUS_STORAGE_KEY)render();});
+    render();
+  });
+
+  setupHomePlus();
+  document.addEventListener('astro:page-load',setupHomePlus);
+</script>
