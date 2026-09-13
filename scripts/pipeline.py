@@ -4,6 +4,13 @@ import argparse,concurrent.futures,datetime as dt,difflib,fcntl,gzip,hashlib,htm
 import urllib.error,urllib.parse,urllib.request,urllib.robotparser,xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
+from contextlib import contextmanager
+STATE_PATHS={}
+@contextmanager
+def state_paths(paths):
+ previous=STATE_PATHS.copy();STATE_PATHS.update(paths)
+ try:yield
+ finally:STATE_PATHS.clear();STATE_PATHS.update(previous)
 ROOT=Path(__file__).resolve().parents[1]
 UTC=dt.timezone.utc
 UA='ApuranteBot/1.0 (editorial feed reader; https://humbertomennella.github.io/framenexo/politica-editorial/)'
@@ -22,10 +29,10 @@ def date(value):
   except (ValueError,TypeError,IndexError):return None
  return r.replace(tzinfo=UTC) if r.tzinfo is None else r.astimezone(UTC)
 def read(name,default):
- p=ROOT/name
+ p=ROOT/STATE_PATHS.get(name,name)
  return json.loads(p.read_text()) if p.exists() else default
 def write(name,data):
- p=ROOT/name;p.parent.mkdir(parents=True,exist_ok=True);raw=json.dumps(data,ensure_ascii=False,indent=2)+'\n'
+ p=ROOT/STATE_PATHS.get(name,name);p.parent.mkdir(parents=True,exist_ok=True);raw=json.dumps(data,ensure_ascii=False,indent=2)+'\n'
  if p.exists() and p.read_text()==raw:return False
  temp=p.with_suffix(p.suffix+'.tmp');temp.write_text(raw);temp.replace(p);return True
 def log(event,**data):

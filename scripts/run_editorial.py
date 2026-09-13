@@ -1,14 +1,20 @@
-"""Collect, start CPU-only model when an edition is due, publish, clean up."""
+"""Consume a completed Scout snapshot, start CPU-only model when an edition is due, publish, clean up."""
 import argparse,fcntl,json,os,subprocess,time,urllib.request
 import pipeline as p
 import edition_schedule as schedule
+import scout_snapshot
 import publish_edition
 import local_model
 def run(force=False,dry_run=False,limit=30):
  state=p.read('data/publishing-state.json',{})
  if state.get('paused'):return {'paused':True}
- result=p.collect()
- if not result['sourcesOK']:raise RuntimeError('all_sources_failed')
+ try:snapshot=scout_snapshot.consume()
+ except (ValueError,TypeError,KeyError) as error:
+  p.log('edition_held',reason='no_valid_scout_snapshot',code=str(error),restore=p.read('.cache/scout/restore.json',{}))
+  return {'publication':'held_no_valid_scout_snapshot'}
+ observed=snapshot['state']
+ result=dict(sourcesOK=observed['sourcesReached'],collected=observed.get('newCandidates',0),errors=observed.get('sourceErrors',[]),snapshotRunId=snapshot['runId'],snapshotCompletedAt=snapshot['completedAt'])
+ state['lastCollectedAt']=snapshot['completedAt'];p.write('data/publishing-state.json',state)
  if os.environ.get('GITHUB_ACTIONS')=='true':
   status=p.read('data/deployment-status.json',{});status.update(repository=os.environ['GITHUB_REPOSITORY'],scheduleActive=True,notes='Escuta contínua; edições regulares às 08h, 13h, 18h e 22h (America/Sao_Paulo). Urgências podem gerar edição extraordinária.');p.write('data/deployment-status.json',status)
  state=p.read('data/publishing-state.json',{})
