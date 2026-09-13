@@ -1,0 +1,22 @@
+<section class="plus-portability" data-plus-portability aria-labelledby="portability-title">
+  <div><span class="eyebrow">Portabilidade</span><h2 id="portability-title">Leve suas preferências com você</h2><p>Exporte um JSON e importe em outro navegador. O arquivo contém somente preferências locais do APURANTE+.</p></div>
+  <div class="plus-portability-actions">
+    <button class="button" type="button" data-plus-export>Exportar JSON</button>
+    <label class="button secondary" for="plus-import-file">Importar JSON</label>
+    <input id="plus-import-file" class="plus-file-input" type="file" accept="application/json,.json" data-plus-import/>
+    <button class="button secondary plus-reset" type="button" data-plus-reset>Restaurar padrão</button>
+  </div>
+  <p class="plus-feedback" data-plus-portability-feedback role="status" aria-live="polite"></p>
+</section>
+<script>
+  import {PLUS_SCHEMA_VERSION,readPlusState,normalizePlusState,writePlusState,clearPlusState} from '../lib/plus';
+  const setupPortability=()=>document.querySelectorAll<HTMLElement>('[data-plus-portability]').forEach(root=>{
+    if(root.dataset.ready==='true')return;root.dataset.ready='true';
+    const feedback=root.querySelector<HTMLElement>('[data-plus-portability-feedback]');
+    const announce=(text:string)=>{if(feedback)feedback.textContent=text;};
+    root.querySelector('[data-plus-export]')?.addEventListener('click',()=>{const payload={app:'APURANTE+',schemaVersion:PLUS_SCHEMA_VERSION,exportedAt:new Date().toISOString(),state:readPlusState()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='apurante-plus-config.json';document.body.append(link);link.click();link.remove();URL.revokeObjectURL(url);announce('Configurações exportadas.');});
+    root.querySelector<HTMLInputElement>('[data-plus-import]')?.addEventListener('change',async event=>{const input=event.currentTarget;const file=input.files?.[0];if(!file)return;try{const parsed=JSON.parse(await file.text());const source=parsed?.state??parsed;if(!source||typeof source!=='object')throw new Error('invalid');writePlusState(normalizePlusState(source));announce('Configurações importadas com sucesso.');}catch{announce('Arquivo inválido. Use um JSON exportado pelo APURANTE+.');}input.value='';});
+    root.querySelector('[data-plus-reset]')?.addEventListener('click',()=>{if(!window.confirm('Restaurar todas as preferências locais do APURANTE+ neste navegador?'))return;clearPlusState();announce('Preferências locais restauradas.');});
+  });
+  setupPortability();document.addEventListener('astro:page-load',setupPortability);
+</script>

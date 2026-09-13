@@ -1,7 +1,7 @@
 ---
-const {slug}=Astro.props;
+const {slug,compact=false}=Astro.props;
 ---
-<button class="plus-action" type="button" data-plus-save={slug} aria-pressed="false">
+<button class:list={['plus-action',{'is-compact':compact}]} type="button" data-plus-save={slug} aria-pressed="false" aria-label={compact?'Salvar matéria':'Salvar esta matéria'}>
   <span aria-hidden="true" data-plus-save-icon>＋</span><span data-plus-save-label>Salvar</span>
 </button>
 <script>

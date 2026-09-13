@@ -1,0 +1,12 @@
+<div class="plus-personalized-badge" data-plus-home-badge hidden><span aria-hidden="true">A+</span> Home personalizada neste dispositivo</div>
+<script>
+  import {readPlusState} from '../lib/plus';
+  const setupHomePersonalization=()=>{
+    const host=document.querySelector<HTMLElement>('[data-home-sections]');
+    const badge=document.querySelector<HTMLElement>('[data-plus-home-badge]');
+    if(!host||!badge||host.dataset.plusReady==='true')return;host.dataset.plusReady='true';
+    const apply=()=>{const state=readPlusState();const home=state.preferences.home;const blocks=[...host.querySelectorAll<HTMLElement>('[data-home-category]')];const original=[...blocks].sort((a,b)=>Number(a.dataset.homeIndex)-Number(b.dataset.homeIndex));if(!home.enabled){original.forEach(block=>{block.hidden=false;host.append(block);});badge.hidden=true;return;}const all=blocks.map(block=>block.dataset.homeCategory||'');const order=[...home.order.filter(category=>all.includes(category)),...all.filter(category=>!home.order.includes(category))];const rank=new Map(order.map((category,index)=>[category,index]));blocks.sort((a,b)=>(rank.get(a.dataset.homeCategory||'')??999)-(rank.get(b.dataset.homeCategory||'')??999)).forEach(block=>{block.hidden=home.hiddenCategories.includes(block.dataset.homeCategory||'');host.append(block);});badge.hidden=false;};
+    window.addEventListener('apurante-plus:change',apply);window.addEventListener('storage',event=>{if(event.key==='apurante_plus')apply();});apply();
+  };
+  setupHomePersonalization();document.addEventListener('astro:page-load',setupHomePersonalization);
+</script>
