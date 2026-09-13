@@ -1,22 +1,181 @@
+---
+import {articles} from '../lib/news';
+const catalog=articles.map(article=>({
+  articleId:article.articleId,
+  slug:article.slug,
+  canonicalPath:`noticias/${article.slug}/`,
+  title:article.title,
+  summary:article.description,
+  category:article.category,
+  publishedAt:article.publishedAt,
+  lastModifiedAt:article.updatedAt||article.publishedAt
+}));
+---
 <section class="plus-portability" data-plus-portability aria-labelledby="portability-title">
-  <div><span class="eyebrow">Portabilidade</span><h2 id="portability-title">Leve suas preferências com você</h2><p>Exporte um JSON e importe em outro navegador. O arquivo contém somente preferências locais do APURANTE+.</p></div>
+  <div>
+    <span class="eyebrow">Proteção local</span>
+    <h2 id="portability-title">Proteja seu APURANTE+</h2>
+    <p>Suas escolhas ficam neste navegador. Crie uma cópia única para levar tudo a outro aparelho ou recuperar sua configuração se os dados locais forem removidos.</p>
+  </div>
+  <div class="plus-backup-options">
+    <label class="plus-backup-protect"><input type="checkbox" data-plus-encrypt/> <span><strong>Proteger backup com senha</strong><small>Opcional. A senha nunca é enviada ao APURANTE.</small></span></label>
+    <label class="plus-backup-password" data-plus-export-password-wrap hidden>Senha do backup <input type="password" minlength="8" autocomplete="new-password" data-plus-export-password/></label>
+  </div>
   <div class="plus-portability-actions">
-    <button class="button" type="button" data-plus-export>Exportar JSON</button>
-    <label class="button secondary" for="plus-import-file">Importar JSON</label>
-    <input id="plus-import-file" class="plus-file-input" type="file" accept="application/json,.json" data-plus-import/>
+    <button class="button" type="button" data-plus-export>Criar backup</button>
+    <label class="button secondary" for="plus-import-file">Escolher backup</label>
+    <input id="plus-import-file" class="plus-file-input" type="file" accept=".apurante,.json,application/json,application/octet-stream" data-plus-import/>
+    <button class="button secondary" type="button" data-plus-restore disabled>Restaurar backup</button>
     <button class="button secondary plus-reset" type="button" data-plus-reset>Restaurar padrão</button>
   </div>
+  <label class="plus-backup-password" data-plus-import-password-wrap hidden>Senha deste backup <input type="password" autocomplete="current-password" data-plus-import-password/></label>
+  <p class="plus-backup-file" data-plus-selected-file hidden></p>
   <p class="plus-feedback" data-plus-portability-feedback role="status" aria-live="polite"></p>
+  <script type="application/json" data-plus-article-catalog set:html={JSON.stringify(catalog).replace(/</g,'\\u003c')}></script>
 </section>
 <script>
   import {PLUS_SCHEMA_VERSION,readPlusState,normalizePlusState,writePlusState,clearPlusState} from '../lib/plus';
+  const BACKUP_FORMAT='apurante-backup';
+  const BACKUP_VERSION=1;
+  const THEME_KEY='apurante_theme';
+  const WEATHER_KEY='apurante_weather_location';
+  const encoder=new TextEncoder();
+  const decoder=new TextDecoder();
+  const toBase64=(bytes:Uint8Array)=>{let binary='';bytes.forEach(byte=>binary+=String.fromCharCode(byte));return btoa(binary)};
+  const fromBase64=(value:string)=>{const binary=atob(value);return Uint8Array.from(binary,char=>char.charCodeAt(0))};
+  const deriveKey=async(password:string,salt:Uint8Array,iterations:number)=>{
+    const base=await crypto.subtle.importKey('raw',encoder.encode(password),'PBKDF2',false,['deriveKey']);
+    return crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt,iterations},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
+  };
+  const encryptData=async(data:unknown,password:string)=>{
+    const salt=crypto.getRandomValues(new Uint8Array(16));
+    const iv=crypto.getRandomValues(new Uint8Array(12));
+    const iterations=310000;
+    const key=await deriveKey(password,salt,iterations);
+    const ciphertext=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},key,encoder.encode(JSON.stringify(data))));
+    return {kdf:{name:'PBKDF2',hash:'SHA-256',iterations,salt:toBase64(salt)},cipher:{name:'AES-GCM',iv:toBase64(iv)},ciphertext:toBase64(ciphertext)};
+  };
+  const decryptData=async(envelope:any,password:string)=>{
+    if(envelope?.kdf?.name!=='PBKDF2'||envelope?.kdf?.hash!=='SHA-256'||envelope?.cipher?.name!=='AES-GCM')throw new Error('unsupported_crypto');
+    const iterations=Number(envelope.kdf.iterations);
+    if(!Number.isInteger(iterations)||iterations<100000||iterations>1000000)throw new Error('invalid_kdf');
+    const salt=fromBase64(String(envelope.kdf.salt||''));
+    const iv=fromBase64(String(envelope.cipher.iv||''));
+    const ciphertext=fromBase64(String(envelope.ciphertext||''));
+    if(salt.length!==16||iv.length!==12||!ciphertext.length)throw new Error('invalid_crypto_payload');
+    const key=await deriveKey(password,salt,iterations);
+    const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ciphertext);
+    return JSON.parse(decoder.decode(plain));
+  };
+  const readJsonStorage=(key:string)=>{try{return JSON.parse(localStorage.getItem(key)||'null')}catch{return null}};
   const setupPortability=()=>document.querySelectorAll<HTMLElement>('[data-plus-portability]').forEach(root=>{
     if(root.dataset.ready==='true')return;root.dataset.ready='true';
     const feedback=root.querySelector<HTMLElement>('[data-plus-portability-feedback]');
+    const importInput=root.querySelector<HTMLInputElement>('[data-plus-import]');
+    const restoreButton=root.querySelector<HTMLButtonElement>('[data-plus-restore]');
+    const selectedFile=root.querySelector<HTMLElement>('[data-plus-selected-file]');
+    const encryptToggle=root.querySelector<HTMLInputElement>('[data-plus-encrypt]');
+    const exportPasswordWrap=root.querySelector<HTMLElement>('[data-plus-export-password-wrap]');
+    const exportPassword=root.querySelector<HTMLInputElement>('[data-plus-export-password]');
+    const importPasswordWrap=root.querySelector<HTMLElement>('[data-plus-import-password-wrap]');
+    const importPassword=root.querySelector<HTMLInputElement>('[data-plus-import-password]');
+    const catalogNode=root.querySelector<HTMLScriptElement>('[data-plus-article-catalog]');
+    let selected:File|null=null;
+    let selectedEnvelope:any=null;
     const announce=(text:string)=>{if(feedback)feedback.textContent=text;};
-    root.querySelector('[data-plus-export]')?.addEventListener('click',()=>{const payload={app:'APURANTE+',schemaVersion:PLUS_SCHEMA_VERSION,exportedAt:new Date().toISOString(),state:readPlusState()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='apurante-plus-config.json';document.body.append(link);link.click();link.remove();URL.revokeObjectURL(url);announce('Configurações exportadas.');});
-    root.querySelector<HTMLInputElement>('[data-plus-import]')?.addEventListener('change',async event=>{const input=event.currentTarget;const file=input.files?.[0];if(!file)return;try{const parsed=JSON.parse(await file.text());const source=parsed?.state??parsed;if(!source||typeof source!=='object')throw new Error('invalid');writePlusState(normalizePlusState(source));announce('Configurações importadas com sucesso.');}catch{announce('Arquivo inválido. Use um JSON exportado pelo APURANTE+.');}input.value='';});
+    const catalog=(()=>{try{return JSON.parse(catalogNode?.textContent||'[]') as any[]}catch{return []}})();
+    const findCurrent=(articleId:string,slug:string)=>catalog.find(article=>(articleId&&article.articleId===articleId)||(slug&&article.slug===slug));
+    const snapshotFromCurrent=(article:any,savedAt:string)=>({...article,savedAt:savedAt||new Date().toISOString()});
+    const reconcileState=(source:unknown)=>{
+      const state=normalizePlusState(source);
+      const snapshots=state.savedArticles.map(slug=>{
+        const previous=state.savedArticleSnapshots.find(item=>item.slug===slug);
+        const current=findCurrent(previous?.articleId||'',slug);
+        if(previous)return previous;
+        if(current)return snapshotFromCurrent(current,new Date().toISOString());
+        return {articleId:`legacy:${slug}`,slug,canonicalPath:`noticias/${slug}/`,title:slug.replace(/-/g,' '),summary:'Registro preservado de um backup anterior. A matéria não foi encontrada na edição atual do APURANTE.',category:'',publishedAt:'',lastModifiedAt:'',savedAt:''};
+      });
+      state.savedArticleSnapshots=snapshots;
+      const missing=snapshots.filter(item=>!findCurrent(item.articleId,item.slug)).length;
+      return {state,missing};
+    };
+    const routeBackup=async(parsed:any,password:string)=>{
+      if(parsed?.format===BACKUP_FORMAT){
+        if(parsed.version!==BACKUP_VERSION)throw new Error('unsupported_backup_version');
+        const data=parsed.encrypted?await decryptData(parsed,password):parsed.data;
+        if(!data||typeof data!=='object'||!('state' in data))throw new Error('invalid_backup_data');
+        const reconciled=reconcileState((data as any).state);
+        return {state:reconciled.state,missing:reconciled.missing,appearance:(data as any).appearance,weatherLocation:(data as any).weatherLocation,createdAt:parsed.createdAt||''};
+      }
+      if(parsed?.app==='APURANTE+'||parsed?.state||parsed?.version){
+        const reconciled=reconcileState(parsed?.state??parsed);
+        return {state:reconciled.state,missing:reconciled.missing,appearance:null,weatherLocation:null,createdAt:parsed?.exportedAt||''};
+      }
+      throw new Error('unknown_backup_format');
+    };
+    const buildBackupState=()=>{
+      const state=readPlusState();
+      state.savedArticleSnapshots=state.savedArticles.map(slug=>{
+        const previous=state.savedArticleSnapshots.find(item=>item.slug===slug);
+        const current=findCurrent(previous?.articleId||'',slug);
+        if(previous)return previous;
+        if(current)return snapshotFromCurrent(current,new Date().toISOString());
+        return {articleId:`legacy:${slug}`,slug,canonicalPath:`noticias/${slug}/`,title:slug.replace(/-/g,' '),summary:'Registro preservado. A matéria não está presente no índice atual.',category:'',publishedAt:'',lastModifiedAt:'',savedAt:''};
+      });
+      writePlusState(state);
+      return state;
+    };
+    encryptToggle?.addEventListener('change',()=>{if(exportPasswordWrap)exportPasswordWrap.hidden=!encryptToggle.checked;if(!encryptToggle.checked&&exportPassword)exportPassword.value='';});
+    root.querySelector('[data-plus-export]')?.addEventListener('click',async()=>{
+      try{
+        const protect=Boolean(encryptToggle?.checked);
+        const password=exportPassword?.value||'';
+        if(protect&&password.length<8){announce('Use uma senha com pelo menos 8 caracteres para proteger o backup.');return;}
+        const data={state:buildBackupState(),appearance:{theme:localStorage.getItem(THEME_KEY)},weatherLocation:readJsonStorage(WEATHER_KEY)};
+        let payload:any={format:BACKUP_FORMAT,version:BACKUP_VERSION,createdAt:new Date().toISOString(),encrypted:false,data};
+        if(protect){const encrypted=await encryptData(data,password);payload={format:BACKUP_FORMAT,version:BACKUP_VERSION,createdAt:new Date().toISOString(),encrypted:true,...encrypted};}
+        const blob=new Blob([JSON.stringify(payload)],{type:'application/vnd.apurante.backup+json'});
+        const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=`meu-apurante-${new Date().toISOString().slice(0,10)}.apurante`;document.body.append(link);link.click();link.remove();URL.revokeObjectURL(url);
+        localStorage.setItem('apurante_plus_last_backup_at',new Date().toISOString());
+        announce(protect?'Backup protegido criado. Guarde também a senha.':'Backup completo criado.');
+      }catch{announce('Não foi possível criar o backup neste navegador.');}
+    });
+    importInput?.addEventListener('change',async()=>{
+      selected=importInput.files?.[0]||null;selectedEnvelope=null;
+      if(restoreButton)restoreButton.disabled=!selected;
+      if(selectedFile){selectedFile.hidden=!selected;selectedFile.textContent=selected?`Arquivo selecionado: ${selected.name}`:'';}
+      if(importPasswordWrap)importPasswordWrap.hidden=true;if(importPassword)importPassword.value='';
+      if(!selected)return;
+      try{
+        selectedEnvelope=JSON.parse(await selected.text());
+        if(!selectedEnvelope||typeof selectedEnvelope!=='object')throw new Error('invalid');
+        if(importPasswordWrap)importPasswordWrap.hidden=selectedEnvelope?.format===BACKUP_FORMAT&&selectedEnvelope?.encrypted===true?false:true;
+        announce(selectedEnvelope?.encrypted?'Backup protegido selecionado. Informe a senha para restaurar.':'Backup selecionado. Revise e confirme a restauração.');
+      }catch{selected=null;selectedEnvelope=null;if(restoreButton)restoreButton.disabled=true;announce('Arquivo corrompido ou adulterado. Nenhuma configuração foi alterada.');}
+    });
+    restoreButton?.addEventListener('click',async()=>{
+      if(!selected||!selectedEnvelope)return;
+      try{
+        const password=importPassword?.value||'';
+        if(selectedEnvelope?.encrypted&&!password){announce('Informe a senha deste backup.');return;}
+        const routed=await routeBackup(selectedEnvelope,password);
+        const state=routed.state;
+        const summary=`${state.interests.length} editorias favoritas, ${state.followedTopics.length} assuntos seguidos e ${state.savedArticles.length} matérias em Ler depois${routed.missing?` (${routed.missing} preservadas sem versão atual no portal)`:''}.`;
+        if(!window.confirm(`Este backup contém ${summary}\n\nSubstituir o Meu APURANTE+ atual por esta cópia?`))return;
+        writePlusState(state);
+        const theme=routed.appearance?.theme;if(theme==='light'||theme==='dark')localStorage.setItem(THEME_KEY,theme);
+        if(routed.weatherLocation&&typeof routed.weatherLocation==='object')localStorage.setItem(WEATHER_KEY,JSON.stringify(routed.weatherLocation));
+        announce(`Backup restaurado com sucesso. ${routed.missing?`${routed.missing} item(ns) antigo(s) foram preservados como memória local.`:''}`.trim());
+        selected=null;selectedEnvelope=null;importInput.value='';if(restoreButton)restoreButton.disabled=true;if(selectedFile)selectedFile.hidden=true;if(importPasswordWrap)importPasswordWrap.hidden=true;
+      }catch(error){
+        const message=error instanceof Error?error.message:'';
+        if(message==='unsupported_backup_version')announce('Este backup usa uma versão ainda não suportada pelo APURANTE. Nenhuma configuração foi alterada.');
+        else if(selectedEnvelope?.encrypted)announce('Não foi possível abrir o backup. Verifique a senha e a integridade do arquivo.');
+        else announce('Backup inválido, corrompido ou incompatível. Nenhuma configuração foi alterada.');
+      }
+    });
     root.querySelector('[data-plus-reset]')?.addEventListener('click',()=>{if(!window.confirm('Restaurar todas as preferências locais do APURANTE+ neste navegador?'))return;clearPlusState();announce('Preferências locais restauradas.');});
+    window.addEventListener('apurante-plus:storage-error',()=>announce('O navegador recusou salvar os dados locais. Crie um backup antes de continuar.'));
   });
   setupPortability();document.addEventListener('astro:page-load',setupPortability);
 </script>
