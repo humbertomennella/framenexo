@@ -1,0 +1,35 @@
+---
+import {articles} from '../lib/news';
+import {editionHours,editionHoursLabel,editionSchedule,editionTitle} from '../lib/editions';
+const latestEditionArticle=articles.find(article=>Boolean(article.editionId));
+const latestEditionCount=latestEditionArticle?articles.filter(article=>article.editionId===latestEditionArticle.editionId).length:0;
+const latestEditionLabel=latestEditionArticle?editionTitle(latestEditionArticle):'Cronograma editorial ativo';
+---
+<section class="edition-schedule" data-edition-schedule data-slots={JSON.stringify(editionHours)} data-timezone={editionSchedule.timezone} aria-label="Cronograma de edições do APURANTE">
+  <div class="edition-schedule-main">
+    <span class="eyebrow">EDIÇÕES PROGRAMADAS</span>
+    <strong>{editionHoursLabel}</strong>
+    <p>Novas matérias chegam em edições completas. Notícias urgentes podem gerar uma edição extraordinária fora desses horários.</p>
+  </div>
+  <div class="edition-schedule-state">
+    <div><span>Última edição</span><strong>{latestEditionLabel}</strong>{latestEditionCount>0&&<small>{latestEditionCount} {latestEditionCount===1?'matéria':'matérias'} publicadas em conjunto</small>}</div>
+    <div><span>Próxima edição programada</span><strong data-next-edition>Calculando…</strong><small>Horário de Brasília</small></div>
+  </div>
+</section>
+<script is:inline>
+(()=>{
+ const setup=()=>document.querySelectorAll('[data-edition-schedule]').forEach(root=>{
+  const output=root.querySelector('[data-next-edition]');if(!output)return;
+  let slots=[];try{slots=JSON.parse(root.getAttribute('data-slots')||'[]')}catch{}
+  const timezone=root.getAttribute('data-timezone')||'America/Sao_Paulo';
+  const update=()=>{
+   const parts=new Intl.DateTimeFormat('en-GB',{timeZone:timezone,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
+   const hour=Number(parts.find(part=>part.type==='hour')?.value||0);const minute=Number(parts.find(part=>part.type==='minute')?.value||0);const now=hour*60+minute;
+   const next=slots.find(value=>value*60>now);const target=next??slots[0];if(target===undefined)return;
+   output.textContent=`${String(target).padStart(2,'0')}h · ${next===undefined?'amanhã':'hoje'}`;
+  };
+  update();if(root.getAttribute('data-ready')==='true')return;root.setAttribute('data-ready','true');document.addEventListener('visibilitychange',()=>{if(!document.hidden)update()});
+ });
+ setup();document.addEventListener('astro:page-load',setup);
+})();
+</script>
