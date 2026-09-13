@@ -1,12 +1,12 @@
 {
-  "startedAt": "2026-09-12T22:55:18Z",
-  "finishedAt": "2026-09-12T22:55:22Z",
+  "startedAt": "2026-09-13T00:43:11Z",
+  "finishedAt": "2026-09-13T00:43:18Z",
   "status": "degraded",
-  "runId": "34723995372",
+  "runId": "34728676052",
   "result": {
     "collection": {
-      "collected": 18,
-      "sourcesOK": 15,
+      "collected": 15,
+      "sourcesOK": 14,
       "errors": [
         {
           "source": "ibge",
@@ -14,6 +14,10 @@
         },
         {
           "source": "tse",
+          "code": "HTTPError"
+        },
+        {
+          "source": "camara-meio-ambiente",
           "code": "HTTPError"
         }
       ]
