@@ -35,10 +35,16 @@ test('saved weather location survives reload without asking again',async({page})
   await expect(summary).toContainText('Chuva');
 });
 
-test('weather bar stays compact on a 360px viewport',async({page})=>{
+test('weather bar stays compact and centered on a 360px viewport',async({page})=>{
   await page.setViewportSize({width:360,height:800});
   await page.reload();
   await expect(page.locator('[data-weather]')).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect(await page.locator('[data-weather]').evaluate(el=>Math.round(el.getBoundingClientRect().height))).toBeLessThan(45);
+  const centers=await page.evaluate(()=>{
+    const row=document.querySelector('.weather-row').getBoundingClientRect();
+    const summary=document.querySelector('[data-weather-toggle]').getBoundingClientRect();
+    return {row:row.left+row.width/2,summary:summary.left+summary.width/2};
+  });
+  expect(Math.abs(centers.row-centers.summary)).toBeLessThanOrEqual(2);
 });
