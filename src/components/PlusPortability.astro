@@ -34,7 +34,7 @@ const catalog=articles.map(article=>({
   <script type="application/json" data-plus-article-catalog set:html={JSON.stringify(catalog).replace(/</g,'\\u003c')}></script>
 </section>
 <script>
-  import {PLUS_SCHEMA_VERSION,readPlusState,normalizePlusState,writePlusState,clearPlusState} from '../lib/plus';
+  import {readPlusState,normalizePlusState,writePlusState,clearPlusState} from '../lib/plus';
   const BACKUP_FORMAT='apurante-backup';
   const BACKUP_VERSION=1;
   const THEME_KEY='apurante_theme';
@@ -68,6 +68,10 @@ const catalog=articles.map(article=>({
     return JSON.parse(decoder.decode(plain));
   };
   const readJsonStorage=(key:string)=>{try{return JSON.parse(localStorage.getItem(key)||'null')}catch{return null}};
+  const isStateLike=(value:any)=>Boolean(value&&typeof value==='object'&&(
+    Array.isArray(value.interests)||Array.isArray(value.savedArticles)||Array.isArray(value.followedTopics)||
+    (value.preferences&&typeof value.preferences==='object')
+  ));
   const setupPortability=()=>document.querySelectorAll<HTMLElement>('[data-plus-portability]').forEach(root=>{
     if(root.dataset.ready==='true')return;root.dataset.ready='true';
     const feedback=root.querySelector<HTMLElement>('[data-plus-portability-feedback]');
@@ -87,6 +91,7 @@ const catalog=articles.map(article=>({
     const findCurrent=(articleId:string,slug:string)=>catalog.find(article=>(articleId&&article.articleId===articleId)||(slug&&article.slug===slug));
     const snapshotFromCurrent=(article:any,savedAt:string)=>({...article,savedAt:savedAt||new Date().toISOString()});
     const reconcileState=(source:unknown)=>{
+      if(!isStateLike(source))throw new Error('invalid_state');
       const state=normalizePlusState(source);
       const snapshots=state.savedArticles.map(slug=>{
         const previous=state.savedArticleSnapshots.find(item=>item.slug===slug);
@@ -103,12 +108,15 @@ const catalog=articles.map(article=>({
       if(parsed?.format===BACKUP_FORMAT){
         if(parsed.version!==BACKUP_VERSION)throw new Error('unsupported_backup_version');
         const data=parsed.encrypted?await decryptData(parsed,password):parsed.data;
-        if(!data||typeof data!=='object'||!('state' in data))throw new Error('invalid_backup_data');
+        if(!data||typeof data!=='object'||!('state' in data)||!isStateLike((data as any).state))throw new Error('invalid_backup_data');
         const reconciled=reconcileState((data as any).state);
         return {state:reconciled.state,missing:reconciled.missing,appearance:(data as any).appearance,weatherLocation:(data as any).weatherLocation,createdAt:parsed.createdAt||''};
       }
-      if(parsed?.app==='APURANTE+'||parsed?.state||parsed?.version){
-        const reconciled=reconcileState(parsed?.state??parsed);
+      const legacyState=parsed?.app==='APURANTE+'&&isStateLike(parsed?.state)
+        ? parsed.state
+        : (!parsed?.app&&isStateLike(parsed) ? parsed : null);
+      if(legacyState){
+        const reconciled=reconcileState(legacyState);
         return {state:reconciled.state,missing:reconciled.missing,appearance:null,weatherLocation:null,createdAt:parsed?.exportedAt||''};
       }
       throw new Error('unknown_backup_format');
@@ -148,8 +156,11 @@ const catalog=articles.map(article=>({
       if(!selected)return;
       try{
         selectedEnvelope=JSON.parse(await selected.text());
-        if(!selectedEnvelope||typeof selectedEnvelope!=='object')throw new Error('invalid');
-        if(importPasswordWrap)importPasswordWrap.hidden=selectedEnvelope?.format===BACKUP_FORMAT&&selectedEnvelope?.encrypted===true?false:true;
+        if(!selectedEnvelope||typeof selectedEnvelope!=='object'||Array.isArray(selectedEnvelope))throw new Error('invalid');
+        const looksCurrent=selectedEnvelope?.format===BACKUP_FORMAT;
+        const looksLegacy=selectedEnvelope?.app==='APURANTE+'&&isStateLike(selectedEnvelope?.state)||(!selectedEnvelope?.app&&isStateLike(selectedEnvelope));
+        if(!looksCurrent&&!looksLegacy)throw new Error('invalid');
+        if(importPasswordWrap)importPasswordWrap.hidden=!(looksCurrent&&selectedEnvelope?.encrypted===true);
         announce(selectedEnvelope?.encrypted?'Backup protegido selecionado. Informe a senha para restaurar.':'Backup selecionado. Revise e confirme a restauração.');
       }catch{selected=null;selectedEnvelope=null;if(restoreButton)restoreButton.disabled=true;announce('Arquivo corrompido ou adulterado. Nenhuma configuração foi alterada.');}
     });
