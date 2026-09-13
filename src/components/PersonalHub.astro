@@ -19,16 +19,16 @@ const recommended=articles;
 
   <section class="plus-section" id="para-voce" aria-labelledby="para-voce-title"><div class="section-heading"><div><span class="eyebrow">Sua edição</span><h2 id="para-voce-title">Para você</h2></div></div><p class="plus-explainer">Editorias favoritas e assuntos seguidos sobem na sua seleção. Quando uma nova matéria publicada combina com essas escolhas, ela passa a ganhar prioridade automaticamente.</p><div class="cards personal-feed" data-personal-feed>{recommended.map(article=><div data-personal-article data-slug={article.slug} data-category={article.category} data-tags={JSON.stringify(article.tags)}><Card article={article}/></div>)}</div><div class="plus-empty" data-personal-empty hidden><h3>Nenhuma matéria corresponde às preferências atuais.</h3><p>Escolha outras editorias ou acompanhe novos assuntos.</p></div></section>
 
-  <section class="plus-section" id="salvos" aria-labelledby="salvos-title"><div class="section-heading"><div><span class="eyebrow">Sua biblioteca</span><h2 id="salvos-title">Ler depois</h2></div></div><p class="plus-explainer">O que você salva fica aqui e, se desejar, também aparece como uma prateleira na Home.</p><div class="cards saved-feed" data-saved-feed>{articles.map(article=><div data-saved-article data-slug={article.slug} hidden><Card article={article}/><button class="plus-remove" type="button" data-remove-saved={article.slug}>Remover dos salvos</button></div>)}</div><div class="plus-empty" data-saved-empty><h3>Sua lista de leitura está vazia.</h3><p>Use o botão “Salvar” nas notícias. Elas voltarão aqui quando você quiser.</p></div></section>
+  <section class="plus-section" id="salvos" aria-labelledby="salvos-title"><div class="section-heading"><div><span class="eyebrow">Sua biblioteca</span><h2 id="salvos-title">Ler depois</h2></div></div><p class="plus-explainer">O que você salva fica aqui e, se desejar, também aparece como uma prateleira na Home. Se uma matéria mudar depois do salvamento, o APURANTE avisa sem reescrever silenciosamente a sua memória local.</p><div class="cards saved-feed" data-saved-feed>{articles.map(article=><div data-saved-article data-slug={article.slug} data-article-id={article.articleId} data-updated-at={article.updatedAt||article.publishedAt} hidden><Card article={article}/><p class="plus-saved-note" data-saved-update hidden>Atualizado pela redação depois que você salvou esta matéria.</p><button class="plus-remove" type="button" data-remove-saved={article.slug}>Remover dos salvos</button></div>)}</div><div class="saved-archive-feed" data-saved-archive></div><div class="plus-empty" data-saved-empty><h3>Sua lista de leitura está vazia.</h3><p>Use o botão “Salvar” nas notícias. Elas voltarão aqui quando você quiser.</p></div></section>
 
   <section class="plus-section" id="assuntos" aria-labelledby="topics-title"><div class="section-heading"><div><span class="eyebrow">Acompanhamento contínuo</span><h2 id="topics-title">Assuntos que você segue</h2></div></div><p class="plus-explainer">Ao seguir uma editoria ou tag em uma matéria, novas publicações relacionadas passam a influenciar seu feed pessoal.</p><div class="followed-topics" data-followed-topics></div><div class="plus-empty" data-topics-empty><h3>Você ainda não acompanha nenhum assunto.</h3><p>Abra uma matéria e use os controles do APURANTE+ para acompanhar uma editoria ou tema.</p></div></section>
 
   <section class="plus-section" id="preferencias" aria-labelledby="preferences-title"><InterestSelector heading="Minhas editorias favoritas" /></section>
   <section class="plus-section" id="preferencias-home" aria-label="Preferências da página inicial"><HomePreferences/></section>
-  <section class="plus-section" aria-label="Levar ou restaurar suas preferências"><PlusPortability/></section>
+  <section class="plus-section" aria-label="Backup e restauração do Meu APURANTE+"><PlusPortability/></section>
 </div>
 <script>
-  import {readPlusState,toggleSavedArticle,toggleFollowedTopic} from '../lib/plus';
+  import {readPlusState,toggleSavedArticle,toggleFollowedTopic,getSavedSnapshot} from '../lib/plus';
   const setupHub=()=>document.querySelectorAll<HTMLElement>('[data-personal-hub]').forEach(hub=>{
     if(hub.dataset.ready==='true')return;hub.dataset.ready='true';
     const render=()=>{
@@ -51,8 +51,32 @@ const recommended=articles;
       const personalEmpty=hub.querySelector<HTMLElement>('[data-personal-empty]');if(personalEmpty)personalEmpty.hidden=ranked.length>0;
 
       const saved=[...hub.querySelectorAll<HTMLElement>('[data-saved-article]')];
-      saved.forEach(item=>item.hidden=!state.savedArticles.includes(item.dataset.slug||''));
-      const savedEmpty=hub.querySelector<HTMLElement>('[data-saved-empty]');if(savedEmpty)savedEmpty.hidden=saved.some(item=>!item.hidden);
+      const currentSlugs=new Set(saved.map(item=>item.dataset.slug||''));
+      saved.forEach(item=>{
+        const slug=item.dataset.slug||'';
+        const selected=state.savedArticles.includes(slug);
+        item.hidden=!selected;
+        const snapshot=getSavedSnapshot(state,item.dataset.articleId||'',slug);
+        const currentModified=Date.parse(item.dataset.updatedAt||'');
+        const savedModified=Date.parse(snapshot?.lastModifiedAt||'');
+        const note=item.querySelector<HTMLElement>('[data-saved-update]');
+        if(note)note.hidden=!(selected&&snapshot&&Number.isFinite(currentModified)&&Number.isFinite(savedModified)&&currentModified>savedModified);
+      });
+
+      const archive=hub.querySelector<HTMLElement>('[data-saved-archive]');
+      if(archive){
+        archive.replaceChildren();
+        state.savedArticleSnapshots.filter(snapshot=>state.savedArticles.includes(snapshot.slug)&&!currentSlugs.has(snapshot.slug)).forEach(snapshot=>{
+          const card=document.createElement('article');card.className='saved-archive-card';
+          const eyebrow=document.createElement('span');eyebrow.className='eyebrow';eyebrow.textContent=snapshot.category||'Arquivo pessoal';
+          const title=document.createElement('h3');title.textContent=snapshot.title||snapshot.slug;
+          const summary=document.createElement('p');summary.textContent=snapshot.summary||'Registro preservado no seu backup.';
+          const notice=document.createElement('p');notice.className='plus-saved-note';notice.textContent='Versão preservada do seu backup. Esta matéria não está mais disponível na edição atual do APURANTE.';
+          const remove=document.createElement('button');remove.type='button';remove.className='plus-remove';remove.textContent='Remover dos salvos';remove.addEventListener('click',()=>toggleSavedArticle(snapshot.slug,false));
+          card.append(eyebrow,title,summary,notice,remove);archive.append(card);
+        });
+      }
+      const savedEmpty=hub.querySelector<HTMLElement>('[data-saved-empty]');if(savedEmpty)savedEmpty.hidden=saved.some(item=>!item.hidden)||Boolean(archive?.children.length);
 
       const topics=hub.querySelector<HTMLElement>('[data-followed-topics]');
       if(topics){topics.replaceChildren(...state.followedTopics.map(topic=>{const button=document.createElement('button');button.type='button';button.className='topic-chip';button.textContent=`${topic} ×`;button.setAttribute('aria-label',`Deixar de acompanhar ${topic}`);button.addEventListener('click',()=>toggleFollowedTopic(topic,false));return button;}));}
