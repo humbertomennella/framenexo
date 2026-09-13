@@ -11,3 +11,7 @@ test('explicit election coverage flag prevents incidental candidate mentions fro
  const incidental={...base,slug:'incidental',electionCoverage:false};
  assert.deepEqual(selectElections([incidental,base],Date.parse('2026-09-10T10:00:00Z')).map(a=>a.slug),['direct']);
 });
+test('clear election wording is recognized even when explicit metadata is absent',()=>{
+ const story={slug:'auto',status:'published',publishedAt:'2026-09-09T09:00:00Z',updatedAt:'2026-09-09T11:00:00Z',confidence:'ALTA CONFIANÇA',tags:['Política'],title:'TSE publica nova decisão para as eleições 2026',description:'A Justiça Eleitoral atualizou a regra.'};
+ assert.deepEqual(selectElections([story],Date.parse('2026-09-10T10:00:00Z')).map(a=>a.slug),['auto']);
+});
