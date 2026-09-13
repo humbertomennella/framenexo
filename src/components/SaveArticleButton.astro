@@ -1,7 +1,18 @@
 ---
-const {slug,compact=false}=Astro.props;
+const {article,slug=article?.slug,compact=false}=Astro.props;
+const snapshot=article?{
+  articleId:article.articleId,
+  slug:article.slug,
+  canonicalPath:`noticias/${article.slug}/`,
+  title:article.title,
+  summary:article.description,
+  category:article.category,
+  publishedAt:article.publishedAt,
+  lastModifiedAt:article.updatedAt||article.publishedAt,
+  savedAt:''
+}:null;
 ---
-<button class:list={['plus-action',{'is-compact':compact}]} type="button" data-plus-save={slug} aria-pressed="false" aria-label={compact?'Salvar matéria':'Salvar esta matéria'}>
+<button class:list={['plus-action',{'is-compact':compact}]} type="button" data-plus-save={slug} data-plus-snapshot={snapshot?JSON.stringify(snapshot):undefined} aria-pressed="false" aria-label={compact?'Salvar matéria':'Salvar esta matéria'}>
   <span aria-hidden="true" data-plus-save-icon>＋</span><span data-plus-save-label>Salvar</span>
 </button>
 <script>
@@ -10,6 +21,7 @@ const {slug,compact=false}=Astro.props;
     if(button.dataset.ready==='true') return;
     button.dataset.ready='true';
     const slug=button.dataset.plusSave!;
+    const snapshot=()=>{try{return button.dataset.plusSnapshot?JSON.parse(button.dataset.plusSnapshot):undefined}catch{return undefined}};
     const render=()=>{
       const active=readPlusState().savedArticles.includes(slug);
       button.setAttribute('aria-pressed',String(active));
@@ -18,7 +30,7 @@ const {slug,compact=false}=Astro.props;
       if(label) label.textContent=active?'Salva':'Salvar';
       if(icon) icon.textContent=active?'✓':'＋';
     };
-    button.addEventListener('click',()=>{toggleSavedArticle(slug);render();});
+    button.addEventListener('click',()=>{toggleSavedArticle(slug,undefined,snapshot());render();});
     window.addEventListener('apurante-plus:change',render);
     render();
   });
