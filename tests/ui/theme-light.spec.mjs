@@ -30,6 +30,7 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
   await toggle.click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   await expect(page.locator('body')).toHaveAttribute('data-theme','light');
+  await expect(page.locator('meta[name="color-scheme"]')).toHaveAttribute('content','only light');
   await expect.poll(()=>page.locator('.site-header').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(248, 247, 243)');
   const state=await page.evaluate(()=>({
     body:getComputedStyle(document.body).backgroundColor,
@@ -43,6 +44,7 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
   expect(state.stored).toBe('light');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+  await expect(page.locator('meta[name="color-scheme"]')).toHaveAttribute('content','only light');
   const persisted=await page.evaluate(()=>({
     body:getComputedStyle(document.body).backgroundColor,
     htmlScheme:document.documentElement.style.colorScheme,
@@ -51,6 +53,16 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
   expect(persisted.body).toBe('rgb(244, 243, 239)');
   expectOnlyLight(persisted.htmlScheme);
   expectOnlyLight(persisted.bodyScheme);
+});
+
+test('theme metadata follows the manual choice instead of system preference',async({page})=>{
+  await page.emulateMedia({colorScheme:'dark'});
+  const schemeMeta=page.locator('meta[name="color-scheme"]');
+  await expect(schemeMeta).toHaveAttribute('content','dark');
+  await page.locator('[data-theme-toggle]').click();
+  await expect(schemeMeta).toHaveAttribute('content','only light');
+  await page.locator('[data-theme-toggle]').click();
+  await expect(schemeMeta).toHaveAttribute('content','dark');
 });
 
 test('APURANTE+ header wordmark stays visible and opens the explainer',async({page})=>{
