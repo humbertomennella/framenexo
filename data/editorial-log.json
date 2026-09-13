@@ -3116,5 +3116,74 @@
       },
       "publication": "held_missing_independent_evidence_or_media"
     }
+  },
+  {
+    "at": "2026-09-13T12:20:24Z",
+    "event": "collection",
+    "collected": 21,
+    "discarded": 140,
+    "sourceCounts": {
+      "camara-economia": 10,
+      "camara-cultura": 0,
+      "camara": 10,
+      "camara-tecnologia": 10,
+      "nasa": 10,
+      "un": 30,
+      "who": 25,
+      "ap": 10,
+      "camara-saude": 10,
+      "bbc-portugues": 41,
+      "uol": 15,
+      "guardian": 45,
+      "cnn-brasil": 60,
+      "camara-esportes": 8
+    },
+    "errors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "HTTPError"
+      }
+    ],
+    "seconds": 7.35
+  },
+  {
+    "at": "2026-09-13T12:20:24Z",
+    "event": "scout_completed",
+    "lastRunAt": "2026-09-13T12:20:24Z",
+    "status": "degraded",
+    "runId": "34756805582",
+    "sourcesReached": 14,
+    "newCandidates": 21,
+    "sourceErrors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "HTTPError"
+      }
+    ],
+    "queueByStatus": {
+      "published": 17,
+      "candidate": 505,
+      "expired": 4,
+      "needs_review": 10
+    },
+    "publishingAllowed": false,
+    "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
+    "startedAt": "2026-09-13T12:20:16Z"
   }
 ]
