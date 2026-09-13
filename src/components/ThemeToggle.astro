@@ -13,6 +13,13 @@
   const KEY = 'apurante_theme';
   const getTheme = () => document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
   const schemeFor = theme => theme === 'light' ? 'only light' : 'dark';
+  const syncMeta = theme => {
+    const scheme = schemeFor(theme);
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#f4f3ef' : '#090a0d');
+    const schemeMeta = document.querySelector('meta[name="color-scheme"]');
+    if (schemeMeta) schemeMeta.setAttribute('content', scheme);
+  };
   const sync = () => {
     const light = getTheme() === 'light';
     document.querySelectorAll('[data-theme-toggle]').forEach(button => {
@@ -32,8 +39,7 @@
       document.body.style.colorScheme = scheme;
     }
     if (persist) { try { localStorage.setItem(KEY, normalized); } catch {} }
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', normalized === 'light' ? '#f4f3ef' : '#090a0d');
+    syncMeta(normalized);
     sync();
     window.dispatchEvent(new CustomEvent('apurante:theme', {detail:{theme:normalized}}));
   };
@@ -45,6 +51,7 @@
       document.body.setAttribute('data-theme', theme);
       document.body.style.colorScheme = scheme;
     }
+    syncMeta(theme);
     document.querySelectorAll('[data-theme-toggle]').forEach(button => {
       if (button.dataset.themeReady === 'true') return;
       button.dataset.themeReady = 'true';
