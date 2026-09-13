@@ -1,0 +1,7 @@
+import {read,write,normalize,clear,VERSION} from './store.js';
+export function bindPortability(root,rerender){
+  const status=(message,tone='neutral')=>{const el=root.querySelector('[data-ap-status]');if(el){el.textContent=message;el.dataset.tone=tone;}};
+  root.querySelector('[data-ap-export]')?.addEventListener('click',()=>{const payload={app:'APURANTE+',schemaVersion:VERSION,exportedAt:new Date().toISOString(),state:read()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='apurante-plus-config.json';document.body.append(link);link.click();link.remove();URL.revokeObjectURL(url);status('Configurações exportadas em JSON.','success');});
+  root.querySelector('[data-ap-import]')?.addEventListener('change',async event=>{const file=event.currentTarget.files?.[0];if(!file)return;try{const parsed=JSON.parse(await file.text());const source=parsed?.state??parsed;if(!source||typeof source!=='object')throw new Error();write(normalize(source));rerender();status('Configurações importadas com sucesso.','success');}catch{status('Não foi possível importar este arquivo. Use um JSON exportado pelo APURANTE+.','error');}event.currentTarget.value='';});
+  root.querySelector('[data-ap-reset]')?.addEventListener('click',()=>{if(!window.confirm('Restaurar as preferências locais do APURANTE+ neste navegador?'))return;clear();rerender();status('Preferências locais restauradas.','success');});
+}
