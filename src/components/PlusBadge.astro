@@ -2,11 +2,14 @@
 import {href} from '../lib/news';
 const {compact=false,destination='mais/',label='Conhecer o APURANTE+'}=Astro.props;
 ---
-<a class:list={['plus-entry',{'is-compact':compact}]} href={href(destination)} aria-label={label}>
-  <span class="plus-text" aria-hidden="true">A+</span><span class="plus-name">APURANTE+</span>
+<a class:list={['plus-entry','plus-wordmark-entry',{'is-compact':compact}]} href={href(destination)} aria-label={label}>
+  <span class="plus-name" aria-hidden="true">APURANTE<span class="plus-brand-mark">+</span></span>
 </a>
 <style>
-.plus-text{display:inline-block;color:var(--accent);font-size:1.08rem;font-weight:950;line-height:1;letter-spacing:-.06em}
-.plus-entry:hover .plus-text,.plus-entry:focus-visible .plus-text{color:color-mix(in srgb,var(--accent) 82%,#fff)}
-.plus-entry:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.plus-wordmark-entry{display:inline-flex;align-items:center;min-height:44px}
+.plus-wordmark-entry .plus-name{display:inline-flex!important;align-items:baseline;gap:1px;color:var(--text);font-size:.82rem;font-weight:900;line-height:1;letter-spacing:-.035em;white-space:nowrap}
+.plus-wordmark-entry .plus-brand-mark{color:var(--accent-text);font-weight:950}
+.plus-wordmark-entry:hover .plus-name,.plus-wordmark-entry:focus-visible .plus-name{color:var(--text)}
+.plus-wordmark-entry:hover .plus-brand-mark,.plus-wordmark-entry:focus-visible .plus-brand-mark{color:var(--link-hover,var(--accent))}
+.plus-wordmark-entry:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 </style>
