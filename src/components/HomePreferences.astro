@@ -3,9 +3,17 @@ import {categories} from '../lib/news';
 ---
 <div class="home-preferences" data-home-preferences>
   <div class="home-preferences-head">
-    <div><span class="eyebrow">Página inicial</span><h2>Organize as editorias da Home</h2><p>Defina a ordem e oculte editorias apenas neste navegador. Destaques, urgentes e notícias recentes continuam editoriais.</p></div>
-    <label class="home-master-toggle"><input type="checkbox" data-home-enabled/><span>Personalizar Home</span></label>
+    <div><span class="eyebrow">Sua Home</span><h2>Monte a página inicial do seu jeito</h2><p>O que você decidir aqui altera a Home do APURANTE neste navegador: ordem, editorias visíveis, feed pessoal, salvos e densidade.</p></div>
+    <label class="home-master-toggle"><input type="checkbox" data-home-enabled/><span>Usar minha ordem</span></label>
   </div>
+
+  <div class="plus-home-switches" aria-label="Conteúdo personalizado da Home">
+    <label><input type="checkbox" data-home-personal-feed/><span><strong>Meu feed na Home</strong><small>Mostra matérias ligadas às suas editorias e assuntos seguidos.</small></span></label>
+    <label><input type="checkbox" data-home-saved-shelf/><span><strong>Ler depois na Home</strong><small>Mantém seus salvos acessíveis sem entrar no painel.</small></span></label>
+    <label><input type="checkbox" data-compact-feed/><span><strong>Modo compacto</strong><small>Mostra mais informação ocupando menos espaço na tela.</small></span></label>
+  </div>
+
+  <div class="home-order-intro"><strong>Ordem e visibilidade das editorias</strong><span>Arraste mentalmente menos. Use as setas. A civilização ainda não aperfeiçoou tudo.</span></div>
   <div class="home-order-list" data-home-order>
     {categories.map((category,index)=><div class="home-order-row" data-home-row data-category={category} data-default-index={index}>
       <label><input type="checkbox" value={category} data-home-visible checked/><span>{category}</span></label>
@@ -15,19 +23,55 @@ import {categories} from '../lib/news';
   <p class="plus-feedback" data-home-feedback role="status" aria-live="polite"></p>
 </div>
 <script>
-  import {readPlusState,setHomePreferences} from '../lib/plus';
+  import {readPlusState,setCompactFeed,setHomePreferences} from '../lib/plus';
   const setupHomePreferences=()=>document.querySelectorAll<HTMLElement>('[data-home-preferences]').forEach(root=>{
     if(root.dataset.ready==='true')return;root.dataset.ready='true';
     const host=root.querySelector<HTMLElement>('[data-home-order]');
     const enabled=root.querySelector<HTMLInputElement>('[data-home-enabled]');
+    const personalFeed=root.querySelector<HTMLInputElement>('[data-home-personal-feed]');
+    const savedShelf=root.querySelector<HTMLInputElement>('[data-home-saved-shelf]');
+    const compact=root.querySelector<HTMLInputElement>('[data-compact-feed]');
     const feedback=root.querySelector<HTMLElement>('[data-home-feedback]');
-    if(!host||!enabled)return;
+    if(!host||!enabled||!personalFeed||!savedShelf||!compact)return;
     const rows=()=>[...host.querySelectorAll<HTMLElement>('[data-home-row]')];
     const orderFor=(state:any)=>{const all=rows().map(row=>row.dataset.category||'');return [...state.preferences.home.order.filter((c:string)=>all.includes(c)),...all.filter(c=>!state.preferences.home.order.includes(c))];};
-    const render=()=>{const state=readPlusState();enabled.checked=state.preferences.home.enabled;const order=orderFor(state);const byCategory=new Map(rows().map(row=>[row.dataset.category||'',row]));order.forEach((category,index)=>{const row=byCategory.get(category);if(!row)return;const visible=row.querySelector<HTMLInputElement>('[data-home-visible]');if(visible)visible.checked=!state.preferences.home.hiddenCategories.includes(category);const up=row.querySelector<HTMLButtonElement>('[data-home-up]');const down=row.querySelector<HTMLButtonElement>('[data-home-down]');if(up)up.disabled=index===0;if(down)down.disabled=index===order.length-1;host.append(row);});};
-    const persist=(message='Preferências da Home salvas neste dispositivo.')=>{const current=rows();setHomePreferences({enabled:enabled.checked,order:current.map(row=>row.dataset.category||''),hiddenCategories:current.filter(row=>!row.querySelector<HTMLInputElement>('[data-home-visible]')?.checked).map(row=>row.dataset.category||'')});if(feedback)feedback.textContent=message;};
-    root.addEventListener('change',event=>{const input=event.target;if(input instanceof HTMLInputElement&&(input.matches('[data-home-enabled]')||input.matches('[data-home-visible]')))persist();});
-    root.addEventListener('click',event=>{const target=event.target instanceof Element?event.target:null;const button=target?.closest<HTMLButtonElement>('[data-home-up],[data-home-down]');if(!button)return;const row=button.closest<HTMLElement>('[data-home-row]');if(!row)return;const current=rows();const index=current.indexOf(row);const next=index+(button.matches('[data-home-up]')?-1:1);if(next<0||next>=current.length)return;if(next<index)host.insertBefore(row,current[next]);else host.insertBefore(current[next],row);persist('Ordem das editorias atualizada.');render();});
+    const render=()=>{
+      const state=readPlusState();
+      enabled.checked=state.preferences.home.enabled;
+      personalFeed.checked=state.preferences.home.showPersonalFeed;
+      savedShelf.checked=state.preferences.home.showSavedShelf;
+      compact.checked=state.preferences.compactFeed;
+      const order=orderFor(state);
+      const byCategory=new Map(rows().map(row=>[row.dataset.category||'',row]));
+      order.forEach((category,index)=>{const row=byCategory.get(category);if(!row)return;const visible=row.querySelector<HTMLInputElement>('[data-home-visible]');if(visible)visible.checked=!state.preferences.home.hiddenCategories.includes(category);const up=row.querySelector<HTMLButtonElement>('[data-home-up]');const down=row.querySelector<HTMLButtonElement>('[data-home-down]');if(up)up.disabled=index===0;if(down)down.disabled=index===order.length-1;host.append(row);});
+    };
+    const persist=(message='Sua Home foi atualizada.')=>{
+      const current=rows();
+      const compactValue=compact.checked;
+      const homeValue={
+        enabled:enabled.checked,
+        order:current.map(row=>row.dataset.category||''),
+        hiddenCategories:current.filter(row=>!row.querySelector<HTMLInputElement>('[data-home-visible]')?.checked).map(row=>row.dataset.category||''),
+        showPersonalFeed:personalFeed.checked,
+        showSavedShelf:savedShelf.checked,
+      };
+      setHomePreferences(homeValue);
+      setCompactFeed(compactValue);
+      if(feedback)feedback.textContent=message;
+    };
+    root.addEventListener('change',event=>{
+      const input=event.target;
+      if(input instanceof HTMLInputElement&&(input.matches('[data-home-enabled],[data-home-visible],[data-home-personal-feed],[data-home-saved-shelf],[data-compact-feed]')))persist();
+    });
+    root.addEventListener('click',event=>{
+      const target=event.target instanceof Element?event.target:null;
+      const button=target?.closest<HTMLButtonElement>('[data-home-up],[data-home-down]');if(!button)return;
+      const row=button.closest<HTMLElement>('[data-home-row]');if(!row)return;
+      const current=rows();const index=current.indexOf(row);const next=index+(button.matches('[data-home-up]')?-1:1);if(next<0||next>=current.length)return;
+      if(next<index)host.insertBefore(row,current[next]);else host.insertBefore(current[next],row);
+      enabled.checked=true;
+      persist('Ordem atualizada e aplicada à Home.');render();
+    });
     window.addEventListener('apurante-plus:change',render);render();
   });
   setupHomePreferences();document.addEventListener('astro:page-load',setupHomePreferences);

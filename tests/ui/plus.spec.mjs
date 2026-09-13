@@ -8,11 +8,11 @@ test.beforeEach(async({page})=>{
 
 test('interests, saved articles and followed topics persist locally',async({page})=>{
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
-  await expect(page.getByRole('link',{name:'Abrir Meu APURANTE'}).first()).toBeVisible();
+  await expect(page.getByRole('link',{name:'Abrir Meu APURANTE+'}).first()).toBeVisible();
   await page.getByLabel('Tecnologia').check();
   await page.getByLabel('Ciência').check();
-  await page.getByRole('button',{name:'Salvar interesses'}).click();
-  await expect(page.getByRole('status')).toContainText('Interesses salvos');
+  await page.getByRole('button',{name:'Aplicar ao meu APURANTE+'}).click();
+  await expect(page.getByRole('status')).toContainText('influenciam sua Home');
   await page.reload();
   await expect(page.getByLabel('Tecnologia')).toBeChecked();
   await expect(page.getByLabel('Ciência')).toBeChecked();
@@ -39,7 +39,7 @@ test('interests, saved articles and followed topics persist locally',async({page
   if(title)await expect(page.locator('[data-saved-article]:not([hidden]) h3')).toContainText(title);
   await expect(page.getByRole('button',{name:`Deixar de acompanhar ${topic}`})).toBeVisible();
   await page.getByRole('button',{name:'Remover dos salvos'}).click();
-  await expect(page.getByText('Você ainda não salvou nenhuma matéria.')).toBeVisible();
+  await expect(page.getByText('Sua lista de leitura está vazia.')).toBeVisible();
   expect(errors).toEqual([]);
 });
 
@@ -63,7 +63,7 @@ test('header uses the APURANTE+ wordmark and opens the explainer first',async({p
   await shortcut.click();
   await expect(page).toHaveURL(/\/mais\/$/);
   await expect(page.getByRole('link',{name:'APURANTE+ — início'})).toHaveText('APURANTE+');
-  await page.getByRole('link',{name:'Abrir Meu APURANTE'}).first().click();
+  await page.getByRole('link',{name:'Abrir Meu APURANTE+'}).first().click();
   await expect(page).toHaveURL(/\/meu-apurante\/$/);
   await page.setViewportSize({width:390,height:800});
   const card=page.locator('.personal-feed .card').first();

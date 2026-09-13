@@ -7,19 +7,60 @@ import {articles} from '../lib/news';
 const recommended=articles;
 ---
 <div class="personal-hub" data-personal-hub>
-  <section class="plus-section" aria-labelledby="para-voce-title"><div class="section-heading"><div><span class="eyebrow">Seleção local</span><h2 id="para-voce-title">Para você</h2></div></div><p class="plus-explainer">A ordem considera suas editorias e assuntos seguidos. Quando não há preferências, mostramos as publicações verificadas mais recentes.</p><div class="cards personal-feed" data-personal-feed>{recommended.map(article=><div data-personal-article data-slug={article.slug} data-category={article.category} data-tags={JSON.stringify(article.tags)}><Card article={article}/></div>)}</div><div class="plus-empty" data-personal-empty hidden><h3>Nenhuma matéria corresponde às preferências atuais.</h3><p>Escolha outras editorias ou acompanhe novos assuntos.</p></div></section>
-  <section class="plus-section" aria-labelledby="salvos-title"><div class="section-heading"><div><span class="eyebrow">Sua biblioteca</span><h2 id="salvos-title">Salvos</h2></div></div><div class="cards saved-feed" data-saved-feed>{articles.map(article=><div data-saved-article data-slug={article.slug} hidden><Card article={article}/><button class="plus-remove" type="button" data-remove-saved={article.slug}>Remover dos salvos</button></div>)}</div><div class="plus-empty" data-saved-empty><h3>Você ainda não salvou nenhuma matéria.</h3><p>Use o botão “Salvar” nas notícias para encontrá-las aqui.</p></div></section>
-  <section class="plus-section" aria-labelledby="topics-title"><div class="section-heading"><div><span class="eyebrow">Acompanhamento</span><h2 id="topics-title">Assuntos seguidos</h2></div></div><div class="followed-topics" data-followed-topics></div><div class="plus-empty" data-topics-empty><h3>Nenhum assunto acompanhado.</h3><p>Você pode acompanhar a editoria ou uma tag diretamente em cada matéria.</p></div></section>
-  <section class="plus-section" aria-labelledby="preferences-title"><InterestSelector heading="Preferências" /></section>
+  <section class="plus-command-center" aria-labelledby="command-title">
+    <div class="plus-command-copy"><span class="eyebrow">Painel de comando</span><h2 id="command-title">Você está no controle.</h2><p>Escolha, acompanhe, esconda, reorganize e guarde. O que você muda aqui passa a refletir na página inicial do APURANTE.</p></div>
+    <div class="plus-command-stats" aria-label="Resumo do Meu APURANTE+">
+      <a href="#preferencias"><strong data-hub-interests>0</strong><span>editorias favoritas</span></a>
+      <a href="#assuntos"><strong data-hub-topics>0</strong><span>assuntos seguidos</span></a>
+      <a href="#salvos"><strong data-hub-saved>0</strong><span>matérias salvas</span></a>
+    </div>
+    <nav class="plus-command-nav" aria-label="Atalhos do Meu APURANTE+"><a href="#para-voce">Meu feed</a><a href="#salvos">Ler depois</a><a href="#assuntos">Assuntos</a><a href="#preferencias">Editorias</a><a href="#preferencias-home">Minha Home</a></nav>
+  </section>
+
+  <section class="plus-section" id="para-voce" aria-labelledby="para-voce-title"><div class="section-heading"><div><span class="eyebrow">Sua edição</span><h2 id="para-voce-title">Para você</h2></div></div><p class="plus-explainer">Editorias favoritas e assuntos seguidos sobem na sua seleção. Quando uma nova matéria publicada combina com essas escolhas, ela passa a ganhar prioridade automaticamente.</p><div class="cards personal-feed" data-personal-feed>{recommended.map(article=><div data-personal-article data-slug={article.slug} data-category={article.category} data-tags={JSON.stringify(article.tags)}><Card article={article}/></div>)}</div><div class="plus-empty" data-personal-empty hidden><h3>Nenhuma matéria corresponde às preferências atuais.</h3><p>Escolha outras editorias ou acompanhe novos assuntos.</p></div></section>
+
+  <section class="plus-section" id="salvos" aria-labelledby="salvos-title"><div class="section-heading"><div><span class="eyebrow">Sua biblioteca</span><h2 id="salvos-title">Ler depois</h2></div></div><p class="plus-explainer">O que você salva fica aqui e, se desejar, também aparece como uma prateleira na Home.</p><div class="cards saved-feed" data-saved-feed>{articles.map(article=><div data-saved-article data-slug={article.slug} hidden><Card article={article}/><button class="plus-remove" type="button" data-remove-saved={article.slug}>Remover dos salvos</button></div>)}</div><div class="plus-empty" data-saved-empty><h3>Sua lista de leitura está vazia.</h3><p>Use o botão “Salvar” nas notícias. Elas voltarão aqui quando você quiser.</p></div></section>
+
+  <section class="plus-section" id="assuntos" aria-labelledby="topics-title"><div class="section-heading"><div><span class="eyebrow">Acompanhamento contínuo</span><h2 id="topics-title">Assuntos que você segue</h2></div></div><p class="plus-explainer">Ao seguir uma editoria ou tag em uma matéria, novas publicações relacionadas passam a influenciar seu feed pessoal.</p><div class="followed-topics" data-followed-topics></div><div class="plus-empty" data-topics-empty><h3>Você ainda não acompanha nenhum assunto.</h3><p>Abra uma matéria e use os controles do APURANTE+ para acompanhar uma editoria ou tema.</p></div></section>
+
+  <section class="plus-section" id="preferencias" aria-labelledby="preferences-title"><InterestSelector heading="Minhas editorias favoritas" /></section>
   <section class="plus-section" id="preferencias-home" aria-label="Preferências da página inicial"><HomePreferences/></section>
-  <section class="plus-section" aria-label="Portabilidade das preferências"><PlusPortability/></section>
+  <section class="plus-section" aria-label="Levar ou restaurar suas preferências"><PlusPortability/></section>
 </div>
 <script>
   import {readPlusState,toggleSavedArticle,toggleFollowedTopic} from '../lib/plus';
   const setupHub=()=>document.querySelectorAll<HTMLElement>('[data-personal-hub]').forEach(hub=>{
     if(hub.dataset.ready==='true')return;hub.dataset.ready='true';
-    const render=()=>{const state=readPlusState();const feed=[...hub.querySelectorAll<HTMLElement>('[data-personal-article]')];const ranked=feed.map((item,index)=>{const category=item.dataset.category||'';const tags=JSON.parse(item.dataset.tags||'[]') as string[];const topicMatch=tags.filter(tag=>state.followedTopics.includes(tag)).length+(state.followedTopics.includes(category)?1:0);return {item,index,score:(state.interests.includes(category)?3:0)+(topicMatch*2)};}).sort((a,b)=>b.score-a.score||a.index-b.index);ranked.forEach(({item},position)=>{item.style.order=String(position);item.hidden=position>=12;});const personalEmpty=hub.querySelector<HTMLElement>('[data-personal-empty]');if(personalEmpty)personalEmpty.hidden=ranked.length>0;const saved=[...hub.querySelectorAll<HTMLElement>('[data-saved-article]')];saved.forEach(item=>item.hidden=!state.savedArticles.includes(item.dataset.slug||''));const savedEmpty=hub.querySelector<HTMLElement>('[data-saved-empty]');if(savedEmpty)savedEmpty.hidden=saved.some(item=>!item.hidden);const topics=hub.querySelector<HTMLElement>('[data-followed-topics]');if(topics){topics.replaceChildren(...state.followedTopics.map(topic=>{const button=document.createElement('button');button.type='button';button.className='topic-chip';button.textContent=`${topic} ×`;button.setAttribute('aria-label',`Deixar de acompanhar ${topic}`);button.addEventListener('click',()=>toggleFollowedTopic(topic,false));return button;}));}const topicsEmpty=hub.querySelector<HTMLElement>('[data-topics-empty]');if(topicsEmpty)topicsEmpty.hidden=state.followedTopics.length>0;};
-    hub.querySelectorAll<HTMLButtonElement>('[data-remove-saved]').forEach(button=>button.addEventListener('click',()=>toggleSavedArticle(button.dataset.removeSaved||'',false)));window.addEventListener('apurante-plus:change',render);render();
+    const render=()=>{
+      const state=readPlusState();
+      const interestStat=hub.querySelector<HTMLElement>('[data-hub-interests]');
+      const topicStat=hub.querySelector<HTMLElement>('[data-hub-topics]');
+      const savedStat=hub.querySelector<HTMLElement>('[data-hub-saved]');
+      if(interestStat)interestStat.textContent=String(state.interests.length);
+      if(topicStat)topicStat.textContent=String(state.followedTopics.length);
+      if(savedStat)savedStat.textContent=String(state.savedArticles.length);
+
+      const feed=[...hub.querySelectorAll<HTMLElement>('[data-personal-article]')];
+      const ranked=feed.map((item,index)=>{
+        const category=item.dataset.category||'';
+        const tags=JSON.parse(item.dataset.tags||'[]') as string[];
+        const topicMatch=tags.filter(tag=>state.followedTopics.includes(tag)).length+(state.followedTopics.includes(category)?1:0);
+        return {item,index,score:(state.interests.includes(category)?5:0)+(topicMatch*4)};
+      }).sort((a,b)=>b.score-a.score||a.index-b.index);
+      ranked.forEach(({item},position)=>{item.style.order=String(position);item.hidden=position>=(state.preferences.compactFeed?18:12);});
+      const personalEmpty=hub.querySelector<HTMLElement>('[data-personal-empty]');if(personalEmpty)personalEmpty.hidden=ranked.length>0;
+
+      const saved=[...hub.querySelectorAll<HTMLElement>('[data-saved-article]')];
+      saved.forEach(item=>item.hidden=!state.savedArticles.includes(item.dataset.slug||''));
+      const savedEmpty=hub.querySelector<HTMLElement>('[data-saved-empty]');if(savedEmpty)savedEmpty.hidden=saved.some(item=>!item.hidden);
+
+      const topics=hub.querySelector<HTMLElement>('[data-followed-topics]');
+      if(topics){topics.replaceChildren(...state.followedTopics.map(topic=>{const button=document.createElement('button');button.type='button';button.className='topic-chip';button.textContent=`${topic} ×`;button.setAttribute('aria-label',`Deixar de acompanhar ${topic}`);button.addEventListener('click',()=>toggleFollowedTopic(topic,false));return button;}));}
+      const topicsEmpty=hub.querySelector<HTMLElement>('[data-topics-empty]');if(topicsEmpty)topicsEmpty.hidden=state.followedTopics.length>0;
+      hub.classList.toggle('is-compact',state.preferences.compactFeed);
+    };
+    hub.querySelectorAll<HTMLButtonElement>('[data-remove-saved]').forEach(button=>button.addEventListener('click',()=>toggleSavedArticle(button.dataset.removeSaved||'',false)));
+    window.addEventListener('apurante-plus:change',render);render();
   });
   setupHub();document.addEventListener('astro:page-load',setupHub);
 </script>

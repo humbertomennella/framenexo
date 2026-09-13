@@ -2,17 +2,52 @@
 import {href} from '../lib/news';
 ---
 <aside class="home-personalization-status" data-plus-home-badge hidden aria-live="polite">
-  <div class="home-personalization-copy"><span class="home-personalization-dot" aria-hidden="true"></span><span>Home organizada pelas preferências deste dispositivo.</span></div>
-  <nav class="home-personalization-actions" aria-label="Preferências da Home"><a href={`${href('meu-apurante/')}#preferencias-home`}>Configurar ordem →</a><a href={href('mais/')}>O que é?</a></nav>
+  <div class="home-personalization-copy"><span class="home-personalization-dot" aria-hidden="true"></span><span data-plus-home-status>Seu APURANTE+ está influenciando esta Home.</span></div>
+  <nav class="home-personalization-actions" aria-label="Preferências da Home"><a href={`${href('meu-apurante/')}#preferencias-home`}>Ajustar minha Home →</a><a href={href('mais/')}>Como funciona?</a></nav>
 </aside>
 <script>
-  import {readPlusState} from '../lib/plus';
+  import {readPlusState,PLUS_STORAGE_KEY,hasPersonalization} from '../lib/plus';
   const setupHomePersonalization=()=>{
     const host=document.querySelector<HTMLElement>('[data-home-sections]');
     const badge=document.querySelector<HTMLElement>('[data-plus-home-badge]');
     if(!host||!badge||host.dataset.plusReady==='true')return;host.dataset.plusReady='true';
-    const apply=()=>{const state=readPlusState();const home=state.preferences.home;const blocks=[...host.querySelectorAll<HTMLElement>('[data-home-category]')];const original=[...blocks].sort((a,b)=>Number(a.dataset.homeIndex)-Number(b.dataset.homeIndex));if(!home.enabled){original.forEach(block=>{block.hidden=false;host.append(block);});badge.hidden=true;return;}const all=blocks.map(block=>block.dataset.homeCategory||'');const order=[...home.order.filter(category=>all.includes(category)),...all.filter(category=>!home.order.includes(category))];const rank=new Map(order.map((category,index)=>[category,index]));blocks.sort((a,b)=>(rank.get(a.dataset.homeCategory||'')??999)-(rank.get(b.dataset.homeCategory||'')??999)).forEach(block=>{block.hidden=home.hiddenCategories.includes(block.dataset.homeCategory||'');host.append(block);});badge.hidden=false;};
-    window.addEventListener('apurante-plus:change',apply);window.addEventListener('storage',event=>{if(event.key==='apurante_plus')apply();});apply();
+    const status=badge.querySelector<HTMLElement>('[data-plus-home-status]');
+    const apply=()=>{
+      const state=readPlusState();
+      const home=state.preferences.home;
+      const blocks=[...host.querySelectorAll<HTMLElement>('[data-home-category]')];
+      const original=[...blocks].sort((a,b)=>Number(a.dataset.homeIndex)-Number(b.dataset.homeIndex));
+      const all=blocks.map(block=>block.dataset.homeCategory||'');
+
+      let order:string[];
+      if(home.enabled){
+        order=[...home.order.filter(category=>all.includes(category)),...all.filter(category=>!home.order.includes(category))];
+      }else if(state.interests.length){
+        order=[...state.interests.filter(category=>all.includes(category)),...all.filter(category=>!state.interests.includes(category))];
+      }else{
+        order=original.map(block=>block.dataset.homeCategory||'');
+      }
+
+      const rank=new Map(order.map((category,index)=>[category,index]));
+      blocks.sort((a,b)=>(rank.get(a.dataset.homeCategory||'')??999)-(rank.get(b.dataset.homeCategory||'')??999)).forEach(block=>{
+        block.hidden=home.enabled&&home.hiddenCategories.includes(block.dataset.homeCategory||'');
+        host.append(block);
+      });
+
+      const active=hasPersonalization(state);
+      badge.hidden=!active;
+      document.documentElement.classList.toggle('plus-compact-home',state.preferences.compactFeed);
+      if(status&&active){
+        const parts=[];
+        if(state.interests.length)parts.push(`${state.interests.length} editoria${state.interests.length===1?' favorita':'s favoritas'}`);
+        if(state.followedTopics.length)parts.push(`${state.followedTopics.length} assunto${state.followedTopics.length===1?' seguido':'s seguidos'}`);
+        if(state.savedArticles.length)parts.push(`${state.savedArticles.length} salvo${state.savedArticles.length===1?'':'s'}`);
+        status.textContent=parts.length?`Esta Home é sua: ${parts.join(' · ')}.`:'Sua organização pessoal está aplicada nesta Home.';
+      }
+    };
+    window.addEventListener('apurante-plus:change',apply);
+    window.addEventListener('storage',event=>{if(event.key===PLUS_STORAGE_KEY)apply();});
+    apply();
   };
   setupHomePersonalization();document.addEventListener('astro:page-load',setupHomePersonalization);
 </script>

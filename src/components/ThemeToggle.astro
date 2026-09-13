@@ -8,46 +8,47 @@
   </svg>
 </button>
 
-<script>
-  const THEME_STORAGE_KEY='apurante_theme';
-  type Theme='light'|'dark';
-
-  const currentTheme=():Theme=>document.documentElement.dataset.theme==='light'?'light':'dark';
-
-  const syncButton=(button:HTMLButtonElement)=>{
-    const light=currentTheme()==='light';
-    button.setAttribute('aria-pressed',String(light));
-    button.setAttribute('aria-label',light?'Ativar tema escuro':'Ativar tema claro');
-    button.title=light?'Usar tema escuro':'Usar tema claro';
-  };
-
-  const applyTheme=(theme:Theme,persist=true)=>{
-    const root=document.documentElement;
-    root.dataset.theme=theme;
-    root.style.colorScheme=theme;
-    if(persist){try{localStorage.setItem(THEME_STORAGE_KEY,theme);}catch{}}
-    const meta=document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-    if(meta)meta.content=theme==='light'?'#f4f3ef':'#090a0d';
-    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach(syncButton);
-    window.dispatchEvent(new CustomEvent('apurante:theme',{detail:{theme}}));
-  };
-
-  const setupThemeToggle=()=>{
-    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach(button=>{
-      syncButton(button);
-      if(button.dataset.themeReady==='true')return;
-      button.dataset.themeReady='true';
-      button.addEventListener('click',event=>{
-        event.preventDefault();
-        applyTheme(currentTheme()==='light'?'dark':'light');
-      });
+<script is:inline>
+(() => {
+  const KEY = 'apurante_theme';
+  const getTheme = () => document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  const sync = () => {
+    const light = getTheme() === 'light';
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(light));
+      button.setAttribute('aria-label', light ? 'Ativar tema escuro' : 'Ativar tema claro');
+      button.setAttribute('title', light ? 'Usar tema escuro' : 'Usar tema claro');
     });
   };
-
-  setupThemeToggle();
-  document.addEventListener('DOMContentLoaded',setupThemeToggle,{once:true});
-  document.addEventListener('astro:page-load',setupThemeToggle);
-  window.addEventListener('storage',event=>{
-    if(event.key===THEME_STORAGE_KEY&&(event.newValue==='light'||event.newValue==='dark'))applyTheme(event.newValue,false);
+  const apply = (theme, persist = true) => {
+    const normalized = theme === 'light' ? 'light' : 'dark';
+    const root = document.documentElement;
+    root.setAttribute('data-theme', normalized);
+    root.style.colorScheme = normalized;
+    if (document.body) document.body.setAttribute('data-theme', normalized);
+    if (persist) { try { localStorage.setItem(KEY, normalized); } catch {} }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', normalized === 'light' ? '#f4f3ef' : '#090a0d');
+    sync();
+    window.dispatchEvent(new CustomEvent('apurante:theme', {detail:{theme:normalized}}));
+  };
+  const setup = () => {
+    document.body?.setAttribute('data-theme', getTheme());
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      if (button.dataset.themeReady === 'true') return;
+      button.dataset.themeReady = 'true';
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        apply(getTheme() === 'light' ? 'dark' : 'light');
+      }, {passive:false});
+    });
+    sync();
+  };
+  setup();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup, {once:true});
+  window.addEventListener('pageshow', setup);
+  window.addEventListener('storage', event => {
+    if (event.key === KEY && (event.newValue === 'light' || event.newValue === 'dark')) apply(event.newValue, false);
   });
+})();
 </script>
