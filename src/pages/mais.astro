@@ -4,19 +4,40 @@ import PlusBadge from '../components/PlusBadge.astro';
 import InterestSelector from '../components/InterestSelector.astro';
 import {href} from '../lib/news';
 ---
-<Base title="APURANTE+" description="Personalize assuntos, salve matérias e organize sua leitura no APURANTE+.">
-  <section class="plus-hero">
-    <div><PlusBadge/><span class="eyebrow">Gratuito nesta fase</span><h1>Informação do seu jeito.</h1><p>Personalize seus assuntos, salve matérias e acompanhe histórias importantes sem perder o contexto.</p><div class="plus-cta"><a class="button" href={href('meu-apurante/')}>Abrir Meu APURANTE</a><a class="button secondary" href="#interesses">Escolher meus interesses</a></div></div>
-    <aside aria-label="Como funciona"><span class="plus-plain-large" aria-hidden="true">A+</span><strong>Seu espaço. Neste dispositivo.</strong><p>Sem cadastro, paywall ou coleta de e-mail. Suas escolhas ficam no navegador que você está usando.</p></aside>
+<Base title="APURANTE+" description="Monte seu próprio APURANTE: escolha assuntos, organize a Home, salve matérias e acompanhe o que importa para você.">
+  <section class="plus-hero plus-hero-control">
+    <div>
+      <PlusBadge/>
+      <span class="eyebrow">Seu jornal de bolso · grátis para sempre</span>
+      <h1>O APURANTE é nosso. O seu APURANTE+ é seu.</h1>
+      <p>Escolha o que ganha espaço, o que fica para depois, quais assuntos você acompanha e como sua Home deve se organizar. Você monta a sua edição.</p>
+      <div class="plus-cta"><a class="button" href={href('meu-apurante/')}>Abrir Meu APURANTE+</a><a class="button secondary" href="#interesses">Começar pelas editorias</a></div>
+      <div class="plus-permanent-note" aria-label="Compromisso do APURANTE+"><span>Sem assinatura</span><span>Sem paywall</span><span>Sem plano premium</span></div>
+    </div>
+    <aside class="plus-control-card" aria-label="O que é o APURANTE+">
+      <span class="plus-card-wordmark">APURANTE<span>+</span></span>
+      <strong>Você decide. A Home responde.</strong>
+      <p>Suas editorias favoritas ganham prioridade. Assuntos seguidos formam seu feed. Matérias salvas voltam como “Ler depois”. E você escolhe o que aparece ou some.</p>
+      <a href={href('meu-apurante/')}>Montar meu jornal →</a>
+    </aside>
   </section>
-  <section class="plus-benefits" aria-labelledby="plus-benefits-title"><span class="eyebrow">Uma camada de organização</span><h2 id="plus-benefits-title">As notícias continuam abertas. O controle fica com você.</h2><div>
-    <article><strong>01</strong><h3>Salve para depois</h3><p>Monte uma biblioteca local com as matérias que merecem uma segunda leitura.</p></article>
-    <article><strong>02</strong><h3>Acompanhe assuntos</h3><p>Siga editorias e temas presentes na própria apuração, sem histórias artificiais.</p></article>
-    <article><strong>03</strong><h3>Priorize o que importa</h3><p>Uma ordem simples e transparente combina interesses, assuntos seguidos e atualidade.</p></article>
-  </div></section>
-  <div id="interesses"><InterestSelector/></div>
-  <p class="plus-privacy">Nesta fase, suas preferências ficam armazenadas somente neste dispositivo. Não existe conta na nuvem nem sincronização entre aparelhos.</p>
+
+  <section class="plus-benefits plus-benefits-control" aria-labelledby="plus-benefits-title">
+    <span class="eyebrow">Controle de verdade</span>
+    <h2 id="plus-benefits-title">Não é uma assinatura. É a sua forma de usar o APURANTE.</h2>
+    <div>
+      <article><strong>01</strong><h3>Escolha o que importa</h3><p>Defina editorias favoritas e acompanhe temas específicos. Novas matérias desses assuntos entram naturalmente na sua seleção.</p></article>
+      <article><strong>02</strong><h3>Monte sua Home</h3><p>Reordene editorias, esconda o que não quer ver e decida se seu feed pessoal e seus salvos aparecem na página inicial.</p></article>
+      <article><strong>03</strong><h3>Guarde para depois</h3><p>Salve matérias e mantenha uma biblioteca de leitura. O que você marca continua acessível no Meu APURANTE+.</p></article>
+      <article><strong>04</strong><h3>Mude quando quiser</h3><p>Nada é definitivo. Seu jornal muda junto com seus interesses, sem algoritmo secreto escolhendo por você.</p></article>
+    </div>
+  </section>
+
+  <section class="plus-control-preview" aria-labelledby="plus-preview-title">
+    <div><span class="eyebrow">Tudo conectado</span><h2 id="plus-preview-title">Uma escolha aqui muda o que você vê lá.</h2><p>O Meu APURANTE+ funciona como o painel de comando da sua experiência. O portal continua editorial e aberto; a forma de navegar passa a ser sua.</p></div>
+    <div class="plus-flow" aria-hidden="true"><span>Editorias</span><span>Assuntos</span><span>Salvos</span><strong>→</strong><span>Minha Home</span></div>
+  </section>
+
+  <div id="interesses"><InterestSelector heading="Comece escolhendo suas editorias favoritas"/></div>
+  <p class="plus-privacy"><strong>Privacidade por padrão:</strong> suas escolhas ficam armazenadas somente neste navegador. O APURANTE+ é gratuito para sempre e não depende de assinatura, cadastro ou coleta de e-mail.</p>
 </Base>
-<style>
-.plus-plain-large{display:inline-block;color:var(--accent);font-size:2.25rem;font-weight:950;line-height:1;letter-spacing:-.08em}
-</style>
