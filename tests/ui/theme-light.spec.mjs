@@ -6,18 +6,18 @@ test.beforeEach(async({page})=>{
   await page.reload();
 });
 
-test('light theme changes rendered colors and keeps readable hover contrast',async({page})=>{
+test('light theme uses the editorial paper palette and readable hover contrast',async({page})=>{
   await page.locator('[data-theme-toggle]').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   const colors=await page.evaluate(()=>({
     body:getComputedStyle(document.body).backgroundColor,
     text:getComputedStyle(document.body).color
   }));
-  expect(colors.body).toBe('rgb(232, 233, 228)');
-  expect(colors.text).toBe('rgb(27, 31, 34)');
+  expect(colors.body).toBe('rgb(244, 243, 239)');
+  expect(colors.text).toBe('rgb(32, 33, 36)');
   const link=page.locator('.editoria-links a').first();
   await link.hover();
-  expect(await link.evaluate(el=>getComputedStyle(el).color)).toBe('rgb(36, 70, 15)');
+  expect(await link.evaluate(el=>getComputedStyle(el).color)).toBe('rgb(45, 80, 16)');
 });
 
 test('APURANTE+ header wordmark stays visible and opens the explainer',async({page})=>{
