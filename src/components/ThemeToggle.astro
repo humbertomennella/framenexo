@@ -27,8 +27,9 @@
     root.style.colorScheme=theme;
     if(persist){try{localStorage.setItem(THEME_STORAGE_KEY,theme);}catch{}}
     const meta=document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-    if(meta)meta.content=theme==='light'?'#f5f6f2':'#090a0d';
+    if(meta)meta.content=theme==='light'?'#e8e9e4':'#090a0d';
     document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach(syncButton);
+    window.dispatchEvent(new CustomEvent('apurante:theme',{detail:{theme}}));
   };
 
   const setupThemeToggle=()=>{
@@ -36,11 +37,15 @@
       syncButton(button);
       if(button.dataset.themeReady==='true')return;
       button.dataset.themeReady='true';
-      button.addEventListener('click',()=>applyTheme(currentTheme()==='light'?'dark':'light'));
+      button.addEventListener('click',event=>{
+        event.preventDefault();
+        applyTheme(currentTheme()==='light'?'dark':'light');
+      });
     });
   };
 
   setupThemeToggle();
+  document.addEventListener('DOMContentLoaded',setupThemeToggle,{once:true});
   document.addEventListener('astro:page-load',setupThemeToggle);
   window.addEventListener('storage',event=>{
     if(event.key===THEME_STORAGE_KEY&&(event.newValue==='light'||event.newValue==='dark'))applyTheme(event.newValue,false);
