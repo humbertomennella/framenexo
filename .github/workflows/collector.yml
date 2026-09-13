@@ -1,11 +1,12 @@
 name: Coleta e edição
 on:
   schedule:
-    - cron: '2 * * * *'
+    # GitHub Actions usa UTC. 01/11/16/21 UTC = 22/08/13/18 em America/Sao_Paulo.
+    - cron: '0 1,11,16,21 * * *'
   workflow_dispatch:
     inputs:
       force:
-        description: Considerar uma edição antes da janela de uma hora
+        description: Publicar uma edição extraordinária fora do cronograma
         type: boolean
         default: false
   workflow_call:
@@ -40,7 +41,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - name: Coletar, verificar e redigir
+      - name: Coletar, verificar e redigir a edição
         id: pipeline
         continue-on-error: true
         env:
@@ -55,7 +56,7 @@ jobs:
         run: |
           npm run build
           npm run check:site
-      - name: Salvar dados e matérias aprovadas
+      - name: Salvar edição aprovada
         id: commit
         env:
           GITHUB_TOKEN: ${{ github.token }}
