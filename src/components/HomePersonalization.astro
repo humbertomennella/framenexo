@@ -1,4 +1,10 @@
-<div class="plus-personalized-badge" data-plus-home-badge hidden><span aria-hidden="true">A+</span> Home personalizada neste dispositivo</div>
+---
+import {href} from '../lib/news';
+---
+<aside class="home-personalization-status" data-plus-home-badge hidden aria-live="polite">
+  <div class="home-personalization-copy"><span class="home-personalization-dot" aria-hidden="true"></span><span>Home organizada pelas preferências deste dispositivo.</span></div>
+  <nav class="home-personalization-actions" aria-label="Preferências da Home"><a href={`${href('meu-apurante/')}#preferencias-home`}>Configurar ordem →</a><a href={href('mais/')}>O que é?</a></nav>
+</aside>
 <script>
   import {readPlusState} from '../lib/plus';
   const setupHomePersonalization=()=>{
