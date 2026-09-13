@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Card from '../components/Card.astro';
 import Headlines from '../components/Headlines.astro';
 import Elections from '../components/Elections.astro';
+import EditionSchedule from '../components/EditionSchedule.astro';
 import HomePersonalization from '../components/HomePersonalization.astro';
 import HomePlusFeed from '../components/HomePlusFeed.astro';
 import {articles,articleUrl,href,date,categories,categorySlug,inCategory} from '../lib/news';
@@ -17,6 +18,7 @@ const sections=categories.map(category=>({category,items:articles.filter(a=>inCa
 <Base>
  <div class="home-page">
   <h1 class="sr-only">Apurante — notícias do Brasil e do mundo</h1>
+  <EditionSchedule/>
   <div class="front-grid"><Headlines articles={featured}/><Elections compact/><Headlines articles={highlights} variant="moment"/></div>
   {recent.length>0&&<section class="section"><div class="section-heading"><h2>Mais recentes</h2><a href={href('ultimas/')}>Todas as notícias ↗</a></div><div class="cards">{recent.map(a=><Card article={a}/>)}</div></section>}
   <div class="editorial-strip"><div><strong>Brasil e mundo, com contexto.</strong><p>Leitura rápida para se situar. Matérias completas para entender.</p></div><a href={href('politica-editorial/')}>Conheça nossa política editorial ↗</a></div>
