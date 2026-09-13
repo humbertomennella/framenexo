@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       force:
-        description: Antecipar a janela editorial mantendo todas as verificações
+        description: Publicar uma edição extraordinária agora, mantendo todas as verificações
         type: boolean
-        default: false
+        default: true
 permissions:
   contents: write
   pages: write
