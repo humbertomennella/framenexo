@@ -35,7 +35,7 @@ test('Meu APURANTE+ controls shelves, order and compact mode',async({page})=>{
   await page.locator('[data-compact-feed]').check();
   await page.locator('[data-home-personal-feed]').uncheck();
   const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('apurante_plus')));
-  expect(state.version).toBe(2);
+  expect(state.version).toBe(3);
   expect(state.preferences.home.enabled).toBe(true);
   expect(state.preferences.compactFeed).toBe(true);
   expect(state.preferences.home.showPersonalFeed).toBe(false);
