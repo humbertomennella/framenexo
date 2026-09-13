@@ -6,6 +6,13 @@ test.beforeEach(async({page})=>{
   await page.reload();
 });
 
+const downloadBuffer=async download=>{
+  const stream=await download.createReadStream();
+  const chunks=[];
+  for await(const chunk of stream)chunks.push(Buffer.from(chunk));
+  return Buffer.concat(chunks);
+};
+
 test('cards save articles using only localStorage and keep an editorial snapshot',async({page,context})=>{
   const button=page.locator('.card [data-plus-save]').first();
   await expect(button).toBeVisible();
@@ -56,6 +63,37 @@ test('APURANTE+ creates a single versioned .apurante backup and still imports le
   expect(state.preferences.home.enabled).toBe(true);
 });
 
+test('password-protected .apurante backup encrypts and restores locally',async({page})=>{
+  await page.goto('./meu-apurante/');
+  const interests=page.locator('[data-interest-selector]');
+  await interests.getByLabel('Tecnologia').check();
+  await interests.getByRole('button',{name:'Aplicar ao meu APURANTE+'}).click();
+  await page.locator('[data-plus-encrypt]').check();
+  await page.locator('[data-plus-export-password]').fill('SenhaForte-2026');
+  const downloadPromise=page.waitForEvent('download');
+  await page.locator('[data-plus-export]').click();
+  const download=await downloadPromise;
+  const buffer=await downloadBuffer(download);
+  const envelope=JSON.parse(buffer.toString('utf8'));
+  expect(envelope.format).toBe('apurante-backup');
+  expect(envelope.version).toBe(1);
+  expect(envelope.encrypted).toBe(true);
+  expect(envelope.data).toBeUndefined();
+  expect(envelope.kdf.name).toBe('PBKDF2');
+  expect(envelope.cipher.name).toBe('AES-GCM');
+  expect(envelope.ciphertext).toBeTruthy();
+
+  await page.evaluate(()=>localStorage.removeItem('apurante_plus'));
+  await page.locator('[data-plus-import]').setInputFiles({name:'protegido.apurante',mimeType:'application/octet-stream',buffer});
+  await expect(page.locator('[data-plus-import-password-wrap]')).toBeVisible();
+  await page.locator('[data-plus-import-password]').fill('SenhaForte-2026');
+  page.once('dialog',dialog=>dialog.accept());
+  await page.locator('[data-plus-restore]').click();
+  await expect(page.locator('[data-plus-portability-feedback]')).toContainText('restaurado com sucesso');
+  const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('apurante_plus')));
+  expect(state.interests).toContain('Tecnologia');
+});
+
 test('corrupted backup is rejected without touching current state',async({page})=>{
   await page.goto('./meu-apurante/');
   await page.evaluate(()=>localStorage.setItem('apurante_plus',JSON.stringify({version:3,interests:['Ciência'],savedArticles:[],savedArticleSnapshots:[],followedTopics:[],preferences:{compactFeed:false,home:{enabled:false,order:[],hiddenCategories:[],showPersonalFeed:true,showSavedShelf:true}}})));
@@ -70,7 +108,7 @@ test('unknown backup schema is rejected without guessing a migration',async({pag
   await page.goto('./meu-apurante/');
   await page.evaluate(()=>localStorage.setItem('apurante_plus',JSON.stringify({version:3,interests:['Saúde'],savedArticles:[],savedArticleSnapshots:[],followedTopics:[],preferences:{compactFeed:false,home:{enabled:false,order:[],hiddenCategories:[],showPersonalFeed:true,showSavedShelf:true}}})));
   const before=await page.evaluate(()=>localStorage.getItem('apurante_plus'));
-  const future={format:'apurante-backup',version:99,createdAt:new Date().toISOString(),encrypted:false,data:{state:{}}};
+  const future={format:'apurante-backup',version:99,createdAt:new Date().toISOString(),encrypted:false,data:{state:{interests:[],savedArticles:[],followedTopics:[],preferences:{}}}};
   await page.locator('[data-plus-import]').setInputFiles({name:'futuro.apurante',mimeType:'application/octet-stream',buffer:Buffer.from(JSON.stringify(future))});
   await page.locator('[data-plus-restore]').click();
   await expect(page.locator('[data-plus-portability-feedback]')).toContainText('versão ainda não suportada');
