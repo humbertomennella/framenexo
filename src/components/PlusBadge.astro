@@ -3,5 +3,5 @@ import {href} from '../lib/news';
 const {compact=false,destination='mais/',label='Conhecer o APURANTE+'}=Astro.props;
 ---
 <a class:list={['plus-entry',{'is-compact':compact}]} href={href(destination)} aria-label={label}>
-  <span class="plus-symbol" aria-hidden="true">A+</span><span class="plus-name">APURANTE+</span>
+  <span class="plus-symbol" aria-hidden="true"><span class="plus-letter">A</span><span class="plus-mark">+</span></span><span class="plus-name">APURANTE+</span>
 </a>
