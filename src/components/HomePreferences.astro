@@ -47,14 +47,16 @@ import {categories} from '../lib/news';
     };
     const persist=(message='Sua Home foi atualizada.')=>{
       const current=rows();
-      setHomePreferences({
+      const compactValue=compact.checked;
+      const homeValue={
         enabled:enabled.checked,
         order:current.map(row=>row.dataset.category||''),
         hiddenCategories:current.filter(row=>!row.querySelector<HTMLInputElement>('[data-home-visible]')?.checked).map(row=>row.dataset.category||''),
         showPersonalFeed:personalFeed.checked,
         showSavedShelf:savedShelf.checked,
-      });
-      setCompactFeed(compact.checked);
+      };
+      setHomePreferences(homeValue);
+      setCompactFeed(compactValue);
       if(feedback)feedback.textContent=message;
     };
     root.addEventListener('change',event=>{
