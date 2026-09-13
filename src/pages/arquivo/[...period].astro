@@ -14,7 +14,7 @@ const months=[...new Set(articles.map(a=>`${a.publishedAt.slice(0,4)}/${a.publis
 <nav class="archive-links" aria-label="Período do arquivo"><a href={href('arquivo/')}>Todo o arquivo</a>{years.map(y=><a href={href(`arquivo/${y}/`)}>{y}</a>)}{months.map(m=><a href={href(`arquivo/${m}/`)}>{m}</a>)}</nav>
 <div class="archive-editions">
 {groups.map(group=><section class="archive-edition" aria-label={group.label}>
- <header class="archive-edition-head"><div><span class="eyebrow">{group.type==='extraordinary'?'EDIÇÃO EXTRAORDINÁRIA':group.type==='scheduled'?'EDIÇÃO PROGRAMADA':'ARQUIVO ANTERIOR'}</span><h2>{group.type==='legacy'?date(group.slot):group.label}</h2></div><p>{group.items.length} {group.items.length===1?'matéria':'matérias'} · {date(group.slot)}{group.type!=='legacy'&&<> · {time(group.slot)} BRT</>}</p></header>
+ <header class="archive-edition-head"><div><span class="eyebrow">{group.type==='extraordinary'?'EDIÇÃO EXTRAORDINÁRIA':group.type==='scheduled'?'EDIÇÃO PROGRAMADA':'ARQUIVO ANTERIOR'}</span><h2>{group.type==='legacy'?date(group.slot):group.label}</h2></div><p>{group.items.length} {group.items.length===1?'matéria':'matérias'} · {date(group.slot)}{group.type!=='legacy'?` · ${time(group.slot)} BRT`:''}</p></header>
  <div>{group.items.map(a=><article class="news-row"><time datetime={a.publishedAt}>{time(a.publishedAt)} BRT<br/>{a.category}</time><div><h3><a href={articleUrl(a)}>{a.title}</a></h3><span class="eyebrow">{a.description}</span></div></article>)}</div>
 </section>)}
 </div>
