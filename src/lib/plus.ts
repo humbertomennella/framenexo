@@ -1,8 +1,15 @@
 export const PLUS_STORAGE_KEY = 'apurante_plus';
 export const PLUS_SCHEMA_VERSION = 1;
 
+export interface HomePreferences {
+  enabled: boolean;
+  order: string[];
+  hiddenCategories: string[];
+}
+
 export interface PlusPreferences {
   compactFeed: boolean;
+  home: HomePreferences;
 }
 
 export interface PlusState {
@@ -18,7 +25,10 @@ export const defaultPlusState = (): PlusState => ({
   interests: [],
   savedArticles: [],
   followedTopics: [],
-  preferences: {compactFeed: false},
+  preferences: {
+    compactFeed: false,
+    home: {enabled: false, order: [], hiddenCategories: []},
+  },
 });
 
 const cleanList = (value: unknown) => Array.isArray(value)
@@ -28,6 +38,7 @@ const cleanList = (value: unknown) => Array.isArray(value)
 export function normalizePlusState(value: unknown): PlusState {
   if (!value || typeof value !== 'object') return defaultPlusState();
   const candidate = value as Partial<PlusState>;
+  const home = candidate.preferences?.home;
   return {
     version: PLUS_SCHEMA_VERSION,
     interests: cleanList(candidate.interests),
@@ -35,6 +46,11 @@ export function normalizePlusState(value: unknown): PlusState {
     followedTopics: cleanList(candidate.followedTopics),
     preferences: {
       compactFeed: Boolean(candidate.preferences?.compactFeed),
+      home: {
+        enabled: Boolean(home?.enabled),
+        order: cleanList(home?.order),
+        hiddenCategories: cleanList(home?.hiddenCategories),
+      },
     },
   };
 }
@@ -78,6 +94,16 @@ export function toggleFollowedTopic(topic: string, force?: boolean) {
 export function setInterests(interests: string[]) {
   const state = readPlusState();
   state.interests = cleanList(interests);
+  return writePlusState(state);
+}
+
+export function setHomePreferences(home: HomePreferences) {
+  const state = readPlusState();
+  state.preferences.home = {
+    enabled: Boolean(home.enabled),
+    order: cleanList(home.order),
+    hiddenCategories: cleanList(home.hiddenCategories),
+  };
   return writePlusState(state);
 }
 
