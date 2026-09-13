@@ -1,10 +1,12 @@
 export const PLUS_STORAGE_KEY = 'apurante_plus';
-export const PLUS_SCHEMA_VERSION = 1;
+export const PLUS_SCHEMA_VERSION = 2;
 
 export interface HomePreferences {
   enabled: boolean;
   order: string[];
   hiddenCategories: string[];
+  showPersonalFeed: boolean;
+  showSavedShelf: boolean;
 }
 
 export interface PlusPreferences {
@@ -13,7 +15,7 @@ export interface PlusPreferences {
 }
 
 export interface PlusState {
-  version: 1;
+  version: 2;
   interests: string[];
   savedArticles: string[];
   followedTopics: string[];
@@ -27,7 +29,13 @@ export const defaultPlusState = (): PlusState => ({
   followedTopics: [],
   preferences: {
     compactFeed: false,
-    home: {enabled: false, order: [], hiddenCategories: []},
+    home: {
+      enabled: false,
+      order: [],
+      hiddenCategories: [],
+      showPersonalFeed: true,
+      showSavedShelf: true,
+    },
   },
 });
 
@@ -50,6 +58,8 @@ export function normalizePlusState(value: unknown): PlusState {
         enabled: Boolean(home?.enabled),
         order: cleanList(home?.order),
         hiddenCategories: cleanList(home?.hiddenCategories),
+        showPersonalFeed: home?.showPersonalFeed !== false,
+        showSavedShelf: home?.showSavedShelf !== false,
       },
     },
   };
@@ -97,14 +107,32 @@ export function setInterests(interests: string[]) {
   return writePlusState(state);
 }
 
+export function setCompactFeed(compactFeed: boolean) {
+  const state = readPlusState();
+  state.preferences.compactFeed = Boolean(compactFeed);
+  return writePlusState(state);
+}
+
 export function setHomePreferences(home: HomePreferences) {
   const state = readPlusState();
   state.preferences.home = {
     enabled: Boolean(home.enabled),
     order: cleanList(home.order),
     hiddenCategories: cleanList(home.hiddenCategories),
+    showPersonalFeed: home.showPersonalFeed !== false,
+    showSavedShelf: home.showSavedShelf !== false,
   };
   return writePlusState(state);
+}
+
+export function hasPersonalization(state = readPlusState()) {
+  return Boolean(
+    state.interests.length ||
+    state.savedArticles.length ||
+    state.followedTopics.length ||
+    state.preferences.compactFeed ||
+    state.preferences.home.enabled
+  );
 }
 
 export function clearPlusState() {
