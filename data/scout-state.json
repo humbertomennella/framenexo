@@ -1,7 +1,7 @@
 {
-  "lastRunAt": "2026-09-13T01:22:05Z",
+  "lastRunAt": "2026-09-13T06:43:08Z",
   "status": "degraded",
-  "runId": "34730342244",
+  "runId": "34743425642",
   "sourcesReached": 14,
   "newCandidates": 10,
   "sourceErrors": [
@@ -14,17 +14,17 @@
       "code": "HTTPError"
     },
     {
-      "source": "camara-meio-ambiente",
+      "source": "camara",
       "code": "HTTPError"
     }
   ],
   "queueByStatus": {
     "published": 17,
-    "candidate": 433,
-    "expired": 3,
-    "needs_review": 8
+    "candidate": 461,
+    "expired": 4,
+    "needs_review": 9
   },
   "publishingAllowed": false,
   "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
-  "startedAt": "2026-09-13T01:21:59Z"
+  "startedAt": "2026-09-13T06:42:59Z"
 }
