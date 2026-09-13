@@ -6,6 +6,8 @@ test.beforeEach(async({page})=>{
   await page.reload();
 });
 
+const expectOnlyLight=scheme=>expect(scheme.trim().split(/\s+/).sort()).toEqual(['light','only']);
+
 test('light theme uses the editorial paper palette and readable hover contrast',async({page})=>{
   await page.locator('[data-theme-toggle]').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
@@ -36,8 +38,8 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
     stored:localStorage.getItem('apurante_theme')
   }));
   expect(state.body).toBe('rgb(244, 243, 239)');
-  expect(state.htmlScheme).toBe('only light');
-  expect(state.bodyScheme).toBe('only light');
+  expectOnlyLight(state.htmlScheme);
+  expectOnlyLight(state.bodyScheme);
   expect(state.stored).toBe('light');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
@@ -47,8 +49,8 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
     bodyScheme:document.body.style.colorScheme
   }));
   expect(persisted.body).toBe('rgb(244, 243, 239)');
-  expect(persisted.htmlScheme).toBe('only light');
-  expect(persisted.bodyScheme).toBe('only light');
+  expectOnlyLight(persisted.htmlScheme);
+  expectOnlyLight(persisted.bodyScheme);
 });
 
 test('APURANTE+ header wordmark stays visible and opens the explainer',async({page})=>{
