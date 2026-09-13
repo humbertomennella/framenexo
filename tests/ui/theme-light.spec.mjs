@@ -6,6 +6,8 @@ test.beforeEach(async({page})=>{
   await page.reload();
 });
 
+const expectOnlyLight=scheme=>expect(scheme.trim().split(/\s+/).sort()).toEqual(['light','only']);
+
 test('light theme uses the editorial paper palette and readable hover contrast',async({page})=>{
   await page.locator('[data-theme-toggle]').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
@@ -20,18 +22,35 @@ test('light theme uses the editorial paper palette and readable hover contrast',
   expect(await link.evaluate(el=>getComputedStyle(el).color)).toBe('rgb(45, 80, 16)');
 });
 
-test('light theme toggles and persists on a 390px mobile viewport',async({page})=>{
+test('light theme resists forced-dark behavior and persists on a 390px mobile viewport',async({page})=>{
+  await page.emulateMedia({colorScheme:'dark'});
   await page.setViewportSize({width:390,height:800});
   const toggle=page.locator('[data-theme-toggle]');
   await expect(toggle).toBeVisible();
   await toggle.click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   await expect(page.locator('body')).toHaveAttribute('data-theme','light');
-  expect(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor)).toBe('rgb(244, 243, 239)');
-  expect(await page.evaluate(()=>localStorage.getItem('apurante_theme'))).toBe('light');
+  await expect.poll(()=>page.locator('.site-header').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(248, 247, 243)');
+  const state=await page.evaluate(()=>({
+    body:getComputedStyle(document.body).backgroundColor,
+    htmlScheme:document.documentElement.style.colorScheme,
+    bodyScheme:document.body.style.colorScheme,
+    stored:localStorage.getItem('apurante_theme')
+  }));
+  expect(state.body).toBe('rgb(244, 243, 239)');
+  expectOnlyLight(state.htmlScheme);
+  expectOnlyLight(state.bodyScheme);
+  expect(state.stored).toBe('light');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
-  expect(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor)).toBe('rgb(244, 243, 239)');
+  const persisted=await page.evaluate(()=>({
+    body:getComputedStyle(document.body).backgroundColor,
+    htmlScheme:document.documentElement.style.colorScheme,
+    bodyScheme:document.body.style.colorScheme
+  }));
+  expect(persisted.body).toBe('rgb(244, 243, 239)');
+  expectOnlyLight(persisted.htmlScheme);
+  expectOnlyLight(persisted.bodyScheme);
 });
 
 test('APURANTE+ header wordmark stays visible and opens the explainer',async({page})=>{

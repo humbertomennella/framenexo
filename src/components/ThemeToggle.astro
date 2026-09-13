@@ -12,6 +12,7 @@
 (() => {
   const KEY = 'apurante_theme';
   const getTheme = () => document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  const schemeFor = theme => theme === 'light' ? 'only light' : 'dark';
   const sync = () => {
     const light = getTheme() === 'light';
     document.querySelectorAll('[data-theme-toggle]').forEach(button => {
@@ -22,10 +23,14 @@
   };
   const apply = (theme, persist = true) => {
     const normalized = theme === 'light' ? 'light' : 'dark';
+    const scheme = schemeFor(normalized);
     const root = document.documentElement;
     root.setAttribute('data-theme', normalized);
-    root.style.colorScheme = normalized;
-    if (document.body) document.body.setAttribute('data-theme', normalized);
+    root.style.colorScheme = scheme;
+    if (document.body) {
+      document.body.setAttribute('data-theme', normalized);
+      document.body.style.colorScheme = scheme;
+    }
     if (persist) { try { localStorage.setItem(KEY, normalized); } catch {} }
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', normalized === 'light' ? '#f4f3ef' : '#090a0d');
@@ -33,7 +38,13 @@
     window.dispatchEvent(new CustomEvent('apurante:theme', {detail:{theme:normalized}}));
   };
   const setup = () => {
-    document.body?.setAttribute('data-theme', getTheme());
+    const theme = getTheme();
+    const scheme = schemeFor(theme);
+    document.documentElement.style.colorScheme = scheme;
+    if (document.body) {
+      document.body.setAttribute('data-theme', theme);
+      document.body.style.colorScheme = scheme;
+    }
     document.querySelectorAll('[data-theme-toggle]').forEach(button => {
       if (button.dataset.themeReady === 'true') return;
       button.dataset.themeReady = 'true';
