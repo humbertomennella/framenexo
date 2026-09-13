@@ -3302,5 +3302,95 @@
     "publishingAllowed": false,
     "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
     "startedAt": "2026-09-13T16:35:18Z"
+  },
+  {
+    "at": "2026-09-13T19:05:07Z",
+    "event": "collection",
+    "collected": 18,
+    "discarded": 134,
+    "sourceCounts": {
+      "nasa": 10,
+      "un": 30,
+      "who": 25,
+      "ap": 10,
+      "bbc-portugues": 41,
+      "cnn-brasil": 60,
+      "uol": 15,
+      "guardian": 45,
+      "camara-meio-ambiente": 10,
+      "camara-esportes": 8,
+      "camara-saude": 10
+    },
+    "errors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-cultura",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "URLError"
+      },
+      {
+        "source": "camara",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "URLError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      }
+    ],
+    "seconds": 347.59
+  },
+  {
+    "at": "2026-09-13T19:05:07Z",
+    "event": "scout_completed",
+    "lastRunAt": "2026-09-13T19:05:07Z",
+    "status": "degraded",
+    "runId": "34776286596",
+    "sourcesReached": 11,
+    "newCandidates": 18,
+    "sourceErrors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-cultura",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "URLError"
+      },
+      {
+        "source": "camara",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "URLError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      }
+    ],
+    "queueByStatus": {
+      "published": 17,
+      "candidate": 573,
+      "expired": 4,
+      "needs_review": 12
+    },
+    "publishingAllowed": false,
+    "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
+    "startedAt": "2026-09-13T18:59:19Z"
   }
 ]
