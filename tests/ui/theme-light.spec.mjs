@@ -28,15 +28,14 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
   await toggle.click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   await expect(page.locator('body')).toHaveAttribute('data-theme','light');
+  await expect.poll(()=>page.locator('.site-header').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(248, 247, 243)');
   const state=await page.evaluate(()=>({
     body:getComputedStyle(document.body).backgroundColor,
-    header:getComputedStyle(document.querySelector('.site-header')).backgroundColor,
     htmlScheme:document.documentElement.style.colorScheme,
     bodyScheme:document.body.style.colorScheme,
     stored:localStorage.getItem('apurante_theme')
   }));
   expect(state.body).toBe('rgb(244, 243, 239)');
-  expect(state.header).toBe('rgb(248, 247, 243)');
   expect(state.htmlScheme).toBe('only light');
   expect(state.bodyScheme).toBe('only light');
   expect(state.stored).toBe('light');
