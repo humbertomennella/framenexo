@@ -7,10 +7,10 @@ const shown=full?items:items.slice(0,3);
 const latest=items.length?items.map(a=>a.updatedAt||a.publishedAt).sort().at(-1):null;
 ---
 <section class:list={['elections-panel',compact&&'elections-compact']} aria-label="ELEIÇÕES 2026" aria-roledescription={compact?'carrossel':undefined} data-elections data-election-carousel={compact||undefined} data-interval="3800">
- <div class="section-heading"><div><h2><i class="live-dot" aria-hidden="true"></i>ELEIÇÕES 2026</h2>{compact&&<p>Cobertura verificada, 24 horas</p>}</div>{!full&&<a href={href('eleicoes/')}>Toda a cobertura ↗</a>} {compact&&<span class="elections-position" aria-hidden="true"><b data-election-position>{shown.length?'01':'00'}</b> / {String(shown.length).padStart(2,'0')}</span>}</div>
+ <div class="section-heading"><div><h2><i class="live-dot" aria-hidden="true"></i>ELEIÇÕES 2026</h2>{compact&&<p>Fontes monitoradas continuamente · cobertura verificada</p>}</div>{!full&&<a href={href('eleicoes/')}>Toda a cobertura ↗</a>} {compact&&<span class="elections-position" aria-hidden="true"><b data-election-position>{shown.length?'01':'00'}</b> / {String(shown.length).padStart(2,'0')}</span>}</div>
  {!compact&&<p class="elections-intro">Candidaturas, pesquisas e decisões eleitorais. Informação com fontes e limites da apuração.</p>}
- <p class="meta">{latest?<>Última atualização da cobertura: <time datetime={latest}>{date(latest)} · {time(latest)} BRT</time></>: 'Nenhuma matéria eleitoral verificada publicada nesta seção.'}</p>
- <div class="elections-grid">{shown.map((a,i)=><article class:list={['election-story',compact&&i===0&&'is-current']} data-election-slide={compact||undefined} aria-hidden={compact?String(i!==0):undefined} inert={compact&&i!==0}><a href={articleUrl(a)} tabindex="-1" aria-hidden="true"><img src={href(a.image)} alt="" width="1200" height="675" loading="lazy"/></a><div><time class="meta" datetime={a.publishedAt}>{date(a.publishedAt)} · {time(a.publishedAt)} BRT</time><h3><a href={articleUrl(a)}>{a.title}</a></h3>{!compact&&<p>{a.description}</p>}</div></article>)}</div>
+ <p class="meta">{latest?<>Última atualização da cobertura: <time datetime={latest}>{date(latest)} · {time(latest)} BRT</time></>: 'Monitoramento ativo. Aguardando a primeira matéria eleitoral verificada.'}</p>
+ <div class="elections-grid">{shown.map((a,i)=><article class:list={['election-story',compact&&i===0&&'is-current']} data-election-slide={compact||undefined} data-election-article={a.slug} aria-hidden={compact?String(i!==0):undefined} inert={compact&&i!==0}><a href={articleUrl(a)} tabindex="-1" aria-hidden="true"><img src={href(a.image)} alt="" width="1200" height="675" loading="lazy"/></a><div><time class="meta" datetime={a.publishedAt}>{date(a.publishedAt)} · {time(a.publishedAt)} BRT</time><h3><a href={articleUrl(a)}>{a.title}</a></h3>{!compact&&<p>{a.description}</p>}</div></article>)}</div>
  {compact&&shown.length>1&&<div class="elections-carousel-footer"><div class="elections-dots" role="group" aria-label="Selecionar notícia eleitoral">{shown.map((a,i)=><button type="button" data-election-go={i} aria-label={`Notícia eleitoral ${i+1}: ${a.title}`} aria-current={i===0?'true':undefined}><span></span></button>)}</div><div><button type="button" data-election-previous aria-label="Notícia eleitoral anterior">←</button><button type="button" data-election-next aria-label="Próxima notícia eleitoral">→</button></div></div>}
  {!compact&&<div class="elections-sources"><strong>Consulta oficial</strong><a href="https://www.tse.jus.br/eleicoes/eleicoes-2026">TSE — Eleições 2026 ↗</a><a href="https://divulgacandcontas.tse.jus.br/divulga/">Candidaturas e contas ↗</a></div>}
  {!compact&&<p class="elections-note">Pesquisas retratam o período de coleta e não antecipam o resultado. Novas publicações dependem da verificação dos fatos.</p>}
@@ -18,7 +18,8 @@ const latest=items.length?items.map(a=>a.updatedAt||a.publishedAt).sort().at(-1)
 </section>
 <script>
 document.querySelectorAll<HTMLElement>('[data-elections]').forEach(root=>{
- const initial=root.querySelector('time')?.dateTime;
+ const signature=()=>[...root.querySelectorAll<HTMLElement>('[data-election-article]')].map(item=>item.dataset.electionArticle).join('|');
+ const initial=signature();
  let busy=false;
  const check=async()=>{
   if(document.hidden||busy)return;
@@ -27,11 +28,9 @@ document.querySelectorAll<HTMLElement>('[data-elections]').forEach(root=>{
    const response=await fetch(location.href,{cache:'no-store',signal:AbortSignal.timeout(10000)});
    if(!response.ok)return;
    const parsed=new DOMParser().parseFromString(await response.text(),'text/html');
-   const next=parsed.querySelector('[data-elections] time')?.getAttribute('datetime');
-   if(next&&next!==initial){
-    const target=root.querySelector<HTMLElement>('[data-election-update]')!;
-    if(!target.childElementCount){const link=document.createElement('a');link.href=location.href;link.textContent='Há uma atualização publicada. Atualizar a cobertura ↗';target.append(link);}
-   }
+   const panel=parsed.querySelector('[data-elections]');
+   const next=[...panel?.querySelectorAll<HTMLElement>('[data-election-article]')||[]].map(item=>item.dataset.electionArticle).join('|');
+   if(next&&next!==initial)location.reload();
   }catch{/* Preserve the readable, dated version if checking is unavailable. */}
   finally{busy=false;}
  };
@@ -45,7 +44,7 @@ document.querySelectorAll<HTMLElement>('[data-elections]').forEach(root=>{
   root.style.setProperty('--carousel-interval',`${interval}ms`);
   let index=0,timer:ReturnType<typeof setTimeout>|undefined,touchX=0,touchY=0;
   const schedule=()=>{clearTimeout(timer);root.classList.toggle('is-timer-paused',reduced.matches||document.hidden);if(!reduced.matches&&!document.hidden&&slides.length>1)timer=setTimeout(()=>show(index+1,1),interval)};
-  const show=(next:number,direction=1)=>{const outgoing=slides[index];index=(next+slides.length)%slides.length;const incoming=slides[index];slides.forEach(slide=>{const current=slide===incoming;slide.classList.toggle('is-current',current);slide.inert=!current;slide.setAttribute('aria-hidden',String(!current))});if(outgoing!==incoming&&!reduced.matches){outgoing.animate([{opacity:1,transform:'translateX(0)'},{opacity:0,transform:`translateX(${-direction*7}%)`}],{duration:320,easing:'ease-out'});incoming.animate([{opacity:0,transform:`translateX(${direction*7}%)`},{opacity:1,transform:'translateX(0)'}],{duration:320,easing:'ease-out'})}dots.forEach((dot,i)=>i===index?dot.setAttribute('aria-current','true'):dot.removeAttribute('aria-current'));root.querySelector('[data-election-position]')!.textContent=String(index+1).padStart(2,'0');schedule()};
+  const show=(next:number,direction=1)=>{if(!slides.length)return;const outgoing=slides[index];index=(next+slides.length)%slides.length;const incoming=slides[index];slides.forEach(slide=>{const current=slide===incoming;slide.classList.toggle('is-current',current);slide.inert=!current;slide.setAttribute('aria-hidden',String(!current))});if(outgoing!==incoming&&!reduced.matches){outgoing.animate([{opacity:1,transform:'translateX(0)'},{opacity:0,transform:`translateX(${-direction*7}%)`}],{duration:320,easing:'ease-out'});incoming.animate([{opacity:0,transform:`translateX(${direction*7}%)`},{opacity:1,transform:'translateX(0)'}],{duration:320,easing:'ease-out'})}dots.forEach((dot,i)=>i===index?dot.setAttribute('aria-current','true'):dot.removeAttribute('aria-current'));root.querySelector('[data-election-position]')!.textContent=String(index+1).padStart(2,'0');schedule()};
   root.querySelector('[data-election-previous]')?.addEventListener('click',()=>show(index-1,-1));root.querySelector('[data-election-next]')?.addEventListener('click',()=>show(index+1,1));dots.forEach((dot,i)=>dot.addEventListener('click',()=>show(i,i<index?-1:1)));
   root.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY},{passive:true});root.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))show(index+(dx<0?1:-1),dx<0?1:-1)},{passive:true});
   document.addEventListener('visibilitychange',schedule);reduced.addEventListener('change',schedule);schedule();
