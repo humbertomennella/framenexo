@@ -3392,5 +3392,116 @@
     "publishingAllowed": false,
     "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
     "startedAt": "2026-09-13T18:59:19Z"
+  },
+  {
+    "at": "2026-09-13T21:30:59Z",
+    "event": "collection",
+    "collected": 22,
+    "discarded": 124,
+    "sourceCounts": {
+      "nasa": 10,
+      "un": 30,
+      "who": 25,
+      "ap": 10,
+      "bbc-portugues": 41,
+      "cnn-brasil": 60,
+      "uol": 15,
+      "guardian": 45
+    },
+    "errors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "URLError"
+      },
+      {
+        "source": "camara",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-cultura",
+        "code": "URLError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-esportes",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-saude",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "URLError"
+      }
+    ],
+    "seconds": 404.61
+  },
+  {
+    "at": "2026-09-13T21:30:59Z",
+    "event": "scout_completed",
+    "lastRunAt": "2026-09-13T21:30:59Z",
+    "status": "degraded",
+    "runId": "34783712358",
+    "sourcesReached": 8,
+    "newCandidates": 22,
+    "sourceErrors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-economia",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-tecnologia",
+        "code": "URLError"
+      },
+      {
+        "source": "camara",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-cultura",
+        "code": "URLError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      },
+      {
+        "source": "camara-esportes",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-saude",
+        "code": "URLError"
+      },
+      {
+        "source": "camara-meio-ambiente",
+        "code": "URLError"
+      }
+    ],
+    "queueByStatus": {
+      "published": 17,
+      "candidate": 595,
+      "expired": 4,
+      "needs_review": 12
+    },
+    "publishingAllowed": false,
+    "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
+    "startedAt": "2026-09-13T21:24:14Z"
   }
 ]
