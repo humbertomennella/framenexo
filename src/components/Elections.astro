@@ -20,7 +20,7 @@ const latest=items.length?items.map(a=>a.updatedAt||a.publishedAt).sort().at(-1)
 document.querySelectorAll<HTMLElement>('[data-elections]').forEach(root=>{
  const signature=()=>[...root.querySelectorAll<HTMLElement>('[data-election-article]')].map(item=>item.dataset.electionArticle).join('|');
  const initial=signature();
- let busy=false;
+ let busy=false,lastEditionCheck=Date.now();
  const check=async()=>{
   if(document.hidden||busy)return;
   busy=true;
@@ -31,11 +31,10 @@ document.querySelectorAll<HTMLElement>('[data-elections]').forEach(root=>{
    const panel=parsed.querySelector('[data-elections]');
    const next=[...panel?.querySelectorAll<HTMLElement>('[data-election-article]')||[]].map(item=>item.dataset.electionArticle).join('|');
    if(next&&next!==initial)location.reload();
-  }catch{/* Preserve the readable, dated version if checking is unavailable. */}
-  finally{busy=false;}
+  }catch{/* Preserve the readable, dated version if the opportunistic check is unavailable. */}
+  finally{busy=false;lastEditionCheck=Date.now();}
  };
- setInterval(check,60000);
- document.addEventListener('visibilitychange',check);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-lastEditionCheck>=10*60*1000)check();});
  if(root.hasAttribute('data-election-carousel')){
   const slides=[...root.querySelectorAll<HTMLElement>('[data-election-slide]')];
   const dots=[...root.querySelectorAll<HTMLButtonElement>('[data-election-go]')];

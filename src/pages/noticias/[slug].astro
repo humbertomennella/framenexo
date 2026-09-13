@@ -32,7 +32,7 @@ const sourceRole=(source:any)=>source.role==='wire'?'Agência de notícias':sour
    <a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><span class="badge">{confidence}</span>
    <h1>{a.title}</h1><p class="dek">{a.description}</p>
    <div class="article-byline"><strong>Apurante Editorial</strong> · <time datetime={a.publishedAt}>{date(a.publishedAt)}, {time(a.publishedAt)} BRT</time> · {reading(a)} min de leitura{a.updatedAt!==a.publishedAt&&<span> · Atualizado em {date(a.updatedAt)}, {time(a.updatedAt)} BRT</span>}</div>
-   <div class="article-plus-actions" aria-label="Ações do APURANTE+"><span class="plus-action-heading"><span class="plus-symbol" aria-hidden="true">A+</span> Organize sua leitura</span><SaveArticleButton slug={a.slug}/><FollowTopicButton topic={a.tags[0]||a.category}/><a href={href('meu-apurante/')}>Abrir Meu APURANTE →</a></div>
+   <div class="article-plus-actions" aria-label="Ações do APURANTE+"><span class="plus-action-heading"><span class="plus-symbol" aria-hidden="true">A+</span> Organize sua leitura</span><SaveArticleButton article={a}/><FollowTopicButton topic={a.tags[0]||a.category}/><a href={href('meu-apurante/')}>Abrir Meu APURANTE →</a></div>
   </header>
   <ReadingTools summary={(a.quickTakeaways||[a.description]).join(" ")}/>
   <figure class="article-figure">{useEditorialCover?<EditorialCover article={a}/>:<img src={href(a.image)} alt={a.imageAlt} width="1440" height="810" fetchpriority="high"/>}<figcaption>{useEditorialCover?'Capa editorial tipográfica do Apurante. Não representa fotografia do acontecimento.':a.imageCredit}</figcaption></figure>
