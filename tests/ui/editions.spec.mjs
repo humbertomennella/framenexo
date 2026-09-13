@@ -1,26 +1,38 @@
 import {test,expect} from '@playwright/test';
 
-test('Home explains the four daily editions without polling',async({page})=>{
+test('barra superior mostra o cronograma e abre a explicação',async({page})=>{
   await page.goto('./');
-  const schedule=page.locator('[data-edition-schedule]');
-  await expect(schedule).toBeVisible();
-  await expect(schedule).toContainText('EDIÇÕES PROGRAMADAS');
-  await expect(schedule).toContainText('08h · 13h · 18h · 22h');
-  await expect(schedule).toContainText('Notícias urgentes podem gerar uma edição extraordinária');
-  await expect(schedule.locator('[data-next-edition]')).not.toHaveText('Calculando…');
+  const notice=page.locator('[data-edition-notice]');
+  await expect(notice).toBeVisible();
+  await expect(notice).toContainText('08h · 13h · 18h · 22h');
+  await expect(notice.locator('[data-next-edition]')).not.toHaveText('calculando…');
+  await expect(page.locator('[data-edition-schedule]')).toHaveCount(0);
+
+  await notice.locator('[data-edition-open]').click();
+  const dialog=page.locator('[data-edition-dialog]');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('heading',{name:'Notícia boa não precisa pingar o dia inteiro.'})).toBeVisible();
+  await expect(dialog).toContainText('Quatro edições por dia');
+  await expect(dialog).toContainText('edição extraordinária');
+  await expect(dialog).toContainText('Horário fixo não vira desculpa para preencher espaço com notícia fraca');
+  await dialog.getByRole('button',{name:'Entendi'}).click();
+  await expect(dialog).not.toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
-test('schedule remains compact on a 390px viewport',async({page})=>{
+test('barra de edições ocupa pouco espaço em 390px',async({page})=>{
   await page.setViewportSize({width:390,height:800});
   await page.goto('./');
-  const schedule=page.locator('[data-edition-schedule]');
-  await expect(schedule).toBeVisible();
-  expect(await schedule.evaluate(el=>el.getBoundingClientRect().width)).toBeLessThanOrEqual(390);
+  const notice=page.locator('[data-edition-notice]');
+  await expect(notice).toBeVisible();
+  const box=await notice.boundingBox();
+  expect(box.height).toBeLessThanOrEqual(36);
+  expect(box.width).toBeLessThanOrEqual(390);
+  await expect(page.locator('[data-edition-schedule]')).toHaveCount(0);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
-test('archive explains edition grouping and preserves legacy publications',async({page})=>{
+test('arquivo explica agrupamento por edição e preserva publicações anteriores',async({page})=>{
   await page.goto('./arquivo/');
   await expect(page.getByRole('heading',{name:'Arquivo',exact:true})).toBeVisible();
   await expect(page.getByText(/agrupadas pelas edições de 08h, 13h, 18h e 22h/)).toBeVisible();

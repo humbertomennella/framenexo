@@ -1,0 +1,77 @@
+---
+import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
+---
+<div class="edition-notice" data-edition-notice data-slots={JSON.stringify(editionHours)} data-timezone={editionSchedule.timezone}>
+  <button class="edition-notice-trigger" type="button" data-edition-open aria-haspopup="dialog" aria-controls="edition-info-dialog">
+    <span class="edition-notice-label">EDIÇÕES</span>
+    <span class="edition-notice-hours">{editionHoursLabel}</span>
+    <span class="edition-notice-separator" aria-hidden="true">·</span>
+    <span class="edition-notice-next">Próxima: <strong data-next-edition>calculando…</strong></span>
+    <span class="edition-notice-help">Como funciona? <span aria-hidden="true">↗</span></span>
+  </button>
+
+  <dialog class="edition-dialog" id="edition-info-dialog" data-edition-dialog aria-labelledby="edition-dialog-title">
+    <div class="edition-dialog-inner">
+      <button class="edition-dialog-close" type="button" data-edition-close aria-label="Fechar explicação sobre as edições">×</button>
+      <span class="eyebrow">COMO O APURANTE FUNCIONA</span>
+      <h2 id="edition-dialog-title">Notícia boa não precisa pingar o dia inteiro.</h2>
+      <p class="edition-dialog-lead">Em vez de soltar uma matéria a cada poucos minutos, o APURANTE reúne o que realmente vale a pena e publica edições completas em horários previsíveis.</p>
+
+      <div class="edition-dialog-grid">
+        <section>
+          <strong>Quatro edições por dia</strong>
+          <p><b>08h</b> pela manhã, <b>13h</b> no meio do dia, <b>18h</b> no fim da tarde e <b>22h</b> no fechamento. Sempre no horário de Brasília.</p>
+        </section>
+        <section>
+          <strong>Por que desse jeito?</strong>
+          <p>Para você saber quando voltar e encontrar um conjunto novo de matérias, sem precisar atualizar o portal a cada dez minutos à caça de novidade.</p>
+        </section>
+        <section>
+          <strong>Enquanto a próxima edição não chega</strong>
+          <p>As fontes continuam sendo monitoradas. O APURANTE agrupa pautas, cruza informações e só publica o que passa pelos critérios editoriais.</p>
+        </section>
+        <section>
+          <strong>Se algo não puder esperar</strong>
+          <p>Uma notícia realmente urgente pode sair fora da grade em uma <b>edição extraordinária</b>. Urgente de verdade, não “alguém postou um tweet há 40 segundos”.</p>
+        </section>
+      </div>
+
+      <p class="edition-dialog-note">A quantidade de matérias varia conforme o que aconteceu e o que foi possível confirmar. Horário fixo não vira desculpa para preencher espaço com notícia fraca.</p>
+      <form method="dialog"><button class="button edition-dialog-done" type="submit">Entendi</button></form>
+    </div>
+  </dialog>
+</div>
+
+<script is:inline>
+(()=>{
+ const setup=()=>document.querySelectorAll('[data-edition-notice]').forEach(root=>{
+  const open=root.querySelector('[data-edition-open]');
+  const dialog=root.querySelector('[data-edition-dialog]');
+  const close=root.querySelector('[data-edition-close]');
+  const output=root.querySelector('[data-next-edition]');
+  if(!open||!dialog||!output)return;
+  let slots=[];try{slots=JSON.parse(root.getAttribute('data-slots')||'[]')}catch{}
+  const timezone=root.getAttribute('data-timezone')||'America/Sao_Paulo';
+  const update=()=>{
+   const parts=new Intl.DateTimeFormat('en-GB',{timeZone:timezone,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
+   const hour=Number(parts.find(part=>part.type==='hour')?.value||0);
+   const minute=Number(parts.find(part=>part.type==='minute')?.value||0);
+   const now=hour*60+minute;
+   const next=slots.find(value=>value*60>now);
+   const target=next??slots[0];
+   if(target===undefined)return;
+   output.textContent=`${String(target).padStart(2,'0')}h ${next===undefined?'amanhã':'hoje'}`;
+  };
+  update();
+  if(root.getAttribute('data-ready')==='true')return;
+  root.setAttribute('data-ready','true');
+  open.addEventListener('click',()=>{
+   if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
+  });
+  close?.addEventListener('click',()=>dialog.close?.());
+  dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close?.()});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)update()});
+ });
+ setup();document.addEventListener('astro:page-load',setup);
+})();
+</script>
