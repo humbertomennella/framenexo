@@ -1,5 +1,17 @@
 export const PLUS_STORAGE_KEY = 'apurante_plus';
-export const PLUS_SCHEMA_VERSION = 2;
+export const PLUS_SCHEMA_VERSION = 3;
+
+export interface SavedArticleSnapshot {
+  articleId: string;
+  slug: string;
+  canonicalPath: string;
+  title: string;
+  summary: string;
+  category: string;
+  publishedAt: string;
+  lastModifiedAt: string;
+  savedAt: string;
+}
 
 export interface HomePreferences {
   enabled: boolean;
@@ -15,9 +27,10 @@ export interface PlusPreferences {
 }
 
 export interface PlusState {
-  version: 2;
+  version: 3;
   interests: string[];
   savedArticles: string[];
+  savedArticleSnapshots: SavedArticleSnapshot[];
   followedTopics: string[];
   preferences: PlusPreferences;
 }
@@ -26,6 +39,7 @@ export const defaultPlusState = (): PlusState => ({
   version: PLUS_SCHEMA_VERSION,
   interests: [],
   savedArticles: [],
+  savedArticleSnapshots: [],
   followedTopics: [],
   preferences: {
     compactFeed: false,
@@ -39,18 +53,53 @@ export const defaultPlusState = (): PlusState => ({
   },
 });
 
+const cleanString = (value: unknown) => typeof value === 'string' ? value.trim() : '';
 const cleanList = (value: unknown) => Array.isArray(value)
   ? [...new Set(value.filter(item => typeof item === 'string' && item.trim()).map(item => item.trim()))]
   : [];
+
+const normalizeSnapshot = (value: unknown): SavedArticleSnapshot | null => {
+  if (!value || typeof value !== 'object') return null;
+  const item = value as Partial<SavedArticleSnapshot>;
+  const slug = cleanString(item.slug);
+  const articleId = cleanString(item.articleId);
+  if (!slug && !articleId) return null;
+  return {
+    articleId: articleId || `legacy:${slug}`,
+    slug,
+    canonicalPath: cleanString(item.canonicalPath) || (slug ? `noticias/${slug}/` : ''),
+    title: cleanString(item.title) || slug.replace(/-/g, ' '),
+    summary: cleanString(item.summary),
+    category: cleanString(item.category),
+    publishedAt: cleanString(item.publishedAt),
+    lastModifiedAt: cleanString(item.lastModifiedAt),
+    savedAt: cleanString(item.savedAt),
+  };
+};
+
+const normalizeSnapshots = (value: unknown) => {
+  if (!Array.isArray(value)) return [];
+  const unique = new Map<string, SavedArticleSnapshot>();
+  value.forEach(raw => {
+    const snapshot = normalizeSnapshot(raw);
+    if (!snapshot) return;
+    unique.set(snapshot.articleId || snapshot.slug, snapshot);
+  });
+  return [...unique.values()];
+};
 
 export function normalizePlusState(value: unknown): PlusState {
   if (!value || typeof value !== 'object') return defaultPlusState();
   const candidate = value as Partial<PlusState>;
   const home = candidate.preferences?.home;
+  const savedArticles = cleanList(candidate.savedArticles);
+  const snapshots = normalizeSnapshots((candidate as any).savedArticleSnapshots)
+    .filter(item => !item.slug || savedArticles.includes(item.slug));
   return {
     version: PLUS_SCHEMA_VERSION,
     interests: cleanList(candidate.interests),
-    savedArticles: cleanList(candidate.savedArticles),
+    savedArticles,
+    savedArticleSnapshots: snapshots,
     followedTopics: cleanList(candidate.followedTopics),
     preferences: {
       compactFeed: Boolean(candidate.preferences?.compactFeed),
@@ -77,8 +126,12 @@ export function readPlusState(): PlusState {
 export function writePlusState(state: PlusState): PlusState {
   const normalized = normalizePlusState(state);
   if (typeof window !== 'undefined') {
-    window.localStorage.setItem(PLUS_STORAGE_KEY, JSON.stringify(normalized));
-    window.dispatchEvent(new CustomEvent('apurante-plus:change', {detail: normalized}));
+    try {
+      window.localStorage.setItem(PLUS_STORAGE_KEY, JSON.stringify(normalized));
+      window.dispatchEvent(new CustomEvent('apurante-plus:change', {detail: normalized}));
+    } catch (error) {
+      window.dispatchEvent(new CustomEvent('apurante-plus:storage-error', {detail: error}));
+    }
   }
   return normalized;
 }
@@ -89,10 +142,27 @@ const toggle = (items: string[], value: string, force?: boolean) => {
   return include ? [...new Set([...items, value])] : items.filter(item => item !== value);
 };
 
-export function toggleSavedArticle(slug: string, force?: boolean) {
+export function toggleSavedArticle(slug: string, force?: boolean, snapshot?: SavedArticleSnapshot) {
   const state = readPlusState();
+  const exists = state.savedArticles.includes(slug);
+  const include = force ?? !exists;
   state.savedArticles = toggle(state.savedArticles, slug, force);
+  if (!include) {
+    state.savedArticleSnapshots = state.savedArticleSnapshots.filter(item => item.slug !== slug);
+  } else if (snapshot) {
+    const normalized = normalizeSnapshot({...snapshot, slug});
+    if (normalized) {
+      const previous = state.savedArticleSnapshots.find(item => item.articleId === normalized.articleId || item.slug === slug);
+      normalized.savedAt = previous?.savedAt || normalized.savedAt || new Date().toISOString();
+      state.savedArticleSnapshots = state.savedArticleSnapshots.filter(item => item.articleId !== normalized.articleId && item.slug !== slug);
+      state.savedArticleSnapshots.push(normalized);
+    }
+  }
   return writePlusState(state);
+}
+
+export function getSavedSnapshot(state: PlusState, articleId: string, slug: string) {
+  return state.savedArticleSnapshots.find(item => (articleId && item.articleId === articleId) || item.slug === slug);
 }
 
 export function toggleFollowedTopic(topic: string, force?: boolean) {
