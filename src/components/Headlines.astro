@@ -66,9 +66,8 @@ document.querySelectorAll<HTMLElement>('[data-headlines]').forEach(root=>{
  let touchX=0,touchY=0;root.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX;touchY=e.changedTouches[0].clientY;},{passive:true});root.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchX,dy=e.changedTouches[0].clientY-touchY;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){const travel=dx<0?1:-1;show(index+travel,true,travel);}},{passive:true});
  document.addEventListener('visibilitychange',()=>show(index));reduced.addEventListener('change',schedule);
  if(root.hasAttribute('data-moment')){
-  setInterval(()=>show(index),30000);
   const initial=allSlides.map(slide=>`${slide.dataset.article}:${slide.dataset.level}:${slide.dataset.expires||''}`).join('|');
-  let checking=false;
+  let checking=false,lastEditionCheck=Date.now();
   const checkPublishedEdition=async()=>{
    if(document.hidden||checking)return;
    checking=true;
@@ -79,11 +78,10 @@ document.querySelectorAll<HTMLElement>('[data-headlines]').forEach(root=>{
     const panel=parsed.querySelector('[data-headlines][data-moment]');
     const next=[...panel?.querySelectorAll<HTMLElement>('[data-slide]')||[]].map(slide=>`${slide.dataset.article}:${slide.dataset.level}:${slide.dataset.expires||''}`).join('|');
     if(next&&next!==initial)location.reload();
-   }catch{/* Keep the current verified edition if the network check is unavailable. */}
-   finally{checking=false;}
+   }catch{/* Keep the current verified edition if the opportunistic check is unavailable. */}
+   finally{checking=false;lastEditionCheck=Date.now();}
   };
-  setInterval(checkPublishedEdition,60000);
-  document.addEventListener('visibilitychange',checkPublishedEdition);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-lastEditionCheck>=10*60*1000)checkPublishedEdition();});
  }
 });
 </script>
