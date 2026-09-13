@@ -27,7 +27,7 @@
     root.style.colorScheme=theme;
     if(persist){try{localStorage.setItem(THEME_STORAGE_KEY,theme);}catch{}}
     const meta=document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-    if(meta)meta.content=theme==='light'?'#e8e9e4':'#090a0d';
+    if(meta)meta.content=theme==='light'?'#f4f3ef':'#090a0d';
     document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach(syncButton);
     window.dispatchEvent(new CustomEvent('apurante:theme',{detail:{theme}}));
   };
