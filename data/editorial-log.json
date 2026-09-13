@@ -3185,5 +3185,60 @@
     "publishingAllowed": false,
     "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
     "startedAt": "2026-09-13T12:20:16Z"
+  },
+  {
+    "at": "2026-09-13T15:56:09Z",
+    "event": "collection",
+    "collected": 28,
+    "discarded": 161,
+    "sourceCounts": {
+      "camara-cultura": 0,
+      "camara": 10,
+      "camara-economia": 10,
+      "camara-tecnologia": 10,
+      "nasa": 10,
+      "camara-esportes": 8,
+      "camara-meio-ambiente": 10,
+      "un": 30,
+      "who": 25,
+      "bbc-portugues": 41,
+      "cnn-brasil": 60,
+      "ap": 10,
+      "uol": 15,
+      "guardian": 45,
+      "camara-saude": 10
+    },
+    "errors": [
+      {
+        "source": "ibge",
+        "code": "HTTPError"
+      },
+      {
+        "source": "tse",
+        "code": "HTTPError"
+      }
+    ],
+    "seconds": 9.84
+  },
+  {
+    "at": "2026-09-13T15:56:09Z",
+    "event": "runner_completed",
+    "result": {
+      "collection": {
+        "collected": 28,
+        "sourcesOK": 15,
+        "errors": [
+          {
+            "source": "ibge",
+            "code": "HTTPError"
+          },
+          {
+            "source": "tse",
+            "code": "HTTPError"
+          }
+        ]
+      },
+      "publication": "held_missing_independent_evidence_or_media"
+    }
   }
 ]
