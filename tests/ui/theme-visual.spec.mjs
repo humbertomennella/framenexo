@@ -32,7 +32,7 @@ test('personalized Home uses the subtle status bar instead of the old promo card
   })));
   await page.reload();
   await expect(page.locator('[data-plus-home-badge]')).toBeVisible();
-  await expect(page.locator('[data-plus-home-badge]')).toContainText('Home organizada pelas preferências deste dispositivo.');
+  await expect(page.locator('[data-plus-home-badge]')).toContainText('Sua organização pessoal está aplicada nesta Home.');
   await expect(page.locator('.plus-home-promo')).toHaveCount(0);
   await expect(page.locator('[data-plus-home-badge] a').first()).toHaveAttribute('href',/meu-apurante\/#preferencias-home$/);
 });
