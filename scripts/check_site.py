@@ -36,7 +36,7 @@ check(DIST/'mais'/'index.html' in pages,'Missing APURANTE+ page');check(DIST/'me
 base=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).path.rstrip('/')+'/'
 origin=urllib.parse.urlsplit(pages[DIST/'index.html'].canonical).netloc
 home_html=(DIST/'index.html').read_text()
-check('Conhecer APURANTE+' in home_html,'Homepage APURANTE+ entry missing')
+check('data-plus-home-badge' in home_html,'Homepage APURANTE+ personalization status missing')
 plus_html=(DIST/'mais'/'index.html').read_text();my_html=(DIST/'meu-apurante'/'index.html').read_text()
 check('data-interest-selector' in plus_html,'APURANTE+ interest selector missing');check('noindex,follow' in my_html,'Meu APURANTE must be noindex')
 focus=re.search(r'<section class="headlines[^>]*aria-label="Em foco".*?</section>',home_html,re.S)

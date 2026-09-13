@@ -11,7 +11,7 @@ const recommended=articles;
   <section class="plus-section" aria-labelledby="salvos-title"><div class="section-heading"><div><span class="eyebrow">Sua biblioteca</span><h2 id="salvos-title">Salvos</h2></div></div><div class="cards saved-feed" data-saved-feed>{articles.map(article=><div data-saved-article data-slug={article.slug} hidden><Card article={article}/><button class="plus-remove" type="button" data-remove-saved={article.slug}>Remover dos salvos</button></div>)}</div><div class="plus-empty" data-saved-empty><h3>Você ainda não salvou nenhuma matéria.</h3><p>Use o botão “Salvar” nas notícias para encontrá-las aqui.</p></div></section>
   <section class="plus-section" aria-labelledby="topics-title"><div class="section-heading"><div><span class="eyebrow">Acompanhamento</span><h2 id="topics-title">Assuntos seguidos</h2></div></div><div class="followed-topics" data-followed-topics></div><div class="plus-empty" data-topics-empty><h3>Nenhum assunto acompanhado.</h3><p>Você pode acompanhar a editoria ou uma tag diretamente em cada matéria.</p></div></section>
   <section class="plus-section" aria-labelledby="preferences-title"><InterestSelector heading="Preferências" /></section>
-  <section class="plus-section" aria-label="Preferências da página inicial"><HomePreferences/></section>
+  <section class="plus-section" id="preferencias-home" aria-label="Preferências da página inicial"><HomePreferences/></section>
   <section class="plus-section" aria-label="Portabilidade das preferências"><PlusPortability/></section>
 </div>
 <script>
