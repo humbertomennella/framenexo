@@ -1,9 +1,9 @@
 {
-  "lastRunAt": "2026-09-12T23:26:59Z",
+  "lastRunAt": "2026-09-13T01:22:05Z",
   "status": "degraded",
-  "runId": "34725433462",
-  "sourcesReached": 15,
-  "newCandidates": 15,
+  "runId": "34730342244",
+  "sourcesReached": 14,
+  "newCandidates": 10,
   "sourceErrors": [
     {
       "source": "ibge",
@@ -12,15 +12,19 @@
     {
       "source": "tse",
       "code": "HTTPError"
+    },
+    {
+      "source": "camara-meio-ambiente",
+      "code": "HTTPError"
     }
   ],
   "queueByStatus": {
     "published": 17,
-    "candidate": 408,
+    "candidate": 433,
     "expired": 3,
     "needs_review": 8
   },
   "publishingAllowed": false,
   "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
-  "startedAt": "2026-09-12T23:26:52Z"
+  "startedAt": "2026-09-13T01:21:59Z"
 }
