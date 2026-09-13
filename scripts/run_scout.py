@@ -6,6 +6,7 @@ import json
 import os
 
 import pipeline as p
+import scout_snapshot as snapshots
 
 
 def summarize(result: dict) -> dict:
@@ -31,31 +32,49 @@ def main() -> None:
     (p.ROOT / ".cache").mkdir(exist_ok=True)
     with (p.ROOT / ".cache/scout.lock").open("w") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        started = p.iso()
-        try:
-            result = p.collect()
-            if not result.get("sourcesOK"):
-                raise RuntimeError("all_sources_failed")
-            state = summarize(result)
-            state["startedAt"] = started
-            p.write("data/scout-state.json", state)
-            p.log("scout_completed", **state)
-            print(json.dumps(state, ensure_ascii=False))
-        except Exception as error:
-            p.write(
-                "data/scout-state.json",
-                {
-                    "startedAt": started,
-                    "lastRunAt": p.iso(),
-                    "status": "failed",
-                    "runId": os.environ.get("GITHUB_RUN_ID"),
-                    "error": type(error).__name__,
-                    "publishingAllowed": False,
-                },
-            )
-            p.log("error", stage="scout", code=type(error).__name__)
-            raise
+        restore = p.read(".cache/scout/restore.json", {})
+        document = p.read(".cache/scout/input.json", {})
+        if document:
+            seed = snapshots.validate(document)["candidates"]
+        elif restore.get("status") == "unavailable" and not restore.get("errors"):
+            seed = p.read("data/candidates.json", [])  # First installation / retention expiry.
+        else:
+            raise RuntimeError("snapshot_restore_required")
+        with p.state_paths(snapshots.TRANSIENT):
+            p.write("data/candidates.json", snapshots.prune(seed))
+            collect_snapshot()
 
+
+def collect_snapshot():
+    started = p.iso()
+    (p.ROOT / ".cache/scout/snapshot.json").unlink(missing_ok=True)
+    try:
+        result = p.collect()
+        if not result.get("sourcesOK"):
+            raise RuntimeError("all_sources_failed")
+        p.write("data/candidates.json", snapshots.prune(p.read("data/candidates.json", [])))
+        state = summarize(result)
+        state["startedAt"] = started
+        p.write("data/scout-state.json", state)
+        p.log("scout_completed", **state)
+        document = snapshots.create(p.read("data/candidates.json", []), state)
+        snapshots.validate(document)
+        p.write(".cache/scout/snapshot.json", document)
+        print(json.dumps(state, ensure_ascii=False))
+    except Exception as error:
+        p.write(
+            "data/scout-state.json",
+            {
+                "startedAt": started,
+                "lastRunAt": p.iso(),
+                "status": "failed",
+                "runId": os.environ.get("GITHUB_RUN_ID"),
+                "error": type(error).__name__,
+                "publishingAllowed": False,
+            },
+        )
+        p.log("error", stage="scout", code=type(error).__name__)
+        raise
 
 if __name__ == "__main__":
     main()

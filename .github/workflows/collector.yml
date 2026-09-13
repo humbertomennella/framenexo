@@ -26,6 +26,7 @@ jobs:
     timeout-minutes: 55
     permissions:
       contents: write
+      actions: read
       issues: write
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
@@ -41,7 +42,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - name: Coletar, verificar e redigir a edição
+      - name: Recuperar último snapshot concluído
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/scout_snapshot.py
+      - name: Verificar snapshot e redigir a edição
         id: pipeline
         continue-on-error: true
         env:
