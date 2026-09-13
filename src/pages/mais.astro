@@ -7,7 +7,7 @@ import {href} from '../lib/news';
 <Base title="APURANTE+" description="Personalize assuntos, salve matérias e organize sua leitura no APURANTE+.">
   <section class="plus-hero">
     <div><PlusBadge/><span class="eyebrow">Gratuito nesta fase</span><h1>Informação do seu jeito.</h1><p>Personalize seus assuntos, salve matérias e acompanhe histórias importantes sem perder o contexto.</p><div class="plus-cta"><a class="button" href={href('meu-apurante/')}>Abrir Meu APURANTE</a><a class="button secondary" href="#interesses">Escolher meus interesses</a></div></div>
-    <aside aria-label="Como funciona"><span class="plus-symbol large" aria-hidden="true">A+</span><strong>Seu espaço. Neste dispositivo.</strong><p>Sem cadastro, paywall ou coleta de e-mail. Suas escolhas ficam no navegador que você está usando.</p></aside>
+    <aside aria-label="Como funciona"><span class="plus-plain-large" aria-hidden="true">A+</span><strong>Seu espaço. Neste dispositivo.</strong><p>Sem cadastro, paywall ou coleta de e-mail. Suas escolhas ficam no navegador que você está usando.</p></aside>
   </section>
   <section class="plus-benefits" aria-labelledby="plus-benefits-title"><span class="eyebrow">Uma camada de organização</span><h2 id="plus-benefits-title">As notícias continuam abertas. O controle fica com você.</h2><div>
     <article><strong>01</strong><h3>Salve para depois</h3><p>Monte uma biblioteca local com as matérias que merecem uma segunda leitura.</p></article>
@@ -17,3 +17,6 @@ import {href} from '../lib/news';
   <div id="interesses"><InterestSelector/></div>
   <p class="plus-privacy">Nesta fase, suas preferências ficam armazenadas somente neste dispositivo. Não existe conta na nuvem nem sincronização entre aparelhos.</p>
 </Base>
+<style>
+.plus-plain-large{display:inline-block;color:var(--accent);font-size:2.25rem;font-weight:950;line-height:1;letter-spacing:-.08em}
+</style>
