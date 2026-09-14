@@ -99,20 +99,23 @@ A aquisição automática de mídia ocorre somente depois que o texto passa pela
 
 ## Publicação
 
-O fechamento regular é agendado no GitHub em UTC:
+As edições continuam identificadas pelos horários editoriais **08h, 13h, 18h e 22h** em Brasília. O GitHub Actions não é um scheduler de tempo real, então cada slot possui duas tentativas fora do minuto `00`: uma principal aos `:07` e outra de recuperação aos `:27`.
 
-- `11:00 UTC` → 08h Brasília
-- `16:00 UTC` → 13h Brasília
-- `21:00 UTC` → 18h Brasília
-- `01:00 UTC` → 22h Brasília do dia anterior
+- `11:07 UTC` e `11:27 UTC` → edição das 08h Brasília
+- `16:07 UTC` e `16:27 UTC` → edição das 13h Brasília
+- `21:07 UTC` e `21:27 UTC` → edição das 18h Brasília
+- `01:07 UTC` e `01:27 UTC` → edição das 22h Brasília do dia anterior
 
-O cron configurado é:
+Os crons configurados são:
 
 ```text
-0 1,11,16,21 * * *
+7 1,11,16,21 * * *
+27 1,11,16,21 * * *
 ```
 
-`data/edition-schedule.json` é a fonte de configuração dos slots e do fuso.
+A segunda tentativa é idempotente: `data/publishing-state.json` registra `lastEditionSlot`. Se a tentativa principal já publicou a edição daquele slot, `edition_schedule.is_due()` retorna falso e a recuperação termina sem criar uma edição duplicada. O grupo de concorrência do workflow também mantém as duas execuções serializadas caso o GitHub atrase a primeira.
+
+`data/edition-schedule.json` continua sendo a fonte de configuração dos slots editoriais e do fuso.
 
 O workflow só deve fazer commit quando houver alteração real em `content/news/`. Dados transitórios de coleta e diagnóstico não constituem uma edição e não devem criar commits no `main`.
 
