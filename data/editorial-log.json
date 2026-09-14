@@ -3526,5 +3526,29 @@
       },
       "publication": "held_missing_independent_evidence_or_media"
     }
+  },
+  {
+    "at": "2026-09-14T05:48:01Z",
+    "event": "runner_completed",
+    "result": {
+      "collection": {
+        "sourcesOK": 15,
+        "collected": 13,
+        "errors": [
+          {
+            "source": "ibge",
+            "code": "HTTPError"
+          },
+          {
+            "source": "tse",
+            "code": "HTTPError"
+          }
+        ],
+        "snapshotRunId": "34805473223",
+        "snapshotCompletedAt": "2026-09-14T04:17:33Z"
+      },
+      "publication": "not_due",
+      "nextEdition": "08h · hoje"
+    }
   }
 ]

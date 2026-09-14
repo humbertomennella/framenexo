@@ -1,8 +1,8 @@
 {
-  "startedAt": "2026-09-13T22:52:35Z",
-  "finishedAt": "2026-09-13T22:52:35Z",
+  "startedAt": "2026-09-14T05:48:01Z",
+  "finishedAt": "2026-09-14T05:48:01Z",
   "status": "degraded",
-  "runId": "34788052480",
+  "runId": "34810925751",
   "result": {
     "collection": {
       "sourcesOK": 15,
@@ -17,9 +17,10 @@
           "code": "HTTPError"
         }
       ],
-      "snapshotRunId": "34785417189",
-      "snapshotCompletedAt": "2026-09-13T21:59:34Z"
+      "snapshotRunId": "34805473223",
+      "snapshotCompletedAt": "2026-09-14T04:17:33Z"
     },
-    "publication": "held_missing_independent_evidence_or_media"
+    "publication": "not_due",
+    "nextEdition": "08h · hoje"
   }
 }

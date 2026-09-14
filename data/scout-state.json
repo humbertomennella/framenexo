@@ -1,7 +1,7 @@
 {
-  "lastRunAt": "2026-09-13T21:59:34Z",
+  "lastRunAt": "2026-09-14T04:17:33Z",
   "status": "degraded",
-  "runId": "34785417189",
+  "runId": "34805473223",
   "sourcesReached": 15,
   "newCandidates": 13,
   "sourceErrors": [
@@ -15,10 +15,10 @@
     }
   ],
   "queueByStatus": {
-    "candidate": 608,
+    "candidate": 660,
     "needs_review": 12
   },
   "publishingAllowed": false,
   "note": "A escuta apenas organiza pautas. Publicação continua sujeita à confirmação independente, mídia autorizada e validação editorial.",
-  "startedAt": "2026-09-13T21:59:29Z"
+  "startedAt": "2026-09-14T04:17:27Z"
 }
