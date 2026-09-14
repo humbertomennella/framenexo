@@ -23,6 +23,11 @@ class EditionClock(unittest.TestCase):
   self.assertTrue(schedule.is_due({},at))
   self.assertFalse(schedule.is_due({'lastEditionSlot':'2026-09-13T11:00:00Z'},at))
 
+ def test_recovery_run_does_not_duplicate_published_slot(self):
+  recovery=dt.datetime(2026,9,13,11,27,tzinfo=UTC)
+  self.assertTrue(schedule.is_due({},recovery))
+  self.assertFalse(schedule.is_due({'lastEditionSlot':'2026-09-13T11:00:00Z'},recovery))
+
  def test_regular_slot_expires_outside_publication_window(self):
   self.assertFalse(schedule.is_due({},dt.datetime(2026,9,13,14,0,tzinfo=UTC)))
 
@@ -66,9 +71,11 @@ class MediaFallback(unittest.TestCase):
   acquire.assert_not_called()
 
 class WorkflowContract(unittest.TestCase):
- def test_regular_publisher_runs_four_times_per_day(self):
+ def test_regular_publisher_has_primary_and_recovery_runs(self):
   text=(ROOT/'.github/workflows/collector.yml').read_text()
-  self.assertIn("cron: '0 1,11,16,21 * * *'",text)
+  self.assertIn("cron: '7 1,11,16,21 * * *'",text)
+  self.assertIn("cron: '27 1,11,16,21 * * *'",text)
+  self.assertNotIn("cron: '0 1,11,16,21 * * *'",text)
 
  def test_scout_keeps_collecting_without_publishing(self):
   text=(ROOT/'.github/workflows/scout.yml').read_text()

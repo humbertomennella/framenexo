@@ -171,6 +171,9 @@ class WorkflowIsolation(unittest.TestCase):
         self.assertIn('git diff --exit-code',text);self.assertIn("'*/15 * * * *'",text)
         self.assertIn('group: apurante-scout-snapshot',text);self.assertIn('cancel-in-progress: false',text)
         self.assertIn('actions/upload-artifact@',text)
-        self.assertIn("'0 1,11,16,21 * * *'",(ROOT/'.github/workflows/collector.yml').read_text())
+        collector=(ROOT/'.github/workflows/collector.yml').read_text()
+        self.assertIn("'7 1,11,16,21 * * *'",collector)
+        self.assertIn("'27 1,11,16,21 * * *'",collector)
+        self.assertNotIn("'0 1,11,16,21 * * *'",collector)
 
 if __name__=='__main__':unittest.main()

@@ -21,7 +21,11 @@ def published_metadata():
 class ProductionContract(unittest.TestCase):
     def test_failed_editorial_pipeline_cannot_validate_or_commit(self):
         workflow=(ROOT/'.github/workflows/collector.yml').read_text()
-        self.assertIn("- cron: '0 1,11,16,21 * * *'",workflow)
+        self.assertIn("- cron: '7 1,11,16,21 * * *'",workflow)
+        self.assertIn("- cron: '27 1,11,16,21 * * *'",workflow)
+        self.assertNotIn("- cron: '0 1,11,16,21 * * *'",workflow)
+        self.assertIn("group: framenexo-editorial",workflow)
+        self.assertIn("cancel-in-progress: false",workflow)
         self.assertIn("- name: Validar antes de salvar conteúdo\n        if: steps.pipeline.outcome == 'success'",workflow)
         self.assertIn("- name: Salvar edição aprovada\n        if: steps.pipeline.outcome == 'success'",workflow)
         self.assertIn("if: steps.pipeline.outcome == 'failure'",workflow)
