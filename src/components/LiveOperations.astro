@@ -1,4 +1,4 @@
-<section class="notice" aria-label="Estado da operação">
+<section class="notice" aria-label="Estado da operação" data-operation-live>
  <h2>Operação agora</h2>
  <p><strong>Scout:</strong> <span data-operation-scout role="status">Consultando a última escuta pública…</span></p>
  <p><strong>Fechamento editorial:</strong> <span data-operation-editorial>Consultando a última execução pública…</span></p>
@@ -22,8 +22,8 @@ async function latest(workflow){
 }
 async function refresh(){
  if(document.hidden)return;
- try{if(scoutTarget)scoutTarget.textContent=formatRun(await latest('scout.yml'),'scout')}catch{if(scoutTarget)scoutTarget.textContent='Estado ao vivo do Scout indisponível; o site publicado continua válido.'}
- try{if(editorialTarget)editorialTarget.textContent=formatRun(await latest('collector.yml'),'editorial')}catch{if(editorialTarget)editorialTarget.textContent='Estado ao vivo do fechamento indisponível; consulte a última publicação confirmada abaixo.'}
+ try{if(scoutTarget)scoutTarget.textContent=formatRun(await latest('scout.yml'),'scout')}catch{if(scoutTarget)scoutTarget.textContent='Estado ao vivo indisponível para o Scout; o site publicado continua válido.'}
+ try{if(editorialTarget)editorialTarget.textContent=formatRun(await latest('collector.yml'),'editorial')}catch{if(editorialTarget)editorialTarget.textContent='Estado ao vivo indisponível para o fechamento; consulte a última publicação confirmada abaixo.'}
 }
 refresh();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});
