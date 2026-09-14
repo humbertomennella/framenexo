@@ -21,6 +21,7 @@ def published_metadata():
 class ProductionContract(unittest.TestCase):
     def test_failed_editorial_pipeline_cannot_validate_or_commit(self):
         workflow=(ROOT/'.github/workflows/collector.yml').read_text()
+        self.assertIn("- cron: '0 1,11,16,21 * * *'",workflow)
         self.assertIn("- name: Validar antes de salvar conteúdo\n        if: steps.pipeline.outcome == 'success'",workflow)
         self.assertIn("- name: Salvar edição aprovada\n        if: steps.pipeline.outcome == 'success'",workflow)
         self.assertIn("if: steps.pipeline.outcome == 'failure'",workflow)
@@ -28,12 +29,13 @@ class ProductionContract(unittest.TestCase):
     def test_commit_is_bound_to_public_article_changes(self):
         script=(ROOT/'scripts/commit_changes.py').read_text()
         self.assertIn("changed=status('content/news')",script)
-        self.assertIn("'data/publishing-state.json'",script)
-        self.assertIn("'data/evidence'",script)
-        self.assertIn("'data/image-rights.json'",script)
         self.assertNotIn("git('add','data'",script)
-        self.assertNotIn("'data/candidates.json'",script)
-        self.assertNotIn("'data/scout-state.json'",script)
+        # Closing state can accompany a real article, but never create a commit alone.
+        for path in (
+            'data/publishing-state.json','data/candidates.json','data/scout-state.json',
+            'data/editorial-log.json','data/operation-state.json','data/deployment-status.json',
+            'data/evidence','data/image-rights.json'):
+            self.assertIn(repr(path),script)
 
     def test_publishing_state_matches_latest_public_article(self):
         rows=published_metadata()
@@ -44,6 +46,19 @@ class ProductionContract(unittest.TestCase):
         slugs={row.get('slug') for row in state.get('history',[])}
         latest_slugs={row['slug'] for row in rows if row['publishedAt']==latest}
         self.assertTrue(latest_slugs <= slugs)
+
+    def test_public_status_uses_fixed_editions_not_hourly_window(self):
+        status=(ROOT/'src/pages/status.astro').read_text()
+        live=(ROOT/'src/components/LiveOperations.astro').read_text()
+        schedule=json.loads((ROOT/'data/edition-schedule.json').read_text())
+        self.assertEqual(schedule['slots'],[8,13,18,22])
+        self.assertIn('editionHoursLabel',status)
+        self.assertIn('08h, 13h, 18h e 22h',status)
+        self.assertNotIn('3600000',status)
+        self.assertNotIn('janela editorial continua horária',status)
+        self.assertIn("latest('scout.yml')",live)
+        self.assertIn("latest('collector.yml')",live)
+        self.assertNotIn('setInterval',live)
 
     def test_no_legacy_site_fallback_or_aplus_abbreviation(self):
         astro=(ROOT/'astro.config.mjs').read_text()
