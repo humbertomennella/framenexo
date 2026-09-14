@@ -19,9 +19,9 @@
     "diplomacia",
     "inteligência artificial"
   ],
-  "image": "/images/news/brics-nova-delhi-2026.svg",
-  "imageAlt": "Ilustração editorial abstrata sobre a cúpula do BRICS em Nova Délhi, com uma mesa circular e pontos conectados.",
-  "imageCredit": "Apurante Editorial · Ilustração editorial original, não é fotografia do evento.",
+  "image": "/og.png",
+  "imageAlt": "Capa editorial tipográfica do APURANTE para a matéria sobre a cúpula do BRICS em Nova Délhi.",
+  "imageCredit": "Apurante Editorial · Capa editorial original.",
   "status": "published",
   "confidence": "ALTA CONFIANÇA",
   "relevance": 88,
@@ -56,7 +56,7 @@
     }
   ],
   "author": "Apurante Editorial",
-  "production": "Texto original em português produzido a partir de reportagens independentes da Reuters e da Associated Press consultadas em 14 de setembro de 2026. A imagem é uma ilustração editorial original e não representa fotografia do evento.",
+  "production": "Texto original em português produzido a partir de reportagens independentes da Reuters e da Associated Press consultadas em 14 de setembro de 2026. A apresentação visual usa a capa editorial original do APURANTE.",
   "leadSourceOrganization": "reuters"
 }
 ---
