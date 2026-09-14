@@ -1,5 +1,6 @@
 import datetime as dt,sys,unittest
 from pathlib import Path
+from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import edition_schedule as schedule
 import publish_edition
@@ -45,6 +46,24 @@ class EditionBalance(unittest.TestCase):
   groups=[self.group('Brasil',i) for i in range(10)]
   selected=publish_edition.balanced_groups(groups,max_total=30,max_per_category=4)
   self.assertEqual(len(selected),4)
+
+class MediaFallback(unittest.TestCase):
+ def test_verified_story_falls_back_to_first_party_cover(self):
+  candidate={'id':'abc123','title':'Acontecimento verificado sem imagem externa'}
+  group=[candidate]
+  with patch.object(publish_edition.p,'approved_media',side_effect=ValueError('approved_media_required')),patch.object(publish_edition.editorial_media,'acquire',side_effect=ValueError('licensed_specific_media_unavailable')),patch.object(publish_edition.p,'log') as log:
+   media=publish_edition.resolve_media(group,candidate,'evidência verificada',set())
+  self.assertEqual(media['path'],'/og.png')
+  self.assertIn(candidate['title'],media['alt'])
+  self.assertIn('Apurante Editorial',media['credit'])
+  log.assert_called_once()
+
+ def test_approved_media_still_wins_over_fallback(self):
+  candidate={'id':'abc123','title':'Acontecimento com imagem aprovada'}
+  approved={'path':'/images/news/approved.webp','alt':'Imagem aprovada','credit':'Crédito aprovado'}
+  with patch.object(publish_edition.p,'approved_media',return_value=approved),patch.object(publish_edition.editorial_media,'acquire') as acquire:
+   self.assertEqual(publish_edition.resolve_media([candidate],candidate,'evidência',set()),approved)
+  acquire.assert_not_called()
 
 class WorkflowContract(unittest.TestCase):
  def test_regular_publisher_runs_four_times_per_day(self):
