@@ -13,6 +13,13 @@ export const editionTitle=(article?:Article|null)=>{
 
 export const editionKey=(article:Article)=>article.editionId||`legacy:${article.publishedAt.slice(0,10)}`;
 
+const normalizedEditionSlot=(article:Article)=>{
+ const slot=article.editionSlot;
+ if(!slot)return article.publishedAt;
+ if(/^\d{2}:\d{2}$/.test(slot))return `${article.publishedAt.slice(0,10)}T${slot}:00-03:00`;
+ return slot;
+};
+
 export interface EditionGroup {key:string;type:'scheduled'|'extraordinary'|'legacy';slot:string;label:string;items:Article[]}
 
 export const groupByEdition=(items:Article[]):EditionGroup[]=>{
@@ -22,7 +29,7 @@ export const groupByEdition=(items:Article[]):EditionGroup[]=>{
   let group=groups.get(key);
   if(!group){
    const type=article.editionType||'legacy';
-   group={key,type,slot:article.editionSlot||article.publishedAt,label:article.editionLabel||(type==='legacy'?'Publicações anteriores ao cronograma':'Edição'),items:[]};
+   group={key,type,slot:normalizedEditionSlot(article),label:article.editionLabel||(type==='legacy'?'Publicações anteriores ao cronograma':'Edição'),items:[]};
    groups.set(key,group);
   }
   group.items.push(article);
