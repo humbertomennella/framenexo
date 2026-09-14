@@ -1,8 +1,12 @@
 name: Coleta e edição
 on:
   schedule:
-    # GitHub Actions usa UTC. 01/11/16/21 UTC = 22/08/13/18 em America/Sao_Paulo.
-    - cron: '0 1,11,16,21 * * *'
+    # GitHub Actions usa UTC. Cada edição tem um disparo principal em :07 e um de
+    # recuperação em :27. Evitamos o minuto 00, sujeito a maior contenção no
+    # scheduler, e a segunda tentativa é idempotente via lastEditionSlot.
+    # 01/11/16/21 UTC = 22/08/13/18 em America/Sao_Paulo.
+    - cron: '7 1,11,16,21 * * *'
+    - cron: '27 1,11,16,21 * * *'
   workflow_dispatch:
     inputs:
       force:
