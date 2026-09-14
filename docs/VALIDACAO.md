@@ -1,26 +1,79 @@
-# Validação da entrega — 7 de setembro de 2026
+# Validação operacional — 14 de setembro de 2026
 
-Este registro separa verificações realmente executadas de etapas que dependem do GitHub ainda não ativado.
+Este documento registra o estado observado do APURANTE depois da recuperação do pipeline editorial e substitui o relatório inicial de 7 de setembro, que já não representava a produção.
 
-## Executado com sucesso
+## Produção confirmada
 
-- `npm ci` com Node.js 24 e lockfile presente.
-- `npm test`: a suíte cobre janela real de uma hora, primeira publicação, pausa, mídia exclusiva com direitos registrados, idempotência/atomicidade, URLs e SSRF, redirecionamento, HTML não confiável, prompt injection, XXE, RSS/Atom, deduplicação de eventos, rumores, conteúdo fraco, modelo remoto, números não sustentados, HTML na saída e detecção de cópia.
-- `astro build`: 27 páginas estáticas geradas.
-- `npm run check:site`: passou com homepage, artigos, categorias, arquivo, 404, links internos, imagens, alt/dimensões, canonical, descriptions, JSON-LD, RSS, sitemap, robots e índice de busca.
-- Busca visual: `exodus` retornou uma matéria, abriu a página correspondente e exibiu a origem. Busca sem resultados retornou estado vazio sem inserir HTML não confiável.
-- Verificação móvel: iframe de 390 px apresentou conteúdo com `clientWidth=375` e `scrollWidth=375`, sem rolagem horizontal. A inspeção visual mostrou header compacto, navegação horizontal intencional, destaque empilhado e radar legível.
-- Coleta real: 170 candidatos novos, 7 feeds respondendo e 1 timeout da IGN registrado no log. O texto bruto não foi publicado.
-- Primeira edição: 6 matérias com URLs das fontes oficiais, sem imagens de jogos de terceiros. Títulos e resumos foram escritos para a edição, e o portal identifica o uso de IA.
-- Execução anterior do modelo local: uma redação em português foi aprovada pela validação de formato e pela segunda passagem do modelo. Essa evidência é histórica; depois dela o extrator de fatos e os bloqueios contra inferência promocional foram endurecidos.
+- Repositório público: `humbertomennella/framenexo`.
+- Site público: `https://humbertomennella.github.io/framenexo/`.
+- Frontend estático em Astro publicado pelo GitHub Pages.
+- Grade editorial pública: **08h, 13h, 18h e 22h**, horário de Brasília (`America/Sao_Paulo`).
+- Cron regular do GitHub Actions: `0 1,11,16,21 * * *` em UTC.
+- Edições extraordinárias podem ser acionadas fora da grade sem consumir o próximo slot regular.
+- O deploy #73, associado à edição extraordinária de 14/09, terminou com sucesso.
 
-## Ainda não confirmado
+## Scout
 
-- A nova combinação de extração de quatro fatos + redação curta + bloqueio de linguagem promocional não teve uma segunda execução completa após o endurecimento: o ambiente atingiu o limite de uso durante a tentativa. `data/deployment-status.json` permanece com `generationValidated: false`.
-- GitHub Actions, GitHub Pages e a rotina horária não foram executados nesta sessão. O repositório dedicado `humbertomennella/framenexo` ainda não existia na consulta à conta.
-- URL de Pages não foi apresentada como ativa. O endereço esperado, ainda não verificado, é `https://humbertomennella.github.io/framenexo/`.
-- Não houve teste de Lighthouse/Core Web Vitals em produção, leitores RSS externos, indexação do Google News/Discover ou compatibilidade com todos os navegadores.
+- O Scout roda a cada 15 minutos.
+- Ele possui somente leitura do repositório e não pode publicar, fazer commit ou executar deploy.
+- O pool transitório é transportado em GitHub Actions Artifact e validado por versão, repositório, run, idade e SHA-256.
+- A execução real observada em 14/09 alcançou 15 fontes, adicionou 13 candidatos e preservou centenas de candidatos acumulados no snapshot.
+- Falhas individuais de fonte são registradas como degradação parcial; não zeram o pool e não liberam publicação sem evidência.
 
-## Critério de conclusão operacional
+## Fechamento editorial
 
-Considerar o portal contínuo somente após: criar o repositório público dedicado; enviar o commit; ativar Pages; observar uma execução de `tests.yml`; observar uma execução do coletor com build/deploy; abrir a URL real retornada pelo GitHub; e substituir os campos pendentes em `data/deployment-status.json` por fatos observados.
+O fechamento regular só pode publicar depois de:
+
+1. recuperar um snapshot de Scout concluído e válido;
+2. agrupar candidatos e exigir rotas independentes para matéria completa;
+3. obter evidência textual verificável;
+4. gerar e revisar o texto;
+5. obter mídia autorizada ou usar a solução editorial original prevista pelo projeto;
+6. executar testes, build e verificação do site;
+7. persistir somente uma edição efetivamente aprovada.
+
+Uma falha no passo editorial não pode seguir para validação, commit ou deploy. Dados transitórios do Scout, logs de coleta e alterações de status sem nova matéria não constituem uma edição e não devem gerar commit no `main`.
+
+## Cobertura automatizada
+
+A suíte Python cobre, entre outros pontos:
+
+- horário de Brasília e os quatro slots regulares;
+- limite e balanceamento por editoria;
+- confirmação entre organizações independentes;
+- republicações de agência;
+- conflito factual;
+- rumores e opinião;
+- aquisição e licença de mídia;
+- duplicação de mídia;
+- idempotência de publicação;
+- URLs, SSRF e redirecionamentos;
+- XML/XXE e conteúdo HTML não confiável;
+- snapshots do Scout, checksum, origem, idade e fallback;
+- isolamento do Scout em relação a commit e deploy;
+- falhas parciais de fontes;
+- consistência entre estado editorial e artigos publicados.
+
+O frontend também passa por testes JavaScript, `astro build`, `npm run check:site` e Playwright/Chromium. `check:site` verifica rotas, H1, canonical, descrição, imagens, links, JSON-LD, sitemap, robots, busca, regras editoriais, fontes e extensão mínima de matérias.
+
+## Contrato de recuperação
+
+A auditoria de 14/09 adiciona regressões explícitas para impedir que:
+
+- um pipeline editorial com falha chegue ao commit;
+- o Scout volte a versionar `candidates.json` ou `scout-state.json` no `main`;
+- alterações apenas transitórias criem uma falsa edição;
+- o estado durável fique atrás do artigo público mais recente;
+- domínio legado volte a ser usado como canonical de fallback;
+- a abreviação antiga `A+` reapareça no artigo;
+- a grade pública de 08h, 13h, 18h e 22h seja alterada acidentalmente.
+
+## Limites conhecidos
+
+O GitHub Actions pode atrasar cron jobs; o horário define a edição editorial, não uma garantia de início no segundo exato. Fontes externas podem sofrer indisponibilidade, alterar feeds ou impor bloqueios. Esses casos devem degradar a coleta de forma visível sem derrubar a versão já publicada do site.
+
+Lighthouse/Core Web Vitals, indexação de mecanismos externos e disponibilidade de terceiros não são garantias do pipeline editorial. Eles devem ser monitorados separadamente e não podem ser usados para contornar paywall, CAPTCHA, autenticação ou termos dos provedores.
+
+## Critério de liberação
+
+Uma alteração de recuperação só deve chegar ao `main` quando a CI completa da própria alteração passar. Depois do merge, o deploy do Pages deve terminar com sucesso e a Home, a matéria mais recente, o Arquivo e o cronograma público devem ser conferidos na versão publicada.

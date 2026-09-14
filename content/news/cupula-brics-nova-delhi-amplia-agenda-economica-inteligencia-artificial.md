@@ -9,8 +9,8 @@
     "China apresentou propostas de cooperação em inteligência artificial, comércio de serviços e zonas econômicas, enquanto a Índia destacou pagamentos, saúde e segurança alimentar.",
     "O bloco ampliado tenta aumentar sua influência internacional, mas reúne países com interesses estratégicos diferentes e terá de transformar declarações conjuntas em iniciativas concretas."
   ],
-  "publishedAt": "2026-09-14T04:12:00Z",
-  "updatedAt": "2026-09-14T04:12:00Z",
+  "publishedAt": "2026-09-14T04:27:33Z",
+  "updatedAt": "2026-09-14T04:53:44Z",
   "category": "Mundo",
   "tags": [
     "Mundo",
@@ -19,16 +19,16 @@
     "diplomacia",
     "inteligência artificial"
   ],
-  "image": "/images/news/brics-nova-delhi-2026.svg",
-  "imageAlt": "Ilustração editorial abstrata sobre a cúpula do BRICS em Nova Délhi, com uma mesa circular e pontos conectados.",
-  "imageCredit": "Apurante Editorial · Ilustração editorial original, não é fotografia do evento.",
+  "image": "/og.png",
+  "imageAlt": "Capa editorial tipográfica do APURANTE para a matéria sobre a cúpula do BRICS em Nova Délhi.",
+  "imageCredit": "Apurante Editorial · Capa editorial original.",
   "status": "published",
   "confidence": "ALTA CONFIANÇA",
   "relevance": 88,
   "eventKey": "brics-nova-delhi-2026-cooperacao-economica-ia",
-  "editionId": "2026-09-14-extra-01",
+  "editionId": "extraordinary:2026-09-14T04:27:33Z",
   "editionType": "extraordinary",
-  "editionSlot": "01:12",
+  "editionSlot": "2026-09-14T04:27:33Z",
   "editionLabel": "Edição extraordinária",
   "verificationPolicyVersion": 2,
   "sources": [
@@ -49,9 +49,14 @@
       "role": "reporting"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-14T04:53:44Z",
+      "text": "Metadados de publicação ajustados para refletir o horário efetivo em que a edição entrou em produção. O conteúdo factual da matéria não foi alterado."
+    }
+  ],
   "author": "Apurante Editorial",
-  "production": "Texto original em português produzido a partir de reportagens independentes da Reuters e da Associated Press consultadas em 14 de setembro de 2026. A imagem é uma ilustração editorial original e não representa fotografia do evento.",
+  "production": "Texto original em português produzido a partir de reportagens independentes da Reuters e da Associated Press consultadas em 14 de setembro de 2026. A apresentação visual usa a capa editorial original do APURANTE.",
   "leadSourceOrganization": "reuters"
 }
 ---

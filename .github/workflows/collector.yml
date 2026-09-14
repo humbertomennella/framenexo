@@ -58,12 +58,14 @@ jobs:
             python3 scripts/run_editorial.py
           fi
       - name: Validar antes de salvar conteúdo
+        if: steps.pipeline.outcome == 'success'
         run: |
           npm run build
           npm run check:site
           npx playwright install --with-deps chromium
           npm run test:ui
       - name: Salvar edição aprovada
+        if: steps.pipeline.outcome == 'success'
         id: commit
         env:
           GITHUB_TOKEN: ${{ github.token }}

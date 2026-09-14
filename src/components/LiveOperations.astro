@@ -1,19 +1,30 @@
-<section class="notice" aria-label="Estado da operação"><h2>Execução da coleta</h2><p data-operation-live role="status">Consultando o estado público da execução…</p><p class="disclosure">Coleta concluída não significa matéria publicada. A publicação depende da confirmação independente e da mídia aprovada. Este indicador consulta o workflow do repositório; não mede a tarefa externa do ChatGPT.</p></section>
+<section class="notice" aria-label="Estado da operação" data-operation-live>
+ <h2>Operação agora</h2>
+ <p><strong>Scout:</strong> <span data-operation-scout role="status">Consultando a última escuta pública…</span></p>
+ <p><strong>Fechamento editorial:</strong> <span data-operation-editorial>Consultando a última execução pública…</span></p>
+ <p class="disclosure">O Scout observa fontes a cada 15 minutos, mas não publica. As edições regulares são fechadas às 08h, 13h, 18h e 22h de Brasília; o GitHub pode iniciar um job alguns minutos depois do horário previsto.</p>
+</section>
 <script>
-const target=document.querySelector('[data-operation-live]');
-async function refresh(){
- if(!target||document.hidden)return;
- try{
-  const response=await fetch('https://api.github.com/repos/humbertomennella/framenexo/actions/workflows/collector.yml/runs?per_page=1',{headers:{Accept:'application/vnd.github+json'},cache:'no-store',signal:AbortSignal.timeout(10000)});
-  if(!response.ok)throw Error('unavailable');
-  const run=(await response.json()).workflow_runs?.[0];
-  if(!run){target.textContent='Nenhuma execução pública localizada.';return;}
-  const started=run.run_started_at||run.created_at;
-  const when=new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short',timeZone:'America/Sao_Paulo'}).format(new Date(started));
-  const stale=Date.now()-Date.parse(started)>2*3600000;
-  const label=run.status!=='completed'?(run.status==='in_progress'?'Em execução':'Na fila'):run.conclusion==='success'?'Concluída':run.conclusion==='cancelled'?'Cancelada':run.conclusion==='timed_out'?'Tempo limite excedido':'Falha ou execução não concluída com sucesso';
-  target.textContent=`${label}. Início: ${when} BRT.${stale?' Sem execução recente nas últimas duas horas.':''}`;
- }catch{target.textContent='Estado ao vivo indisponível. Os registros abaixo pertencem à versão publicada; não confirmam atividade atual.';}
+const scoutTarget=document.querySelector('[data-operation-scout]');
+const editorialTarget=document.querySelector('[data-operation-editorial]');
+const formatRun=(run,kind)=>{
+ if(!run)return 'Nenhuma execução pública localizada.';
+ const started=run.run_started_at||run.created_at;
+ const when=new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short',timeZone:'America/Sao_Paulo'}).format(new Date(started));
+ const label=run.status!=='completed'?(run.status==='in_progress'?'Em execução':'Na fila'):run.conclusion==='success'?'Concluída':run.conclusion==='cancelled'?'Cancelada':run.conclusion==='timed_out'?'Tempo limite excedido':'Falhou';
+ const stale=kind==='scout'&&Date.now()-Date.parse(started)>45*60*1000;
+ return `${label}. Início: ${when} BRT.${stale?' Nenhuma escuta concluída recentemente; consulte o Actions para diagnóstico.':''}`;
+};
+async function latest(workflow){
+ const response=await fetch(`https://api.github.com/repos/humbertomennella/framenexo/actions/workflows/${workflow}/runs?branch=main&per_page=1`,{headers:{Accept:'application/vnd.github+json'},cache:'no-store',signal:AbortSignal.timeout(10000)});
+ if(!response.ok)throw Error('unavailable');
+ return (await response.json()).workflow_runs?.[0];
 }
-refresh();setInterval(refresh,60000);
+async function refresh(){
+ if(document.hidden)return;
+ try{if(scoutTarget)scoutTarget.textContent=formatRun(await latest('scout.yml'),'scout')}catch{if(scoutTarget)scoutTarget.textContent='Estado ao vivo indisponível para o Scout; o site publicado continua válido.'}
+ try{if(editorialTarget)editorialTarget.textContent=formatRun(await latest('collector.yml'),'editorial')}catch{if(editorialTarget)editorialTarget.textContent='Estado ao vivo indisponível para o fechamento; consulte a última publicação confirmada abaixo.'}
+}
+refresh();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});
 </script>

@@ -79,7 +79,7 @@ for source in source_registry:
  check(source.get('type') in ('primary','press'),f'source {source.get("id")}: invalid type');check(source.get('role') in ('evidence','wire','reporting','specialist','discovery'),f'source {source.get("id")}: invalid role')
  check(not source.get('enabled') or bool(source.get('feed')),f'source {source.get("id")}: enabled without feed')
 records=[]
-used_image_paths=set();used_image_hashes=set();now=dt.datetime.now(dt.timezone.utc)
+used_image_paths=set();used_image_hashes=set();generic_editorial_images={'/og.png','/images/cathedral.webp'};now=dt.datetime.now(dt.timezone.utc)
 for file in (ROOT/'content/news').glob('*.md'):
  parts=file.read_text().split('---',2);check(len(parts)==3,f'{file.name}: frontmatter missing')
  try:a=json.loads(parts[1])
@@ -100,9 +100,12 @@ for file in (ROOT/'content/news').glob('*.md'):
  if a.get('verificationPolicyVersion',0)>=2:check(len(organizations)>=2,f'{file.name}: policy v2 requires two independent organizations')
  try:published=dt.datetime.fromisoformat(a['publishedAt'].replace('Z','+00:00'));check(published<=now+dt.timedelta(minutes=5),f'{file.name}: publication date is in the future')
  except Exception:errors.append(f'{file.name}: invalid publication date')
- check(a['image'] not in used_image_paths,f'{file.name}: duplicate image path');used_image_paths.add(a['image'])
- if image_file.is_file():
-  image_hash=hashlib.sha256(image_file.read_bytes()).hexdigest();check(image_hash not in used_image_hashes,f'{file.name}: duplicate image content');used_image_hashes.add(image_hash)
+ # Generic paths are sentinels for the article-specific EditorialCover component,
+ # not reused photographic assets. Real media must remain unique by path and hash.
+ if a['image'] not in generic_editorial_images:
+  check(a['image'] not in used_image_paths,f'{file.name}: duplicate image path');used_image_paths.add(a['image'])
+  if image_file.is_file():
+   image_hash=hashlib.sha256(image_file.read_bytes()).hexdigest();check(image_hash not in used_image_hashes,f'{file.name}: duplicate image content');used_image_hashes.add(image_hash)
  rendered=pages.get(DIST/'noticias'/a['slug']/'index.html');check(rendered is not None,f'{file.name}: article not rendered')
  if rendered:
   check(rendered.meta.get('og:title')==a['title'],f'{file.name}: OG mismatch');check(rendered.meta.get('twitter:description')==a['description'],f'{file.name}: social description mismatch');check(any(s.get('@type')=='NewsArticle' and s.get('headline')==a['title'] for s in rendered.schemas),f'{file.name}: NewsArticle missing')

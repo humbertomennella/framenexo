@@ -1,9 +1,27 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-12T14:10:00Z",
+  "lastPublishedAt": "2026-09-14T04:27:33Z",
   "lastCollectedAt": "2026-09-14T04:17:33Z",
-  "editionCount": 14,
+  "editionCount": 15,
   "history": [
+    {
+      "slug": "cupula-brics-nova-delhi-amplia-agenda-economica-inteligencia-artificial",
+      "title": "Cúpula do BRICS em Nova Délhi amplia agenda econômica e de inteligência artificial",
+      "eventKey": "brics-nova-delhi-2026-cooperacao-economica-ia",
+      "publishedAt": "2026-09-14T04:27:33Z",
+      "sourceUrls": [
+        "https://www.reuters.com/business/aerospace-defense/xi-pushes-greater-brics-economic-ties-give-bloc-larger-global-role-2026-09-13/",
+        "https://apnews.com/article/72e4329da3bc30ab7b231b2d11aae375"
+      ],
+      "sourceOrganizations": [
+        "reuters",
+        "associated-press"
+      ],
+      "leadSourceOrganization": "reuters",
+      "editionId": "extraordinary:2026-09-14T04:27:33Z",
+      "editionType": "extraordinary",
+      "editionSlot": "2026-09-14T04:27:33Z"
+    },
     {
       "slug": "temporais-sao-paulo-alertas-defesa-civil",
       "title": "Temporais deixam 89 pessoas fora de casa em SP; alertas seguem ativos",
@@ -13,7 +31,7 @@
         "https://www.agenciasp.sp.gov.br/defesa-civil-de-sp-envia-15-alertas-cell-broadcast-e-registra-rajadas-de-vento-de-ate-926-km-h-na-madrugada-deste-sabado-12/",
         "https://portal.inmet.gov.br/noticias/previs%C3%A3o-para-s%C3%A1bado-12-domingo-13-e-segunda-feira-14",
         "https://cge.prefeitura.sp.gov.br/v3/noticias.jsp?data=2026-09-12",
-        "https://noticias.uol.com.br/cotidiano/ultimas-noticias/2026/09/12/defesa-civil-registra-25-ocorrencias-e-rajadas-de-926-kmh-em-sp.ghtm"
+        "https://noticias.uol.com.br/cotidiano/ultimas-noticias/2026/09/12/defesa-civil-registra-25-ocorrencias-e-rajadas-de-vento-de-926-kmh-em-sp.ghtm"
       ]
     },
     {
@@ -138,7 +156,7 @@
       "publishedAt": "2026-09-08T21:00:00Z",
       "sourceUrls": [
         "https://www.reuters.com/world/americas/brazil-court-crisis-deepens-justice-orders-federal-police-chief-suspended-2026-09-08/",
-        "https://www.cnnbrasil.com.br/politica/entenda-a-decisao-de-mendonca-que-afastou-andrei-rodrigues-da-pf/",
+        "https://www.cnnbrasil.com.br/politica/entenda-a-decisao-de-mendonca-que-afastou-andrei-rodrigues-do-comando-da-pf/",
         "https://www1.folha.uol.com.br/poder/2026/09/mendonca-determina-afastamento-de-andrei-rodrigues-do-comando-da-pf.shtml",
         "https://noticias.uol.com.br/politica/ultimas-noticias/2026/09/08/decisao-de-mendonca-ocorre-em-acao-do-partido-de-zema-contra-chefe-da-pf.ghtm"
       ]
@@ -200,6 +218,22 @@
       "publishedAt": "2026-09-08T01:50:00Z",
       "sourceUrls": [
         "https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/community/reminder-lisa-science-gaps-2026/"
+      ]
+    }
+  ],
+  "editionHistory": [
+    {
+      "id": "extraordinary:2026-09-14T04:27:33Z",
+      "type": "extraordinary",
+      "slot": "2026-09-14T04:27:33Z",
+      "label": "Edição extraordinária",
+      "publishedAt": "2026-09-14T04:27:33Z",
+      "articleCount": 1,
+      "categories": {
+        "Mundo": 1
+      },
+      "slugs": [
+        "cupula-brics-nova-delhi-amplia-agenda-economica-inteligencia-artificial"
       ]
     }
   ]

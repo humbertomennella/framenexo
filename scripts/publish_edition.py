@@ -7,6 +7,7 @@ import editorial_selection
 import editorial_media
 
 CATEGORIES=['Brasil','Mundo','Política','Economia','Tecnologia','Ciência','Cultura','Esportes','Saúde','Meio Ambiente']
+GENERIC_EDITORIAL_COVER='/og.png'
 
 def balanced_groups(groups,max_total=None,max_per_category=None):
  """Round-robin categories so one busy desk cannot consume the whole edition."""
@@ -19,6 +20,22 @@ def balanced_groups(groups,max_total=None,max_per_category=None):
   for category in order:
    if buckets[category] and len(selected)<max_total:selected.append(buckets[category].pop(0))
  return selected
+
+def editorial_cover_media(candidate):
+ """Safe first-party fallback. The frontend renders /og.png as an article-specific EditorialCover."""
+ title=str(candidate.get('title') or 'matéria').strip()
+ return dict(path=GENERIC_EDITORIAL_COVER,alt=f'Capa editorial tipográfica do APURANTE para: {title}.',credit='Apurante Editorial · Capa editorial original.')
+
+def resolve_media(group,candidate,body,used_images=()):
+ """Prefer approved/explicitly licensed media; never hold verified journalism solely for an image outage."""
+ for item in group:
+  try:return p.approved_media(item,used_images)
+  except ValueError:continue
+ try:return editorial_media.acquire(candidate,body,used_images)
+ except (ValueError,urllib.error.URLError,TimeoutError,RuntimeError,KeyError,TypeError,json.JSONDecodeError) as error:
+  code=str(error) if isinstance(error,ValueError) else type(error).__name__
+  p.log('media_fallback',candidate=candidate.get('id'),code=code)
+  return editorial_cover_media(candidate)
 
 def publish(force=False,dry_run=False,limit=30):
  start=time.monotonic();state=p.read('data/publishing-state.json',{});history=p.published()
@@ -42,14 +59,14 @@ def publish(force=False,dry_run=False,limit=30):
    c=p.choose_lead(group,sources,history)
    draft,review=p.generate(c,body,[{'title':h['title'],'eventKey':h['eventKey']} for h in history])
    if any(h.get('eventKey')==draft['eventKey'] for h in history):raise ValueError('duplicate_published_event')
-   media=None
-   for item in group:
-    try:media=p.approved_media(item,used_images|reserved_images);break
-    except ValueError:continue
-   if media is None:
-    if dry_run:raise ValueError('dry_run_missing_approved_media')
-    media=editorial_media.acquire(c,body,used_images|reserved_images)
-   reserved_images.add(media['path'])
+   if dry_run:
+    media=None
+    for item in group:
+     try:media=p.approved_media(item,used_images|reserved_images);break
+     except ValueError:continue
+    if media is None:media=editorial_cover_media(c)
+   else:media=resolve_media(group,c,body,used_images|reserved_images)
+   if media['path']!=GENERIC_EDITORIAL_COVER:reserved_images.add(media['path'])
    slug=re.sub(r'[^a-z0-9]+','-',p.normalized(draft['title'])).strip('-')[:80].rstrip('-')+'-'+c['id'][:6];stamp=p.iso()
    article_id=f"apr-{stamp[:10]}-{c['id'][:7]}";takeaways=[f.get('claim') for f in draft.get('facts',[]) if isinstance(f,dict) and f.get('claim')][:3] or [draft['description']]
    lead_org=p.source_organization(c,sources.get(c.get('sourceId'),{}))
@@ -70,7 +87,6 @@ def publish(force=False,dry_run=False,limit=30):
    p.log('error',stage='generation',candidate=c['id'],code=type(e).__name__);break
   except Exception as e:
    held+=1;reason=str(e) if isinstance(e,ValueError) else type(e).__name__;reasons[reason]+=1
-   # Infrastructure/media failures remain retryable; no automatic permanent quarantine.
    p.log('error',stage='verification',candidate=c['id'],code=str(e) if isinstance(e,ValueError) else type(e).__name__)
  if not dry_run:
   p.write('data/candidates.json',all_items)
