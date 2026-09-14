@@ -1,7 +1,7 @@
 """Commit only generated editorial data. Repository token is confined to push."""
 import base64,os,subprocess
 def git(*args,**kwargs):return subprocess.run(['git',*args],check=True,text=True,**kwargs)
-git('add','data','content/news')
+git('add','data','content/news','public/images/news')
 changed=subprocess.run(['git','diff','--cached','--quiet']).returncode==1
 if changed:
  git('config','user.name','github-actions[bot]');git('config','user.email','41898282+github-actions[bot]@users.noreply.github.com')

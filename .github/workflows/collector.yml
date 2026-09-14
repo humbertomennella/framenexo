@@ -61,6 +61,8 @@ jobs:
         run: |
           npm run build
           npm run check:site
+          npx playwright install --with-deps chromium
+          npm run test:ui
       - name: Salvar edição aprovada
         id: commit
         env:

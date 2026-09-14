@@ -3,6 +3,7 @@ import argparse,fcntl,json,os,subprocess,time,urllib.request
 import pipeline as p
 import edition_schedule as schedule
 import scout_snapshot
+import editorial_selection
 import publish_edition
 import local_model
 def run(force=False,dry_run=False,limit=30):
@@ -19,19 +20,13 @@ def run(force=False,dry_run=False,limit=30):
   status=p.read('data/deployment-status.json',{});status.update(repository=os.environ['GITHUB_REPOSITORY'],scheduleActive=True,notes='Escuta contínua; edições regulares às 08h, 13h, 18h e 22h (America/Sao_Paulo). Urgências podem gerar edição extraordinária.');p.write('data/deployment-status.json',status)
  state=p.read('data/publishing-state.json',{})
  if not force and not schedule.is_due(state):return dict(collection=result,publication='not_due',nextEdition=schedule.next_label())
- candidates=[c for c in p.read('data/candidates.json',[]) if c['status']=='candidate' and c.get('relevance',0)>=(65 if c.get('sourceType')=='primary' else 55)]
- if not candidates:return dict(collection=result,publication='no_eligible_candidates')
- # Do not download/start a model if independent evidence or approved media is missing.
  sources={s['id']:s for s in p.read('data/sources.json',[])}
- used={a.get('image') for a in p.published() if a.get('image')}
- ready=False
- for group in p.clusters(candidates):
-  if not p.corroborated(group,sources):continue
-  for candidate in group:
-   try:p.approved_media(candidate,used);ready=True;break
-   except ValueError:continue
-  if ready:break
- if not ready:return dict(collection=result,publication='held_missing_independent_evidence_or_media')
+ candidates=editorial_selection.eligible(p.read('data/candidates.json',[]),sources)
+ related=editorial_selection.groups(candidates)
+ independent=[g for g in related if p.corroborated(g,sources)]
+ result['selection']=dict(eligible=len(candidates),relatedGroups=len(related),independentCandidates=len(independent))
+ if not independent:return dict(collection=result,publication='held_no_independent_candidate_group')
+ # Text verification and licensed media acquisition require the model and happen at closing.
  args,env=local_model.command();opener=urllib.request.build_opener(urllib.request.ProxyHandler({}));(p.ROOT/'.cache').mkdir(exist_ok=True)
  with (p.ROOT/'.cache/llama-server.log').open('w') as logfile:
   server=subprocess.Popen(args,env=env,stdout=logfile,stderr=subprocess.STDOUT)
@@ -59,7 +54,7 @@ if __name__=='__main__':
   started=p.iso()
   try:
    result=run(a.force,a.dry_run,a.limit)
-   p.write('data/operation-state.json',dict(startedAt=started,finishedAt=p.iso(),status='degraded' if result.get('collection',{}).get('errors') else 'completed',runId=os.environ.get('GITHUB_RUN_ID'),result=result))
+   p.write('data/operation-state.json',dict(startedAt=started,finishedAt=p.iso(),status='degraded' if result.get('collection',{}).get('errors') or result.get('held') or str(result.get('publication','')).startswith('held_') else 'completed',runId=os.environ.get('GITHUB_RUN_ID'),result=result))
    p.log('runner_completed',result=result)
    print(json.dumps(result))
   except Exception as e:
