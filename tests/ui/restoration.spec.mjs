@@ -19,3 +19,18 @@ test('urgent panel contains only explicitly urgent stories',async({page})=>{
   await expect(panel.locator('[data-slide]:not([data-level="urgent"])')).toHaveCount(0);
  }
 });
+
+test('home urgent strip receives new alerts and expires them without navigation',async({page})=>{
+ await page.clock.install();
+ await page.goto('./');
+ const strip=page.locator('[data-urgent-strip]');
+ await expect(strip).toBeVisible();
+ const start=await page.evaluate(()=>Date.now());
+ const items=[{title:'Alerta de teste com validade explícita',url:'/noticias/teste/',expiresAt:new Date(start+90000).toISOString()}];
+ const encoded=JSON.stringify(items).replaceAll('&','&amp;').replaceAll('"','&quot;');
+ await page.route('**/',route=>route.fulfill({contentType:'text/html',body:`<aside data-urgent-strip data-items="${encoded}"></aside>`}));
+ await page.clock.fastForward(60010);
+ await expect(strip).toContainText(items[0].title);
+ await page.clock.fastForward(30020);
+ await expect(strip).toContainText('Nenhum alerta urgente verificado vigente.');
+});
