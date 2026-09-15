@@ -18,7 +18,7 @@ test('interests, saved articles and followed topics persist locally',async({page
   await expect(page.getByLabel('Ciência')).toBeChecked();
 
   await page.goto('./');
-  const articleLink=page.locator('section.headlines h3 a').first();
+  const articleLink=page.locator('.lead-copy h2 a').first();
   const title=(await articleLink.textContent())?.trim();
   await articleLink.click();
   const save=page.locator('[data-plus-save]').first();
