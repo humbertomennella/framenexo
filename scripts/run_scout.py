@@ -35,9 +35,11 @@ def main() -> None:
         restore = p.read(".cache/scout/restore.json", {})
         document = p.read(".cache/scout/input.json", {})
         if document:
-            seed = snapshots.validate(document)["candidates"]
+            payload = snapshots.validate(document)
+            seed = payload["candidates"]
+            snapshots.restore_evidence(payload)
         elif restore.get("status") == "unavailable" and not restore.get("errors"):
-            seed = p.read("data/candidates.json", [])  # First installation / retention expiry.
+            seed = p.read("data/candidates.json", [])
         else:
             raise RuntimeError("snapshot_restore_required")
         with p.state_paths(snapshots.TRANSIENT):
