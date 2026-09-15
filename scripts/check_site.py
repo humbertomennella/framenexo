@@ -1,4 +1,4 @@
-"""Check the built public artifact, including base-path routing and SEO records."""
+"""Check the built public artifact, including base-path routing, editorial hierarchy and SEO records."""
 from pathlib import Path
 from html.parser import HTMLParser
 import datetime as dt,hashlib,json,re,sys,urllib.parse,xml.etree.ElementTree as ET
@@ -39,20 +39,34 @@ home_html=(DIST/'index.html').read_text()
 check('data-plus-home-badge' in home_html,'Homepage APURANTE+ personalization status missing')
 plus_html=(DIST/'mais'/'index.html').read_text();my_html=(DIST/'meu-apurante'/'index.html').read_text()
 check('data-interest-selector' in plus_html,'APURANTE+ interest selector missing');check('noindex,follow' in my_html,'Meu APURANTE must be noindex')
-focus=re.search(r'<section class="headlines[^>]*aria-label="Em foco".*?</section>',home_html,re.S)
-moments=re.search(r'<section class="headlines moment-panel[^>]*aria-label="URGENTE".*?</section>',home_html,re.S)
-check(bool(focus and moments),'Homepage carousels missing')
-check('data-pause' not in home_html and '>Pausar<' not in home_html and '>Reproduzir<' not in home_html,'Carousel play/pause control was not removed')
-headlines_source=(ROOT/'src/components/Headlines.astro').read_text(encoding='utf-8')
-check('data-interval="3800"' in headlines_source,'Carousel autoplay must remain between 3 and 4 seconds')
-check("addEventListener('touchstart'" in headlines_source and "addEventListener('touchend'" in headlines_source,'Carousel swipe gestures are missing')
-check("[data-previous]" in headlines_source and "[data-next]" in headlines_source,'Carousel arrow controls are missing')
-if focus and moments:
- focus_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',focus.group()))
- moment_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',moments.group()))
- check(len(focus_urls)==4,'Em foco must contain four distinct articles')
- check(len(moment_urls)<=3,'URGENTE must never exceed three articles')
- check(not focus_urls.intersection(moment_urls),'Homepage carousels repeat the same article')
+
+# Homepage contract: one obvious lead, visible focus, chronological latest stories,
+# elections, edition promise and a complete editorial directory. Hidden carousels are
+# deliberately not required: the public hierarchy must work without autoplay or JS.
+for marker,label in [
+ ('class="lead-zone"','lead zone'),
+ ('class="lead-story"','lead story'),
+ ('class="focus-rail"','focus rail'),
+ ('latest-zone','latest stories'),
+ ('class="elections-home"','elections block'),
+ ('class="edition-promise"','edition promise'),
+ ('data-home-sections','editorial sections')]:
+ check(marker in home_html,f'Homepage {label} missing')
+check('Meta de vinte matérias verificadas' in home_html,'Homepage 20-article editorial target missing')
+check('data-pause' not in home_html and '>Pausar<' not in home_html and '>Reproduzir<' not in home_html,'Homepage must not depend on carousel play/pause controls')
+lead_match=re.search(r'<article class="lead-story">.*?</article>',home_html,re.S)
+focus_match=re.search(r'<aside class="focus-rail".*?</aside>',home_html,re.S)
+latest_match=re.search(r'<section class="section latest-zone">.*?</section>',home_html,re.S)
+lead_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',lead_match.group() if lead_match else ''))
+focus_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',focus_match.group() if focus_match else ''))
+latest_urls=set(re.findall(r'href="([^"]*/noticias/[^"]+)"',latest_match.group() if latest_match else ''))
+check(len(lead_urls)==1,'Homepage must expose exactly one primary lead article')
+check(len(focus_urls)<=3,'Homepage focus rail must not exceed three articles')
+check(not lead_urls.intersection(focus_urls),'Homepage focus rail repeats the primary lead')
+check(not lead_urls.intersection(latest_urls),'Homepage latest block repeats the primary lead')
+check(not focus_urls.intersection(latest_urls),'Homepage latest block repeats focus stories')
+check(home_html.count('class="editoria-block"')>=10,'Homepage must expose all ten editorial desks')
+
 search_html=(DIST/'busca'/'index.html').read_text()
 check(f'data-index-url="{base}search-index.json"' in search_html,'Search index ignores deployment base path')
 def resolve(url,current):
@@ -92,12 +106,18 @@ for file in (ROOT/'content/news').glob('*.md'):
  check(bool(a.get('leadSourceOrganization')),f'{file.name}: lead source organization missing')
  check(a.get('leadSourceOrganization') in organizations,f'{file.name}: lead source is not one of the cited organizations')
  if len(organizations)<2 and not any(source.get('type')=='primary' for source in a['sources']):check(a.get('confidence')=='RELATO',f'{file.name}: single press route must be labeled RELATO')
- if a.get('verificationPolicyVersion',0)>=2:
+ policy=a.get('verificationPolicyVersion',0)
+ if policy>=2:
   prose_paragraphs=[p for p in re.split(r'\n\s*\n',parts[2].strip()) if p and not p.startswith('#')]
   check(len(prose_paragraphs)>=9,f'{file.name}: complete article needs at least nine useful paragraphs')
   for heading in ['## O que aconteceu','## Contexto','## Por que importa','## Como ler esta notícia','## Contexto para interpretar','## O que acompanhar agora']:
    check(heading not in parts[2],f'{file.name}: generic section remains: {heading}')
- if a.get('verificationPolicyVersion',0)>=2:check(len(organizations)>=2,f'{file.name}: policy v2 requires two independent organizations')
+ # Policy v2 represented the old two-independent-organizations rule. Policy v3
+ # keeps that route and also admits a direct authoritative primary evidence route.
+ if policy==2:check(len(organizations)>=2,f'{file.name}: policy v2 requires two independent organizations')
+ if policy>=3:
+  primary_evidence=any(source.get('type')=='primary' and source.get('role','evidence')=='evidence' for source in a['sources'])
+  check(len(organizations)>=2 or primary_evidence,f'{file.name}: policy v3 requires independent confirmation or authoritative primary evidence')
  try:published=dt.datetime.fromisoformat(a['publishedAt'].replace('Z','+00:00'));check(published<=now+dt.timedelta(minutes=5),f'{file.name}: publication date is in the future')
  except Exception:errors.append(f'{file.name}: invalid publication date')
  # Generic paths are sentinels for the article-specific EditorialCover component,
@@ -119,4 +139,4 @@ category_counts={category:sum(1 for article in records if article.get('category'
 for category,count in category_counts.items():check(count>=3,f'Editorial coverage regression: {category} has only {count} articles')
 for forbidden in ['.git','.cache','data','scripts','__qa-mobile.html']:check(not (DIST/forbidden).exists(),'Private or QA artifact exposed: '+forbidden)
 if errors:print('\n'.join(errors));sys.exit(1)
-print(f'PASS: {len(pages)} HTML pages, {len(records)} articles, internal links, images, metadata, JSON-LD, sitemap, robots and search. Base: {base}')
+print(f'PASS: {len(pages)} HTML pages, {len(records)} articles, editorial hierarchy, internal links, images, metadata, JSON-LD, sitemap, robots and search. Base: {base}')
