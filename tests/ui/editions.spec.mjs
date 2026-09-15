@@ -41,7 +41,7 @@ test('barra de edições ocupa pouco espaço em 390px',async({page})=>{
 test('arquivo explica agrupamento pelas quatro janelas e preserva publicações anteriores',async({page})=>{
   await page.goto('./arquivo/');
   await expect(page.getByRole('heading',{name:'Arquivo',exact:true})).toBeVisible();
-  await expect(page.getByText(/08h, 13h, 18h e 22h/)).toBeVisible();
+  await expect(page.getByText(/08h, 13h, 18h e 22h/).last()).toBeVisible();
   await expect(page.locator('.archive-edition').first()).toBeVisible();
   await expect(page.locator('.archive-edition').first()).toContainText(/ARQUIVO ANTERIOR|EDIÇÃO PROGRAMADA|EDIÇÃO EXTRAORDINÁRIA/);
 });
