@@ -1,0 +1,30 @@
+---
+import { calendarThemes } from '../lib/calendarThemes';
+---
+<div class="calendar-theme-shell" aria-live="polite">
+ {calendarThemes.map(theme=><aside class="calendar-theme-banner" data-calendar-theme-panel={theme.id} aria-label={theme.label} hidden>
+  <div class="wrap calendar-theme-inner">
+   <span class="calendar-theme-ribbon" aria-hidden="true">
+    <svg viewBox="0 0 28 34" width="24" height="29" fill="none"><path d="M10.3 2.7c2.2-1.4 5.2-1.4 7.4 0 2.8 1.8 4 5.2 2.9 8.3l-2.1 5.8 6.1 12.5-5.7 2-4.9-10.5-4.9 10.5-5.7-2 6.1-12.5L7.4 11c-1.1-3.1.1-6.5 2.9-8.3Z" fill="currentColor"/><path d="M10.7 4.9c1.9-1.2 4.7-1.2 6.6 0 2 1.3 2.9 3.9 2.1 6.2l-5.4 15-5.4-15c-.8-2.3.1-4.9 2.1-6.2Z" fill="var(--calendar-theme-surface-tint)"/></svg>
+   </span>
+   <div class="calendar-theme-copy">
+    <strong>{theme.label}</strong>
+    <span>{theme.message}</span>
+   </div>
+   {theme.link&&<a class="calendar-theme-link" href={theme.link} target="_blank" rel="noopener noreferrer">{theme.linkLabel || 'Saiba mais'} <span aria-hidden="true">↗</span></a>}
+  </div>
+ </aside>)}
+</div>
+
+<style is:global>
+.calendar-theme-shell{position:relative;z-index:24}.calendar-theme-banner{display:none;background:linear-gradient(90deg,color-mix(in srgb,var(--calendar-theme-accent) 88%,#fff 12%),var(--calendar-theme-accent));color:var(--calendar-theme-button-text);border-bottom:1px solid color-mix(in srgb,var(--calendar-theme-button-text) 20%,transparent)}
+html[data-calendar-theme] .calendar-theme-banner[hidden]{display:none}
+html[data-calendar-theme="setembro-amarelo"] .calendar-theme-banner[data-calendar-theme-panel="setembro-amarelo"]{display:block}
+.calendar-theme-inner{min-height:45px;display:flex;align-items:center;gap:12px;padding-block:7px}.calendar-theme-ribbon{width:28px;height:31px;display:grid;place-items:center;flex:0 0 auto;color:var(--calendar-theme-button-text)}.calendar-theme-copy{display:flex;align-items:baseline;gap:10px;min-width:0}.calendar-theme-copy strong{text-transform:uppercase;font-size:.74rem;letter-spacing:.09em;white-space:nowrap}.calendar-theme-copy span{font-size:.82rem;line-height:1.35}.calendar-theme-link{margin-left:auto;flex:0 0 auto;font-size:.76rem;font-weight:800;text-decoration:underline;text-underline-offset:3px;color:var(--calendar-theme-button-text)}.calendar-theme-link:hover{color:var(--calendar-theme-button-text);text-decoration-thickness:2px}
+html[data-calendar-theme] .site-header{box-shadow:inset 0 2px 0 color-mix(in srgb,var(--calendar-theme-accent) 75%,transparent)}
+html[data-calendar-theme] .wordmark .brand-point,html[data-calendar-theme] .live-dot{filter:drop-shadow(0 0 8px color-mix(in srgb,var(--calendar-theme-accent) 30%,transparent))}
+html[data-calendar-theme] .categories a.active{position:relative}html[data-calendar-theme] .categories a.active:after{content:'';position:absolute;left:0;right:0;bottom:7px;height:2px;border-radius:4px;background:var(--calendar-theme-accent)}
+@media(max-width:760px){.calendar-theme-inner{min-height:42px;gap:9px;padding-block:6px}.calendar-theme-ribbon{width:22px;height:27px}.calendar-theme-ribbon svg{width:20px;height:25px}.calendar-theme-copy{display:block}.calendar-theme-copy strong{display:block;font-size:.67rem}.calendar-theme-copy span{display:block;font-size:.73rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:54vw}.calendar-theme-link{font-size:.7rem}.calendar-theme-link>span{display:none}}
+@media(max-width:430px){.calendar-theme-copy span{display:none}.calendar-theme-link{font-size:.68rem}.calendar-theme-inner{gap:7px}}
+@media(prefers-reduced-motion:reduce){.calendar-theme-banner *{scroll-behavior:auto}}
+</style>
