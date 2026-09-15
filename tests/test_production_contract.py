@@ -21,9 +21,9 @@ def published_metadata():
 class ProductionContract(unittest.TestCase):
     def test_failed_editorial_pipeline_cannot_validate_or_commit(self):
         workflow=(ROOT/'.github/workflows/collector.yml').read_text()
-        self.assertIn("- cron: '7 1,11,16,21 * * *'",workflow)
-        self.assertIn("- cron: '27 1,11,16,21 * * *'",workflow)
-        self.assertNotIn("- cron: '0 1,11,16,21 * * *'",workflow)
+        self.assertIn("- cron: '7 * * * *'",workflow)
+        self.assertIn("- cron: '27 * * * *'",workflow)
+        self.assertNotIn("- cron: '0 * * * *'",workflow)
         self.assertIn("group: framenexo-editorial",workflow)
         self.assertIn("cancel-in-progress: false",workflow)
         self.assertIn("- name: Validar antes de salvar conteúdo\n        if: steps.pipeline.outcome == 'success'",workflow)
@@ -34,7 +34,6 @@ class ProductionContract(unittest.TestCase):
         script=(ROOT/'scripts/commit_changes.py').read_text()
         self.assertIn("changed=status('content/news')",script)
         self.assertNotIn("git('add','data'",script)
-        # Closing state can accompany a real article, but never create a commit alone.
         for path in (
             'data/publishing-state.json','data/candidates.json','data/scout-state.json',
             'data/editorial-log.json','data/operation-state.json','data/deployment-status.json',
@@ -51,15 +50,14 @@ class ProductionContract(unittest.TestCase):
         latest_slugs={row['slug'] for row in rows if row['publishedAt']==latest}
         self.assertTrue(latest_slugs <= slugs)
 
-    def test_public_status_uses_fixed_editions_not_hourly_window(self):
+    def test_public_status_uses_hourly_editorial_window(self):
         status=(ROOT/'src/pages/status.astro').read_text()
         live=(ROOT/'src/components/LiveOperations.astro').read_text()
         schedule=json.loads((ROOT/'data/edition-schedule.json').read_text())
-        self.assertEqual(schedule['slots'],[8,13,18,22])
+        self.assertEqual(schedule['slots'],list(range(24)))
         self.assertIn('editionHoursLabel',status)
-        self.assertIn('08h, 13h, 18h e 22h',status)
-        self.assertNotIn('3600000',status)
-        self.assertNotIn('janela editorial continua horária',status)
+        self.assertIn('de hora em hora',status)
+        self.assertNotIn('08h, 13h, 18h e 22h',status)
         self.assertIn("latest('scout.yml')",live)
         self.assertIn("latest('collector.yml')",live)
         self.assertNotIn('setInterval',live)
