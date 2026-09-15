@@ -21,8 +21,10 @@ def published_metadata():
 class ProductionContract(unittest.TestCase):
     def test_failed_editorial_pipeline_cannot_validate_or_commit(self):
         workflow=(ROOT/'.github/workflows/collector.yml').read_text()
-        self.assertIn("- cron: '7 * * * *'",workflow)
-        self.assertIn("- cron: '27 * * * *'",workflow)
+        self.assertIn("- cron: '7 1,11,16,21 * * *'",workflow)
+        self.assertIn("- cron: '27 1,11,16,21 * * *'",workflow)
+        self.assertNotIn("- cron: '7 * * * *'",workflow)
+        self.assertNotIn("- cron: '27 * * * *'",workflow)
         self.assertNotIn("- cron: '0 * * * *'",workflow)
         self.assertIn("group: framenexo-editorial",workflow)
         self.assertIn("cancel-in-progress: false",workflow)
@@ -50,14 +52,18 @@ class ProductionContract(unittest.TestCase):
         latest_slugs={row['slug'] for row in rows if row['publishedAt']==latest}
         self.assertTrue(latest_slugs <= slugs)
 
-    def test_public_status_uses_hourly_editorial_window(self):
+    def test_public_status_uses_four_daily_editorial_windows(self):
         status=(ROOT/'src/pages/status.astro').read_text()
         live=(ROOT/'src/components/LiveOperations.astro').read_text()
         schedule=json.loads((ROOT/'data/edition-schedule.json').read_text())
-        self.assertEqual(schedule['slots'],list(range(24)))
+        self.assertEqual(schedule['slots'],[8,13,18,22])
+        self.assertEqual(schedule['maxArticlesPerEdition'],20)
+        self.assertEqual(schedule['targetPerCategory'],2)
+        self.assertEqual(schedule['maxPerCategory'],2)
         self.assertIn('editionHoursLabel',status)
-        self.assertIn('de hora em hora',status)
-        self.assertNotIn('08h, 13h, 18h e 22h',status)
+        self.assertIn('08h, 13h, 18h e 22h',status)
+        self.assertIn('20 matérias',status)
+        self.assertNotIn('de hora em hora',status)
         self.assertIn("latest('scout.yml')",live)
         self.assertIn("latest('collector.yml')",live)
         self.assertNotIn('setInterval',live)
