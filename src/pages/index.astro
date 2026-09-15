@@ -4,6 +4,7 @@ import Card from '../components/Card.astro';
 import Elections from '../components/Elections.astro';
 import EditorialCover from '../components/EditorialCover.astro';
 import Headlines from '../components/Headlines.astro';
+import UrgentStrip from '../components/UrgentStrip.astro';
 import HomePersonalization from '../components/HomePersonalization.astro';
 import HomePlusFeed from '../components/HomePlusFeed.astro';
 import {articles,articleUrl,href,date,reading,categories,categorySlug,inCategory,usesEditorialCover} from '../lib/news';
@@ -25,11 +26,7 @@ const sections=categories.map(category=>({category,items:articles.filter(a=>inCa
  <div class="home-page home-editorial">
   <h1 class="sr-only">Apurante — notícias do Brasil e do mundo</h1>
 
-  {urgent.length>0&&<aside class="breaking-strip" aria-label="Notícia urgente">
-   <span>URGENTE</span>
-   <a href={articleUrl(urgent[0])}>{urgent[0].title}</a>
-   <time datetime={urgent[0].publishedAt}>{date(urgent[0].publishedAt)}</time>
-  </aside>}
+  <UrgentStrip articles={urgent}/>
 
   {lead&&<section class="lead-zone" aria-label="Destaques do APURANTE">
    <article class="lead-story">

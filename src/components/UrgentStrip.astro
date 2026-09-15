@@ -1,0 +1,43 @@
+---
+import {articleUrl} from '../lib/news';
+const {articles=[]}=Astro.props;
+const items=articles.map(a=>({title:a.title,url:articleUrl(a),expiresAt:a.highlightExpiresAt}));
+---
+<aside class="breaking-strip" aria-label="Notícias urgentes" data-urgent-strip data-items={JSON.stringify(items)}>
+ <span>URGENTE</span>
+ <div data-urgent-content role="status">{items.length?<a href={items[0].url}>{items[0].title}</a>:<span>Nenhum alerta urgente verificado vigente.</span>}</div>
+</aside>
+<script>
+const root=document.querySelector<HTMLElement>('[data-urgent-strip]');
+if(root){
+ const content=root.querySelector<HTMLElement>('[data-urgent-content]')!;
+ let items:any[]=[],busy=false,expiry:ReturnType<typeof setTimeout>|undefined;
+ const decode=(value:string)=>{
+  try{const rows=JSON.parse(value);return Array.isArray(rows)?rows.filter(row=>typeof row.title==='string'&&typeof row.url==='string'&&row.url.startsWith('/')&&!row.url.startsWith('//')&&Number.isFinite(Date.parse(row.expiresAt))):[]}catch{return []}
+ };
+ const render=()=>{
+  clearTimeout(expiry);
+  const item=items.find(row=>Date.parse(row.expiresAt)>Date.now());
+  const text=item?.title||'Nenhum alerta urgente verificado vigente.';
+  if(content.textContent!==text){
+   const node=document.createElement(item?'a':'span');node.textContent=text;
+   if(item)(node as HTMLAnchorElement).href=item.url;
+   content.replaceChildren(node);
+  }
+  if(item)expiry=setTimeout(render,Math.min(Date.parse(item.expiresAt)-Date.now()+10,2147483647));
+ };
+ items=decode(root.dataset.items||'[]');render();
+ const refresh=async()=>{
+  render();if(document.hidden||busy)return;busy=true;
+  try{
+   const response=await fetch(location.href,{cache:'no-store',signal:AbortSignal.timeout(10000)});
+   if(!response.ok)return;
+   const next=new DOMParser().parseFromString(await response.text(),'text/html').querySelector<HTMLElement>('[data-urgent-strip]');
+   if(next){items=decode(next.dataset.items||'[]');render();}
+  }catch{/* Keep dated items; local expiry still applies during a network outage. */}
+  finally{busy=false;}
+ };
+ setInterval(refresh,60000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
+}
+</script>
