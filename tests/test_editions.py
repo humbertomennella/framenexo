@@ -52,6 +52,19 @@ class EditionBalance(unittest.TestCase):
   selected=publish_edition.balanced_groups(groups,max_total=30,max_per_category=4)
   self.assertEqual(len(selected),4)
 
+ def test_verification_queue_keeps_reserve_groups_beyond_publish_ceiling(self):
+  groups=[self.group('Brasil',i) for i in range(6)]
+  with patch.object(publish_edition.editorial_selection,'cached_evidence',return_value='evidência suficiente'):
+   selected=publish_edition.verification_queue(groups,publish_limit=8,category_limit=2)
+  self.assertEqual(len(selected),6)
+
+ def test_verification_queue_prefers_groups_with_cached_evidence(self):
+  stale=[{'category':'Brasil','relevance':80,'id':'stale-1','publishedAt':'2026-09-15T02:00:00Z'}]
+  ready=[{'category':'Brasil','relevance':80,'id':'ready-1','publishedAt':'2026-09-15T01:00:00Z'}]
+  with patch.object(publish_edition.editorial_selection,'cached_evidence',side_effect=lambda item:'evidência' if item['id'].startswith('ready') else None):
+   selected=publish_edition.verification_queue([stale,ready],publish_limit=2,category_limit=2)
+  self.assertEqual(selected[0][0]['id'],'ready-1')
+
 class MediaFallback(unittest.TestCase):
  def test_verified_story_falls_back_to_first_party_cover(self):
   candidate={'id':'abc123','title':'Acontecimento verificado sem imagem externa'}
