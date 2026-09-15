@@ -5,7 +5,7 @@ test('search, editorial Home and reading preferences work',async({page})=>{
  await expect(page.locator('.lead-story')).toBeVisible();
  await expect(page.locator('.focus-rail')).toBeVisible();
  await expect(page.locator('.latest-zone')).toBeVisible();
- await expect(page.locator('[data-slide]')).toHaveCount(0);
+ await expect(page.locator('.focus-carousel-rail [data-slide]')).toHaveCount(3);
  await page.goto('./busca/?q=Brasil');
  await expect(page.locator('#search-results article').first()).toBeVisible();
  await page.getByRole('searchbox').fill('zzzzsemresultado999');
