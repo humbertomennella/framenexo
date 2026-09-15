@@ -20,15 +20,19 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
       <div class="edition-dialog-grid">
         <section>
           <strong>Uma janela por hora</strong>
-          <p>Há um fechamento editorial a cada hora, sempre no horário de Brasília. Se houver matérias verificadas e aprovadas, elas entram no ar nessa janela.</p>
+          <p>A execução principal começa no minuto <b>:07</b> de cada hora. Se a edição ainda não tiver sido concluída, uma execução de recuperação entra no minuto <b>:27</b>. O conteúdo só aparece depois da redação, revisão, testes, commit e deploy.</p>
+        </section>
+        <section>
+          <strong>Meta de 20 matérias</strong>
+          <p>Cada fechamento tenta entregar <b>20 matérias</b>: duas para cada uma das dez editorias. A meta é de volume máximo, não uma licença para completar espaço com conteúdo fraco.</p>
         </section>
         <section>
           <strong>Sem notícia artificial</strong>
-          <p>Se nada estiver suficientemente confirmado, a janela pode terminar sem novas matérias. Frequência não vale mais que precisão.</p>
+          <p>Se uma editoria não tiver duas pautas com evidência suficiente, ela fica abaixo da cota. Nenhuma matéria é inventada, alongada artificialmente ou publicada sem sustentação factual.</p>
         </section>
         <section>
           <strong>Monitoramento contínuo</strong>
-          <p>Entre os fechamentos, o APURANTE continua consultando fontes, agrupando pautas, cruzando informações e preparando candidatos.</p>
+          <p>Entre os fechamentos, o APURANTE continua consultando fontes, agrupando pautas, cruzando informações e preparando candidatos para a próxima edição.</p>
         </section>
         <section>
           <strong>Se algo não puder esperar</strong>
@@ -36,7 +40,7 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
         </section>
       </div>
 
-      <p class="edition-dialog-note">A quantidade de matérias varia conforme o que aconteceu e o que foi possível confirmar. A janela horária nunca vira desculpa para preencher espaço com notícia fraca.</p>
+      <p class="edition-dialog-note">A quantidade de matérias pode ficar abaixo de 20 quando a evidência não for suficiente. A janela horária nunca vira desculpa para preencher espaço com notícia fraca.</p>
       <form method="dialog"><button class="button edition-dialog-done" type="submit">Entendi</button></form>
     </div>
   </dialog>
@@ -50,17 +54,17 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
   const close=root.querySelector('[data-edition-close]');
   const output=root.querySelector('[data-next-edition]');
   if(!open||!dialog||!output)return;
-  let slots=[];try{slots=JSON.parse(root.getAttribute('data-slots')||'[]')}catch{}
   const timezone=root.getAttribute('data-timezone')||'America/Sao_Paulo';
+  const runMinutes=[7,27];
   const update=()=>{
    const parts=new Intl.DateTimeFormat('en-GB',{timeZone:timezone,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
    const hour=Number(parts.find(part=>part.type==='hour')?.value||0);
    const minute=Number(parts.find(part=>part.type==='minute')?.value||0);
-   const now=hour*60+minute;
-   const next=slots.find(value=>value*60>now);
-   const target=next??slots[0];
-   if(target===undefined)return;
-   output.textContent=`${String(target).padStart(2,'0')}h ${next===undefined?'amanhã':'hoje'}`;
+   const sameHour=runMinutes.find(value=>value>minute);
+   const targetHour=sameHour!==undefined?hour:(hour+1)%24;
+   const targetMinute=sameHour!==undefined?sameHour:runMinutes[0];
+   const tomorrow=sameHour===undefined&&hour===23;
+   output.textContent=`${String(targetHour).padStart(2,'0')}:${String(targetMinute).padStart(2,'0')} ${tomorrow?'amanhã':'hoje'}`;
   };
   update();
   if(root.getAttribute('data-ready')==='true')return;
