@@ -12,11 +12,11 @@
 (() => {
   const KEY = 'apurante_theme';
   const getTheme = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
-  const schemeFor = theme => theme === 'dark' ? 'dark' : 'light';
+  const schemeFor = theme => theme === 'dark' ? 'dark' : 'only light';
   const syncMeta = theme => {
     const scheme = schemeFor(theme);
     const themeMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#f7f7f3' : '#0a0c0f');
+    if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#f6f6f2' : '#0a0c0f');
     const schemeMeta = document.querySelector('meta[name="color-scheme"]');
     if (schemeMeta) schemeMeta.setAttribute('content', scheme);
   };
