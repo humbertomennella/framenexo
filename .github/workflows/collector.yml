@@ -1,12 +1,15 @@
 name: Coleta e edição
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/collector.yml'
   schedule:
-    # GitHub Actions usa UTC. Cada edição tem um disparo principal em :07 e um de
-    # recuperação em :27. Evitamos o minuto 00, sujeito a maior contenção no
-    # scheduler, e a segunda tentativa é idempotente via lastEditionSlot.
-    # 01/11/16/21 UTC = 22/08/13/18 em America/Sao_Paulo.
-    - cron: '7 1,11,16,21 * * *'
-    - cron: '27 1,11,16,21 * * *'
+    # GitHub Actions usa UTC. O APURANTE fecha uma janela editorial por hora.
+    # O disparo principal ocorre aos :07 e a recuperação idempotente aos :27.
+    # Evitamos o minuto 00, que costuma sofrer mais contenção no scheduler.
+    - cron: '7 * * * *'
+    - cron: '27 * * * *'
   workflow_dispatch:
     inputs:
       force:
@@ -54,7 +57,7 @@ jobs:
         id: pipeline
         continue-on-error: true
         env:
-          FORCE_EDITION: ${{ inputs.force || 'false' }}
+          FORCE_EDITION: ${{ github.event_name == 'push' || inputs.force }}
         run: |
           if [ "$FORCE_EDITION" = "true" ]; then
             python3 scripts/run_editorial.py --force
