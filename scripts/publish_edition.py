@@ -61,12 +61,12 @@ def publish(force=False,dry_run=False,limit=30):
  for c in all_items:
   if c['url'] in urls:c['status']='published'
  eligible=editorial_selection.eligible(all_items,sources)
- cfg=schedule.config();publish_limit=max(0,min(int(limit),int(cfg.get('maxArticlesPerEdition',30))));category_limit=max(1,int(cfg.get('maxPerCategory',4)))
+ cfg=schedule.config();publish_limit=max(0,min(int(limit),int(cfg.get('maxArticlesPerEdition',30))));category_limit=max(1,int(cfg.get('maxPerCategory',4)));generation_budget=max(300,min(int(cfg.get('generationBudgetSeconds',1800)),3600))
  publishable_groups=[g for g in editorial_selection.groups(eligible) if editorial_selection.publishable(g,sources)]
  groups=verification_queue(publishable_groups,publish_limit,category_limit)
  count=0;held=0;reasons=collections.Counter();processed=set();evidence_cache={};published_stamps=[];edition_slugs=[];category_counts=collections.Counter()
  for group in groups:
-  if count>=publish_limit or time.monotonic()-start>1800:break
+  if count>=publish_limit or time.monotonic()-start>generation_budget:break
   if any(x['id'] in processed for x in group):continue
   c=p.choose_lead(group,sources,history)
   if category_counts[c.get('category','Outros')]>=category_limit:continue
