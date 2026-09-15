@@ -12,13 +12,14 @@ test.beforeEach(async({page})=>{
 test('theme toggle persists the selected theme locally',async({page,context})=>{
   const root=page.locator('html');
   const toggle=page.locator('[data-theme-toggle]');
-  await expect(root).toHaveAttribute('data-theme','dark');
-  await toggle.click();
   await expect(root).toHaveAttribute('data-theme','light');
   await expect(toggle).toHaveAttribute('aria-pressed','true');
-  expect(await page.evaluate(()=>localStorage.getItem('apurante_theme'))).toBe('light');
+  await toggle.click();
+  await expect(root).toHaveAttribute('data-theme','dark');
+  await expect(toggle).toHaveAttribute('aria-pressed','false');
+  expect(await page.evaluate(()=>localStorage.getItem('apurante_theme'))).toBe('dark');
   await page.reload();
-  await expect(root).toHaveAttribute('data-theme','light');
+  await expect(root).toHaveAttribute('data-theme','dark');
   expect(await context.cookies()).toHaveLength(0);
 });
 
