@@ -17,7 +17,7 @@ permissions:
   contents: read
 concurrency:
   group: framenexo-pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   build:
     if: ${{ !github.event.repository.private }}
