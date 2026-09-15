@@ -17,15 +17,17 @@ def run(force=False,dry_run=False,limit=30):
  result=dict(sourcesOK=observed['sourcesReached'],collected=observed.get('newCandidates',0),errors=observed.get('sourceErrors',[]),snapshotRunId=snapshot['runId'],snapshotCompletedAt=snapshot['completedAt'])
  state['lastCollectedAt']=snapshot['completedAt'];p.write('data/publishing-state.json',state)
  if os.environ.get('GITHUB_ACTIONS')=='true':
-  status=p.read('data/deployment-status.json',{});status.update(repository=os.environ['GITHUB_REPOSITORY'],scheduleActive=True,notes='Escuta contínua; fechamento editorial de hora em hora em America/Sao_Paulo. Uma janela pode ficar sem publicação quando nenhuma pauta passa pela confirmação independente e pela validação editorial.');p.write('data/deployment-status.json',status)
+  status=p.read('data/deployment-status.json',{});status.update(repository=os.environ['GITHUB_REPOSITORY'],scheduleActive=True,notes='Escuta contínua; fechamento editorial de hora em hora em America/Sao_Paulo. Uma janela pode ficar sem publicação quando nenhuma pauta passa por fonte primária verificável ou confirmação independente e pela validação editorial.');p.write('data/deployment-status.json',status)
  state=p.read('data/publishing-state.json',{})
  if not force and not schedule.is_due(state):return dict(collection=result,publication='not_due',nextEdition=schedule.next_label())
  sources={s['id']:s for s in p.read('data/sources.json',[])}
  candidates=editorial_selection.eligible(p.read('data/candidates.json',[]),sources)
  related=editorial_selection.groups(candidates)
  independent=[g for g in related if p.corroborated(g,sources)]
- result['selection']=dict(eligible=len(candidates),relatedGroups=len(related),independentCandidates=len(independent))
- if not independent:return dict(collection=result,publication='held_no_independent_candidate_group')
+ primary=[g for g in related if editorial_selection.authoritative_primary(g,sources) and not p.corroborated(g,sources)]
+ publishable=[g for g in related if editorial_selection.publishable(g,sources)]
+ result['selection']=dict(eligible=len(candidates),relatedGroups=len(related),independentCandidates=len(independent),primaryCandidates=len(primary),publishableCandidates=len(publishable))
+ if not publishable:return dict(collection=result,publication='held_no_publishable_candidate_group')
  args,env=local_model.command();opener=urllib.request.build_opener(urllib.request.ProxyHandler({}));(p.ROOT/'.cache').mkdir(exist_ok=True)
  with (p.ROOT/'.cache/llama-server.log').open('w') as logfile:
   server=subprocess.Popen(args,env=env,stdout=logfile,stderr=subprocess.STDOUT)
