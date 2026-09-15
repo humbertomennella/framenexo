@@ -8,9 +8,11 @@ on:
       - 'scripts/publish_edition.py'
       - 'scripts/editorial_selection.py'
       - 'scripts/commit_changes.py'
+      - 'data/edition-schedule.json'
+      - 'tests/test_editions.py'
   schedule:
-    - cron: '7 * * * *'
-    - cron: '27 * * * *'
+    - cron: '7 1,11,16,21 * * *'
+    - cron: '27 1,11,16,21 * * *'
   workflow_dispatch:
     inputs:
       force:
@@ -31,7 +33,7 @@ jobs:
   editorial:
     if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 55
+    timeout-minutes: 75
     permissions:
       contents: write
       actions: read
@@ -63,7 +65,7 @@ jobs:
         id: pipeline
         continue-on-error: true
         env:
-          FORCE_EDITION: ${{ github.event_name == 'push' || inputs.force }}
+          FORCE_EDITION: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call') && inputs.force }}
         run: |
           if [ "$FORCE_EDITION" = "true" ]; then
             python3 scripts/run_editorial.py --force
