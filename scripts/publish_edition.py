@@ -22,7 +22,7 @@ def balanced_groups(groups,max_total=None,max_per_category=None):
  return selected
 
 def verification_priority(group):
- """Prefer groups whose independent routes already carry recent URL-bound evidence."""
+ """Prefer groups whose routes already carry recent URL-bound evidence."""
  cached=sum(1 for item in group if editorial_selection.cached_evidence(item))
  newest=max((item.get('publishedAt','') for item in group),default='')
  return cached,newest
@@ -62,8 +62,8 @@ def publish(force=False,dry_run=False,limit=30):
   if c['url'] in urls:c['status']='published'
  eligible=editorial_selection.eligible(all_items,sources)
  cfg=schedule.config();publish_limit=max(0,min(int(limit),int(cfg.get('maxArticlesPerEdition',30))));category_limit=max(1,int(cfg.get('maxPerCategory',4)))
- corroborated_groups=[g for g in editorial_selection.groups(eligible) if p.corroborated(g,sources)]
- groups=verification_queue(corroborated_groups,publish_limit,category_limit)
+ publishable_groups=[g for g in editorial_selection.groups(eligible) if editorial_selection.publishable(g,sources)]
+ groups=verification_queue(publishable_groups,publish_limit,category_limit)
  count=0;held=0;reasons=collections.Counter();processed=set();evidence_cache={};published_stamps=[];edition_slugs=[];category_counts=collections.Counter()
  for group in groups:
   if count>=publish_limit or time.monotonic()-start>1800:break
@@ -71,7 +71,7 @@ def publish(force=False,dry_run=False,limit=30):
   c=p.choose_lead(group,sources,history)
   if category_counts[c.get('category','Outros')]>=category_limit:continue
   try:
-   if not p.corroborated(group,sources):raise ValueError('independent_confirmation_required')
+   if not editorial_selection.publishable(group,sources):raise ValueError('verified_source_routes_required')
    group,body=editorial_selection.verify(group,sources,evidence_cache)
    c=p.choose_lead(group,sources,history)
    if category_counts[c.get('category','Outros')]>=category_limit:continue
@@ -87,8 +87,10 @@ def publish(force=False,dry_run=False,limit=30):
    if media['path']!=GENERIC_EDITORIAL_COVER:reserved_images.add(media['path'])
    slug=re.sub(r'[^a-z0-9]+','-',p.normalized(draft['title'])).strip('-')[:80].rstrip('-')+'-'+c['id'][:6];stamp=p.iso()
    article_id=f"apr-{stamp[:10]}-{c['id'][:7]}";takeaways=[f.get('claim') for f in draft.get('facts',[]) if isinstance(f,dict) and f.get('claim')][:3] or [draft['description']]
-   lead_org=p.source_organization(c,sources.get(c.get('sourceId'),{}))
-   meta=dict(articleId=article_id,title=draft['title'],slug=slug,description=draft['description'],quickTakeaways=takeaways,publishedAt=stamp,updatedAt=stamp,category=c['category'],tags=list(dict.fromkeys([c['category']]+draft['tags'])),image=media['path'],imageAlt=media['alt'],imageCredit=media['credit'],status='published',confidence=p.publication_confidence(group,sources),verificationPolicyVersion=2,relevance=p.rank(c['title'],c.get('sourceType')),eventKey=draft['eventKey'],editionId=edition_id,editionType=mode,editionSlot=edition_slot,editionLabel=edition_label,leadSourceOrganization=lead_org,sources=p.unique_sources(group,sources),corrections=[],author='Apurante Editorial',production='Apurante Editorial: texto original, evidência rastreável, confirmação independente e revisão factual automatizada')
+   lead_org=p.source_organization(c,sources.get(c.get('sourceId'),{}));primary_route=editorial_selection.authoritative_primary(group,sources) and not p.corroborated(group,sources)
+   confidence='CONFIRMADO' if primary_route else p.publication_confidence(group,sources)
+   production='Apurante Editorial: texto original, evidência rastreável, fonte primária verificável ou confirmação independente e revisão factual automatizada'
+   meta=dict(articleId=article_id,title=draft['title'],slug=slug,description=draft['description'],quickTakeaways=takeaways,publishedAt=stamp,updatedAt=stamp,category=c['category'],tags=list(dict.fromkeys([c['category']]+draft['tags'])),image=media['path'],imageAlt=media['alt'],imageCredit=media['credit'],status='published',confidence=confidence,verificationPolicyVersion=3,relevance=p.rank(c['title'],c.get('sourceType')),eventKey=draft['eventKey'],editionId=edition_id,editionType=mode,editionSlot=edition_slot,editionLabel=edition_label,leadSourceOrganization=lead_org,sources=p.unique_sources(group,sources),corrections=[],author='Apurante Editorial',production=production)
    if dry_run:
     p.write(f'.cache/drafts/{c["id"]}.json',dict(metadata=meta,paragraphs=draft['paragraphs'],review=review));count+=1;continue
    target=p.ROOT/'content/news'/f'{slug}.md'
@@ -98,7 +100,8 @@ def publish(force=False,dry_run=False,limit=30):
     if x['id'] in ids:x['status']='published'
    record=dict(slug=slug,title=meta['title'],eventKey=meta['eventKey'],publishedAt=stamp,image=meta['image'],sourceUrls=[x['url'] for x in group],sourceOrganizations=list(p.independent_organizations(group,sources)),leadSourceOrganization=lead_org,editionId=edition_id,editionType=mode,editionSlot=edition_slot)
    history.append(record);published_stamps.append(stamp);edition_slugs.append(slug);category_counts[c['category']]+=1
-   p.write(f'data/evidence/{c["id"]}.json',dict(sourceUrls=record['sourceUrls'],sourceOrganizations=record['sourceOrganizations'],sourceSha256=hashlib.sha256(body.encode()).hexdigest(),verifiedAt=stamp,claims=[f['claim'] for f in draft['facts']],review=review,model='Qwen3-4B-Q4_K_M',checks=['numeric anchors','copy detection','format validation','independent organizations','same-model factual review','event deduplication']))
+   route_check='authoritative primary source' if primary_route else 'independent organizations'
+   p.write(f'data/evidence/{c["id"]}.json',dict(sourceUrls=record['sourceUrls'],sourceOrganizations=record['sourceOrganizations'],sourceSha256=hashlib.sha256(body.encode()).hexdigest(),verifiedAt=stamp,claims=[f['claim'] for f in draft['facts']],review=review,model='Qwen3-4B-Q4_K_M',checks=['numeric anchors','copy detection','format validation',route_check,'same-model factual review','event deduplication']))
    count+=1
   except (urllib.error.URLError,TimeoutError) as e:
    held+=1;reasons[type(e).__name__]+=1
