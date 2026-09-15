@@ -82,14 +82,21 @@ test('APURANTE+ header wordmark stays visible and opens the explainer',async({pa
   await expect(plus).toHaveAttribute('href',/mais\/$/);
 });
 
-test('Home keeps one dominant lead and separates focus, elections and the edition promise',async({page})=>{
+test('Home keeps one dominant lead and restores an image-led focus carousel',async({page})=>{
   await expect(page.locator('.lead-story')).toBeVisible();
   await expect(page.locator('.lead-story h2 a')).toBeVisible();
-  await expect(page.locator('.focus-rail')).toBeVisible();
+  await expect(page.locator('.lead-media img')).toBeVisible();
+  const carousel=page.locator('.focus-carousel-rail [data-headlines]');
+  await expect(carousel).toBeVisible();
+  const slideCount=await carousel.locator('[data-slide]').count();
+  expect(slideCount).toBeGreaterThanOrEqual(3);
+  await expect(carousel.locator('.headline-slide.is-current .headline-photo img')).toBeVisible();
+  const before=await carousel.locator('[data-position]').textContent();
+  await carousel.locator('[data-next]').click();
+  await expect.poll(()=>carousel.locator('[data-position]').textContent()).not.toBe(before);
   await expect(page.locator('.elections-home')).toBeVisible();
   await expect(page.locator('.elections-home [data-election-article]').first()).toBeVisible();
   await expect(page.locator('.edition-promise')).toBeVisible();
   await expect(page.locator('.editoria-block')).toHaveCount(10);
   await expect(page.locator('.front-grid')).toHaveCount(0);
-  await expect(page.locator('[data-slide]')).toHaveCount(0);
 });
