@@ -36,11 +36,9 @@ def next_slot(at=None):
  return tomorrow.replace(hour=hours[0],minute=0,second=0,microsecond=0).astimezone(UTC)
 
 def is_due(state,at=None):
- """True only inside the current scheduled publication window and once per slot."""
+ """True whenever the latest scheduled slot has not been published yet."""
  if state.get('paused'):return False
  current=(at or dt.datetime.now(UTC)).astimezone(UTC);slot=slot_for(current)
- window=dt.timedelta(minutes=int(config().get('publicationWindowMinutes',150)))
- if not dt.timedelta(0)<=current-slot<=window:return False
  last=parse(state.get('lastEditionSlot'))
  return last is None or last<slot
 
