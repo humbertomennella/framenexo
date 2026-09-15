@@ -4,6 +4,10 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/collector.yml'
+      - 'scripts/run_editorial.py'
+      - 'scripts/publish_edition.py'
+      - 'scripts/editorial_selection.py'
+      - 'scripts/commit_changes.py'
   schedule:
     - cron: '7 * * * *'
     - cron: '27 * * * *'
