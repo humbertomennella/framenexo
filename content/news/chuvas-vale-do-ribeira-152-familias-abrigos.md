@@ -74,11 +74,15 @@ Barra do Turvo, Iporanga e Eldorado publicaram decretos de situação de emergê
 
 Ao todo, foram organizados 19 abrigos provisórios na área afetada. Equipes estaduais também visitaram comunidades quilombolas em Eldorado para avaliar necessidades de deslocamento, alimentação, água, saúde e acesso viário.
 
+Em visita à região, o governo paulista anunciou reforço operacional com 16 barcos e dois helicópteros Águia. Também foram informadas ações de ajuda humanitária com alimentos e roupas, apoio à recuperação de estradas, envio de medicamentos, atendimento para emissão de documentos e assistência a agricultores locais. A mobilização mostra que a emergência não se limita à retirada de moradores: o poder público também precisa restabelecer circulação, serviços e abastecimento nas comunidades afetadas.
+
 ## Rios e drenagem sob pressão
 
 O principal risco não está apenas na chuva durante um período curto. O solo já encharcado e os rios elevados tornam novas precipitações mais perigosas, porque a capacidade de absorção e drenagem fica reduzida.
 
 O Cemaden alertou para possibilidade de eventos hidrológicos em áreas do Sudeste devido à persistência das chuvas. O órgão acompanha cenários de enxurradas, alagamentos e extravasamento de cursos d'água, especialmente onde o relevo e a ocupação urbana aumentam a exposição.
+
+Na bacia do Ribeira de Iguape, o balanço citado pelo Canal Rural registrou média de 38,80 milímetros de chuva em 24 horas. Entre 29 estações monitoradas, cinco indicavam extravasamento, oito estavam em alerta, uma em emergência e cinco em atenção; as outras 11 permaneciam em condição normal. Esse quadro ajuda a explicar por que o retorno das famílias depende de avaliações locais, mesmo quando a intensidade da chuva começa a diminuir.
 
 ## Impacto sobre moradores
 
