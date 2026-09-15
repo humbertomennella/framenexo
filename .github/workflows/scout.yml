@@ -6,7 +6,9 @@ on:
       - '.github/workflows/scout.yml'
       - 'scripts/run_scout.py'
       - 'scripts/scout_snapshot.py'
+      - 'scripts/editorial_selection.py'
       - 'scripts/pipeline.py'
+      - 'tests/test_scout_snapshot.py'
       - 'data/sources.json'
   schedule:
     - cron: '*/15 * * * *'
