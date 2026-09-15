@@ -3,10 +3,10 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
 ---
 <div class="edition-notice" data-edition-notice data-slots={JSON.stringify(editionHours)} data-timezone={editionSchedule.timezone}>
   <button class="edition-notice-trigger" type="button" data-edition-open aria-haspopup="dialog" aria-controls="edition-info-dialog">
-    <span class="edition-notice-label">EDIÇÕES</span>
+    <span class="edition-notice-label">ATUALIZAÇÕES</span>
     <span class="edition-notice-hours">{editionHoursLabel}</span>
     <span class="edition-notice-separator" aria-hidden="true">·</span>
-    <span class="edition-notice-next">Próxima: <strong data-next-edition>calculando…</strong></span>
+    <span class="edition-notice-next">Próxima janela: <strong data-next-edition>calculando…</strong></span>
     <span class="edition-notice-help">Como funciona? <span aria-hidden="true">↗</span></span>
   </button>
 
@@ -14,29 +14,29 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
     <div class="edition-dialog-inner">
       <button class="edition-dialog-close" type="button" data-edition-close aria-label="Fechar explicação sobre as edições">×</button>
       <span class="eyebrow">COMO O APURANTE FUNCIONA</span>
-      <h2 id="edition-dialog-title">Notícia boa não precisa pingar o dia inteiro.</h2>
-      <p class="edition-dialog-lead">Em vez de soltar uma matéria a cada poucos minutos, o APURANTE reúne o que realmente vale a pena e publica edições completas em horários previsíveis.</p>
+      <h2 id="edition-dialog-title">O APURANTE fecha notícias de hora em hora.</h2>
+      <p class="edition-dialog-lead">As fontes são monitoradas continuamente. A cada hora o sistema fecha uma nova janela editorial e publica somente o que passou pelos critérios de confirmação e qualidade.</p>
 
       <div class="edition-dialog-grid">
         <section>
-          <strong>Quatro edições por dia</strong>
-          <p><b>08h</b> pela manhã, <b>13h</b> no meio do dia, <b>18h</b> no fim da tarde e <b>22h</b> no fechamento. Sempre no horário de Brasília.</p>
+          <strong>Uma janela por hora</strong>
+          <p>Há um fechamento editorial a cada hora, sempre no horário de Brasília. Se houver matérias verificadas e aprovadas, elas entram no ar nessa janela.</p>
         </section>
         <section>
-          <strong>Por que desse jeito?</strong>
-          <p>Para você saber quando voltar e encontrar um conjunto novo de matérias, sem precisar atualizar o portal a cada dez minutos à caça de novidade.</p>
+          <strong>Sem notícia artificial</strong>
+          <p>Se nada estiver suficientemente confirmado, a janela pode terminar sem novas matérias. Frequência não vale mais que precisão.</p>
         </section>
         <section>
-          <strong>Enquanto a próxima edição não chega</strong>
-          <p>As fontes continuam sendo monitoradas. O APURANTE agrupa pautas, cruza informações e só publica o que passa pelos critérios editoriais.</p>
+          <strong>Monitoramento contínuo</strong>
+          <p>Entre os fechamentos, o APURANTE continua consultando fontes, agrupando pautas, cruzando informações e preparando candidatos.</p>
         </section>
         <section>
           <strong>Se algo não puder esperar</strong>
-          <p>Uma notícia realmente urgente pode sair fora da grade em uma <b>edição extraordinária</b>. Urgente de verdade, não “alguém postou um tweet há 40 segundos”.</p>
+          <p>Uma notícia realmente urgente pode sair em uma <b>edição extraordinária</b>, sem esperar a próxima janela regular.</p>
         </section>
       </div>
 
-      <p class="edition-dialog-note">A quantidade de matérias varia conforme o que aconteceu e o que foi possível confirmar. Horário fixo não vira desculpa para preencher espaço com notícia fraca.</p>
+      <p class="edition-dialog-note">A quantidade de matérias varia conforme o que aconteceu e o que foi possível confirmar. A janela horária nunca vira desculpa para preencher espaço com notícia fraca.</p>
       <form method="dialog"><button class="button edition-dialog-done" type="submit">Entendi</button></form>
     </div>
   </dialog>
