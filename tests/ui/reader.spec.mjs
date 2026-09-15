@@ -1,13 +1,11 @@
 import {test,expect} from '@playwright/test';
-test('search, carousel and reading preferences work',async({page})=>{
+test('search, editorial Home and reading preferences work',async({page})=>{
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('./');
- const focus=page.getByRole('region',{name:'Em foco',exact:true});
- await expect(focus.locator('[data-slide]')).toHaveCount(4);
- await focus.getByRole('button',{name:'Próxima notícia',exact:true}).click();
- await expect(focus.locator('[data-position]')).toHaveText('02');
- await focus.getByRole('button',{name:'Notícia anterior',exact:true}).click();
- await expect(focus.locator('[data-position]')).toHaveText('01');
+ await expect(page.locator('.lead-story')).toBeVisible();
+ await expect(page.locator('.focus-rail')).toBeVisible();
+ await expect(page.locator('.latest-zone')).toBeVisible();
+ await expect(page.locator('[data-slide]')).toHaveCount(0);
  await page.goto('./busca/?q=Brasil');
  await expect(page.locator('#search-results article').first()).toBeVisible();
  await page.getByRole('searchbox').fill('zzzzsemresultado999');
