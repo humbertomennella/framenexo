@@ -20,7 +20,7 @@ test('favorite editorias reorder Home and activate personal feed',async({page})=
 });
 
 test('saved stories become a Ler depois shelf on Home',async({page})=>{
-  const save=page.locator('.cards [data-plus-save]').first();
+  const save=page.locator('.latest-grid .card [data-plus-save]').first();
   await expect(save).toBeVisible();
   await save.click();
   await expect(page.locator('[data-home-plus]')).toBeVisible();
