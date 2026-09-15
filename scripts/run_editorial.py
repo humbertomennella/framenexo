@@ -6,6 +6,37 @@ import scout_snapshot
 import editorial_selection
 import publish_edition
 import local_model
+
+# The local model was repeatedly producing otherwise useful drafts with headline
+# fields just outside the public schema, plus an occasional malformed JSON object.
+# Repair only presentation shape here; factual, evidence, length and verifier gates
+# remain untouched inside pipeline.validate_draft / pipeline.generate.
+_BASE_VALIDATE_DRAFT=p.validate_draft
+_BASE_MODEL_CALL=p.model_call
+
+def _trim_at_word(value,max_chars):
+ value=' '.join(str(value).split())
+ if len(value)<=max_chars:return value
+ clipped=value[:max_chars+1].rsplit(' ',1)[0].rstrip(' ,;:-')
+ return clipped if clipped else value[:max_chars].rstrip(' ,;:-')
+
+def _validate_draft_with_safe_shape(draft,body):
+ if isinstance(draft,dict):
+  draft=dict(draft)
+  if isinstance(draft.get('title'),str):draft['title']=_trim_at_word(draft['title'],130)
+  if isinstance(draft.get('description'),str):draft['description']=_trim_at_word(draft['description'],240)
+ return _BASE_VALIDATE_DRAFT(draft,body)
+
+def _model_call_with_json_retry(system,payload,max_tokens=800):
+ try:return _BASE_MODEL_CALL(system,payload,max_tokens)
+ except json.JSONDecodeError:
+  retry_system=system+'\nCRITICAL OUTPUT CONTRACT: return exactly one syntactically valid JSON object. Escape every internal quote and newline correctly; emit no prose before or after the JSON.'
+  return _BASE_MODEL_CALL(retry_system,payload,max_tokens)
+
+p.validate_draft=_validate_draft_with_safe_shape
+p.model_call=_model_call_with_json_retry
+p.WRITER+='''\nSTRICT PUBLICATION SHAPE: title must contain 15-130 characters and description 35-240 characters. Keep both concise enough to fit those limits before returning JSON. Do not compensate for these limits by removing verified context from the article body.'''
+
 def run(force=False,dry_run=False,limit=30):
  state=p.read('data/publishing-state.json',{})
  if state.get('paused'):return {'paused':True}
