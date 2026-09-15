@@ -14,11 +14,11 @@ test('light theme uses the editorial paper palette and readable link contrast',a
     body:getComputedStyle(document.body).backgroundColor,
     text:getComputedStyle(document.body).color
   }));
-  expect(colors.body).toBe('rgb(246, 246, 242)');
-  expect(colors.text).toBe('rgb(23, 26, 28)');
+  expect(colors.body).toBe('rgb(244, 243, 239)');
+  expect(colors.text).toBe('rgb(21, 24, 26)');
   const link=page.locator('.lead-read').first();
   await link.hover();
-  expect(await link.evaluate(el=>getComputedStyle(el).color)).toBe('rgb(77, 121, 27)');
+  expect(await link.evaluate(el=>getComputedStyle(el).color)).toBe('rgb(49, 92, 15)');
 });
 
 test('light theme resists forced-dark behavior and persists on a 390px mobile viewport',async({page})=>{
@@ -33,14 +33,14 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
   await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
   await toggle.click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
-  await expect.poll(()=>page.locator('.site-header').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(246, 246, 242)');
+  await expect.poll(()=>page.locator('.site-header').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(247, 247, 243)');
   const state=await page.evaluate(()=>({
     body:getComputedStyle(document.body).backgroundColor,
     htmlScheme:document.documentElement.style.colorScheme,
     bodyScheme:document.body.style.colorScheme,
     stored:localStorage.getItem('apurante_theme')
   }));
-  expect(state.body).toBe('rgb(246, 246, 242)');
+  expect(state.body).toBe('rgb(244, 243, 239)');
   expectOnlyLight(state.htmlScheme);
   expectOnlyLight(state.bodyScheme);
   expect(state.stored).toBe('light');
@@ -52,7 +52,7 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
     htmlScheme:document.documentElement.style.colorScheme,
     bodyScheme:document.body.style.colorScheme
   }));
-  expect(persisted.body).toBe('rgb(246, 246, 242)');
+  expect(persisted.body).toBe('rgb(244, 243, 239)');
   expectOnlyLight(persisted.htmlScheme);
   expectOnlyLight(persisted.bodyScheme);
 });
