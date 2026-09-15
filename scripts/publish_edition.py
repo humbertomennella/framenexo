@@ -21,6 +21,20 @@ def balanced_groups(groups,max_total=None,max_per_category=None):
    if buckets[category] and len(selected)<max_total:selected.append(buckets[category].pop(0))
  return selected
 
+def verification_priority(group):
+ """Prefer groups whose independent routes already carry recent URL-bound evidence."""
+ cached=sum(1 for item in group if editorial_selection.cached_evidence(item))
+ newest=max((item.get('publishedAt','') for item in group),default='')
+ return cached,newest
+
+def verification_queue(groups,publish_limit,category_limit):
+ """Build a deeper verification queue; publication ceilings are enforced on successes, not attempts."""
+ if publish_limit<=0:return []
+ attempt_total=max(publish_limit,min(len(groups),max(16,publish_limit*3)))
+ attempt_per_category=max(category_limit,min(10,category_limit*5))
+ ranked=sorted(groups,key=verification_priority,reverse=True)
+ return balanced_groups(ranked,max_total=attempt_total,max_per_category=attempt_per_category)
+
 def editorial_cover_media(candidate):
  """Safe first-party fallback. The frontend renders /og.png as an article-specific EditorialCover."""
  title=str(candidate.get('title') or 'matéria').strip()
@@ -47,16 +61,20 @@ def publish(force=False,dry_run=False,limit=30):
  for c in all_items:
   if c['url'] in urls:c['status']='published'
  eligible=editorial_selection.eligible(all_items,sources)
- groups=balanced_groups([g for g in editorial_selection.groups(eligible) if p.corroborated(g,sources)],max_total=max(0,min(int(limit),int(schedule.config().get('maxArticlesPerEdition',30)))))
+ cfg=schedule.config();publish_limit=max(0,min(int(limit),int(cfg.get('maxArticlesPerEdition',30))));category_limit=max(1,int(cfg.get('maxPerCategory',4)))
+ corroborated_groups=[g for g in editorial_selection.groups(eligible) if p.corroborated(g,sources)]
+ groups=verification_queue(corroborated_groups,publish_limit,category_limit)
  count=0;held=0;reasons=collections.Counter();processed=set();evidence_cache={};published_stamps=[];edition_slugs=[];category_counts=collections.Counter()
  for group in groups:
-  if time.monotonic()-start>1800:break
+  if count>=publish_limit or time.monotonic()-start>1800:break
   if any(x['id'] in processed for x in group):continue
   c=p.choose_lead(group,sources,history)
+  if category_counts[c.get('category','Outros')]>=category_limit:continue
   try:
    if not p.corroborated(group,sources):raise ValueError('independent_confirmation_required')
    group,body=editorial_selection.verify(group,sources,evidence_cache)
    c=p.choose_lead(group,sources,history)
+   if category_counts[c.get('category','Outros')]>=category_limit:continue
    draft,review=p.generate(c,body,[{'title':h['title'],'eventKey':h['eventKey']} for h in history])
    if any(h.get('eventKey')==draft['eventKey'] for h in history):raise ValueError('duplicate_published_event')
    if dry_run:
