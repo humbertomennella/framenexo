@@ -10,16 +10,20 @@ ROOT=Path(__file__).resolve().parents[1]
 
 class EditionClock(unittest.TestCase):
  def test_schedule_is_brazil_time(self):
-  self.assertEqual(schedule.config()['timezone'],'America/Sao_Paulo')
-  self.assertEqual(schedule.config()['slots'],list(range(24)))
+  cfg=schedule.config()
+  self.assertEqual(cfg['timezone'],'America/Sao_Paulo')
+  self.assertEqual(cfg['slots'],[8,13,18,22])
+  self.assertEqual(cfg['targetPerCategory'],2)
+  self.assertEqual(cfg['maxPerCategory'],2)
+  self.assertEqual(cfg['maxArticlesPerEdition'],20)
 
  def test_slot_and_next_slot_use_sao_paulo_clock(self):
   at=dt.datetime(2026,9,13,14,15,tzinfo=UTC) # 11h15 em Brasília
-  self.assertEqual(schedule.slot_for(at),dt.datetime(2026,9,13,14,0,tzinfo=UTC)) # edição 11h
-  self.assertEqual(schedule.next_slot(at),dt.datetime(2026,9,13,15,0,tzinfo=UTC)) # edição 12h
+  self.assertEqual(schedule.slot_for(at),dt.datetime(2026,9,13,11,0,tzinfo=UTC)) # edição 08h
+  self.assertEqual(schedule.next_slot(at),dt.datetime(2026,9,13,16,0,tzinfo=UTC)) # edição 13h
 
  def test_regular_slot_is_due_once(self):
-  at=dt.datetime(2026,9,13,11,5,tzinfo=UTC)
+  at=dt.datetime(2026,9,13,11,5,tzinfo=UTC) # 08h05 em Brasília
   self.assertTrue(schedule.is_due({},at))
   self.assertFalse(schedule.is_due({'lastEditionSlot':'2026-09-13T11:00:00Z'},at))
 
@@ -31,9 +35,9 @@ class EditionClock(unittest.TestCase):
  def test_regular_slot_expires_outside_publication_window(self):
   self.assertFalse(schedule.is_due({},dt.datetime(2026,9,13,11,51,tzinfo=UTC)))
 
- def test_late_night_points_to_next_hour(self):
+ def test_late_night_points_to_next_morning(self):
   at=dt.datetime(2026,9,14,2,15,tzinfo=UTC) # 23h15 do dia 13 em Brasília
-  self.assertEqual(schedule.next_slot(at),dt.datetime(2026,9,14,3,0,tzinfo=UTC))
+  self.assertEqual(schedule.next_slot(at),dt.datetime(2026,9,14,11,0,tzinfo=UTC)) # 08h do dia 14
 
 class EditionBalance(unittest.TestCase):
  def group(self,category,index,relevance=80):
@@ -49,8 +53,16 @@ class EditionBalance(unittest.TestCase):
 
  def test_per_category_ceiling_is_respected(self):
   groups=[self.group('Brasil',i) for i in range(10)]
-  selected=publish_edition.balanced_groups(groups,max_total=30,max_per_category=4)
-  self.assertEqual(len(selected),4)
+  selected=publish_edition.balanced_groups(groups,max_total=20,max_per_category=2)
+  self.assertEqual(len(selected),2)
+
+ def test_twenty_article_target_can_fill_two_per_ten_categories(self):
+  categories=['Brasil','Mundo','Política','Economia','Tecnologia','Ciência','Cultura','Esportes','Saúde','Meio Ambiente']
+  groups=[self.group(category,index) for index in range(2) for category in categories]
+  selected=publish_edition.balanced_groups(groups,max_total=20,max_per_category=2)
+  self.assertEqual(len(selected),20)
+  counts={category:sum(1 for group in selected if group[0]['category']==category) for category in categories}
+  self.assertTrue(all(value==2 for value in counts.values()))
 
  def test_verification_queue_keeps_reserve_groups_beyond_publish_ceiling(self):
   groups=[self.group('Brasil',i) for i in range(6)]
@@ -86,9 +98,10 @@ class MediaFallback(unittest.TestCase):
 class WorkflowContract(unittest.TestCase):
  def test_regular_publisher_has_primary_and_recovery_runs(self):
   text=(ROOT/'.github/workflows/collector.yml').read_text()
-  self.assertIn("cron: '7 * * * *'",text)
-  self.assertIn("cron: '27 * * * *'",text)
-  self.assertNotIn("cron: '0 * * * *'",text)
+  self.assertIn("cron: '7 1,11,16,21 * * *'",text)
+  self.assertIn("cron: '27 1,11,16,21 * * *'",text)
+  self.assertNotIn("cron: '7 * * * *'",text)
+  self.assertNotIn("cron: '27 * * * *'",text)
 
  def test_scout_keeps_collecting_without_publishing(self):
   text=(ROOT/'.github/workflows/scout.yml').read_text()
