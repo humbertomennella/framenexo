@@ -1,0 +1,20 @@
+name: Publicação manual
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Publicar uma edição extraordinária agora, mantendo todas as verificações
+        type: boolean
+        default: true
+permissions:
+  contents: write
+  actions: read
+  issues: write
+  pages: write
+  id-token: write
+jobs:
+  publish:
+    if: ${{ !github.event.repository.private }}
+    uses: ./.github/workflows/collector.yml
+    with:
+      force: ${{ inputs.force }}
