@@ -30,6 +30,21 @@
 .lead-media>img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .45s cubic-bezier(.22,.7,.22,1)}
 .lead-story:hover .lead-media>img{transform:scale(1.018)}
 
+/* Elections is a feature rail, not a full-screen billboard. */
+.elections-home{max-width:1120px;margin:44px auto 0}
+.elections-home .elections-compact{overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.elections-home .elections-compact>.section-heading{padding:15px 18px 12px;margin:0;border-bottom:1px solid var(--line)}
+.elections-home .elections-compact>.meta{padding:8px 18px;margin:0;border-bottom:1px solid var(--line-soft);font-size:.74rem}
+.elections-home .elections-compact .elections-grid{display:grid;min-height:0}
+.elections-home .elections-compact .election-story{grid-area:1/1;display:grid;grid-template-columns:minmax(300px,40%) minmax(0,60%);min-height:280px;max-height:320px;background:var(--surface)}
+.elections-home .elections-compact .election-story:not(.is-current){visibility:hidden;pointer-events:none}
+.elections-home .elections-compact .election-story>a{display:block;min-width:0;height:100%;overflow:hidden;background:var(--surface-soft)}
+.elections-home .elections-compact .election-story>a img{width:100%;height:100%;min-height:280px;max-height:320px;aspect-ratio:auto;object-fit:cover;object-position:center}
+.elections-home .elections-compact .election-story>div{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:28px 32px}
+.elections-home .elections-compact .election-story>div>.meta{margin-bottom:10px}
+.elections-home .elections-compact .election-story h3{font-family:var(--editorial-serif);font-size:clamp(1.6rem,2.5vw,2.25rem);line-height:1.08;letter-spacing:-.035em;margin:0;max-width:20ch}
+.elections-home .elections-compact .elections-carousel-footer{padding:10px 16px;border-top:1px solid var(--line);background:var(--surface)}
+
 html[data-theme="light"] .focus-carousel-rail .headline-photo{box-shadow:0 1px 0 rgba(21,24,26,.09)}
 html[data-theme="light"] .focus-carousel-rail .headlines-controls button{background:#fff}
 
@@ -39,6 +54,10 @@ html[data-theme="light"] .focus-carousel-rail .headlines-controls button{backgro
  .focus-carousel-rail .headline-slide{grid-template-columns:minmax(220px,.82fr) minmax(0,1.18fr);grid-template-rows:auto;gap:24px}
  .focus-carousel-rail .headline-photo{margin-top:18px;min-height:190px;max-height:240px}
  .focus-carousel-rail .headline-content{padding-top:18px}
+ .elections-home{max-width:100%}
+ .elections-home .elections-compact .election-story{grid-template-columns:minmax(260px,42%) minmax(0,58%);min-height:260px;max-height:300px}
+ .elections-home .elections-compact .election-story>a img{min-height:260px;max-height:300px}
+ .elections-home .elections-compact .election-story>div{padding:24px 26px}
 }
 
 @media(max-width:760px){
@@ -53,6 +72,15 @@ html[data-theme="light"] .focus-carousel-rail .headlines-controls button{backgro
  .focus-carousel-rail .headline-content p{font-size:.95rem;-webkit-line-clamp:2}
  .focus-carousel-rail .carousel-footer{padding-top:8px}
  .focus-carousel-rail .headlines-dots button{min-width:26px;width:26px}
+ .elections-home{max-width:none;margin-top:34px}
+ .elections-home .elections-compact>.section-heading{padding:13px 14px 10px}
+ .elections-home .elections-compact>.meta{padding:7px 14px}
+ .elections-home .elections-compact .election-story{grid-template-columns:1fr;grid-template-rows:auto auto;min-height:0;max-height:none}
+ .elections-home .elections-compact .election-story>a{height:auto;aspect-ratio:16/9}
+ .elections-home .elections-compact .election-story>a img{width:100%;height:100%;min-height:0;max-height:none;aspect-ratio:16/9;object-fit:cover}
+ .elections-home .elections-compact .election-story>div{padding:18px 16px 20px}
+ .elections-home .elections-compact .election-story h3{max-width:none;font-size:1.48rem;line-height:1.14}
+ .elections-home .elections-compact .elections-carousel-footer{padding:8px 12px}
 }
 
 @media(prefers-reduced-motion:reduce){
