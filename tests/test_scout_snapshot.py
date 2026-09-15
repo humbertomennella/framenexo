@@ -50,14 +50,25 @@ class Snapshots(unittest.TestCase):
 
     def test_checksum_origin_run_and_age(self):
         good=self.document()
-        self.assertEqual(s.validate(good, self.run_info())['version'], 1)
+        self.assertEqual(s.validate(good, self.run_info())['version'], 2)
         bad=json.loads(json.dumps(good));bad['payload']['candidates'][0]['title']='altered'
         with self.assertRaisesRegex(ValueError,'checksum'):s.validate(bad)
         for key,value in [('repository','other/repo'),('completedAt',p.iso(p.now()-dt.timedelta(hours=25))),
-                          ('completedAt',p.iso(p.now()+dt.timedelta(minutes=10))),('completedAt',5),('version',2)]:
+                          ('completedAt',p.iso(p.now()+dt.timedelta(minutes=10))),('completedAt',5),('version',3)]:
             bad=json.loads(json.dumps(good));bad['payload'][key]=value;bad['sha256']=s.digest(bad['payload'])
             with self.subTest(key=key,value=value),self.assertRaises(ValueError):s.validate(bad)
         with self.assertRaisesRegex(ValueError,'run_mismatch'):s.validate(good,self.run_info(99))
+
+    def test_snapshot_carries_recent_url_bound_evidence(self):
+        candidate=self.candidate()
+        evidence=' '.join(['verified']*80)
+        p.write(f'.cache/evidence/{candidate["id"]}.json',dict(url=candidate['url'],text=evidence,fetchedAt=p.iso()))
+        doc=self.document([candidate]);payload=s.validate(doc)
+        self.assertEqual(payload['evidence'][candidate['id']]['text'],evidence)
+        (self.root/'.cache/evidence'/f'{candidate["id"]}.json').unlink()
+        s.restore_evidence(payload)
+        restored=p.read(f'.cache/evidence/{candidate["id"]}.json',{})
+        self.assertEqual(restored['url'],candidate['url']);self.assertEqual(restored['text'],evidence)
 
     def test_failed_state_is_not_valid_even_with_checksum(self):
         doc=self.document();doc['payload']['state']['status']='failed';doc['sha256']=s.digest(doc['payload'])
