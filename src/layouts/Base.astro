@@ -9,6 +9,7 @@ import '../styles/weather.css';
 import '../styles/plus-control.css';
 import '../styles/plus-backup.css';
 import '../styles/edition.css';
+import '../styles/editorial-system.css';
 import PlusBadge from '../components/PlusBadge.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import WeatherBar from '../components/WeatherBar.astro';
@@ -22,8 +23,8 @@ const isPlusArea = Astro.url.pathname===href('mais/')||Astro.url.pathname===href
 ---
 <!doctype html><html lang="pt-BR" data-theme="dark"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="theme-color" content="#090a0d"/><meta name="color-scheme" content="only light"/>
-<script is:inline>(()=>{const key='apurante_theme';let theme='dark';try{const saved=localStorage.getItem(key);if(saved==='light'||saved==='dark')theme=saved;}catch{}const root=document.documentElement;const scheme=theme==='light'?'only light':'dark';root.dataset.theme=theme;root.style.colorScheme=scheme;const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content',theme==='light'?'#f4f3ef':'#090a0d');const schemeMeta=document.querySelector('meta[name="color-scheme"]');if(schemeMeta)schemeMeta.setAttribute('content',scheme);})();</script>
+<meta name="theme-color" content="#0a0c0f"/><meta name="color-scheme" content="only light"/>
+<script is:inline>(()=>{const key='apurante_theme';let theme='dark';try{const saved=localStorage.getItem(key);if(saved==='light'||saved==='dark')theme=saved;}catch{}const root=document.documentElement;const scheme=theme==='light'?'only light':'dark';root.dataset.theme=theme;root.style.colorScheme=scheme;const themeMeta=document.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.setAttribute('content',theme==='light'?'#f6f6f2':'#0a0c0f');const schemeMeta=document.querySelector('meta[name="color-scheme"]');if(schemeMeta)schemeMeta.setAttribute('content',scheme);})();</script>
 <title>{siteTitle}</title><meta name="description" content={description}/>
 <link rel="canonical" href={canonical}/><link rel="icon" href={href('favicon.svg')} type="image/svg+xml"/>
 <meta property="og:site_name" content="Apurante"/><meta property="og:locale" content="pt_BR"/><meta property="og:type" content={article?'article':'website'}/>
