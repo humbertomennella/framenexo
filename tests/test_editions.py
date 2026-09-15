@@ -32,8 +32,10 @@ class EditionClock(unittest.TestCase):
   self.assertTrue(schedule.is_due({},recovery))
   self.assertFalse(schedule.is_due({'lastEditionSlot':'2026-09-13T11:00:00Z'},recovery))
 
- def test_regular_slot_expires_outside_publication_window(self):
-  self.assertFalse(schedule.is_due({},dt.datetime(2026,9,13,11,51,tzinfo=UTC)))
+ def test_delayed_github_run_keeps_latest_slot_due(self):
+  delayed=dt.datetime(2026,9,13,23,54,tzinfo=UTC) # 20h54 em Brasília; edição das 18h continua pendente
+  self.assertTrue(schedule.is_due({},delayed))
+  self.assertFalse(schedule.is_due({'lastEditionSlot':'2026-09-13T21:00:00Z'},delayed))
 
  def test_late_night_points_to_next_morning(self):
   at=dt.datetime(2026,9,14,2,15,tzinfo=UTC) # 23h15 do dia 13 em Brasília
