@@ -7,13 +7,13 @@ const latestEditionLabel=latestEditionArticle?editionTitle(latestEditionArticle)
 ---
 <section class="edition-schedule" data-edition-schedule data-slots={JSON.stringify(editionHours)} data-timezone={editionSchedule.timezone} aria-label="Cronograma de edições do APURANTE">
   <div class="edition-schedule-main">
-    <span class="eyebrow">EDIÇÕES PROGRAMADAS</span>
+    <span class="eyebrow">JANELAS EDITORIAIS</span>
     <strong>{editionHoursLabel}</strong>
-    <p>Novas matérias chegam em edições completas. Notícias urgentes podem gerar uma edição extraordinária fora desses horários.</p>
+    <p>O APURANTE tenta fechar uma nova edição a cada hora. Se nenhuma pauta passar pelos critérios editoriais, a janela termina sem publicação.</p>
   </div>
   <div class="edition-schedule-state">
     <div><span>Última edição</span><strong>{latestEditionLabel}</strong>{latestEditionCount>0&&<small>{latestEditionCount} {latestEditionCount===1?'matéria':'matérias'} publicadas em conjunto</small>}</div>
-    <div><span>Próxima edição programada</span><strong data-next-edition>Calculando…</strong><small>Horário de Brasília</small></div>
+    <div><span>Próxima janela</span><strong data-next-edition>Calculando…</strong><small>Horário de Brasília</small></div>
   </div>
 </section>
 <script is:inline>
