@@ -2,7 +2,6 @@ import {test,expect} from '@playwright/test';
 
 test('high contrast overrides the light palette instead of falling back to dark',async({page})=>{
   await page.goto('./');
-  await page.locator('[data-theme-toggle]').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   await page.locator('.lead-copy h2 a').click();
   await page.getByText('Ajustar leitura',{exact:true}).click();
