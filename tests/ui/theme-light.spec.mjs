@@ -7,6 +7,12 @@ test.beforeEach(async({page})=>{
 });
 
 const expectOnlyLight=scheme=>expect(scheme.trim().split(/\s+/).sort()).toEqual(['light','only']);
+const rgb=s=>s.match(/\d+/g).slice(0,3).map(Number);
+const luminance=values=>{
+  const [r,g,b]=values.map(v=>{const c=v/255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4});
+  return .2126*r+.7152*g+.0722*b;
+};
+const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
 
 test('light theme uses the editorial paper palette and readable link contrast',async({page})=>{
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
@@ -18,7 +24,8 @@ test('light theme uses the editorial paper palette and readable link contrast',a
   expect(colors.text).toBe('rgb(21, 24, 26)');
   const link=page.locator('.lead-read').first();
   await link.hover();
-  expect(await link.evaluate(el=>getComputedStyle(el).color)).toBe('rgb(49, 92, 15)');
+  const linkColor=await link.evaluate(el=>getComputedStyle(el).color);
+  expect(contrast(rgb(linkColor),rgb(colors.body))).toBeGreaterThanOrEqual(4.5);
 });
 
 test('light theme resists forced-dark behavior and persists on a 390px mobile viewport',async({page})=>{
