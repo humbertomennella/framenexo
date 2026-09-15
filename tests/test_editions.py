@@ -11,12 +11,12 @@ ROOT=Path(__file__).resolve().parents[1]
 class EditionClock(unittest.TestCase):
  def test_schedule_is_brazil_time(self):
   self.assertEqual(schedule.config()['timezone'],'America/Sao_Paulo')
-  self.assertEqual(schedule.config()['slots'],[8,13,18,22])
+  self.assertEqual(schedule.config()['slots'],list(range(24)))
 
  def test_slot_and_next_slot_use_sao_paulo_clock(self):
-  at=dt.datetime(2026,9,13,14,0,tzinfo=UTC) # 11h em Brasília
-  self.assertEqual(schedule.slot_for(at),dt.datetime(2026,9,13,11,0,tzinfo=UTC)) # edição 08h
-  self.assertEqual(schedule.next_slot(at),dt.datetime(2026,9,13,16,0,tzinfo=UTC)) # edição 13h
+  at=dt.datetime(2026,9,13,14,15,tzinfo=UTC) # 11h15 em Brasília
+  self.assertEqual(schedule.slot_for(at),dt.datetime(2026,9,13,14,0,tzinfo=UTC)) # edição 11h
+  self.assertEqual(schedule.next_slot(at),dt.datetime(2026,9,13,15,0,tzinfo=UTC)) # edição 12h
 
  def test_regular_slot_is_due_once(self):
   at=dt.datetime(2026,9,13,11,5,tzinfo=UTC)
@@ -29,11 +29,11 @@ class EditionClock(unittest.TestCase):
   self.assertFalse(schedule.is_due({'lastEditionSlot':'2026-09-13T11:00:00Z'},recovery))
 
  def test_regular_slot_expires_outside_publication_window(self):
-  self.assertFalse(schedule.is_due({},dt.datetime(2026,9,13,14,0,tzinfo=UTC)))
+  self.assertFalse(schedule.is_due({},dt.datetime(2026,9,13,11,51,tzinfo=UTC)))
 
- def test_late_night_points_to_next_morning(self):
-  at=dt.datetime(2026,9,14,2,0,tzinfo=UTC) # 23h do dia 13 em Brasília
-  self.assertEqual(schedule.next_slot(at),dt.datetime(2026,9,14,11,0,tzinfo=UTC))
+ def test_late_night_points_to_next_hour(self):
+  at=dt.datetime(2026,9,14,2,15,tzinfo=UTC) # 23h15 do dia 13 em Brasília
+  self.assertEqual(schedule.next_slot(at),dt.datetime(2026,9,14,3,0,tzinfo=UTC))
 
 class EditionBalance(unittest.TestCase):
  def group(self,category,index,relevance=80):
@@ -73,9 +73,9 @@ class MediaFallback(unittest.TestCase):
 class WorkflowContract(unittest.TestCase):
  def test_regular_publisher_has_primary_and_recovery_runs(self):
   text=(ROOT/'.github/workflows/collector.yml').read_text()
-  self.assertIn("cron: '7 1,11,16,21 * * *'",text)
-  self.assertIn("cron: '27 1,11,16,21 * * *'",text)
-  self.assertNotIn("cron: '0 1,11,16,21 * * *'",text)
+  self.assertIn("cron: '7 * * * *'",text)
+  self.assertIn("cron: '27 * * * *'",text)
+  self.assertNotIn("cron: '0 * * * *'",text)
 
  def test_scout_keeps_collecting_without_publishing(self):
   text=(ROOT/'.github/workflows/scout.yml').read_text()
