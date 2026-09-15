@@ -6,6 +6,7 @@
   "targetPerCategory": 2,
   "maxPerCategory": 2,
   "maxArticlesPerEdition": 20,
+  "generationBudgetSeconds": 3000,
   "qualityFirst": true,
   "extraordinaryEditions": true,
   "launchDate": "2026-09-13"
