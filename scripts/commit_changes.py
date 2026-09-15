@@ -32,6 +32,11 @@ if changed:
  git('commit','-m','chore: publica edição editorial aprovada')
  env=os.environ.copy();token=env.pop('GITHUB_TOKEN');auth=base64.b64encode(('x-access-token:'+token).encode()).decode()
  env.update(GIT_CONFIG_COUNT='1',GIT_CONFIG_KEY_0='http.extraHeader',GIT_CONFIG_VALUE_0='Authorization: Basic '+auth)
+ # The editorial job can run for several minutes while maintenance commits land
+ # on main. Rebase the approved edition onto the latest main before pushing so a
+ # harmless concurrent workflow/config change cannot kill a valid publication.
+ git('fetch','origin','main',env=env)
+ git('rebase','origin/main')
  git('push','origin','HEAD:main',env=env)
 
 sha=git('rev-parse','--verify','HEAD',capture_output=True).stdout.strip()
