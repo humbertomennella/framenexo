@@ -10,7 +10,7 @@ on:
     # Evitamos o minuto 00, que costuma sofrer mais contenção no scheduler.
     # Alterações neste workflow também disparam uma edição forçada de validação.
     # Snapshot v2 preserva a evidência textual capturada pela escuta.
-    # Esta execução valida a fila reserva sem reduzir o padrão editorial.
+    # Esta execução valida o limiar RSS consistente com a fila editorial reserva.
     - cron: '7 * * * *'
     - cron: '27 * * * *'
   workflow_dispatch:
