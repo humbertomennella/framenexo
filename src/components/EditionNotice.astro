@@ -6,7 +6,7 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
     <span class="edition-notice-label">ATUALIZAÇÕES</span>
     <span class="edition-notice-hours">{editionHoursLabel}</span>
     <span class="edition-notice-separator" aria-hidden="true">·</span>
-    <span class="edition-notice-next">Próxima janela: <strong data-next-edition>calculando…</strong></span>
+    <span class="edition-notice-next">Próxima execução: <strong data-next-edition>calculando…</strong></span>
     <span class="edition-notice-help">Como funciona? <span aria-hidden="true">↗</span></span>
   </button>
 
@@ -14,13 +14,13 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
     <div class="edition-dialog-inner">
       <button class="edition-dialog-close" type="button" data-edition-close aria-label="Fechar explicação sobre as edições">×</button>
       <span class="eyebrow">COMO O APURANTE FUNCIONA</span>
-      <h2 id="edition-dialog-title">O APURANTE fecha notícias de hora em hora.</h2>
-      <p class="edition-dialog-lead">As fontes são monitoradas continuamente. A cada hora o sistema fecha uma nova janela editorial e publica somente o que passou pelos critérios de confirmação e qualidade.</p>
+      <h2 id="edition-dialog-title">O APURANTE fecha quatro edições regulares por dia.</h2>
+      <p class="edition-dialog-lead">As fontes são monitoradas continuamente. Os fechamentos regulares acontecem às 08h, 13h, 18h e 22h, sempre no horário de Brasília, e só publicam o que passou pelos critérios de confirmação e qualidade.</p>
 
       <div class="edition-dialog-grid">
         <section>
-          <strong>Uma janela por hora</strong>
-          <p>A execução principal começa no minuto <b>:07</b> de cada hora. Se a edição ainda não tiver sido concluída, uma execução de recuperação entra no minuto <b>:27</b>. O conteúdo só aparece depois da redação, revisão, testes, commit e deploy.</p>
+          <strong>Quatro janelas editoriais</strong>
+          <p>Em cada horário, a execução principal começa no minuto <b>:07</b>. Se a edição ainda não tiver sido concluída, uma execução de recuperação entra no minuto <b>:27</b>. O conteúdo só aparece depois da redação, revisão, testes, commit e deploy.</p>
         </section>
         <section>
           <strong>Meta de 20 matérias</strong>
@@ -32,7 +32,7 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
         </section>
         <section>
           <strong>Monitoramento contínuo</strong>
-          <p>Entre os fechamentos, o APURANTE continua consultando fontes, agrupando pautas, cruzando informações e preparando candidatos para a próxima edição.</p>
+          <p>Entre os fechamentos, o APURANTE continua consultando fontes a cada 15 minutos, agrupando pautas, cruzando informações e preparando candidatos para a próxima edição.</p>
         </section>
         <section>
           <strong>Se algo não puder esperar</strong>
@@ -40,7 +40,7 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
         </section>
       </div>
 
-      <p class="edition-dialog-note">A quantidade de matérias pode ficar abaixo de 20 quando a evidência não for suficiente. A janela horária nunca vira desculpa para preencher espaço com notícia fraca.</p>
+      <p class="edition-dialog-note">A quantidade de matérias pode ficar abaixo de 20 quando a evidência não for suficiente. A meta editorial nunca vira desculpa para preencher espaço com notícia fraca.</p>
       <form method="dialog"><button class="button edition-dialog-done" type="submit">Entendi</button></form>
     </div>
   </dialog>
@@ -54,17 +54,19 @@ import {editionHours,editionHoursLabel,editionSchedule} from '../lib/editions';
   const close=root.querySelector('[data-edition-close]');
   const output=root.querySelector('[data-next-edition]');
   if(!open||!dialog||!output)return;
+  let slots=[];try{slots=JSON.parse(root.getAttribute('data-slots')||'[]')}catch{}
   const timezone=root.getAttribute('data-timezone')||'America/Sao_Paulo';
   const runMinutes=[7,27];
   const update=()=>{
    const parts=new Intl.DateTimeFormat('en-GB',{timeZone:timezone,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
    const hour=Number(parts.find(part=>part.type==='hour')?.value||0);
    const minute=Number(parts.find(part=>part.type==='minute')?.value||0);
-   const sameHour=runMinutes.find(value=>value>minute);
-   const targetHour=sameHour!==undefined?hour:(hour+1)%24;
-   const targetMinute=sameHour!==undefined?sameHour:runMinutes[0];
-   const tomorrow=sameHour===undefined&&hour===23;
-   output.textContent=`${String(targetHour).padStart(2,'0')}:${String(targetMinute).padStart(2,'0')} ${tomorrow?'amanhã':'hoje'}`;
+   const now=hour*60+minute;
+   const candidates=slots.flatMap(slot=>runMinutes.map(runMinute=>({slot,runMinute,total:slot*60+runMinute}))).sort((a,b)=>a.total-b.total);
+   const next=candidates.find(candidate=>candidate.total>now);
+   const target=next??candidates[0];
+   if(!target)return;
+   output.textContent=`${String(target.slot).padStart(2,'0')}:${String(target.runMinute).padStart(2,'0')} ${next?'hoje':'amanhã'}`;
   };
   update();
   if(root.getAttribute('data-ready')==='true')return;
