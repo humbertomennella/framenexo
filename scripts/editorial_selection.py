@@ -35,14 +35,28 @@ def groups(items):
     return result
 
 
+def authoritative_primary(group,sources):
+    """Allow one direct primary route for facts that the institution itself can establish."""
+    organizations=p.independent_organizations(group,sources)
+    if len(organizations)!=1:return False
+    return any(item.get('sourceType')=='primary'
+        and sources.get(item.get('sourceId'),{}).get('role','evidence')=='evidence'
+        for item in group)
+
+
+def publishable(group,sources):
+    """Publish with two independent routes, or one direct authoritative primary source."""
+    return p.corroborated(group,sources) or authoritative_primary(group,sources)
+
+
 def cached_evidence(item):
-    """Use recent URL-bound feed evidence; final publication still requires two independent routes and model review."""
+    """Use recent URL-bound feed evidence; final publication still requires factual review."""
     row=p.read(f'.cache/evidence/{item["id"]}.json',{})
     text=row.get('text');stamp=p.date(row.get('fetchedAt')) if isinstance(row.get('fetchedAt'),str) else None
     try:same=p.canonical_url(row.get('url',''))==p.canonical_url(item['url'])
     except Exception:same=False
-    # RSS summaries are often concise. Twenty-five words are enough to enter
-    # verification, never enough by themselves to authorize publication.
+    # RSS summaries are often concise. Twenty-five words are enough as a safe
+    # fallback, but richer article evidence is preferred before writing.
     if not same or not isinstance(text,str) or len(text.split())<25 or p.suspicious(text) or not stamp:return None
     age=p.now()-stamp
     if not dt.timedelta(minutes=-5)<=age<=dt.timedelta(hours=24):return None
@@ -50,7 +64,7 @@ def cached_evidence(item):
 
 
 def feed_evidence(item,source):
-    """Accept the same safe 25-word RSS floor used by cached evidence before escalating to article scraping."""
+    """Keep a safe RSS fallback while the live path attempts richer article evidence."""
     if not source.get('feed'):return None
     rows=p.parse_feed(p.fetch(source['feed'],source['hosts']))
     target=p.canonical_url(item['url'])
@@ -62,17 +76,20 @@ def feed_evidence(item,source):
 
 
 def evidence(item,source):
+    """Prefer full article evidence; use recent RSS text only when the article cannot be safely read."""
     archived=cached_evidence(item)
-    if archived:return archived
-    # The live path must not be stricter than the snapshot path. A concise RSS
-    # summary can enter the same-fact review, which still requires two truly
-    # independent organizations, exact anchors and the factual model review.
+    feed=None
+    try:feed=feed_evidence(item,source)
+    except (ValueError,OSError):pass
+    fallback=archived or feed
     try:
-        feed=feed_evidence(item,source)
-        if feed:return feed
+        live=p.evidence(item,source)
+        if live:return live
     except (ValueError,OSError):
-        pass
-    return p.evidence(item,source)
+        if fallback:return fallback
+        raise
+    if fallback:return fallback
+    raise ValueError('insufficient_or_hostile_evidence')
 
 
 def shared_fact_review(routes,sources):
@@ -87,14 +104,14 @@ def shared_fact_review(routes,sources):
 
 
 def verify(group,sources,cache=None):
-    """Require direct quotation anchors and explicit same-fact review on each route."""
+    """Verify source text; independent reports need same-fact review, direct primary evidence can stand alone."""
     routes=[];cache={} if cache is None else cache
     pending=[c for c in group if c['url'] not in cache]
     with ThreadPoolExecutor(max_workers=3) as executor:
         jobs={executor.submit(evidence,c,sources[c['sourceId']]):c for c in pending}
         for future in as_completed(jobs):
             item=jobs[future]
-            try:cache[item['url']]=future.result()[:6000]
+            try:cache[item['url']]=future.result()[:11000]
             except (ValueError,OSError) as error:
                 cache[item['url']]=None;p.log('source_evidence_held',candidate=item['id'],code=str(error))
     for item in group:
@@ -103,7 +120,23 @@ def verify(group,sources,cache=None):
         wire=re.search(r'\b(?:por|by|com informa[çc][õo]es d[aeo]|with reporting from|reporting by)\s+(Reuters|Associated Press|AFP|Ag[êe]ncia Brasil)\b',body,re.I)
         if wire:item=dict(item,originalOrganization={'reuters':'reuters','associated press':'associated-press','afp':'afp','agencia brasil':'agencia-brasil'}[p.normalized(wire.group(1))])
         routes.append((item,body))
-    if not p.corroborated([x[0] for x in routes],sources):raise ValueError('independent_texts_required')
+    route_items=[x[0] for x in routes]
+    if not publishable(route_items,sources):raise ValueError('verified_source_routes_required')
+
+    # A direct primary source can establish its own official act, publication,
+    # dataset or announcement. The writer and the separate factual verifier
+    # still compare every generated claim against this source text.
+    if authoritative_primary(route_items,sources) and not p.corroborated(route_items,sources):
+        primary=next(((c,body) for c,body in routes if c.get('sourceType')=='primary'
+            and sources.get(c.get('sourceId'),{}).get('role','evidence')=='evidence'),None)
+        if not primary:raise ValueError('authoritative_primary_required')
+        c,body=primary
+        org=p.source_organization(c,sources[c['sourceId']])
+        p.write(f'.cache/drafts/{group[0]["id"]}-shared-fact.json',dict(
+            verification='authoritative_primary',claim=c.get('title'),
+            routes=[dict(url=c['url'],organization=org)],verifiedAt=p.iso()))
+        return [c],f"FONTE: {c['sourceName']}\nURL: {c['url']}\n{body}"
+
     result=shared_fact_review(routes,sources)
     p.write(f'.cache/drafts/{group[0]["id"]}-shared-review.json',result)
     if result.get('sameFact') is not True or result.get('conflict') is not False or result.get('syndicationUncertain') is not False:raise ValueError('shared_fact_not_verified')
