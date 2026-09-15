@@ -32,6 +32,17 @@ class ProductionContract(unittest.TestCase):
         self.assertIn("- name: Salvar edição aprovada\n        if: steps.pipeline.outcome == 'success'",workflow)
         self.assertIn("if: steps.pipeline.outcome == 'failure'",workflow)
 
+    def test_twenty_story_budget_keeps_quality_margin(self):
+        schedule=json.loads((ROOT/'data/edition-schedule.json').read_text())
+        publisher=(ROOT/'scripts/publish_edition.py').read_text()
+        workflow=(ROOT/'.github/workflows/collector.yml').read_text()
+        self.assertEqual(schedule['maxArticlesPerEdition'],20)
+        self.assertEqual(schedule['targetPerCategory'],2)
+        self.assertEqual(schedule['maxPerCategory'],2)
+        self.assertEqual(schedule['generationBudgetSeconds'],3000)
+        self.assertIn("cfg.get('generationBudgetSeconds',1800)",publisher)
+        self.assertIn('timeout-minutes: 75',workflow)
+
     def test_commit_is_bound_to_public_article_changes(self):
         script=(ROOT/'scripts/commit_changes.py').read_text()
         self.assertIn("changed=status('content/news')",script)
