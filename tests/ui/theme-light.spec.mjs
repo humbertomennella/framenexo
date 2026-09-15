@@ -8,18 +8,18 @@ test.beforeEach(async({page})=>{
 
 const expectOnlyLight=scheme=>expect(scheme.trim().split(/\s+/).sort()).toEqual(['light','only']);
 
-test('light theme uses the editorial paper palette and readable hover contrast',async({page})=>{
+test('light theme uses the editorial paper palette and readable link contrast',async({page})=>{
   await page.locator('[data-theme-toggle]').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   const colors=await page.evaluate(()=>({
     body:getComputedStyle(document.body).backgroundColor,
     text:getComputedStyle(document.body).color
   }));
-  expect(colors.body).toBe('rgb(244, 243, 239)');
-  expect(colors.text).toBe('rgb(32, 33, 36)');
-  const link=page.locator('.editoria-links a').first();
+  expect(colors.body).toBe('rgb(246, 246, 242)');
+  expect(colors.text).toBe('rgb(23, 26, 28)');
+  const link=page.locator('.lead-read').first();
   await link.hover();
-  expect(await link.evaluate(el=>getComputedStyle(el).color)).toBe('rgb(45, 80, 16)');
+  expect(await link.evaluate(el=>getComputedStyle(el).color)).toBe('rgb(77, 121, 27)');
 });
 
 test('light theme resists forced-dark behavior and persists on a 390px mobile viewport',async({page})=>{
@@ -31,14 +31,14 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   await expect(page.locator('body')).toHaveAttribute('data-theme','light');
   await expect(page.locator('meta[name="color-scheme"]')).toHaveAttribute('content','only light');
-  await expect.poll(()=>page.locator('.site-header').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(248, 247, 243)');
+  await expect.poll(()=>page.locator('.site-header').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(246, 246, 242)');
   const state=await page.evaluate(()=>({
     body:getComputedStyle(document.body).backgroundColor,
     htmlScheme:document.documentElement.style.colorScheme,
     bodyScheme:document.body.style.colorScheme,
     stored:localStorage.getItem('apurante_theme')
   }));
-  expect(state.body).toBe('rgb(244, 243, 239)');
+  expect(state.body).toBe('rgb(246, 246, 242)');
   expectOnlyLight(state.htmlScheme);
   expectOnlyLight(state.bodyScheme);
   expect(state.stored).toBe('light');
@@ -50,7 +50,7 @@ test('light theme resists forced-dark behavior and persists on a 390px mobile vi
     htmlScheme:document.documentElement.style.colorScheme,
     bodyScheme:document.body.style.colorScheme
   }));
-  expect(persisted.body).toBe('rgb(244, 243, 239)');
+  expect(persisted.body).toBe('rgb(246, 246, 242)');
   expectOnlyLight(persisted.htmlScheme);
   expectOnlyLight(persisted.bodyScheme);
 });
@@ -72,11 +72,14 @@ test('APURANTE+ header wordmark stays visible and opens the explainer',async({pa
   await expect(plus).toHaveAttribute('href',/mais\/$/);
 });
 
-test('Home keeps election panel before the urgent radar and both have content',async({page})=>{
-  const panels=page.locator('.front-grid > section');
-  await expect(panels.nth(0)).toHaveAttribute('aria-label','Em foco');
-  await expect(panels.nth(1)).toHaveAttribute('aria-label','ELEIÇÕES 2026');
-  await expect(panels.nth(2)).toHaveAttribute('aria-label','URGENTE');
-  await expect(panels.nth(1).locator('[data-election-article]').first()).toBeVisible();
-  await expect(panels.nth(2).locator('[data-slide]').first()).toBeVisible();
+test('Home keeps one dominant lead and separates focus, elections and the edition promise',async({page})=>{
+  await expect(page.locator('.lead-story')).toBeVisible();
+  await expect(page.locator('.lead-story h2 a')).toBeVisible();
+  await expect(page.locator('.focus-rail')).toBeVisible();
+  await expect(page.locator('.elections-home')).toBeVisible();
+  await expect(page.locator('.elections-home [data-election-article]').first()).toBeVisible();
+  await expect(page.locator('.edition-promise')).toBeVisible();
+  await expect(page.locator('.editoria-block')).toHaveCount(10);
+  await expect(page.locator('.front-grid')).toHaveCount(0);
+  await expect(page.locator('[data-slide]')).toHaveCount(0);
 });
