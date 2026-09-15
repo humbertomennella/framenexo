@@ -1,4 +1,4 @@
-<button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema claro" aria-pressed="false" title="Alternar tema">
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar tema escuro" aria-pressed="true" title="Alternar tema">
   <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
     <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/>
     <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -11,12 +11,12 @@
 <script is:inline>
 (() => {
   const KEY = 'apurante_theme';
-  const getTheme = () => document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-  const schemeFor = theme => theme === 'light' ? 'only light' : 'dark';
+  const getTheme = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+  const schemeFor = theme => theme === 'dark' ? 'dark' : 'light';
   const syncMeta = theme => {
     const scheme = schemeFor(theme);
     const themeMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#f4f3ef' : '#090a0d');
+    if (themeMeta) themeMeta.setAttribute('content', theme === 'light' ? '#f7f7f3' : '#0a0c0f');
     const schemeMeta = document.querySelector('meta[name="color-scheme"]');
     if (schemeMeta) schemeMeta.setAttribute('content', scheme);
   };
@@ -29,7 +29,7 @@
     });
   };
   const apply = (theme, persist = true) => {
-    const normalized = theme === 'light' ? 'light' : 'dark';
+    const normalized = theme === 'dark' ? 'dark' : 'light';
     const scheme = schemeFor(normalized);
     const root = document.documentElement;
     root.setAttribute('data-theme', normalized);
