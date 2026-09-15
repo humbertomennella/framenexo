@@ -1,6 +1,6 @@
 """Conservative editorial pipeline. Internet text is untrusted data, never code."""
 from __future__ import annotations
-import argparse,concurrent.futures,datetime as dt,difflib,fcntl,gzip,hashlib,html,ipaddress,json,os,re,socket,time,unicodedata
+import argparse,concurrent.futures,datetime as dt,difflib,fcntl,gzip,io,hashlib,html,ipaddress,json,os,re,socket,time,unicodedata
 import urllib.error,urllib.parse,urllib.request,urllib.robotparser,xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
@@ -67,7 +67,7 @@ def fetch(url,hosts):
     # A few institutional feeds send gzip bytes without the Content-Encoding
     # header. Detect the format by its magic bytes and cap the expanded body.
     if raw.startswith(b'\x1f\x8b'):
-     raw=gzip.decompress(raw)
+     with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:raw=stream.read(MAX_BYTES+1)
      if len(raw)>MAX_BYTES:raise ValueError('source_too_large')
     return raw
   except urllib.error.HTTPError as e:
@@ -149,7 +149,7 @@ def unique_sources(group,sources):
 def choose_lead(group,sources,history,window=20):
  """Balance the lead credit without weakening the evidence threshold."""
  counts={}
- for item in history[-window:]:
+ for item in sorted(history,key=lambda row:date(row.get('publishedAt')) or dt.datetime.min.replace(tzinfo=UTC))[-window:]:
   org=item.get('leadSourceOrganization') or next(iter(item.get('sourceOrganizations',[])),None)
   if org:counts[org]=counts.get(org,0)+1
  def key(item):
@@ -172,7 +172,7 @@ def approved_media(candidate,used_images=()):
  media=candidate.get('media')
  if not isinstance(media,dict):raise ValueError('approved_media_required')
  path=media.get('path','')
- if not isinstance(path,str) or not re.fullmatch(r'/images/news/[a-z0-9][a-z0-9._-]*\.(?:webp|png|jpe?g)',path):raise ValueError('invalid_media_path')
+ if not isinstance(path,str) or not re.fullmatch(r'/images/news/[a-z0-9][a-z0-9._-]*\.(?:webp|png|jpe?g|svg)',path):raise ValueError('invalid_media_path')
  if path in set(used_images):raise ValueError('media_must_be_unique')
  asset=(ROOT/'public'/path.lstrip('/')).resolve();public=(ROOT/'public').resolve()
  if public not in asset.parents or not asset.is_file():raise ValueError('media_asset_missing')
@@ -182,7 +182,11 @@ def approved_media(candidate,used_images=()):
   existing=(ROOT/'public'/used.lstrip('/')).resolve()
   if existing.is_file() and hashlib.sha256(existing.read_bytes()).hexdigest()==asset_hash:raise ValueError('media_content_must_be_unique')
  rights=next((x for x in read('data/image-rights.json',[]) if x.get('path')==path),None)
+ if path.endswith('.svg'):
+  raw=asset.read_text()
+  if re.search(r'<(?:script|foreignObject)|(?:href|onload|onclick)\s*=|<!ENTITY|<!DOCTYPE',raw,re.I):raise ValueError('unsafe_svg')
  if not rights or any(k not in rights for k in ('origin','credit','license','sourceURL','proof')):raise ValueError('media_rights_incomplete')
+ if rights.get('sha256')!=asset_hash:raise ValueError('media_hash_mismatch')
  if not all(isinstance(media.get(k),str) and media[k].strip() for k in ('alt','credit')):raise ValueError('media_metadata_incomplete')
  return dict(path=path,alt=media['alt'].strip(),credit=media['credit'].strip())
 def collect():
@@ -213,22 +217,44 @@ def collect():
  if counts:state['lastCollectedAt']=iso();write('data/publishing-state.json',state)
  log('collection',collected=len(added),discarded=discarded,sourceCounts=counts,errors=errors,seconds=round(time.monotonic()-start,2))
  return dict(collected=len(added),sourcesOK=len(counts),errors=errors)
+class ArticleText(HTMLParser):
+ """Read only an explicit article body, never navigation or related stories."""
+ def __init__(self,agency=False):
+  super().__init__(convert_charrefs=True);self.agency=agency;self.depth=0;self.skip=0;self.parts=[];self.done=False
+ def handle_starttag(self,tag,attrs):
+  if self.done:return
+  attrs=dict(attrs)
+  if not self.depth:
+   if tag=='article' or (self.agency and tag=='div' and 'conteudo-noticia' in attrs.get('class','').split()):self.depth=1
+   return
+  if tag not in ('br','img','hr','input','meta','link','source','wbr','area','base','embed','param','track','col'):self.depth+=1
+  if tag in ('script','style','nav','aside','footer','noscript'):self.skip+=1
+  if not self.skip and tag in ('p','div','br','h2','h3','li'):self.parts.append(' ')
+ def handle_endtag(self,tag):
+  if not self.depth:return
+  if tag in ('script','style','nav','aside','footer','noscript') and self.skip:self.skip-=1
+  self.depth-=1
+  if self.depth==0:self.done=True
+ def handle_data(self,value):
+  if self.depth and not self.skip:self.parts.append(value)
+
+def article_text(raw,source):
+ if re.search(r'"isAccessibleForFree"\s*:\s*(?:false|"false")',raw,re.I):raise ValueError('paid_content')
+ parser=ArticleText(agency='agenciabrasil.ebc.com.br' in source.get('hosts',[]));parser.feed(raw)
+ body=' '.join(' '.join(parser.parts).split())
+ if not body:raise ValueError('article_boundary_missing')
+ return body
+
 def evidence(candidate,source):
- # Refresh from the feed; only fall back to the article if robots permits it.
- rows=parse_feed(fetch(source['feed'],source['hosts'])) if source.get('feed') else []
- item=next((r for r in rows if canonical_url(r['url'])==candidate['url']),None)
- body=item['text'] if item else ''
- if len(body.split())<65:
-  p=urllib.parse.urlsplit(candidate['url']);robots=urllib.parse.urlunsplit((p.scheme,p.netloc,'/robots.txt','',''));parser=urllib.robotparser.RobotFileParser()
-  try:parser.parse(fetch(robots,source['hosts']).decode('utf-8','replace').splitlines())
-  except urllib.error.HTTPError as e:
-   if e.code==404:parser.parse([])
-   else:raise ValueError('robots_unavailable') from e
-  if not parser.can_fetch(UA,candidate['url']):raise ValueError('robots_denied')
-  raw=fetch(candidate['url'],source['hosts']).decode('utf-8','replace')
-  article=re.search(r'<article\b[^>]*>(.*?)</article>',raw,re.I|re.S)
-  if not article:raise ValueError('article_boundary_missing')
-  body=text_only(article.group(1))
+ # Always attempt the full public article. RSS fallback is handled separately.
+ parsed=urllib.parse.urlsplit(candidate['url']);robots=urllib.parse.urlunsplit((parsed.scheme,parsed.netloc,'/robots.txt','',''));parser=urllib.robotparser.RobotFileParser()
+ try:parser.parse(fetch(robots,source['hosts']).decode('utf-8','replace').splitlines())
+ except urllib.error.HTTPError as e:
+  if e.code==404:parser.parse([])
+  else:raise ValueError('robots_unavailable') from e
+ if not parser.can_fetch(UA,candidate['url']):raise ValueError('robots_denied')
+ raw=fetch(candidate['url'],source['hosts']).decode('utf-8','replace')
+ body=article_text(raw,source)
  if len(body.split())<65 or suspicious(body):raise ValueError('insufficient_or_hostile_evidence')
  return body[:11000]
 def combined_evidence(group,sources):
@@ -262,6 +288,7 @@ def validate_draft(draft,body):
  if not 500<=len(' '.join(paras).split())<=800:raise ValueError('invalid_length')
  subheads=draft.get('subheads')
  if not isinstance(subheads,list) or len(subheads)!=3 or any(not isinstance(h,str) or not 8<=len(h.strip())<=90 for h in subheads):raise ValueError('invalid_subheads')
+ if any(re.search(r'[<>\[\]{}\n]',h) for h in subheads):raise ValueError('unsafe_subheads')
  if any(re.fullmatch(r'(o que aconteceu|contexto|por que importa)',normalized(h).strip()) for h in subheads):raise ValueError('generic_subheads')
  language_words=re.findall(r'\w+',normalized(written));pt=sum(w in {'de','do','da','dos','das','em','para','com','que','uma','anunciou','segundo','nao','no','na','os','as'} for w in language_words);en=sum(w in {'the','and','with','for','will','this','that','from','you','your','can','are','has','have','is','to'} for w in language_words)
  if en>6 and en>pt:raise ValueError('output_not_portuguese')
@@ -300,9 +327,9 @@ def published():
   if len(parts)<3:raise ValueError('invalid_existing_frontmatter')
   item=json.loads(parts[1])
   if item['status']=='published':
-   organizations=list(dict.fromkeys(s.get('organization') or org_for_url(s['url']) for s in item['sources']))
+   organizations=list(dict.fromkeys(s.get('originalOrganization') or s.get('organization') or org_for_url(s['url']) for s in item['sources']))
    records.append(dict(slug=item['slug'],title=item['title'],eventKey=item.get('eventKey'),publishedAt=item['publishedAt'],image=item.get('image'),sourceUrls=[canonical_url(s['url']) for s in item['sources']],sourceOrganizations=organizations,leadSourceOrganization=item.get('leadSourceOrganization') or next(iter(organizations),None)))
- return records
+ return sorted(records,key=lambda row:date(row['publishedAt']))
 def render_article(draft):
  paras=draft['paragraphs'];heads=draft.get('subheads') or ['Detalhes confirmados','O alcance da informação','Próximos passos']
  groups=[paras[:2],paras[2:5],paras[5:8],paras[8:]]

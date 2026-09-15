@@ -35,8 +35,14 @@ if changed:
  # The editorial job can run for several minutes while maintenance commits land
  # on main. Rebase the approved edition onto the latest main before pushing so a
  # harmless concurrent workflow/config change cannot kill a valid publication.
+ before=git('rev-parse','HEAD',capture_output=True).stdout.strip()
  git('fetch','origin','main',env=env)
  git('rebase','origin/main')
+ after=git('rev-parse','HEAD',capture_output=True).stdout.strip()
+ if before!=after:
+  # Validate exactly the combined tree that will be pushed; conflicts fail closed.
+  for command in [('npm','ci'),('npm','test'),('npm','run','build'),('npm','run','check:site'),('npm','run','test:ui')]:
+   subprocess.run(command,check=True)
  git('push','origin','HEAD:main',env=env)
 
 sha=git('rev-parse','--verify','HEAD',capture_output=True).stdout.strip()

@@ -56,7 +56,12 @@
       "role": "evidence"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-15",
+      "text": "Revisão de formato: organização dos parágrafos e remoção de comentário genérico quando presente, sem acrescentar fatos ou alterar fontes."
+    }
+  ],
   "author": "Apurante Editorial",
   "production": "Texto original em português produzido a partir de comunicação oficial e nota técnica do Ministério da Saúde, com confirmação pela Agência Brasil.",
   "leadSourceOrganization": "ministerio-saude",
@@ -96,6 +101,4 @@ Dados divulgados pelo Ministério mostram altas taxas de hospitalização por pn
 
 ## O que observar
 
-A disponibilidade pode variar entre municípios conforme o envio de doses e a organização local. Pessoas com 85 anos ou mais devem procurar a unidade de saúde de referência e, se possível, levar a caderneta ou registro de vacinas anteriores.
-
-O Ministério da Saúde prevê ampliação gradual para outros grupos conforme critérios de risco e vulnerabilidade. Até lá, a estratégia nacional permanece concentrada nos maiores de 85 anos e em pessoas de outras idades que já se enquadram nas indicações especiais do Programa Nacional de Imunizações.
+A disponibilidade pode variar entre municípios conforme o envio de doses e a organização local. Pessoas com 85 anos ou mais devem procurar a unidade de saúde de referência e, se possível, levar a caderneta ou registro de vacinas anteriores. O Ministério da Saúde prevê ampliação gradual para outros grupos conforme critérios de risco e vulnerabilidade. Até lá, a estratégia nacional permanece concentrada nos maiores de 85 anos e em pessoas de outras idades que já se enquadram nas indicações especiais do Programa Nacional de Imunizações.

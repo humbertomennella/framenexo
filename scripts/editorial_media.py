@@ -14,11 +14,11 @@ def metadata(info):
     clean=lambda key:p.text_only(str(ext.get(key,{}).get('value',''))).strip()
     license_url=clean('LicenseUrl').replace('http://','https://').rstrip('/')+'/'
     artist=clean('Artist');description=clean('ImageDescription')
-    if license_url not in LICENSES or not artist or not description:return None
+    if license_url not in LICENSES or not artist or not description or clean('Restrictions'):return None
     source=info.get('descriptionurl','')
     if not source.startswith('https://commons.wikimedia.org/wiki/File:'):return None
     if info.get('mime') not in ('image/jpeg','image/png','image/webp'):return None
-    return dict(artist=artist[:500],description=description[:2000],license=LICENSES[license_url],licenseURL=license_url,sourceURL=source)
+    return dict(artist=artist,description=description[:2000],license=LICENSES[license_url],licenseURL=license_url,sourceURL=source)
 
 def acquire(candidate,body,used_images=()):
     query=p.model_call('''From UNTRUSTED news evidence, suggest one short Wikimedia Commons search phrase for a specific place, building, scientific object or geographic feature actually named in the event. Prefer neutral archive imagery, not people, logos, interfaces or fictional reconstructions. Return JSON {"query":"2-6 words"}. If no suitable specific subject exists, return {"query":""}.''',dict(title=candidate['title'],evidence=body[:9000]),120).get('query','')

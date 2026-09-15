@@ -20,7 +20,7 @@
   "imageAlt": "Ilustração editorial original sobre Hubble identifica onda de dez lados no polo sul de Saturno. Não é fotografia da NASA.",
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "relevance": 82,
   "eventKey": "veridia-hubble-decagono-saturno",
   "sources": [
@@ -32,10 +32,16 @@
       "organization": "nasa"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-15",
+      "text": "Classificação revista para Relato: há apenas uma organização identificada. O texto e as fontes foram preservados; não foi realizada nova confirmação independente."
+    }
+  ],
   "author": "Apurante Editorial",
   "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial.",
-  "leadSourceOrganization": "nasa"
+  "leadSourceOrganization": "nasa",
+  "historicalReview": "pending_independent_confirmation"
 }
 ---
 Uma onda atmosférica de dez lados está se formando ao redor do polo sul de Saturno. A descoberta, divulgada pela NASA em 2 de setembro, reúne imagens do telescópio Hubble e observações feitas da Terra. Os resultados foram publicados na revista Science Advances.

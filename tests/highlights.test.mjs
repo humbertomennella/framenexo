@@ -10,17 +10,8 @@ test('ordinary recent stories do not receive a false urgent label',()=>assert.eq
 test('a documented review enters the panel with one neutral label',()=>assert.equal(highlightFor({...story,highlight:review},now).highlightLabel,'URGENTE'));
 test('review requires evidence, independence and a valid expiry',()=>{assert.equal(highlightFor({...story,highlight:review},now).highlightLevel,'urgent');for(const change of [{expiresAt:'2026-09-09T11:30:00Z'},{expiresAt:'2026-09-10T00:00:00Z'},{reviewedAt:'2026-09-09T13:00:00Z'},{evidenceURLs:['https://fake.example']},{reason:''}])assert.equal(highlightFor({...story,highlight:{...review,...change}},now),null)});
 test('unconfirmed reports cannot be elevated',()=>{assert.equal(highlightFor({...story,confidence:'RELATO',highlight:review},now),null)});
-test('radar keeps verified coverage when no strict urgent alert is active',()=>{
- const input=Array.from({length:4},(_,i)=>({...story,slug:String(i),relevance:90-i,publishedAt:`2026-09-09T0${8-i}:00:00Z`}));
- const selected=selectHighlights(input,now);
- assert.equal(selected.length,3);
- assert.ok(selected.every(a=>a.highlightLevel==='watch'&&a.highlightLabel==='ACOMPANHAMENTO'));
-});
-test('strict urgent stories stay ahead of continuity coverage',()=>{
+test('urgent panel never falls back to ordinary or old news',()=>{
+ assert.deepEqual(selectHighlights([story,{...story,slug:'old',publishedAt:'2026-09-01T00:00:00Z'}],now),[]);
  const urgent={...story,slug:'urgent',highlight:review};
- const normal={...story,slug:'normal',relevance:99};
- const selected=selectHighlights([normal,urgent],now);
- assert.equal(selected[0].slug,'urgent');
- assert.equal(selected[0].highlightLevel,'urgent');
- assert.equal(selected[1].slug,'normal');
+ assert.deepEqual(selectHighlights([story,urgent],now).map(x=>x.slug),['urgent']);
 });

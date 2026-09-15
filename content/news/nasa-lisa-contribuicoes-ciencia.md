@@ -17,7 +17,7 @@
   ],
   "relevance": 90,
   "image": "/images/news/lisa-interferometro.webp",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "publishedAt": "2026-09-08T01:50:00Z",
   "updatedAt": "2026-09-08T09:33:52Z",
   "status": "published",
@@ -39,9 +39,14 @@
     {
       "date": "2026-09-08T02:13:00Z",
       "text": "Horário de publicação corrigido para o fuso de Brasília e ilustração editorial substituída por uma arte específica da pauta."
+    },
+    {
+      "date": "2026-09-15",
+      "text": "Classificação revista para Relato: há apenas uma organização identificada. O texto e as fontes foram preservados; não foi realizada nova confirmação independente."
     }
   ],
-  "leadSourceOrganization": "nasa"
+  "leadSourceOrganization": "nasa",
+  "historicalReview": "pending_independent_confirmation"
 }
 ---
 A NASA informou que está recebendo contribuições da comunidade científica para atualizar a lista de lacunas de pesquisa do projeto LISA, futuro observatório espacial voltado ao estudo de ondas gravitacionais. O lembrete publicado em 4 de setembro indica que a chamada permanece aberta até 16 de setembro.

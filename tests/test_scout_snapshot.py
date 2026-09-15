@@ -183,7 +183,7 @@ class WorkflowIsolation(unittest.TestCase):
         self.assertIn('group: apurante-scout-snapshot',text);self.assertIn('cancel-in-progress: false',text)
         self.assertIn('actions/upload-artifact@',text)
         collector=(ROOT/'.github/workflows/collector.yml').read_text()
-        self.assertIn("'7 1,11,16,21 * * *'",collector)
+        self.assertIn("'0 1,11,16,21 * * *'",collector)
         self.assertIn("'27 1,11,16,21 * * *'",collector)
         self.assertNotIn("'7 * * * *'",collector)
         self.assertNotIn("'27 * * * *'",collector)

@@ -30,7 +30,7 @@ def install():
  return server,weights
 def command():
  server,weights=install();env=os.environ.copy();env['LD_LIBRARY_PATH']=str(server.parent)
- args=[str(server),'-m',str(weights),'--host','127.0.0.1','--port','8080','-c','8192','-t',str(min(os.cpu_count() or 2,4)),'-np','1','--jinja','--reasoning-budget','0']
+ args=[str(server),'-m',str(weights),'--host','127.0.0.1','--port','8080','-c','16384','-t',str(min(os.cpu_count() or 2,4)),'-np','1','--jinja','--reasoning-budget','0']
  return args,env
 if __name__=='__main__':
  import argparse

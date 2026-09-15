@@ -48,7 +48,7 @@ def run(force=False,dry_run=False,limit=30):
  result=dict(sourcesOK=observed['sourcesReached'],collected=observed.get('newCandidates',0),errors=observed.get('sourceErrors',[]),snapshotRunId=snapshot['runId'],snapshotCompletedAt=snapshot['completedAt'])
  state['lastCollectedAt']=snapshot['completedAt'];p.write('data/publishing-state.json',state)
  if os.environ.get('GITHUB_ACTIONS')=='true':
-  status=p.read('data/deployment-status.json',{});status.update(repository=os.environ['GITHUB_REPOSITORY'],scheduleActive=True,notes='Escuta contínua; fechamentos editoriais regulares às 08h, 13h, 18h e 22h em America/Sao_Paulo, com meta de até 20 matérias verificadas por edição. Uma pauta fica de fora quando não passa por fonte primária verificável ou confirmação independente e pela validação editorial.');p.write('data/deployment-status.json',status)
+  status=p.read('data/deployment-status.json',{});status.update(repository=os.environ['GITHUB_REPOSITORY'],scheduleActive=True,notes='Escuta contínua; fechamentos editoriais regulares às 08h, 13h, 18h e 22h em America/Sao_Paulo, com meta de até 20 matérias verificadas por edição. Uma pauta fica de fora quando não passa por confirmação por duas organizações independentes e pela validação editorial.');p.write('data/deployment-status.json',status)
  state=p.read('data/publishing-state.json',{})
  if not force and not schedule.is_due(state):return dict(collection=result,publication='not_due',nextEdition=schedule.next_label())
  sources={s['id']:s for s in p.read('data/sources.json',[])}
