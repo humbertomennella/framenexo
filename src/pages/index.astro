@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Card from '../components/Card.astro';
 import Elections from '../components/Elections.astro';
 import EditorialCover from '../components/EditorialCover.astro';
+import Headlines from '../components/Headlines.astro';
 import HomePersonalization from '../components/HomePersonalization.astro';
 import HomePlusFeed from '../components/HomePlusFeed.astro';
 import {articles,articleUrl,href,date,reading,categories,categorySlug,inCategory,usesEditorialCover} from '../lib/news';
@@ -10,9 +11,12 @@ import {selectHighlights} from '../lib/highlights.mjs';
 
 const highlights=selectHighlights(articles);
 const urgent=highlights.filter(a=>a.highlightLabel==='URGENTE');
-const lead=urgent[0]||articles[0];
+const ranked=[...highlights,...articles].filter((a,index,list)=>list.findIndex(item=>item.slug===a.slug)===index);
+const visualLead=ranked.find(a=>!usesEditorialCover(a));
+const lead=urgent[0]||visualLead||articles[0];
 const leadSlug=lead?.slug;
-const focus=highlights.filter(a=>a.slug!==leadSlug).slice(0,3);
+const focusPool=ranked.filter(a=>a.slug!==leadSlug);
+const focus=[...focusPool.filter(a=>!usesEditorialCover(a)),...focusPool.filter(a=>usesEditorialCover(a))].slice(0,5);
 const reserved=new Set([leadSlug,...focus.map(a=>a.slug)].filter(Boolean));
 const latest=articles.filter(a=>!reserved.has(a.slug)).slice(0,6);
 const sections=categories.map(category=>({category,items:articles.filter(a=>inCategory(a,category)).slice(0,2)})).filter(section=>section.items.length);
@@ -40,14 +44,8 @@ const sections=categories.map(category=>({category,items:articles.filter(a=>inCa
     </div>
    </article>
 
-   <aside class="focus-rail" aria-label="Em foco">
-    <header><div><span class="eyebrow">EM FOCO</span><h2>O que merece atenção agora</h2></div><a href={href('ultimas/')}>Últimas ↗</a></header>
-    <div class="focus-list">
-     {focus.length>0?focus.map((a,index)=><article class="focus-item">
-      <span class:list={["focus-index",a.highlightLabel==='URGENTE'&&"is-urgent"]}>{a.highlightLabel==='URGENTE'?'URGENTE':String(index+1).padStart(2,'0')}</span>
-      <div><a class="eyebrow" href={href(`categoria/${categorySlug(a.category)}/`)}>{a.category}</a><h3><a href={articleUrl(a)}>{a.title}</a></h3><div class="meta"><time datetime={a.publishedAt}>{date(a.publishedAt)}</time><span>{reading(a)} min</span></div></div>
-     </article>):<p class="focus-empty">Nenhuma pauta extraordinária neste momento. A edição segue com as notícias verificadas mais recentes.</p>}
-    </div>
+   <aside class="focus-rail focus-carousel-rail" aria-label="Em foco">
+    <Headlines articles={focus}/>
    </aside>
   </section>}
 
