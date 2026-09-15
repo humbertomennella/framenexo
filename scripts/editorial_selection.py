@@ -49,9 +49,29 @@ def cached_evidence(item):
     return text[:6000]
 
 
+def feed_evidence(item,source):
+    """Accept the same safe 25-word RSS floor used by cached evidence before escalating to article scraping."""
+    if not source.get('feed'):return None
+    rows=p.parse_feed(p.fetch(source['feed'],source['hosts']))
+    target=p.canonical_url(item['url'])
+    row=next((entry for entry in rows if entry.get('url') and p.canonical_url(entry['url'])==target),None)
+    if not row:return None
+    text=row.get('text','')
+    if not isinstance(text,str) or len(text.split())<25 or p.suspicious(text):return None
+    return text[:6000]
+
+
 def evidence(item,source):
     archived=cached_evidence(item)
     if archived:return archived
+    # The live path must not be stricter than the snapshot path. A concise RSS
+    # summary can enter the same-fact review, which still requires two truly
+    # independent organizations, exact anchors and the factual model review.
+    try:
+        feed=feed_evidence(item,source)
+        if feed:return feed
+    except (ValueError,OSError):
+        pass
     return p.evidence(item,source)
 
 
