@@ -19,15 +19,25 @@ class EditorialFlow(unittest.TestCase):
   rows=[self.row(str(i)) for i in range(5)]+[self.row('other','two')]
   first=selection.groups(rows)[0]
   self.assertEqual({x['sourceId'] for x in first},{'one','two'})
- def test_short_safe_rss_evidence_is_usable_before_article_scraping(self):
+ def test_short_safe_rss_is_fallback_but_richer_live_evidence_wins(self):
   item=self.row()
   source={'id':'one','organization':'one','feed':'https://one.test/feed.xml','hosts':['one.test']}
-  words=' '.join(f'palavra{i}' for i in range(30))
+  words=' '.join(f'palavra{i}' for i in range(30));rich=' '.join(f'conteudo{i}' for i in range(120))
   xml=f'<rss><channel><item><title>Tribunal determina entrega de dados do celular</title><link>{item["url"]}</link><description>{words}</description></item></channel></rss>'.encode()
-  with patch.object(selection,'cached_evidence',return_value=None),patch.object(p,'fetch',return_value=xml),patch.object(p,'evidence') as scrape:
+  with patch.object(selection,'cached_evidence',return_value=None),patch.object(p,'fetch',return_value=xml),patch.object(p,'evidence',return_value=rich) as scrape:
    body=selection.evidence(item,source)
-  self.assertEqual(body,words)
-  scrape.assert_not_called()
+  self.assertEqual(body,rich);scrape.assert_called_once()
+ def test_short_safe_rss_remains_available_when_article_read_fails(self):
+  item=self.row();source={'id':'one','organization':'one','feed':'https://one.test/feed.xml','hosts':['one.test']};words=' '.join(f'palavra{i}' for i in range(30))
+  xml=f'<rss><channel><item><title>Tribunal determina entrega de dados do celular</title><link>{item["url"]}</link><description>{words}</description></item></channel></rss>'.encode()
+  with patch.object(selection,'cached_evidence',return_value=None),patch.object(p,'fetch',return_value=xml),patch.object(p,'evidence',side_effect=ValueError('article_boundary_missing')):
+   self.assertEqual(selection.evidence(item,source),words)
+ def test_single_authoritative_primary_route_is_publishable(self):
+  row=self.row(source='official',sourceType='primary');sources={'official':{'id':'official','organization':'official','role':'evidence'}}
+  self.assertTrue(selection.authoritative_primary([row],sources));self.assertTrue(selection.publishable([row],sources));self.assertFalse(p.corroborated([row],sources))
+  with tempfile.TemporaryDirectory() as temp,patch.object(p,'ROOT',Path(temp)),patch.object(selection,'evidence',return_value='Official institution publishes verified data and a dated announcement with enough factual context for editorial review.'):
+   group,body=selection.verify([row],sources)
+  self.assertEqual(len(group),1);self.assertIn('Official institution',body)
  def test_same_topic_with_conflicting_facts_is_held(self):
   rows=[self.row(),self.row('b','two')];sources={x:{'id':x,'organization':x} for x in ('one','two')}
   with patch.object(p,'evidence',return_value='Court orders delivery of complete records today.'),patch.object(p,'model_call',return_value={'sameFact':True,'conflict':True,'syndicationUncertain':False}),self.assertRaisesRegex(ValueError,'shared_fact'):selection.verify(rows,sources)
@@ -35,7 +45,7 @@ class EditorialFlow(unittest.TestCase):
   rows=[self.row(),self.row('b','two')];sources={x:{'id':x,'organization':x} for x in ('one','two')}
   review=dict(sameFact=True,conflict=False,syndicationUncertain=False,routes=[dict(id=x['id'],quote='these words do not exist here',originalOrganization=x['sourceId']) for x in rows])
   with patch.object(p,'evidence',return_value='Court orders delivery of complete records today.'),patch.object(p,'model_call',return_value=review),self.assertRaisesRegex(ValueError,'anchor'):selection.verify(rows,sources)
-  with patch.object(p,'evidence',return_value='Por Reuters Court orders delivery of complete records today.'),self.assertRaisesRegex(ValueError,'independent'):selection.verify(rows,sources)
+  with patch.object(p,'evidence',return_value='Por Reuters Court orders delivery of complete records today.'),self.assertRaisesRegex(ValueError,'verified_source_routes'):selection.verify(rows,sources)
  def test_supported_routes_are_recorded(self):
   rows=[self.row(),self.row('b','two')];sources={x:{'id':x,'organization':x} for x in ('one','two')}
   review=dict(sameFact=True,conflict=False,syndicationUncertain=False,claim='Decisão judicial',routes=[dict(id=x['id'],quote='Court orders delivery of complete records today.',originalOrganization=x['sourceId']) for x in rows])
