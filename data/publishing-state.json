@@ -1,224 +1,90 @@
 {
   "paused": false,
-  "lastPublishedAt": "2026-09-14T04:27:33Z",
-  "lastCollectedAt": "2026-09-14T04:17:33Z",
-  "editionCount": 15,
+  "lastPublishedAt": "2026-09-15T13:34:00Z",
+  "lastCollectedAt": "2026-09-15T09:40:18Z",
+  "editionCount": 16,
+  "lastEditionSlot": "2026-09-15T11:00:00Z",
   "history": [
     {
-      "slug": "cupula-brics-nova-delhi-amplia-agenda-economica-inteligencia-artificial",
-      "title": "Cúpula do BRICS em Nova Délhi amplia agenda econômica e de inteligência artificial",
-      "eventKey": "brics-nova-delhi-2026-cooperacao-economica-ia",
-      "publishedAt": "2026-09-14T04:27:33Z",
+      "slug": "stf-analisa-abertura-investigacao-moraes-vorcaro",
+      "title": "STF analisa abertura de investigação sobre Moraes e relação com Vorcaro",
+      "eventKey": "stf-sessao-moraes-vorcaro-15-setembro-2026",
+      "publishedAt": "2026-09-15T13:31:00Z",
+      "image": "/og.png",
       "sourceUrls": [
-        "https://www.reuters.com/business/aerospace-defense/xi-pushes-greater-brics-economic-ties-give-bloc-larger-global-role-2026-09-13/",
-        "https://apnews.com/article/72e4329da3bc30ab7b231b2d11aae375"
+        "https://www.reuters.com/business/finance/brazils-top-court-decide-unprecedented-probe-sitting-justice-2026-09-15/",
+        "https://agenciabrasil.ebc.com.br/justica/noticia/2026-09/stf-define-rito-de-sessao-que-analisara-conversas-de-moraes-e-vorcaro",
+        "https://portal.stf.jus.br/processos/detalhe.asp?incidente=7681133"
       ],
       "sourceOrganizations": [
         "reuters",
-        "associated-press"
+        "agencia-brasil",
+        "stf"
       ],
       "leadSourceOrganization": "reuters",
-      "editionId": "extraordinary:2026-09-14T04:27:33Z",
+      "editionId": "extraordinary:2026-09-15T13:30:00Z",
       "editionType": "extraordinary",
-      "editionSlot": "2026-09-14T04:27:33Z"
+      "editionSlot": "2026-09-15T13:30:00Z"
     },
     {
-      "slug": "temporais-sao-paulo-alertas-defesa-civil",
-      "title": "Temporais deixam 89 pessoas fora de casa em SP; alertas seguem ativos",
-      "eventKey": "temporais-sao-paulo-defesa-civil-12-setembro-2026",
-      "publishedAt": "2026-09-12T14:10:00Z",
+      "slug": "move-brasil-r-30-bilhoes-financiamento-veiculos",
+      "title": "Move Brasil passa a programa permanente com R$ 30 bilhões para financiar veículos",
+      "eventKey": "move-brasil-lei-permanente-30-bilhoes-2026",
+      "publishedAt": "2026-09-15T13:32:00Z",
+      "image": "/og.png",
       "sourceUrls": [
-        "https://www.agenciasp.sp.gov.br/defesa-civil-de-sp-envia-15-alertas-cell-broadcast-e-registra-rajadas-de-vento-de-ate-926-km-h-na-madrugada-deste-sabado-12/",
-        "https://portal.inmet.gov.br/noticias/previs%C3%A3o-para-s%C3%A1bado-12-domingo-13-e-segunda-feira-14",
-        "https://cge.prefeitura.sp.gov.br/v3/noticias.jsp?data=2026-09-12",
-        "https://noticias.uol.com.br/cotidiano/ultimas-noticias/2026/09/12/defesa-civil-registra-25-ocorrencias-e-rajadas-de-vento-de-926-kmh-em-sp.ghtm"
-      ]
+        "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/move-brasil-tera-R-30-bilhoes-para-credito-de-veiculos",
+        "https://www.gov.br/mdic/pt-br/assuntos/noticias/presidente-sanciona-lei-que-garante-continuidade-do-move-brasil-para-motoristas-e-entregadores"
+      ],
+      "sourceOrganizations": [
+        "agencia-brasil",
+        "mdic"
+      ],
+      "leadSourceOrganization": "mdic",
+      "editionId": "extraordinary:2026-09-15T13:30:00Z",
+      "editionType": "extraordinary",
+      "editionSlot": "2026-09-15T13:30:00Z"
     },
     {
-      "slug": "tse-rejeita-registro-candidatura-pablo-marcal-presidencia",
-      "title": "TSE rejeita por unanimidade registro de candidatura de Pablo Marçal à Presidência",
-      "eventKey": "tse-rejeita-registro-pablo-marcal-presidencia-2026",
-      "publishedAt": "2026-09-12T12:40:00Z",
+      "slug": "sus-pneumo-20-maiores-85-anos",
+      "title": "SUS amplia Pneumo 20 para pessoas com 85 anos ou mais",
+      "eventKey": "sus-pneumo20-85-anos-setembro-2026",
+      "publishedAt": "2026-09-15T13:33:00Z",
+      "image": "/og.png",
       "sourceUrls": [
-        "https://www.tse.jus.br/comunicacao/noticias/2026/Agosto/tse-concede-liminar-proibindo-pablo-marcal-de-usar-recursos-oficiais-para-campanha",
-        "https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/tse-rejeita-por-unanimidade-o-registro-de-candidatura-de-pablo-marcal",
-        "https://www1.folha.uol.com.br/poder/2026/09/tse-forma-maioria-para-rejeitar-candidatura-de-pablo-marcal-a-presidencia.shtml"
-      ]
+        "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/setembro/nova-vacina-ministerio-da-saude-vai-ofertar-pneumo20-para-quem-tem-mais-de-85-anos",
+        "https://agenciabrasil.ebc.com.br/saude",
+        "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/notas-tecnicas/2026/nota-tecnica-conjunta-no-310-2026.pdf/view"
+      ],
+      "sourceOrganizations": [
+        "ministerio-saude",
+        "agencia-brasil"
+      ],
+      "leadSourceOrganization": "ministerio-saude",
+      "editionId": "extraordinary:2026-09-15T13:30:00Z",
+      "editionType": "extraordinary",
+      "editionSlot": "2026-09-15T13:30:00Z"
     },
     {
-      "slug": "stf-investigacao-financiamento-filme-flavio-bolsonaro",
-      "title": "STF torna pública investigação sobre financiamento de filme ligado a Flávio Bolsonaro",
-      "eventKey": "stf-investigacao-flavio-bolsonaro-filme-banco-master-setembro-2026",
-      "publishedAt": "2026-09-12T08:55:00Z",
+      "slug": "chuvas-vale-do-ribeira-152-familias-abrigos",
+      "title": "Chuvas mantêm 152 famílias em abrigos no Vale do Ribeira",
+      "eventKey": "chuvas-vale-ribeira-abrigos-setembro-2026",
+      "publishedAt": "2026-09-15T13:34:00Z",
+      "image": "/og.png",
       "sourceUrls": [
-        "https://apnews.com/article/brazil-flavio-bolsonaro-investigation-banco-master-movie-f534de4498df7d8b509127fcee2b535d",
-        "https://www.reuters.com/business/finance/brazilian-top-court-unseals-probe-into-multibillion-dollar-bank-fraud-2026-09-11/"
-      ]
-    },
-    {
-      "slug": "aiea-encaminha-ira-conselho-seguranca-onu",
-      "title": "AIEA encaminha caso nuclear do Irã ao Conselho de Segurança da ONU",
-      "eventKey": "aiea-ira-conselho-seguranca-setembro-2026",
-      "publishedAt": "2026-09-10T06:58:00Z",
-      "sourceUrls": [
-        "https://apnews.com/article/607ecdffcd8ef88ddf8f33041e86b720",
-        "https://www.reuters.com/world/middle-east/iaea-reports-progress-syria-investigation-none-iran-2026-09-01/",
-        "https://www1.folha.uol.com.br/mundo/2026/09/agencia-nuclear-da-onu-denuncia-ira-ao-conselho-de-seguranca.shtml",
-        "https://www.iaea.org/topics/monitoring-and-verification-in-iran"
-      ]
-    },
-    {
-      "slug": "congonhas-regra-operacao-excepcional-apos-23h",
-      "title": "Congonhas terá regra para concluir voos após as 23h em situações excepcionais",
-      "eventKey": "anac-congonhas-operacao-excepcional-23h-2026",
-      "publishedAt": "2026-09-10T01:45:00Z",
-      "sourceUrls": [
-        "https://www.gov.br/anac/pt-br/noticias/2026/congonhas-tera-nova-regra-para-conclusao-excepcional-de-operacoes-apos-as-23h",
-        "https://agenciabrasil.ebc.com.br/geral/noticia/2026-09/anac-permite-voos-apos-23h-em-congonhas-em-situacoes-excepcionais",
-        "https://www1.folha.uol.com.br/cotidiano/2026/09/anac-aprova-voos-em-congonhas-apos-23h-para-extremos-climaticos-e-outras-excecoes.shtml"
-      ]
-    },
-    {
-      "slug": "ancelotti-renova-selecao-oito-estreantes-novo-ciclo",
-      "title": "Ancelotti inicia novo ciclo da seleção com oito estreantes e média de idade menor",
-      "eventKey": "selecao-brasileira-convocacao-ancelotti-setembro-2026",
-      "publishedAt": "2026-09-10T01:40:00Z",
-      "sourceUrls": [
-        "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-09/ancelotti-anuncia-26-convocados-para-amistosos-da-selecao-brasileira",
-        "https://www1.folha.uol.com.br/esporte/2026/09/ancelotti-faz-primeira-convocacao-da-selecao-no-pos-copa-veja-ao-vivo.shtml",
-        "https://ge.globo.com/futebol/selecao-brasileira/noticia/2026/09/09/ancelotti-inicia-ciclo-com-convocacao-cheia-de-novidades-veja-lista.ghtml",
-        "https://www.infomoney.com.br/esportes/convocacao-selecao-brasileira-ancelotti/"
-      ]
-    },
-    {
-      "slug": "seis-filmes-finalistas-representar-brasil-oscar-2027",
-      "title": "Seis filmes avançam na escolha do representante brasileiro ao Oscar 2027",
-      "eventKey": "cinema-brasileiro-seis-finalistas-oscar-2027",
-      "publishedAt": "2026-09-10T01:35:00Z",
-      "sourceUrls": [
-        "https://academiabrasileiradecinema.com.br/",
-        "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-09/seis-filmes-continuam-disputa-para-representar-brasil-no-oscar",
-        "https://www1.folha.uol.com.br/ilustrada/2026/09/com-feito-pipa-academia-brasileira-anuncia-filmes-que-podem-concorrer-ao-oscar.shtml",
-        "https://www.infomoney.com.br/consumo/oscar-academia-brasileira-de-cinema-revela-os-6-filmes-que-podem-representar-brasil/"
-      ]
-    },
-    {
-      "slug": "governo-reduz-tributos-combustiveis-amplia-subsidio-diesel",
-      "title": "Governo reduz tributos sobre combustíveis e amplia subsídio ao diesel",
-      "eventKey": "governo-pacote-combustiveis-setembro-2026",
-      "publishedAt": "2026-09-10T01:20:00Z",
-      "sourceUrls": [
-        "https://www.reuters.com/business/energy/brazil-government-releases-13-billion-fuel-subsidies-2026-09-09/",
-        "https://apnews.com/article/0dd4014d2bb5a5e7627ad8acb7cd1256",
-        "https://economia.uol.com.br/noticias/redacao/2026/09/09/governo-decreta-novas-medidas-para-combustiveis-apos-alta-no-petroleo.ghtm",
-        "https://www1.folha.uol.com.br/mercado/2026/09/defasagem-no-preco-do-diesel-dispara-e-governo-lula-libera-mais-verba-para-subsidio.shtml",
-        "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/novas-medidas-para-combustiveis-terao-impacto-de-r-7-bilhoes-por-mes"
-      ]
-    },
-    {
-      "slug": "anvisa-amplia-vacina-meningococica-bebes-seis-semanas",
-      "title": "Anvisa amplia vacina meningocócica para bebês a partir de seis semanas",
-      "eventKey": "anvisa-menquadfi-seis-semanas-2026-09-09",
-      "publishedAt": "2026-09-09T13:52:00Z",
-      "sourceUrls": [
-        "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2026/anvisa-autoriza-ampliacao-de-uso-de-vacina-contra-meningite",
-        "https://agenciabrasil.ebc.com.br/saude/noticia/2026-09/anvisa-amplia-indicacao-de-vacina-contra-meningite"
-      ]
-    },
-    {
-      "slug": "dino-reintegra-direcao-pf-disputa-vai-plenario-stf",
-      "title": "Dino reintegra direção da PF e leva disputa ao plenário do STF",
-      "eventKey": "stf-pf-reintegracao-direcao-2026-09-09",
-      "publishedAt": "2026-09-09T13:50:00Z",
-      "sourceUrls": [
-        "https://www.reuters.com/world/americas/brazil-top-court-judge-orders-reinstatement-federal-police-chief-2026-09-09/",
-        "https://agenciabrasil.ebc.com.br/justica/noticia/2026-09/dino-determina-reintegracao-de-andrei-rodrigues-no-comando-da-pf",
-        "https://www1.folha.uol.com.br/poder/2026/09/dino-reintegra-andrei-rodrigues-no-comando-da-pf.shtml",
-        "https://noticias.uol.com.br/politica/ultimas-noticias/2026/09/09/dino-decisao-andrei-rodrigues-pf.ghtm"
-      ]
-    },
-    {
-      "slug": "anvisa-aprova-genericos-liraglutida-ems",
-      "title": "Anvisa aprova dois genéricos de liraglutida; venda ainda não tem data",
-      "eventKey": "anvisa-genericos-liraglutida-ems-2026-09-08",
-      "publishedAt": "2026-09-09T04:04:21Z",
-      "sourceUrls": [
-        "https://agenciabrasil.ebc.com.br/saude/noticia/2026-09/anvisa-aprova-genericos-de-medicamentos-contra-diabetes-e-obesidade",
-        "https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2026/09/08/canetas-de-liraglutida-ganham-genericos-para-obesidade-e-diabetes.ghtm",
-        "https://www1.folha.uol.com.br/equilibrioesaude/2026/09/anvisa-aprova-genericos-de-canetas-emagrecedoras-da-ems.shtml",
-        "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2025/entra-em-vigor-norma-que-preve-retencao-de-receita-para-medicamentos-agonistas-glp-1"
-      ]
-    },
-    {
-      "slug": "afastamento-direcao-pf-amplia-crise-institucional-stf",
-      "title": "Afastamento da direção da PF amplia crise institucional; julgamento é suspenso",
-      "eventKey": "stf-pf-afastamento-direcao-2026-09-08",
-      "publishedAt": "2026-09-08T21:00:00Z",
-      "sourceUrls": [
-        "https://www.reuters.com/world/americas/brazil-court-crisis-deepens-justice-orders-federal-police-chief-suspended-2026-09-08/",
-        "https://www.cnnbrasil.com.br/politica/entenda-a-decisao-de-mendonca-que-afastou-andrei-rodrigues-do-comando-da-pf/",
-        "https://www1.folha.uol.com.br/poder/2026/09/mendonca-determina-afastamento-de-andrei-rodrigues-do-comando-da-pf.shtml",
-        "https://noticias.uol.com.br/politica/ultimas-noticias/2026/09/08/decisao-de-mendonca-ocorre-em-acao-do-partido-de-zema-contra-chefe-da-pf.ghtm"
-      ]
-    },
-    {
-      "slug": "pisa-2025-brasil-avanco-relativo-desafio-aprendizagem",
-      "title": "PISA 2025 mostra avanço relativo do Brasil, mas distância educacional permanece",
-      "eventKey": "pisa-2025-resultados-brasil-2026-09",
-      "publishedAt": "2026-09-08T13:50:00Z",
-      "sourceUrls": [
-        "https://www.oecd.org/en/publications/2026/09/pisa-2025-results-volume-i_5265bfb1.html",
-        "https://www.oecd.org/en/about/news/press-releases/2026/09/pisa-2025-students-reading-and-mathematics-performance-declined-sharply-across-the-oecd.html",
-        "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-09/pisa-brasil-reduz-diferenca-para-paises-ricos-no-desempenho-escolar"
-      ]
-    },
-    {
-      "slug": "oms-tabaco-fertilidade-riscos-evidencias",
-      "title": "OMS reúne evidências sobre tabaco e riscos à fertilidade",
-      "eventKey": "oms-tabaco-fertilidade-sintese-2026-09",
-      "publishedAt": "2026-09-08T13:45:00Z",
-      "sourceUrls": [
-        "https://www.who.int/news/item/08-09-2026-tobacco-smoking-may-be-harming-your-chances-of-having-a-baby",
-        "https://www.who.int/news-room/fact-sheets/detail/tobacco"
-      ]
-    },
-    {
-      "slug": "focus-inflacao-2026-recua-cinco-por-cento",
-      "title": "Focus reduz projeção de inflação de 2026 para 5% e eleva estimativa do PIB",
-      "eventKey": "focus-2026-09-08-inflacao-pib-selic",
-      "publishedAt": "2026-09-08T13:40:00Z",
-      "sourceUrls": [
-        "https://www.bcb.gov.br/publicacoes/focus",
-        "https://www.bcb.gov.br/controleinflacao/metainflacao",
-        "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/mercado-financeiro-reduz-previsao-da-inflacao-para-5-este-ano"
-      ]
-    },
-    {
-      "slug": "ibge-mapas-mundi-brasil-acesso",
-      "title": "IBGE libera série de mapas-múndi com o Brasil no centro",
-      "eventKey": "ibge-mapas-mundi-brasil-2026",
-      "publishedAt": "2026-09-08T02:00:00Z",
-      "sourceUrls": [
-        "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47986-dia-da-independencia-ibge-libera-acesso-aos-mapas-mundi-do-brasil"
-      ]
-    },
-    {
-      "slug": "nasa-ceu-setembro-venus-equinocio",
-      "title": "NASA destaca Vênus, equinócio e Lua cheia no céu de setembro",
-      "eventKey": "nasa-ceu-setembro-2026",
-      "publishedAt": "2026-09-08T01:55:00Z",
-      "sourceUrls": [
-        "https://science.nasa.gov/solar-system/skywatching/whats-up-september-2026-skywatching-tips-from-nasa/"
-      ]
-    },
-    {
-      "slug": "nasa-lisa-contribuicoes-ciencia",
-      "title": "NASA recebe contribuições da comunidade para definir lacunas científicas do LISA",
-      "eventKey": "nasa-lisa-science-gaps-2026",
-      "publishedAt": "2026-09-08T01:50:00Z",
-      "sourceUrls": [
-        "https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/community/reminder-lisa-science-gaps-2026/"
-      ]
+        "https://agenciabrasil.ebc.com.br/meio-ambiente",
+        "https://www.canalrural.com.br/diversos/chuvas-mantem-152-familias-em-abrigos-no-vale-do-ribeira/",
+        "https://www.gov.br/cemaden/pt-br/assuntos/riscos-geo-hidrologicos/15-09-2026-previsao-de-riscos-geo-hidrologicos"
+      ],
+      "sourceOrganizations": [
+        "agencia-brasil",
+        "canal-rural",
+        "cemaden"
+      ],
+      "leadSourceOrganization": "agencia-brasil",
+      "editionId": "extraordinary:2026-09-15T13:30:00Z",
+      "editionType": "extraordinary",
+      "editionSlot": "2026-09-15T13:30:00Z"
     }
   ],
   "editionHistory": [
@@ -234,6 +100,26 @@
       },
       "slugs": [
         "cupula-brics-nova-delhi-amplia-agenda-economica-inteligencia-artificial"
+      ]
+    },
+    {
+      "id": "extraordinary:2026-09-15T13:30:00Z",
+      "type": "extraordinary",
+      "slot": "2026-09-15T13:30:00Z",
+      "label": "Edição extraordinária",
+      "publishedAt": "2026-09-15T13:34:00Z",
+      "articleCount": 4,
+      "categories": {
+        "Política": 1,
+        "Economia": 1,
+        "Saúde": 1,
+        "Meio Ambiente": 1
+      },
+      "slugs": [
+        "stf-analisa-abertura-investigacao-moraes-vorcaro",
+        "move-brasil-r-30-bilhoes-financiamento-veiculos",
+        "sus-pneumo-20-maiores-85-anos",
+        "chuvas-vale-do-ribeira-152-familias-abrigos"
       ]
     }
   ]
