@@ -17,7 +17,7 @@
   ],
   "relevance": 94,
   "image": "/images/news/ceu-setembro-venus.webp",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "publishedAt": "2026-09-08T01:55:00Z",
   "updatedAt": "2026-09-08T09:33:52Z",
   "status": "published",
@@ -39,9 +39,14 @@
     {
       "date": "2026-09-08T02:13:00Z",
       "text": "Horário de publicação corrigido para o fuso de Brasília e ilustração editorial substituída por uma arte específica da pauta."
+    },
+    {
+      "date": "2026-09-15",
+      "text": "Classificação revista para Relato: há apenas uma organização identificada. O texto e as fontes foram preservados; não foi realizada nova confirmação independente."
     }
   ],
-  "leadSourceOrganization": "nasa"
+  "leadSourceOrganization": "nasa",
+  "historicalReview": "pending_independent_confirmation"
 }
 ---
 O guia mensal da NASA para setembro reúne quatro momentos de observação do céu: a passagem da Lua por Antares e pelo conjunto de estrelas conhecido como Teapot entre os dias 14 e 20, o brilho máximo de Vênus em 18 de setembro, o equinócio em 22 de setembro e a Lua cheia próxima de Saturno e Netuno em 26 de setembro.

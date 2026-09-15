@@ -20,7 +20,7 @@
   "imageAlt": "Ilustração editorial original sobre Satélite registra calor de lago de lava em ilha do Atlântico Sul. Não é fotografia da NASA.",
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "relevance": 82,
   "eventKey": "veridia-landsat-monte-michael-lava",
   "sources": [
@@ -32,10 +32,16 @@
       "organization": "nasa"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-15",
+      "text": "Classificação revista para Relato: há apenas uma organização identificada. O texto e as fontes foram preservados; não foi realizada nova confirmação independente."
+    }
+  ],
   "author": "Apurante Editorial",
   "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial.",
-  "leadSourceOrganization": "nasa"
+  "leadSourceOrganization": "nasa",
+  "historicalReview": "pending_independent_confirmation"
 }
 ---
 Uma abertura nas nuvens permitiu ao satélite Landsat 8 registrar sinais de atividade no Monte Michael, na ilha Saunders, no Atlântico Sul. A imagem foi obtida em 24 de agosto e divulgada pelo Observatório da Terra da NASA em 7 de setembro. O ponto de calor na cratera está associado ao lago de lava que costuma permanecer ativo no vulcão.

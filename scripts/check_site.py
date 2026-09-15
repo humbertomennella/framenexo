@@ -109,12 +109,14 @@ for file in (ROOT/'content/news').glob('*.md'):
  policy=a.get('verificationPolicyVersion',0)
  if policy>=2:
   prose_paragraphs=[p for p in re.split(r'\n\s*\n',parts[2].strip()) if p and not p.startswith('#')]
-  check(len(prose_paragraphs)>=9,f'{file.name}: complete article needs at least nine useful paragraphs')
+  check(9<=len(prose_paragraphs)<=12,f'{file.name}: complete article needs at least nine useful paragraphs')
+  check(len(' '.join(prose_paragraphs).split())<=800,f'{file.name}: article exceeds 800 words')
   for heading in ['## O que aconteceu','## Contexto','## Por que importa','## Como ler esta notícia','## Contexto para interpretar','## O que acompanhar agora']:
    check(heading not in parts[2],f'{file.name}: generic section remains: {heading}')
  # Policy v2 represented the old two-independent-organizations rule. Policy v3
  # keeps that route and also admits a direct authoritative primary evidence route.
  if policy==2:check(len(organizations)>=2,f'{file.name}: policy v2 requires two independent organizations')
+ if policy>=4:check(len(organizations)>=2,f'{file.name}: policy v4 requires two independent organizations')
  if policy>=3:
   primary_evidence=any(source.get('type')=='primary' and source.get('role','evidence')=='evidence' for source in a['sources'])
   check(len(organizations)>=2 or primary_evidence,f'{file.name}: policy v3 requires independent confirmation or authoritative primary evidence')

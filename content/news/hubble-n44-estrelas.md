@@ -20,7 +20,7 @@
   "imageAlt": "Ilustração editorial original sobre Imagem do Hubble mostra como estrelas remodelam a nebulosa N44. Não é fotografia da NASA.",
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "relevance": 82,
   "eventKey": "veridia-hubble-n44-estrelas",
   "sources": [
@@ -32,10 +32,16 @@
       "organization": "nasa"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-15",
+      "text": "Classificação revista para Relato: há apenas uma organização identificada. O texto e as fontes foram preservados; não foi realizada nova confirmação independente."
+    }
+  ],
   "author": "Apurante Editorial",
   "production": "Texto original em português baseado na fonte primária indicada e verificado em 8 de setembro de 2026. Imagem: ilustração editorial original gerada para esta matéria; não é fotografia oficial.",
-  "leadSourceOrganization": "nasa"
+  "leadSourceOrganization": "nasa",
+  "historicalReview": "pending_independent_confirmation"
 }
 ---
 Uma imagem apresentada pela equipe do Hubble em 3 de setembro mostra a nebulosa N44, uma região de formação estelar na Grande Nuvem de Magalhães. A galáxia fica a aproximadamente 160 mil anos-luz e é uma das vizinhas da Via Láctea. Na imagem, o contraste entre uma grande cavidade e sua borda de gás permite acompanhar os efeitos que as estrelas exercem sobre o ambiente em que nasceram.

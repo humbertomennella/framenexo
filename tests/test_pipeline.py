@@ -98,7 +98,7 @@ class Publication(unittest.TestCase):
   self.assertTrue(p.write('data/test.json',{'a':1}));self.assertFalse(p.write('data/test.json',{'a':1}));self.assertEqual(p.read('data/test.json',{}),{'a':1});self.assertFalse(list(self.root.rglob('*.tmp')))
  def add_media(self,c):
   path='/images/news/test.webp';asset=self.root/'public/images/news/test.webp';asset.parent.mkdir(parents=True,exist_ok=True);asset.write_bytes(b'webp')
-  p.write('data/image-rights.json',[{'path':path,'origin':'generated','credit':'Apurante Editorial','license':'original','sourceURL':None,'proof':'test fixture'}])
+  p.write('data/image-rights.json',[{'path':path,'origin':'generated','credit':'Apurante Editorial','license':'original','sourceURL':None,'proof':'test fixture','sha256':p.hashlib.sha256(b'webp').hexdigest()}])
   c['media']={'path':path,'alt':'Ilustração editorial de teste.','credit':'Apurante Editorial — ilustração editorial original.'};return c
  def test_candidate_without_approved_media_is_not_published(self):
   p.write('data/sources.json',[{'id':'official'}]);p.write('data/candidates.json',[{'id':'abcdef123456','title':'Official game expansion announced','sourceId':'official','sourceName':'Official','sourceType':'primary','url':'https://example.com/news','publishedAt':p.iso(),'category':'PC','relevance':90,'status':'candidate'}])

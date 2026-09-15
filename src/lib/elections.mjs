@@ -10,5 +10,5 @@ export function isElectionArticle(article){
 }
 export function selectElections(articles,now=Date.now()){
  return articles.filter(a=>a.status==='published'&&Date.parse(a.publishedAt)<=now&&!['RUMOR','RELATO'].includes(a.confidence)&&isElectionArticle(a))
-  .sort((a,b)=>String(b.updatedAt||b.publishedAt).localeCompare(String(a.updatedAt||a.publishedAt))||b.publishedAt.localeCompare(a.publishedAt));
+  .sort((a,b)=>Date.parse(b.updatedAt||b.publishedAt)-Date.parse(a.updatedAt||a.publishedAt)||Date.parse(b.publishedAt)-Date.parse(a.publishedAt));
 }

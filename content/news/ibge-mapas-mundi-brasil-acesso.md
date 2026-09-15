@@ -17,7 +17,7 @@
   ],
   "relevance": 96,
   "image": "/images/news/brasil-panoramica.webp",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "publishedAt": "2026-09-08T02:00:00Z",
   "updatedAt": "2026-09-08T09:33:52Z",
   "status": "published",
@@ -43,9 +43,14 @@
     {
       "date": "2026-09-08T02:20:00Z",
       "text": "Título e descrição ajustados para esclarecer que se trata de mapas do mundo com o Brasil centralizado."
+    },
+    {
+      "date": "2026-09-15",
+      "text": "Classificação revista para Relato: há apenas uma organização identificada. O texto e as fontes foram preservados; não foi realizada nova confirmação independente."
     }
   ],
-  "leadSourceOrganization": "ibge"
+  "leadSourceOrganization": "ibge",
+  "historicalReview": "pending_independent_confirmation"
 }
 ---
 O Instituto Brasileiro de Geografia e Estatística anunciou a liberação, por meio de sua loja, de uma série de três mapas do mundo lançados entre 2024 e 2026. Eles não retratam apenas o território nacional: são representações do planeta que colocam o Brasil no centro da projeção.

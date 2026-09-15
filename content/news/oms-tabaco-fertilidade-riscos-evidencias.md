@@ -22,7 +22,7 @@
   "imageAlt": "Ilustração editorial abstrata de fumaça sendo interrompida antes de estruturas celulares, em ambiente científico. Não é fotografia nem imagem clínica.",
   "imageCredit": "Apurante Editorial · Ilustração editorial, não é fotografia.",
   "status": "published",
-  "confidence": "CONFIRMADO",
+  "confidence": "RELATO",
   "relevance": 92,
   "eventKey": "oms-tabaco-fertilidade-sintese-2026-09",
   "leadSourceOrganization": "oms",
@@ -42,9 +42,15 @@
       "organization": "oms"
     }
   ],
-  "corrections": [],
+  "corrections": [
+    {
+      "date": "2026-09-15",
+      "text": "Classificação revista para Relato: há apenas uma organização identificada. O texto e as fontes foram preservados; não foi realizada nova confirmação independente."
+    }
+  ],
   "author": "Apurante Editorial",
-  "production": "Texto original baseado em publicações da OMS e da OPAS. Imagem original do Apurante Editorial."
+  "production": "Texto original baseado em publicações da OMS e da OPAS. Imagem original do Apurante Editorial.",
+  "historicalReview": "pending_independent_confirmation"
 }
 ---
 A Organização Mundial da Saúde publicou em 8 de setembro uma síntese de evidências sobre tabaco e infertilidade. O documento reúne estudos sobre mulheres, homens, reprodução assistida e exposição passiva. A mensagem central é que fumar cigarros está associado a prejuízos reprodutivos em diferentes etapas, embora o efeito individual dependa de vários fatores e não possa ser calculado apenas com base no hábito de fumar.

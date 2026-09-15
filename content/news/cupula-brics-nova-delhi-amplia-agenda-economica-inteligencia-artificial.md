@@ -53,6 +53,10 @@
     {
       "date": "2026-09-14T04:53:44Z",
       "text": "Metadados de publicação ajustados para refletir o horário efetivo em que a edição entrou em produção. O conteúdo factual da matéria não foi alterado."
+    },
+    {
+      "date": "2026-09-15",
+      "text": "Revisão de formato: organização dos parágrafos e remoção de comentário genérico quando presente, sem acrescentar fatos ou alterar fontes."
     }
   ],
   "author": "Apurante Editorial",
@@ -60,6 +64,7 @@
   "leadSourceOrganization": "reuters"
 }
 ---
+
 A cúpula do BRICS em Nova Délhi colocou comércio, pagamentos, inteligência artificial e coordenação política no centro de uma agenda que tenta ampliar a influência do bloco em um cenário internacional marcado por tensões geopolíticas, pressão sobre cadeias de suprimento e disputas sobre tecnologia. Reportagens da Reuters e da Associated Press descrevem um encontro em que os integrantes procuraram demonstrar capacidade de ação conjunta apesar das diferenças entre seus interesses nacionais.
 
 ## Uma agenda econômica mais ampla
@@ -83,8 +88,6 @@ Essas propostas mostram que a disputa por influência tecnológica entrou de for
 ## Saúde e segurança alimentar também entram na coordenação
 
 A Índia anunciou ainda uma iniciativa de alerta precoce para doenças infecciosas, segundo a Associated Press. O tema amplia o escopo do BRICS para áreas nas quais cooperação técnica pode produzir resultados mais concretos e menos dependentes de alinhamento geopolítico. Segurança alimentar, energia e clima também apareceram nas discussões, refletindo preocupações comuns a economias com grandes populações e necessidades de infraestrutura.
-
-Esse tipo de programa pode ser um teste importante para a capacidade operacional do grupo. Declarações diplomáticas são relativamente fáceis de aprovar quando permanecem gerais; sistemas compartilhados de saúde, pagamentos ou tecnologia exigem financiamento, definição de responsabilidades e mecanismos permanentes de coordenação. O valor dessas propostas será medido menos pelo texto da cúpula e mais pela execução nos próximos meses e anos.
 
 ## Consenso não elimina diferenças internas
 

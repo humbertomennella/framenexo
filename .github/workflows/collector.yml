@@ -11,7 +11,7 @@ on:
       - 'data/edition-schedule.json'
       - 'tests/test_editions.py'
   schedule:
-    - cron: '7 1,11,16,21 * * *'
+    - cron: '0 1,11,16,21 * * *'
     - cron: '27 1,11,16,21 * * *'
   workflow_dispatch:
     inputs:
@@ -90,6 +90,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python3 scripts/notify_collection.py
+      - name: Registrar resultado independente da publicação
+        if: always()
+        env:
+          PIPELINE_OUTCOME: ${{ steps.pipeline.outcome }}
+        run: python3 scripts/editorial_report.py
+      - name: Preservar relatório do fechamento
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: apurante-editorial-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .cache/editorial-report.json
+          include-hidden-files: true
+          retention-days: 30
+          if-no-files-found: error
       - name: Registrar falha da execução
         if: steps.pipeline.outcome == 'failure'
         run: exit 1

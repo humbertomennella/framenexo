@@ -45,8 +45,8 @@ def authoritative_primary(group,sources):
 
 
 def publishable(group,sources):
-    """Publish with two independent routes, or one direct authoritative primary source."""
-    return p.corroborated(group,sources) or authoritative_primary(group,sources)
+    """A complete article requires two independent organizations, including primary evidence when available."""
+    return p.corroborated(group,sources)
 
 
 def cached_evidence(item):
@@ -81,11 +81,13 @@ def evidence(item,source):
     feed=None
     try:feed=feed_evidence(item,source)
     except (ValueError,OSError):pass
-    fallback=archived or feed
+    fallback=max((text for text in (archived,feed) if text),key=len,default=None)
+    if fallback and len(fallback.split())<180:fallback=None
     try:
         live=p.evidence(item,source)
         if live:return live
-    except (ValueError,OSError):
+    except (ValueError,OSError) as error:
+        if isinstance(error,ValueError) and str(error)=='paid_content':raise
         if fallback:return fallback
         raise
     if fallback:return fallback
@@ -104,7 +106,7 @@ def shared_fact_review(routes,sources):
 
 
 def verify(group,sources,cache=None):
-    """Verify source text; independent reports need same-fact review, direct primary evidence can stand alone."""
+    """Verify that two independent source texts support the same core fact."""
     routes=[];cache={} if cache is None else cache
     pending=[c for c in group if c['url'] not in cache]
     with ThreadPoolExecutor(max_workers=3) as executor:
@@ -122,20 +124,6 @@ def verify(group,sources,cache=None):
         routes.append((item,body))
     route_items=[x[0] for x in routes]
     if not publishable(route_items,sources):raise ValueError('verified_source_routes_required')
-
-    # A direct primary source can establish its own official act, publication,
-    # dataset or announcement. The writer and the separate factual verifier
-    # still compare every generated claim against this source text.
-    if authoritative_primary(route_items,sources) and not p.corroborated(route_items,sources):
-        primary=next(((c,body) for c,body in routes if c.get('sourceType')=='primary'
-            and sources.get(c.get('sourceId'),{}).get('role','evidence')=='evidence'),None)
-        if not primary:raise ValueError('authoritative_primary_required')
-        c,body=primary
-        org=p.source_organization(c,sources[c['sourceId']])
-        p.write(f'.cache/drafts/{group[0]["id"]}-shared-fact.json',dict(
-            verification='authoritative_primary',claim=c.get('title'),
-            routes=[dict(url=c['url'],organization=org)],verifiedAt=p.iso()))
-        return [c],f"FONTE: {c['sourceName']}\nURL: {c['url']}\n{body}"
 
     result=shared_fact_review(routes,sources)
     p.write(f'.cache/drafts/{group[0]["id"]}-shared-review.json',result)

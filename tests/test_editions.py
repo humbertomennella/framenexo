@@ -84,8 +84,12 @@ class MediaFallback(unittest.TestCase):
   candidate={'id':'abc123','title':'Acontecimento verificado sem imagem externa'}
   group=[candidate]
   with patch.object(publish_edition.p,'approved_media',side_effect=ValueError('approved_media_required')),patch.object(publish_edition.editorial_media,'acquire',side_effect=ValueError('licensed_specific_media_unavailable')),patch.object(publish_edition.p,'log') as log:
-   media=publish_edition.resolve_media(group,candidate,'evidência verificada',set())
-  self.assertEqual(media['path'],'/og.png')
+   import tempfile
+   with tempfile.TemporaryDirectory() as temp,patch.object(publish_edition.p,'ROOT',Path(temp)):
+    media=publish_edition.resolve_media(group,candidate,'evidência verificada',set())
+    self.assertTrue((Path(temp)/'public'/media['path'].lstrip('/')).exists())
+    self.assertTrue(publish_edition.p.read('data/image-rights.json',[])[0]['sha256'])
+  self.assertTrue(media['path'].endswith('.svg'))
   self.assertIn(candidate['title'],media['alt'])
   self.assertIn('Apurante Editorial',media['credit'])
   log.assert_called_once()
@@ -100,7 +104,7 @@ class MediaFallback(unittest.TestCase):
 class WorkflowContract(unittest.TestCase):
  def test_regular_publisher_has_primary_and_recovery_runs(self):
   text=(ROOT/'.github/workflows/collector.yml').read_text()
-  self.assertIn("cron: '7 1,11,16,21 * * *'",text)
+  self.assertIn("cron: '0 1,11,16,21 * * *'",text)
   self.assertIn("cron: '27 1,11,16,21 * * *'",text)
   self.assertNotIn("cron: '7 * * * *'",text)
   self.assertNotIn("cron: '27 * * * *'",text)
