@@ -8,6 +8,7 @@ on:
     # GitHub Actions usa UTC. O APURANTE fecha uma janela editorial por hora.
     # O disparo principal ocorre aos :07 e a recuperação idempotente aos :27.
     # Evitamos o minuto 00, que costuma sofrer mais contenção no scheduler.
+    # Alterações neste workflow também disparam uma edição forçada de validação.
     - cron: '7 * * * *'
     - cron: '27 * * * *'
   workflow_dispatch:
