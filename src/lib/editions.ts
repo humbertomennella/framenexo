@@ -3,7 +3,7 @@ import type {Article} from './news';
 
 export const editionSchedule=schedule;
 export const editionHours=[...schedule.slots].sort((a,b)=>a-b);
-export const editionHoursLabel=editionHours.map(hour=>`${String(hour).padStart(2,'0')}h`).join(' · ');
+export const editionHoursLabel=editionHours.length===24?'a cada hora':editionHours.map(hour=>`${String(hour).padStart(2,'0')}h`).join(' · ');
 
 export const editionTitle=(article?:Article|null)=>{
  if(!article)return 'Cronograma editorial';
