@@ -42,9 +42,13 @@ def restore_evidence(payload):
     directory=p.ROOT/'.cache/evidence';directory.mkdir(parents=True,exist_ok=True)
     for old in directory.glob('*.json'):old.unlink(missing_ok=True)
     items={row['id']:row for row in payload.get('candidates',[]) if isinstance(row,dict) and row.get('id')}
+    at=p.now()
     for ident,row in payload.get('evidence',{}).items():
         candidate=items.get(ident)
         if not candidate:continue
+        fetched=row.get('fetchedAt')
+        fetched_at=p.date(fetched) if isinstance(fetched,str) else None
+        if not fetched_at or not dt.timedelta(minutes=-5)<=at-fetched_at<=MAX_AGE:continue
         p.write(f'.cache/evidence/{ident}.json',dict(url=candidate['url'],text=row['text'][:MAX_EVIDENCE_CHARS],fetchedAt=row['fetchedAt']))
 
 def create(items,state):
@@ -88,7 +92,7 @@ def validate(document,run=None,at=None):
         if not isinstance(text,str) or not text.strip() or len(text)>MAX_EVIDENCE_CHARS or p.suspicious(text):raise ValueError('snapshot_evidence_text')
         if not isinstance(url,str) or p.canonical_url(url)!=p.canonical_url(candidate['url']):raise ValueError('snapshot_evidence_url')
         fetched_at=p.date(fetched) if isinstance(fetched,str) else None
-        if not fetched_at or not dt.timedelta(minutes=-5)<=at-fetched_at<=MAX_AGE:raise ValueError('snapshot_evidence_age')
+        if not fetched_at or not dt.timedelta(minutes=-5)<=stamp-fetched_at<=MAX_AGE:raise ValueError('snapshot_evidence_age')
     return payload
 
 class NoAuthRedirect(urllib.request.HTTPRedirectHandler):
