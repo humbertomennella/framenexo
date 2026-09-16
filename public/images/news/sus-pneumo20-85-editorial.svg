@@ -1,19 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
-<title id="title">Ilustração editorial sobre vacinação pneumocócica no SUS</title>
-<desc id="desc">Composição abstrata com escudo, vias respiratórias estilizadas e pontos de proteção. Não representa paciente ou produto real.</desc>
-<rect width="1200" height="675" fill="#111816"/>
-<circle cx="910" cy="330" r="285" fill="#17352e"/>
-<path d="M830 168 C740 210 700 225 700 225v130c0 115 88 194 210 236 122-42 210-121 210-236V225s-40-15-130-57c-57-27-103-27-160 0Z" fill="#1e755f" opacity=".9"/>
-<path d="M910 234v208M806 338h208" stroke="#c7f0df" stroke-width="42" stroke-linecap="round"/>
-<g fill="none" stroke="#89d6bc" stroke-width="18" stroke-linecap="round">
-<path d="M306 225c-65 15-112 78-112 155 0 86 54 153 127 161 32 3 57-21 57-53V308c0-53-26-92-72-83Z"/>
-<path d="M498 225c65 15 112 78 112 155 0 86-54 153-127 161-32 3-57-21-57-53V308c0-53 26-92 72-83Z"/>
-<path d="M402 148v165"/>
-</g>
-<g fill="#a9e5d0" opacity=".9"><circle cx="126" cy="182" r="13"/><circle cx="165" cy="236" r="9"/><circle cx="120" cy="310" r="16"/><circle cx="656" cy="155" r="12"/><circle cx="604" cy="106" r="8"/></g>
-<g fill="#f4f7f5" font-family="Arial,Helvetica,sans-serif">
-<text x="72" y="92" font-size="24" font-weight="700" letter-spacing="4">APURANTE · SAÚDE</text>
-<text x="72" y="585" font-size="52" font-weight="800">PNEUMO 20 · 85+</text>
-<text x="72" y="626" font-size="22" opacity=".8">ILUSTRAÇÃO EDITORIAL · NÃO É FOTOGRAFIA</text>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+<title id="title">Vacinação Pneumo 20 no SUS</title>
+<desc id="desc">Ilustração editorial de vacinação de pessoa idosa em unidade pública de saúde. Cena representativa, não é fotografia de atendimento real.</desc>
+<image href="sus-pneumo-20-editorial-ai.jpg" x="0" y="0" width="640" height="360" preserveAspectRatio="xMidYMid slice"/>
 </svg>

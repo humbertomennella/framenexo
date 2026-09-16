@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "name": "APURANTE — direção de arte editorial",
+  "aspectRatio": "16:9",
+  "preferredOutput": {"width": 1200, "height": 675},
+  "direction": [
+    "Ilustração editorial específica para a pauta, com aparência realista e composição cinematográfica.",
+    "Iluminação natural ou dramática, profundidade e cenário coerente com o assunto; evitar cartões planos, ícones soltos e capas tipográficas genéricas quando houver geração de arte disponível.",
+    "Não inserir logotipos, marcas, textos inventados, documentos falsamente legíveis ou elementos que possam ser confundidos com prova factual.",
+    "Em política, Justiça, segurança e investigações, preferir composição institucional ou simbólica e não fabricar uma cena documental envolvendo pessoas reais.",
+    "A arte deve ser claramente identificada como ilustração editorial e nunca apresentada como fotografia do acontecimento."
+  ],
+  "mediaPriority": [
+    "imagem factual/licenciada adequada e rastreável",
+    "ilustração editorial original específica para a pauta",
+    "capa editorial vetorial de contingência"
+  ],
+  "credit": "Apurante Editorial · Ilustração editorial original, não é fotografia.",
+  "fallbackRule": "A indisponibilidade de uma arte elaborada não autoriza imagem de terceiros sem licença nem representação enganosa do fato.",
+  "referenceAssets": [
+    "/images/news/chuvas-vale-do-ribeira-editorial-ai.jpg",
+    "/images/news/sus-pneumo-20-editorial-ai.jpg",
+    "/images/news/move-brasil-editorial-ai.jpg",
+    "/images/news/stf-moraes-vorcaro-editorial-ai.jpg"
+  ]
+}

@@ -41,7 +41,7 @@ plus_html=(DIST/'mais'/'index.html').read_text();my_html=(DIST/'meu-apurante'/'i
 check('data-interest-selector' in plus_html,'APURANTE+ interest selector missing');check('noindex,follow' in my_html,'Meu APURANTE must be noindex')
 
 # Homepage contract: one obvious lead, visible focus, chronological latest stories,
-# elections, edition promise and a complete editorial directory. Hidden carousels are
+# elections, editorial process and a complete editorial directory. Hidden carousels are
 # deliberately not required: the public hierarchy must work without autoplay or JS.
 for marker,label in [
  ('class="lead-zone"','lead zone'),
@@ -49,10 +49,10 @@ for marker,label in [
  ('class="focus-rail"','focus rail'),
  ('latest-zone','latest stories'),
  ('class="elections-home"','elections block'),
- ('class="edition-promise"','edition promise'),
+ ('class="edition-promise"','editorial process'),
  ('data-home-sections','editorial sections')]:
  check(marker in home_html,f'Homepage {label} missing')
-check('Meta de vinte matérias verificadas' in home_html,'Homepage 20-article editorial target missing')
+check('Publicamos quando a apuração sustenta a matéria' in home_html,'Homepage realistic editorial process statement missing')
 check('data-pause' not in home_html and '>Pausar<' not in home_html and '>Reproduzir<' not in home_html,'Homepage must not depend on carousel play/pause controls')
 lead_match=re.search(r'<article class="lead-story">.*?</article>',home_html,re.S)
 focus_match=re.search(r'<aside class="focus-rail".*?</aside>',home_html,re.S)
