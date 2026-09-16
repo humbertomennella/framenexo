@@ -9,7 +9,7 @@
     "Moraes nega irregularidades; a discussão ocorre em meio a uma crise institucional dentro da própria Corte."
   ],
   "publishedAt": "2026-09-15T13:31:00Z",
-  "updatedAt": "2026-09-16T14:10:00Z",
+  "updatedAt": "2026-09-16T17:51:00Z",
   "category": "Política",
   "tags": [
     "Política",
@@ -18,8 +18,8 @@
     "Daniel Vorcaro",
     "Banco Master"
   ],
-  "image": "/images/news/stf-moraes-vorcaro-editorial.svg",
-  "imageAlt": "Ilustração editorial abstrata com colunas institucionais, documentos e conexões para a análise no STF. Não retrata pessoas, sede oficial ou material de investigação real.",
+  "image": "/images/news/stf-moraes-vorcaro-editorial-ai.jpg",
+  "imageAlt": "Ilustração editorial institucional sobre análise no STF, com arquitetura jurídica e elementos simbólicos de documentos e investigação. Não retrata pessoas nem reproduz material real do processo.",
   "imageCredit": "Apurante Editorial · Ilustração editorial original, não é fotografia.",
   "status": "published",
   "confidence": "ALTA CONFIANÇA",
