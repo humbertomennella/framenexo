@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Ilustração editorial sobre análise institucional no STF</title>
+<desc id="desc">Composição abstrata com colunas, documentos e conexões. Não retrata pessoas, sede oficial ou material de investigação real.</desc>
+<rect width="1200" height="675" fill="#151217"/>
+<circle cx="950" cy="145" r="240" fill="#30203a"/>
+<path d="M190 282 475 135l285 147Z" fill="#cab8df"/>
+<rect x="224" y="302" width="502" height="34" fill="#cab8df"/>
+<g fill="#9f84bd"><rect x="255" y="336" width="58" height="184"/><rect x="365" y="336" width="58" height="184"/><rect x="475" y="336" width="58" height="184"/><rect x="585" y="336" width="58" height="184"/></g>
+<rect x="210" y="520" width="530" height="34" fill="#cab8df"/>
+<g fill="none" stroke="#d2a8ff" stroke-width="8" opacity=".85">
+<path d="M810 250h230v150H810z"/><path d="M845 290h160M845 328h120M845 366h142"/>
+<path d="M760 425c80-55 188-37 268 33" stroke-dasharray="15 16"/>
+</g>
+<circle cx="760" cy="425" r="14" fill="#f0d8ff"/><circle cx="1028" cy="458" r="14" fill="#f0d8ff"/>
+<g fill="#f4f7f5" font-family="Arial,Helvetica,sans-serif">
+<text x="72" y="92" font-size="24" font-weight="700" letter-spacing="4">APURANTE · POLÍTICA</text>
+<text x="72" y="585" font-size="52" font-weight="800">ANÁLISE NO STF</text>
+<text x="72" y="626" font-size="22" opacity=".8">ILUSTRAÇÃO EDITORIAL · NÃO É FOTOGRAFIA</text>
+</g>
+</svg>

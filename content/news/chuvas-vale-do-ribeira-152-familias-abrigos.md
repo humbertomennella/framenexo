@@ -9,7 +9,7 @@
     "Cemaden aponta risco hidrológico elevado em áreas do Sudeste com chuva persistente."
   ],
   "publishedAt": "2026-09-15T13:34:00Z",
-  "updatedAt": "2026-09-15T13:34:00Z",
+  "updatedAt": "2026-09-16T14:10:00Z",
   "category": "Meio Ambiente",
   "tags": [
     "Meio Ambiente",
@@ -18,9 +18,9 @@
     "Defesa Civil",
     "São Paulo"
   ],
-  "image": "/og.png",
-  "imageAlt": "Capa editorial tipográfica do APURANTE para as chuvas no Vale do Ribeira.",
-  "imageCredit": "Apurante Editorial · Capa editorial original.",
+  "image": "/images/news/chuvas-vale-do-ribeira-editorial.svg",
+  "imageAlt": "Ilustração editorial abstrata de chuva intensa, rio elevado e casas no Vale do Ribeira. Não é fotografia do acontecimento.",
+  "imageCredit": "Apurante Editorial · Ilustração editorial original, não é fotografia.",
   "status": "published",
   "confidence": "ALTA CONFIANÇA",
   "relevance": 92,
