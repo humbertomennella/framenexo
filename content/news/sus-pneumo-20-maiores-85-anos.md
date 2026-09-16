@@ -9,7 +9,7 @@
     "O esquema varia conforme o histórico de vacinação pneumocócica de cada pessoa."
   ],
   "publishedAt": "2026-09-15T13:33:00Z",
-  "updatedAt": "2026-09-16T14:10:00Z",
+  "updatedAt": "2026-09-16T17:51:00Z",
   "category": "Saúde",
   "tags": [
     "Saúde",
@@ -18,8 +18,8 @@
     "Pneumo 20",
     "idosos"
   ],
-  "image": "/images/news/sus-pneumo20-85-editorial.svg",
-  "imageAlt": "Ilustração editorial abstrata de proteção respiratória e vacinação pneumocócica para pessoas com 85 anos ou mais. Não representa paciente, produto ou aplicação real.",
+  "image": "/images/news/sus-pneumo-20-editorial-ai.jpg",
+  "imageAlt": "Ilustração editorial de vacinação pneumocócica em pessoa idosa em ambiente de saúde. Cena representativa, não é fotografia de paciente ou aplicação real.",
   "imageCredit": "Apurante Editorial · Ilustração editorial original, não é fotografia.",
   "status": "published",
   "confidence": "CONFIRMADO",
