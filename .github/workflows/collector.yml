@@ -7,9 +7,11 @@ on:
       - 'scripts/run_editorial.py'
       - 'scripts/publish_edition.py'
       - 'scripts/editorial_selection.py'
+      - 'scripts/evidence_anchor.py'
       - 'scripts/commit_changes.py'
       - 'data/edition-schedule.json'
       - 'tests/test_editions.py'
+      - 'tests/test_evidence_anchor.py'
   schedule:
     - cron: '0 1,11,16,21 * * *'
     - cron: '27 1,11,16,21 * * *'
