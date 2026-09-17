@@ -1,26 +1,30 @@
 {
-  "version": 1,
+  "version": 2,
   "name": "APURANTE — direção de arte editorial",
   "aspectRatio": "16:9",
-  "preferredOutput": {"width": 1200, "height": 675},
+  "preferredOutput": {"width": 1200, "height": 675, "format": "webp"},
   "direction": [
     "Ilustração editorial específica para a pauta, com aparência realista e composição cinematográfica.",
-    "Iluminação natural ou dramática, profundidade e cenário coerente com o assunto; evitar cartões planos, ícones soltos e capas tipográficas genéricas quando houver geração de arte disponível.",
+    "Iluminação natural ou dramática, profundidade e cenário coerente com o assunto; evitar cartões planos, ícones soltos e capas tipográficas genéricas quando houver arte rica disponível.",
+    "Priorizar imagens editoriais em WebP com acabamento fotográfico ou cinematográfico, como o padrão visual já usado no acervo do APURANTE.",
     "Não inserir logotipos, marcas, textos inventados, documentos falsamente legíveis ou elementos que possam ser confundidos com prova factual.",
     "Em política, Justiça, segurança e investigações, preferir composição institucional ou simbólica e não fabricar uma cena documental envolvendo pessoas reais.",
     "A arte deve ser claramente identificada como ilustração editorial e nunca apresentada como fotografia do acontecimento."
   ],
   "mediaPriority": [
     "imagem factual/licenciada adequada e rastreável",
-    "ilustração editorial original específica para a pauta",
-    "capa editorial vetorial de contingência"
+    "ilustração editorial rica em WebP específica para a pauta",
+    "imagem editorial temática do acervo, com crédito transparente",
+    "capa vetorial de contingência apenas como último recurso"
   ],
   "credit": "Apurante Editorial · Ilustração editorial original, não é fotografia.",
-  "fallbackRule": "A indisponibilidade de uma arte elaborada não autoriza imagem de terceiros sem licença nem representação enganosa do fato.",
+  "fallbackRule": "A indisponibilidade de uma arte elaborada não autoriza imagem de terceiros sem licença nem representação enganosa do fato. SVG vetorial simples deve ser usado apenas como contingência temporária.",
   "referenceAssets": [
-    "/images/news/chuvas-vale-do-ribeira-editorial-ai.jpg",
-    "/images/news/sus-pneumo-20-editorial-ai.jpg",
-    "/images/news/move-brasil-editorial-ai.jpg",
-    "/images/news/stf-moraes-vorcaro-editorial-ai.jpg"
+    "/images/news/temporais-sao-paulo-alerta-editorial.webp",
+    "/images/news/vacina-meningococica-seis-semanas-editorial.webp",
+    "/images/news/brasil-tem-2-milhoes-de-pessoas-que-trabalham-por-meio-de-aplicativos.webp",
+    "/images/news/stf-pf-crise-institucional-editorial.webp",
+    "/images/news/cinema-brasileiro-finalistas-editorial.webp",
+    "/images/news/selecao-renovacao-2030-editorial.webp"
   ]
 }
