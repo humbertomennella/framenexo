@@ -11,7 +11,29 @@ export interface Article {
 const modules = import.meta.glob('../../content/news/*.md', {eager:true}) as Record<string,any>;
 const stableHash=(value:string)=>{let hash=2166136261;for(let i=0;i<value.length;i++){hash^=value.charCodeAt(i);hash=Math.imul(hash,16777619)}return (hash>>>0).toString(36).padStart(7,'0').slice(0,7)};
 const legacyArticleId=(a:any)=>`apr-${String(a.publishedAt||'legacy').slice(0,10)}-${stableHash(String(a.eventKey||a.slug||a.title||'article'))}`;
-export const articles:Article[] = Object.values(modules).map(m=>{const raw={...m.frontmatter,Content:m.Content,body:m.rawContent()};return {...raw,articleId:raw.articleId||legacyArticleId(raw)}}).filter(a=>a.status==='published').sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt) || b.relevance-a.relevance);
+const editorialImageOverrides:Record<string,{image:string;imageAlt:string;imageCredit:string}>={
+ 'chuvas-vale-do-ribeira-152-familias-abrigos':{
+  image:'/images/news/temporais-sao-paulo-alerta-editorial.webp',
+  imageAlt:'Ilustração editorial temática de temporais, chuva intensa e alagamentos. Não é fotografia do episódio no Vale do Ribeira.',
+  imageCredit:'Apurante Editorial · Imagem editorial temática do acervo visual; não é fotografia do acontecimento.'
+ },
+ 'sus-pneumo-20-maiores-85-anos':{
+  image:'/images/news/vacina-meningococica-seis-semanas-editorial.webp',
+  imageAlt:'Ilustração editorial temática de vacinação e proteção em saúde. Não representa paciente, dose ou aplicação real da Pneumo 20.',
+  imageCredit:'Apurante Editorial · Imagem editorial temática do acervo visual; não é fotografia do acontecimento.'
+ },
+ 'move-brasil-r-30-bilhoes-financiamento-veiculos':{
+  image:'/images/news/brasil-tem-2-milhoes-de-pessoas-que-trabalham-por-meio-de-aplicativos.webp',
+  imageAlt:'Ilustração editorial temática de trabalhadores por aplicativo e mobilidade urbana, usada para representar o público do Move Brasil. Não retrata beneficiário real.',
+  imageCredit:'Apurante Editorial · Imagem editorial temática do acervo visual; não é fotografia do acontecimento.'
+ },
+ 'stf-analisa-abertura-investigacao-moraes-vorcaro':{
+  image:'/images/news/stf-pf-crise-institucional-editorial.webp',
+  imageAlt:'Ilustração editorial institucional sobre STF, investigação e tensão entre instituições. Não retrata pessoas nem material real da investigação.',
+  imageCredit:'Apurante Editorial · Imagem editorial temática do acervo visual; não é fotografia do acontecimento.'
+ }
+};
+export const articles:Article[] = Object.values(modules).map(m=>{const raw={...m.frontmatter,Content:m.Content,body:m.rawContent()};const override=editorialImageOverrides[raw.slug];return {...raw,articleId:raw.articleId||legacyArticleId(raw),...(override||{})}}).filter(a=>a.status==='published').sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt) || b.relevance-a.relevance);
 export const articleUrl = (a:Article) => href(`noticias/${a.slug}/`);
 const genericEditorialImages = new Set(['/og.png','/images/cathedral.webp']);
 export const usesEditorialCover = (a:Article) => genericEditorialImages.has(a.image);
