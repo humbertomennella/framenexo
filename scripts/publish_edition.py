@@ -31,7 +31,10 @@ def verification_queue(groups,publish_limit,category_limit):
  """Build a deeper verification queue; publication ceilings are enforced on successes, not attempts."""
  if publish_limit<=0:return []
  attempt_total=max(publish_limit,min(len(groups),max(16,publish_limit*3)))
- attempt_per_category=max(category_limit,min(10,category_limit*5))
+ # Verification attempts must not inherit the publication ceiling. If the first
+ # candidates in a busy desk fail evidence checks, continue through its reserve
+ # instead of ending the edition with valid groups still waiting behind them.
+ attempt_per_category=attempt_total
  ranked=sorted(groups,key=verification_priority,reverse=True)
  return balanced_groups(ranked,max_total=attempt_total,max_per_category=attempt_per_category)
 
