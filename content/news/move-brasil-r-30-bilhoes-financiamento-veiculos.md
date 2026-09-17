@@ -9,7 +9,7 @@
     "Motoristas de aplicativo precisam ter ao menos seis meses de cadastro ativo para acessar o programa."
   ],
   "publishedAt": "2026-09-15T13:32:00Z",
-  "updatedAt": "2026-09-16T17:51:00Z",
+  "updatedAt": "2026-09-16T14:10:00Z",
   "category": "Economia",
   "tags": [
     "Economia",
@@ -18,8 +18,8 @@
     "motoristas de aplicativo",
     "crédito"
   ],
-  "image": "/images/news/move-brasil-editorial-ai.jpg",
-  "imageAlt": "Ilustração editorial sobre financiamento de veículos no Move Brasil, com veículo genérico e elementos visuais de crédito. Não é fotografia nem representa marca ou modelo real.",
+  "image": "/images/news/move-brasil-financiamento-editorial.svg",
+  "imageAlt": "Ilustração editorial abstrata de estrada, veículo genérico e documento de financiamento para o Move Brasil. Não é fotografia nem representa marca ou modelo real.",
   "imageCredit": "Apurante Editorial · Ilustração editorial original, não é fotografia.",
   "status": "published",
   "confidence": "CONFIRMADO",

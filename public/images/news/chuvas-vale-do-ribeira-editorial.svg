@@ -1,5 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
-<title id="title">Chuvas no Vale do Ribeira</title>
-<desc id="desc">Ilustração editorial de famílias chegando a um abrigo durante enchentes. Cena representativa, não é fotografia do acontecimento.</desc>
-<image href="chuvas-vale-do-ribeira-editorial-ai.jpg" x="0" y="0" width="640" height="360" preserveAspectRatio="xMidYMid slice"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Ilustração editorial sobre chuvas no Vale do Ribeira</title>
+<desc id="desc">Composição abstrata com chuva, relevo, rio elevado e casas estilizadas. Não é fotografia.</desc>
+<rect width="1200" height="675" fill="#101719"/>
+<circle cx="930" cy="128" r="210" fill="#18383b"/>
+<path d="M0 420 C170 350 300 380 430 430 C570 485 700 470 830 414 C980 350 1090 360 1200 405 V675 H0Z" fill="#17302d"/>
+<path d="M0 500 C180 450 350 545 515 500 C675 455 850 420 1200 510 V675 H0Z" fill="#1f6f73"/>
+<path d="M0 555 C220 500 390 610 610 550 C820 495 1010 525 1200 575 V675 H0Z" fill="#4faab0"/>
+<g fill="#e8f1ee" opacity=".92">
+<path d="M190 386 l65-48 65 48v68H190z"/><rect x="212" y="407" width="28" height="47" fill="#101719"/><rect x="266" y="402" width="28" height="26" fill="#9ddbd6"/>
+<path d="M365 405 l54-40 54 40v57H365z"/><rect x="385" y="422" width="25" height="40" fill="#101719"/>
+</g>
+<g stroke="#9ddbd6" stroke-width="8" stroke-linecap="round" opacity=".75">
+<path d="M120 110l-35 78"/><path d="M245 70l-35 78"/><path d="M390 125l-35 78"/><path d="M545 76l-35 78"/><path d="M690 128l-35 78"/><path d="M835 78l-35 78"/><path d="M1010 112l-35 78"/>
+</g>
+<g fill="#f4f7f5" font-family="Arial,Helvetica,sans-serif">
+<text x="72" y="92" font-size="24" font-weight="700" letter-spacing="4">APURANTE · MEIO AMBIENTE</text>
+<text x="72" y="585" font-size="52" font-weight="800">VALE DO RIBEIRA</text>
+<text x="72" y="626" font-size="22" opacity=".8">ILUSTRAÇÃO EDITORIAL · NÃO É FOTOGRAFIA</text>
+</g>
 </svg>
