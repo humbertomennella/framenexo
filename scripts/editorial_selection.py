@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import re
 import pipeline as p
+import evidence_anchor
 
 
 def eligible(items, sources):
@@ -133,7 +134,7 @@ def verify(group,sources,cache=None):
         match=next(((c,body) for c,body in routes if c['id']==route.get('id')),None)
         if not match:raise ValueError('unknown_evidence_route')
         c,body=match;quote=route.get('quote','');org=route.get('originalOrganization','')
-        if not isinstance(quote,str) or not 5<=len(quote.split())<=20 or quote not in body or not re.fullmatch(r'[a-z0-9-]{2,80}',org):raise ValueError('invalid_shared_fact_anchor')
+        if not isinstance(quote,str) or not 5<=len(quote.split())<=20 or not evidence_anchor.matches(body,quote) or not re.fullmatch(r'[a-z0-9-]{2,80}',org):raise ValueError('invalid_shared_fact_anchor')
         known={p.source_organization(x,source) for source in sources.values() for x in [dict(sourceId=source['id'])]} | {'reuters','associated-press','afp','agencia-brasil'}
         if org not in known or (c.get('originalOrganization') and org!=c['originalOrganization']):raise ValueError('unknown_or_conflicting_provenance')
         c=dict(c,originalOrganization=org)
