@@ -9,14 +9,14 @@ def _words(value):
 
 
 def matches(body, quote):
-    """Accept formatting-only differences when the same word sequence exists in source text."""
+    """Accept formatting-only differences when the same 5-20 word sequence exists in source text."""
     if not isinstance(body, str) or not isinstance(quote, str):
         return False
-    if quote in body:
-        return True
     quote_words = _words(quote)
     if not 5 <= len(quote_words) <= 20:
         return False
+    if quote in body:
+        return True
     body_words = _words(body)
     size = len(quote_words)
     return any(body_words[index:index + size] == quote_words for index in range(len(body_words) - size + 1))
