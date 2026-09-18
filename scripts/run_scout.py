@@ -119,7 +119,11 @@ def main() -> None:
             payload = snapshots.validate(document)
             seed = payload["candidates"]
             snapshots.restore_evidence(payload)
-        elif restore.get("status") == "unavailable" and not restore.get("errors"):
+        elif restore.get("status") == "unavailable":
+            # Se o transporte do artifact falhar, ainda podemos fazer uma coleta
+            # nova usando apenas o último pool versionado como semente. Nenhuma
+            # pauta é publicada por esse fallback: ela continua sujeita a todas
+            # as verificações, corroboração independente e validação editorial.
             seed = p.read("data/candidates.json", [])
         else:
             raise RuntimeError("snapshot_restore_required")
