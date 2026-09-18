@@ -52,6 +52,8 @@ def run(force=False,dry_run=False,limit=30):
   snapshot=scout_snapshot.consume()
  except (ValueError,TypeError,KeyError,RuntimeError) as error:
   p.log('edition_held',reason='no_valid_scout_snapshot',code=str(error),restore=p.read('.cache/scout/restore.json',{}))
+  if os.environ.get('GITHUB_ACTIONS')=='true':
+   raise RuntimeError('fresh_snapshot_unavailable') from error
   return {'publication':'held_no_valid_scout_snapshot'}
  observed=snapshot['state']
  result=dict(sourcesOK=observed['sourcesReached'],collected=observed.get('newCandidates',0),errors=observed.get('sourceErrors',[]),snapshotRunId=snapshot['runId'],snapshotCompletedAt=snapshot['completedAt'])
