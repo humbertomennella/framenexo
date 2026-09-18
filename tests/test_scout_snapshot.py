@@ -112,14 +112,28 @@ class Snapshots(unittest.TestCase):
         with patch.object(s,'api',side_effect=api):result=s.restore(required=True)
         self.assertEqual(result['runId'],'101');self.assertEqual(len(result['errors']),1)
 
-    def test_missing_snapshot_bootstraps_but_api_outage_does_not_reset_pool(self):
+    def test_missing_snapshot_bootstraps_and_api_outage_keeps_pool_collecting(self):
         p.write('data/candidates.json',[self.candidate()])
         with patch.object(s,'api',return_value={'workflow_runs':[]}):s.restore()
         with patch.object(p,'collect',return_value={'sourcesOK':1,'collected':0,'errors':[]}):run_scout.main()
         self.assertEqual(len(p.read('.cache/scout/snapshot.json',{})['payload']['candidates']),1)
         with patch.object(s,'api',side_effect=urllib.error.URLError('offline')):s.restore()
-        with patch.object(p,'collect') as collect,self.assertRaisesRegex(RuntimeError,'restore_required'):run_scout.main()
-        collect.assert_not_called()
+        with patch.object(p,'collect',return_value={'sourcesOK':1,'collected':0,'errors':[]}) as collect:
+            run_scout.main()
+        collect.assert_called_once()
+        self.assertEqual(len(p.read('.cache/scout/snapshot.json',{})['payload']['candidates']),1)
+
+    def test_github_closing_refreshes_snapshot_before_due_check(self):
+        doc=self.document()
+        def refresh():
+            p.write('.cache/scout/snapshot.json',doc)
+        with patch.dict(os.environ,{'GITHUB_ACTIONS':'true'}), \
+             patch.object(run_editorial.run_scout,'main',side_effect=refresh) as scout, \
+             patch.object(run_editorial.schedule,'is_due',return_value=False):
+            result=run_editorial.run()
+        scout.assert_called_once()
+        self.assertEqual(result['publication'],'not_due')
+        self.assertEqual(p.read('.cache/scout/input.json',{})['sha256'],doc['sha256'])
 
     def test_scout_preserves_all_durable_files_on_partial_and_total_failure(self):
         p.write('data/candidates.json',[self.candidate()])
