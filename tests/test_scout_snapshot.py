@@ -185,7 +185,7 @@ class Snapshots(unittest.TestCase):
         draft={'title':'Expansão anunciada oficialmente','description':'Informações verificadas do anúncio.', 'paragraphs':['Fato aprovado.','Detalhe aprovado.'], 'eventKey':'fixture-expansion','tags':['Tecnologia'],'facts':[{'claim':'Anúncio','quote':'announcement'}]}
         response=MagicMock();response.__enter__.return_value.status=200
         server=MagicMock();server.poll.return_value=None
-        with patch.object(p,'collect') as collect,patch.object(p,'evidence',return_value='Official announcement.'),patch.object(p,'generate',return_value=(draft,{'supported':True})),patch.object(run_editorial.editorial_selection,'verify',side_effect=lambda group,sources,cache:(group,'Official announcement.')),patch.object(run_editorial.local_model,'command',return_value=(['fixture'],{})),patch.object(run_editorial.subprocess,'Popen',return_value=server),patch.object(run_editorial.urllib.request,'build_opener') as opener:
+        with patch.dict(os.environ,{'GITHUB_ACTIONS':'false'}),patch.object(p,'collect') as collect,patch.object(p,'evidence',return_value='Official announcement.'),patch.object(p,'generate',return_value=(draft,{'supported':True})),patch.object(run_editorial.editorial_selection,'verify',side_effect=lambda group,sources,cache:(group,'Official announcement.')),patch.object(run_editorial.local_model,'command',return_value=(['fixture'],{})),patch.object(run_editorial.subprocess,'Popen',return_value=server),patch.object(run_editorial.urllib.request,'build_opener') as opener:
             opener.return_value.open.return_value=response
             self.assertEqual(run_editorial.run(force=True)['published'],1)
             files=list((self.root/'content/news').glob('*.md'));original=files[0].read_bytes()
