@@ -3,6 +3,7 @@ import argparse,fcntl,json,os,subprocess,time,urllib.request
 import pipeline as p
 import edition_schedule as schedule
 import scout_snapshot
+import run_scout
 import editorial_selection
 import publish_edition
 import local_model
@@ -40,8 +41,16 @@ p.WRITER+='''\nSTRICT PUBLICATION SHAPE: title must contain 15-130 characters an
 def run(force=False,dry_run=False,limit=30):
  state=p.read('data/publishing-state.json',{})
  if state.get('paused'):return {'paused':True}
- try:snapshot=scout_snapshot.consume()
- except (ValueError,TypeError,KeyError) as error:
+ try:
+  if os.environ.get('GITHUB_ACTIONS')=='true':
+   # Cada fechamento renova a coleta antes de publicar. O artifact anterior serve
+   # apenas como semente; a edição usa um snapshot recém-coletado e validado.
+   run_scout.main()
+   document=p.read('.cache/scout/snapshot.json',{})
+   scout_snapshot.validate(document)
+   p.write('.cache/scout/input.json',document)
+  snapshot=scout_snapshot.consume()
+ except (ValueError,TypeError,KeyError,RuntimeError) as error:
   p.log('edition_held',reason='no_valid_scout_snapshot',code=str(error),restore=p.read('.cache/scout/restore.json',{}))
   return {'publication':'held_no_valid_scout_snapshot'}
  observed=snapshot['state']
