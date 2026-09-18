@@ -162,6 +162,12 @@ class Snapshots(unittest.TestCase):
             self.assertEqual(run_editorial.run(force=True)['publication'],'held_no_valid_scout_snapshot')
         collect.assert_not_called();model.assert_not_called()
 
+    def test_github_closing_fails_loudly_when_fresh_snapshot_is_unavailable(self):
+        with patch.dict(os.environ,{'GITHUB_ACTIONS':'true'}), \
+             patch.object(run_editorial.run_scout,'main',side_effect=RuntimeError('collection_failed')):
+            with self.assertRaisesRegex(RuntimeError,'fresh_snapshot_unavailable'):
+                run_editorial.run(force=True)
+
     def test_consumer_keeps_approved_media_and_editorial_holds(self):
         p.write('data/candidates.json',[self.candidate(status='needs_review',media={'path':'/approved.webp'})])
         p.write('.cache/scout/input.json',self.document())
