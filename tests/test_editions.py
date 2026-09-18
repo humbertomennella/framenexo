@@ -119,6 +119,7 @@ class WorkflowContract(unittest.TestCase):
   self.assertIn('run_scout.main()',text)
   self.assertIn("scout_snapshot.validate(document)",text)
   self.assertIn("p.write('.cache/scout/input.json',document)",text)
+  self.assertIn("os.environ.get('GITHUB_ACTIONS')=='true'",text)
   self.assertIn("raise RuntimeError('fresh_snapshot_unavailable')",text)
 
 if __name__=='__main__':unittest.main()
