@@ -158,7 +158,9 @@ class Snapshots(unittest.TestCase):
             with self.assertRaises(BlockingIOError):run_scout.main()
 
     def test_editorial_without_snapshot_holds_before_collection_or_model(self):
-        with patch.object(p,'collect') as collect,patch.object(run_editorial.local_model,'command') as model:
+        with patch.dict(os.environ,{'GITHUB_ACTIONS':'false'}), \
+             patch.object(p,'collect') as collect, \
+             patch.object(run_editorial.local_model,'command') as model:
             self.assertEqual(run_editorial.run(force=True)['publication'],'held_no_valid_scout_snapshot')
         collect.assert_not_called();model.assert_not_called()
 
