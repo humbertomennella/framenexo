@@ -7,6 +7,7 @@ import publish_edition
 
 UTC=dt.timezone.utc
 ROOT=Path(__file__).resolve().parents[1]
+# This suite also acts as a deployment contract for the recovered automatic cycle.
 
 class EditionClock(unittest.TestCase):
  def test_schedule_is_brazil_time(self):
