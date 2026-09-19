@@ -13,7 +13,7 @@ on:
       - 'tests/test_editions.py'
       - 'tests/test_evidence_anchor.py'
   schedule:
-    - cron: '0 1,11,16,21 * * *'
+    - cron: '7 1,11,16,21 * * *'
     - cron: '27 1,11,16,21 * * *'
   workflow_dispatch:
     inputs:
