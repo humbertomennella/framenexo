@@ -1,4 +1,5 @@
 """Frequent, publication-free source watcher for the Apurante newsroom."""
+# Operational trigger: keep source monitoring active after editorial recovery.
 from __future__ import annotations
 
 import datetime as dt
