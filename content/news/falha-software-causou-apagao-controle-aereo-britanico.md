@@ -93,3 +93,7 @@ A secretária britânica de Transportes, Heidi Alexander, determinou uma revisã
 Companhias aéreas também pressionam a operadora por explicações e compensações. Essas disputas comerciais, no entanto, são separadas do diagnóstico técnico já apresentado.
 
 O dado mais sólido neste momento é que a interrupção foi provocada por um defeito específico de software durante o processamento de dados de voo. A apuração mais ampla agora terá de esclarecer por que uma falha localizada conseguiu produzir impacto nacional e quais barreiras técnicas serão adicionadas para impedir uma repetição.
+
+Em infraestrutura crítica, esse tipo de incidente costuma ser analisado também pela capacidade de isolamento da falha. Mesmo quando um componente específico apresenta defeito, a arquitetura deve limitar a propagação do problema e permitir recuperação previsível sem comprometer a segurança operacional.
+
+A revisão independente deverá mostrar se o ponto fraco estava apenas no código que falhou ou também nas camadas de redundância e recuperação. Essa distinção será decisiva para entender se a correção permanente exige apenas uma alteração de software ou mudanças mais amplas na arquitetura do sistema.
