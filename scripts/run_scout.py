@@ -78,7 +78,7 @@ def backfill_feed_evidence(result: dict) -> int:
     restored = 0
     for source in sources:
         try:
-            rows = p.parse_feed(p.fetch(source["feed"], source["hosts"]))
+            rows = p.source_entries(source)
         except Exception as error:
             p.log("evidence_backfill_failed", source=source["id"], code=type(error).__name__)
             continue

@@ -123,15 +123,14 @@ class Snapshots(unittest.TestCase):
         collect.assert_called_once()
         self.assertEqual(len(p.read('.cache/scout/snapshot.json',{})['payload']['candidates']),1)
 
-    def test_github_closing_refreshes_snapshot_before_due_check(self):
+    def test_github_closing_consumes_snapshot_without_collecting(self):
         doc=self.document()
-        def refresh():
-            p.write('.cache/scout/snapshot.json',doc)
+        p.write('.cache/scout/input.json',doc)
         with patch.dict(os.environ,{'GITHUB_ACTIONS':'true'}), \
-             patch.object(run_editorial.run_scout,'main',side_effect=refresh) as scout, \
+             patch.object(p,'collect') as collect, \
              patch.object(run_editorial.schedule,'is_due',return_value=False):
             result=run_editorial.run()
-        scout.assert_called_once()
+        collect.assert_not_called()
         self.assertEqual(result['publication'],'not_due')
         self.assertEqual(p.read('.cache/scout/input.json',{})['sha256'],doc['sha256'])
 
@@ -164,11 +163,12 @@ class Snapshots(unittest.TestCase):
             self.assertEqual(run_editorial.run(force=True)['publication'],'held_no_valid_scout_snapshot')
         collect.assert_not_called();model.assert_not_called()
 
-    def test_github_closing_fails_loudly_when_fresh_snapshot_is_unavailable(self):
+    def test_github_closing_fails_loudly_when_completed_snapshot_is_unavailable(self):
         with patch.dict(os.environ,{'GITHUB_ACTIONS':'true'}), \
-             patch.object(run_editorial.run_scout,'main',side_effect=RuntimeError('collection_failed')):
-            with self.assertRaisesRegex(RuntimeError,'fresh_snapshot_unavailable'):
+             patch.object(p,'collect') as collect:
+            with self.assertRaisesRegex(RuntimeError,'completed_scout_snapshot_unavailable'):
                 run_editorial.run(force=True)
+            collect.assert_not_called()
 
     def test_consumer_keeps_approved_media_and_editorial_holds(self):
         p.write('data/candidates.json',[self.candidate(status='needs_review',media={'path':'/approved.webp'})])
@@ -205,7 +205,7 @@ class WorkflowIsolation(unittest.TestCase):
         self.assertIn('group: apurante-scout-snapshot',text);self.assertIn('cancel-in-progress: false',text)
         self.assertIn('actions/upload-artifact@',text)
         collector=(ROOT/'.github/workflows/collector.yml').read_text()
-        self.assertIn("'0 1,11,16,21 * * *'",collector)
+        self.assertIn("'7 1,11,16,21 * * *'",collector)
         self.assertIn("'27 1,11,16,21 * * *'",collector)
         self.assertNotIn("'7 * * * *'",collector)
         self.assertNotIn("'27 * * * *'",collector)

@@ -3,7 +3,6 @@ import argparse,fcntl,json,os,subprocess,time,urllib.request
 import pipeline as p
 import edition_schedule as schedule
 import scout_snapshot
-import run_scout
 import editorial_selection
 import publish_edition
 import local_model
@@ -42,18 +41,11 @@ def run(force=False,dry_run=False,limit=30):
  state=p.read('data/publishing-state.json',{})
  if state.get('paused'):return {'paused':True}
  try:
-  if os.environ.get('GITHUB_ACTIONS')=='true':
-   # Cada fechamento renova a coleta antes de publicar. O artifact anterior serve
-   # apenas como semente; a edição usa um snapshot recém-coletado e validado.
-   run_scout.main()
-   document=p.read('.cache/scout/snapshot.json',{})
-   scout_snapshot.validate(document)
-   p.write('.cache/scout/input.json',document)
   snapshot=scout_snapshot.consume()
  except (ValueError,TypeError,KeyError,RuntimeError) as error:
   p.log('edition_held',reason='no_valid_scout_snapshot',code=str(error),restore=p.read('.cache/scout/restore.json',{}))
   if os.environ.get('GITHUB_ACTIONS')=='true':
-   raise RuntimeError('fresh_snapshot_unavailable') from error
+   raise RuntimeError('completed_scout_snapshot_unavailable') from error
   return {'publication':'held_no_valid_scout_snapshot'}
  observed=snapshot['state']
  result=dict(sourcesOK=observed['sourcesReached'],collected=observed.get('newCandidates',0),errors=observed.get('sourceErrors',[]),snapshotRunId=snapshot['runId'],snapshotCompletedAt=snapshot['completedAt'])

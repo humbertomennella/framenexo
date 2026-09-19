@@ -105,7 +105,7 @@ class MediaFallback(unittest.TestCase):
 class WorkflowContract(unittest.TestCase):
  def test_regular_publisher_has_primary_and_recovery_runs(self):
   text=(ROOT/'.github/workflows/collector.yml').read_text()
-  self.assertIn("cron: '0 1,11,16,21 * * *'",text)
+  self.assertIn("cron: '7 1,11,16,21 * * *'",text)
   self.assertIn("cron: '27 1,11,16,21 * * *'",text)
   self.assertNotIn("cron: '7 * * * *'",text)
   self.assertNotIn("cron: '27 * * * *'",text)
@@ -115,12 +115,11 @@ class WorkflowContract(unittest.TestCase):
   self.assertIn("cron: '*/15 * * * *'",text)
   self.assertIn('Observar fontes sem publicar',text)
 
- def test_closing_refreshes_and_validates_snapshot_before_editing(self):
+ def test_closing_only_consumes_completed_snapshot(self):
   text=(ROOT/'scripts/run_editorial.py').read_text()
-  self.assertIn('run_scout.main()',text)
-  self.assertIn("scout_snapshot.validate(document)",text)
-  self.assertIn("p.write('.cache/scout/input.json',document)",text)
+  self.assertNotIn('run_scout.main()',text)
+  self.assertIn('scout_snapshot.consume()',text)
   self.assertIn("os.environ.get('GITHUB_ACTIONS')=='true'",text)
-  self.assertIn("raise RuntimeError('fresh_snapshot_unavailable')",text)
+  self.assertIn("raise RuntimeError('completed_scout_snapshot_unavailable')",text)
 
 if __name__=='__main__':unittest.main()

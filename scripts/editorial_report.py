@@ -14,6 +14,9 @@ def report(root=Path('.')):
     result={'runId':run,'attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),
         'pipelineOutcome':os.environ.get('PIPELINE_OUTCOME'), 'operation':state,
         'snapshotRestore':read('.cache/scout/restore.json')}
+    events=read('data/editorial-log.json')
+    started=state.get('startedAt','9999')
+    result['diagnostics']=[row for row in events if isinstance(row,dict) and row.get('at','')>=started] if isinstance(events,list) else []
     path=root/'.cache/editorial-report.json';path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
     if summary:=os.environ.get('GITHUB_STEP_SUMMARY'):

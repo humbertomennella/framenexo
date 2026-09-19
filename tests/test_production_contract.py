@@ -21,7 +21,7 @@ def published_metadata():
 class ProductionContract(unittest.TestCase):
     def test_failed_editorial_pipeline_cannot_validate_or_commit(self):
         workflow=(ROOT/'.github/workflows/collector.yml').read_text()
-        self.assertIn("- cron: '0 1,11,16,21 * * *'",workflow)
+        self.assertIn("- cron: '7 1,11,16,21 * * *'",workflow)
         self.assertIn("- cron: '27 1,11,16,21 * * *'",workflow)
         self.assertNotIn("- cron: '7 * * * *'",workflow)
         self.assertNotIn("- cron: '27 * * * *'",workflow)

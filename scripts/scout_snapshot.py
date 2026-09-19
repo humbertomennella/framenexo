@@ -17,12 +17,15 @@ def digest(payload):
 def prune(items, at=None):
     at=at or p.now(); kept={}
     for item in items:
+        if not isinstance(item,dict) or not isinstance(item.get('url'),str):continue
         stamp=p.date(item.get('publishedAt'))
         if not stamp or not at-dt.timedelta(days=7)<=stamp<=at+dt.timedelta(minutes=5):continue
         if item.get('status') in ('expired','published'):continue
-        row=dict(item);row['url']=p.canonical_url(row['url'])
+        try:row=dict(item);row['url']=p.canonical_url(row['url'])
+        except ValueError:continue
+        if not row['url'].startswith('https://'):continue
         kept.setdefault(row['url'],row)
-    return list(kept.values())[-2000:]
+    return sorted(kept.values(),key=lambda row:p.date(row['publishedAt']),reverse=True)[:2000]
 
 def evidence_for(items):
     """Carry bounded feed evidence with the immutable snapshot instead of re-fetching it later."""

@@ -103,8 +103,27 @@ def parse_feed(raw):
    key=child.tag.rsplit('}',1)[-1];value=''.join(child.itertext()).strip()
    fields[key]=value
    if key=='link' and child.attrib.get('rel','alternate')=='alternate':link=child.attrib.get('href') or value
-  rows.append(dict(title=text_only(fields.get('title','')),url=link,date=fields.get('pubDate') or fields.get('published') or fields.get('updated'),text=text_only(fields.get('encoded') or fields.get('content') or fields.get('description') or fields.get('summary') or '')))
+  rows.append(dict(title=text_only(fields.get('title','')),url=link,date=fields.get('pubDate') or fields.get('published') or fields.get('updated') or fields.get('date'),text=text_only(fields.get('encoded') or fields.get('content') or fields.get('description') or fields.get('summary') or '')))
  return rows[:80]
+def source_entries(source):
+ raw=fetch(source['feed'],source['hosts'])
+ if source.get('feedFormat')!='ibge-json':return parse_feed(raw)
+ document=json.loads(raw)
+ if not isinstance(document,dict) or not isinstance(document.get('items'),list):raise ValueError('invalid_ibge_feed')
+ rows=[]
+ for item in document['items'][:80]:
+  if not isinstance(item,dict):continue
+  try:
+   # The API supplies a local timestamp without an offset. Preserve its date
+   # only rather than inventing an exact publication instant.
+   stamp=dt.datetime.strptime(item['data_publicacao'],'%d/%m/%Y %H:%M:%S').date().isoformat()
+   url=item['link']
+   if url.startswith('http://agenciadenoticias.ibge.gov.br/'):url='https://'+url[7:]
+   validate_url(url,source['hosts'])
+   rows.append(dict(title=text_only(item['titulo']),url=url,date=stamp,text=text_only(item.get('introducao',''))))
+  except (KeyError,TypeError,ValueError):continue
+ return rows
+
 def rumor(title):return bool(re.search(r'\b(rumou?r|rumores|leak\w*|vazad\w*|insider|reportedly|unconfirmed)\b',normalized(title)))
 def needs_editor(title):return rumor(title) or bool(re.search(r'hands.on|preview|review|opinion|analise|impressions|best games|melhores jogos',normalized(title)))
 def rank(title,source_type):
@@ -191,7 +210,7 @@ def approved_media(candidate,used_images=()):
  return dict(path=path,alt=media['alt'].strip(),credit=media['credit'].strip())
 def collect():
  start=time.monotonic();sources=[s for s in read('data/sources.json',[]) if s['enabled'] and s.get('feed')];old=read('data/candidates.json',[]);known={c['url'] for c in old};added=[];errors=[];counts={};discarded=0
- def one(s):return s,parse_feed(fetch(s['feed'],s['hosts']))
+ def one(s):return s,source_entries(s)
  with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
   futures={pool.submit(one,s):s for s in sources}
   for f in concurrent.futures.as_completed(futures):
@@ -231,6 +250,9 @@ class ArticleText(HTMLParser):
   if tag in ('script','style','nav','aside','footer','noscript'):self.skip+=1
   if not self.skip and tag in ('p','div','br','h2','h3','li'):self.parts.append(' ')
  def handle_endtag(self,tag):
+  # HTMLParser invokes endtag for XHTML-style <img /> and <br /> too.
+  # These never increased depth; decrementing closed the article after its lead.
+  if tag in ('br','img','hr','input','meta','link','source','wbr','area','base','embed','param','track','col'):return
   if not self.depth:return
   if tag in ('script','style','nav','aside','footer','noscript') and self.skip:self.skip-=1
   self.depth-=1
