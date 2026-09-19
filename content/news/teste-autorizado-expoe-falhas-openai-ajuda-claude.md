@@ -91,3 +91,7 @@ Também mostra por que programas de recompensa continuam relevantes. Neste caso,
 As informações disponíveis não sustentam a conclusão de que modelos de IA estejam executando sozinhos ataques sofisticados contra grandes empresas. O episódio mostra que eles podem aumentar significativamente a capacidade de uma equipe humana.
 
 Essa diferença evita transformar um caso real de segurança em uma narrativa exagerada sobre autonomia total. O fato confirmado é mais concreto: pesquisadores conseguiram usar IA como multiplicador de produtividade em um teste autorizado que alcançou sistemas sensíveis, e as vulnerabilidades foram posteriormente corrigidas.
+
+Para equipes de segurança, o episódio também reforça a necessidade de revisar caminhos indiretos de autenticação. Um fórum de suporte, um token reutilizado ou uma integração com ferramentas de desenvolvimento pode se tornar parte de uma cadeia maior mesmo quando, isoladamente, parece ter pouco valor.
+
+O caso ainda serve como exemplo de divulgação responsável. A existência de um acesso tecnicamente possível não equivale a afirmar que houve roubo de dados ou comprometimento irrestrito dos sistemas. O que foi demonstrado pelos pesquisadores deve ser separado do que apenas poderia ter ocorrido em um cenário de abuso.
