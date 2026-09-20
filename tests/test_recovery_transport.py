@@ -46,6 +46,21 @@ class RecoveryTransport(unittest.TestCase):
         self.assertEqual(validate.call_count,2)
         self.assertIn('REWRITE REQUIRED',model.call_args_list[1].args[0])
 
+    def test_copy_repair_receives_the_exact_blocked_passage(self):
+        copied='um dois três quatro cinco seis sete oito nove dez onze doze'
+        first={'facts':[],'title':'First','description':'Description','paragraphs':[copied]}
+        rewritten={'facts':[],'title':'Rewritten'}
+        review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
+        with tempfile.TemporaryDirectory() as directory,patch.object(p,'ROOT',Path(directory)),patch.object(p,'model_call',side_effect=[first,rewritten,review]) as model,patch.object(p,'validate_draft',side_effect=[ValueError('copied_passage'),rewritten]):
+            p.generate({'id':'candidate123','sourceName':'Newsroom','title':'Source title'},copied,[])
+        payload=model.call_args_list[1].args[1]
+        self.assertEqual(payload['trechosExatosProibidos'],[p.normalized(copied)])
+
+    def test_copy_matcher_keeps_the_existing_twelve_word_gate(self):
+        copied='um dois três quatro cinco seis sete oito nove dez onze doze'
+        draft={'title':'Original','description':'Description','paragraphs':[copied]}
+        self.assertEqual(p.copied_passages(draft,copied),[p.normalized(copied)])
+
     def test_rdf_feed_keeps_dublin_core_date(self):
         raw=b'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><item><title>Official notice</title><link>https://example.com/news</link><dc:date>2026-09-19T10:00:00Z</dc:date></item></rdf:RDF>'
         self.assertEqual(p.parse_feed(raw)[0]['date'],'2026-09-19T10:00:00Z')
