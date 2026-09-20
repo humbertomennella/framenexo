@@ -1,6 +1,7 @@
 import json
 import sys
 import unittest
+import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
@@ -22,6 +23,28 @@ class RecoveryTransport(unittest.TestCase):
         cached=' '.join('evidence'+str(i) for i in range(220))
         with patch.object(selection,'cached_evidence',return_value=cached),patch.object(selection,'feed_evidence',return_value=None),patch.object(p,'evidence',return_value='short live header'):
             self.assertEqual(selection.evidence({'id':'one'},{}),cached)
+
+    def test_shared_fact_prompt_has_one_unambiguous_anchor_contract(self):
+        captured={}
+        def model(system,payload,max_tokens):
+            captured['system']=system
+            return {'sameFact':False,'conflict':False,'syndicationUncertain':False,'claim':'','routes':[]}
+        route=({'id':'one','sourceId':'press','url':'https://example.com/one'},' '.join('word'+str(index) for index in range(30)))
+        with patch.object(p,'model_call',side_effect=model):
+            selection.shared_fact_review([route],{'press':{'id':'press','organization':'press'}})
+        self.assertIn('"anchorId"',captured['system'])
+        self.assertNotIn('"quote"',captured['system'])
+
+    def test_copy_rejection_gets_one_paraphrase_repair_without_bypassing_validation(self):
+        first={'facts':[],'title':'First'}
+        rewritten={'facts':[],'title':'Rewritten'}
+        review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
+        with tempfile.TemporaryDirectory() as directory,patch.object(p,'ROOT',Path(directory)),patch.object(p,'model_call',side_effect=[first,rewritten,review]) as model,patch.object(p,'validate_draft',side_effect=[ValueError('copied_passage'),rewritten]) as validate:
+            draft,result=p.generate({'id':'candidate123','sourceName':'Newsroom','title':'Source title'},'full evidence',[])
+        self.assertEqual(draft,rewritten)
+        self.assertEqual(result,review)
+        self.assertEqual(validate.call_count,2)
+        self.assertIn('REWRITE REQUIRED',model.call_args_list[1].args[0])
 
     def test_rdf_feed_keeps_dublin_core_date(self):
         raw=b'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><item><title>Official notice</title><link>https://example.com/news</link><dc:date>2026-09-19T10:00:00Z</dc:date></item></rdf:RDF>'
