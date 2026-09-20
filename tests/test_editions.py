@@ -105,6 +105,7 @@ class MediaFallback(unittest.TestCase):
 class WorkflowContract(unittest.TestCase):
  def test_regular_publisher_has_primary_and_recovery_runs(self):
   text=(ROOT/'.github/workflows/collector.yml').read_text()
+  self.assertIn("- 'scripts/pipeline.py'",text)
   self.assertIn("cron: '7 1,11,16,21 * * *'",text)
   self.assertIn("cron: '27 1,11,16,21 * * *'",text)
   self.assertNotIn("cron: '7 * * * *'",text)

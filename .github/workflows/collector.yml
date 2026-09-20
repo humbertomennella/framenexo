@@ -6,6 +6,7 @@ on:
       - '.github/workflows/collector.yml'
       - 'scripts/run_editorial.py'
       - 'scripts/publish_edition.py'
+      - 'scripts/pipeline.py'
       - 'scripts/editorial_selection.py'
       - 'scripts/evidence_anchor.py'
       - 'scripts/commit_changes.py'
