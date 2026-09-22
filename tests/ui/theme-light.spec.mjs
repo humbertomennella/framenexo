@@ -85,7 +85,9 @@ test('APURANTE+ header wordmark stays visible and opens the explainer',async({pa
 test('Home keeps one dominant lead and restores an image-led focus carousel',async({page})=>{
   await expect(page.locator('.lead-story')).toBeVisible();
   await expect(page.locator('.lead-story h2 a')).toBeVisible();
-  await expect(page.locator('.lead-media img')).toBeVisible();
+  const leadVisual=page.locator('.lead-media > img, .lead-media > .editorial-cover');
+  await expect(leadVisual).toHaveCount(1);
+  await expect(leadVisual).toBeVisible();
   const carousel=page.locator('.focus-carousel-rail [data-headlines]');
   await expect(carousel).toBeVisible();
   const slideCount=await carousel.locator('[data-slide]').count();
