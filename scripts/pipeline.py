@@ -238,13 +238,18 @@ def collect():
  return dict(collected=len(added),sourcesOK=len(counts),errors=errors)
 class ArticleText(HTMLParser):
  """Read only an explicit article body, never navigation or related stories."""
- def __init__(self,agency=False):
-  super().__init__(convert_charrefs=True);self.agency=agency;self.depth=0;self.skip=0;self.parts=[];self.done=False
+ def __init__(self,agency=False,un_news=False):
+  super().__init__(convert_charrefs=True);self.agency=agency;self.un_news=un_news;self.depth=0;self.skip=0;self.parts=[];self.done=False
  def handle_starttag(self,tag,attrs):
   if self.done:return
   attrs=dict(attrs)
   if not self.depth:
-   if tag=='article' or (self.agency and tag=='div' and 'conteudo-noticia' in attrs.get('class','').split()):self.depth=1
+   classes=attrs.get('class','').split()
+   # UN News keeps the real story body in a dedicated Drupal field after an
+   # empty <article> shell. Ignore that shell and use the explicit body field.
+   if ((tag=='article' and not self.un_news)
+       or (self.agency and tag=='div' and 'conteudo-noticia' in classes)
+       or (self.un_news and tag=='div' and 'field--name-field-text-column' in classes)):self.depth=1
    return
   if tag not in ('br','img','hr','input','meta','link','source','wbr','area','base','embed','param','track','col'):self.depth+=1
   if tag in ('script','style','nav','aside','footer','noscript'):self.skip+=1
@@ -262,7 +267,8 @@ class ArticleText(HTMLParser):
 
 def article_text(raw,source):
  if re.search(r'"isAccessibleForFree"\s*:\s*(?:false|"false")',raw,re.I):raise ValueError('paid_content')
- parser=ArticleText(agency='agenciabrasil.ebc.com.br' in source.get('hosts',[]));parser.feed(raw)
+ hosts=source.get('hosts',[])
+ parser=ArticleText(agency='agenciabrasil.ebc.com.br' in hosts,un_news='news.un.org' in hosts);parser.feed(raw)
  body=' '.join(' '.join(parser.parts).split())
  if not body:raise ValueError('article_boundary_missing')
  return body
