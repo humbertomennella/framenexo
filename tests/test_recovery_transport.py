@@ -48,7 +48,7 @@ class RecoveryTransport(unittest.TestCase):
         self.assertIn('"anchorId"',captured['system'])
         self.assertNotIn('"quote"',captured['system'])
 
-    def test_copy_rejection_gets_one_paraphrase_repair_without_bypassing_validation(self):
+    def test_copy_rejection_gets_paraphrase_repair_without_bypassing_validation(self):
         first={'facts':[],'title':'First'}
         rewritten={'facts':[],'title':'Rewritten'}
         review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
@@ -58,6 +58,18 @@ class RecoveryTransport(unittest.TestCase):
         self.assertEqual(result,review)
         self.assertEqual(validate.call_count,2)
         self.assertIn('REWRITE REQUIRED',model.call_args_list[1].args[0])
+
+    def test_copy_repair_retries_only_while_the_copy_gate_still_fails(self):
+        first={'facts':[],'title':'First'}
+        still_copied={'facts':[],'title':'Still copied'}
+        rewritten={'facts':[],'title':'Rewritten'}
+        review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
+        with tempfile.TemporaryDirectory() as directory,patch.object(p,'ROOT',Path(directory)),patch.object(p,'copied_passages',return_value=['trecho bloqueado']),patch.object(p,'model_call',side_effect=[first,still_copied,rewritten,review]) as model,patch.object(p,'validate_draft',side_effect=[ValueError('copied_passage'),ValueError('copied_passage'),rewritten]) as validate:
+            draft,result=p.generate({'id':'candidate123','sourceName':'Newsroom','title':'Source title'},'full evidence',[])
+        self.assertEqual(draft,rewritten)
+        self.assertEqual(result,review)
+        self.assertEqual(validate.call_count,3)
+        self.assertEqual(model.call_args_list[2].args[1]['tentativa'],2)
 
     def test_copy_repair_receives_the_exact_blocked_passage(self):
         copied='um dois três quatro cinco seis sete oito nove dez onze doze'
