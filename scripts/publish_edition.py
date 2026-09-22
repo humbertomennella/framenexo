@@ -120,7 +120,9 @@ def publish(force=False,dry_run=False,limit=30):
    count+=1
   except (urllib.error.URLError,TimeoutError) as e:
    held+=1;reasons[type(e).__name__]+=1
-   p.log('error',stage='generation',candidate=c['id'],code=type(e).__name__);break
+   # One slow source or model request must hold only its own candidate. The
+   # remaining independently verified groups can still complete the edition.
+   p.log('error',stage='generation',candidate=c['id'],code=type(e).__name__);continue
   except Exception as e:
    held+=1;reason=str(e) if isinstance(e,ValueError) else type(e).__name__;reasons[reason]+=1
    p.log('error',stage='verification',candidate=c['id'],code=str(e) if isinstance(e,ValueError) else type(e).__name__)
