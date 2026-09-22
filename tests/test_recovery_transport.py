@@ -86,8 +86,11 @@ class RecoveryTransport(unittest.TestCase):
         self.assertEqual(rows[0]['url'],'https://agenciadenoticias.ibge.gov.br/news')
 
     def test_anchor_options_are_always_literal_and_bounded(self):
-        body='O tribunal determinou nesta sexta-feira a apresentação dos documentos originais. A decisão mantém todos os prazos previstos.'
+        body=' '.join('palavra'+str(index) for index in range(1000))
         options=selection.anchor_options(body)
         self.assertTrue(options)
+        self.assertLessEqual(len(options),selection.MAX_ANCHOR_OPTIONS)
         self.assertTrue(all(evidence_anchor.matches(body,quote) for quote in options.values()))
+        self.assertTrue(options['0'].startswith('palavra0 '))
+        self.assertIn('palavra990',options[str(len(options)-1)])
         self.assertNotIn('invented',options)

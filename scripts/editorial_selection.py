@@ -7,6 +7,9 @@ import pipeline as p
 import evidence_anchor
 
 
+MAX_ANCHOR_OPTIONS = 24
+
+
 def eligible(items, sources):
     cutoff=p.now()-dt.timedelta(days=7)
     return sorted([c for c in items if c.get('status')=='candidate'
@@ -101,7 +104,12 @@ def evidence(item,source):
 def anchor_options(body):
     """Exact bounded excerpts: the model selects evidence instead of retyping it."""
     words=body.split()
-    return {str(index):' '.join(words[start:start+14]) for index,start in enumerate(range(0,len(words),10)) if evidence_anchor.matches(body,' '.join(words[start:start+14]))}
+    excerpts=[' '.join(words[start:start+14]) for start in range(0,len(words),10)]
+    excerpts=[quote for quote in excerpts if evidence_anchor.matches(body,quote)]
+    if len(excerpts)>MAX_ANCHOR_OPTIONS:
+        last=len(excerpts)-1
+        excerpts=[excerpts[round(index*last/(MAX_ANCHOR_OPTIONS-1))] for index in range(MAX_ANCHOR_OPTIONS)]
+    return {str(index):quote for index,quote in enumerate(excerpts)}
 
 def shared_fact_review(routes,sources):
     payload={'sources':[dict(id=c['id'],organization=p.source_organization(c,sources[c['sourceId']]),url=c['url'],anchors=anchor_options(body)) for c,body in routes]}
