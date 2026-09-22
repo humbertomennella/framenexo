@@ -321,6 +321,19 @@ def copied_passages(draft,body,window=12,limit=24):
    matches.append(passage)
    if len(matches)>=limit:break
  return matches
+def redact_blocked(value,blocked):
+ """Hide copied word runs from repair input without changing final validation evidence."""
+ if isinstance(value,dict):return {key:redact_blocked(item,blocked) for key,item in value.items()}
+ if isinstance(value,list):return [redact_blocked(item,blocked) for item in value]
+ if not isinstance(value,str):return value
+ result=value
+ for passage in blocked:
+  target=normalized(passage).split();matches=list(re.finditer(r'\w+',result,re.UNICODE));words=[normalized(match.group(0)) for match in matches]
+  spans=[]
+  for index in range(len(words)-len(target)+1):
+   if words[index:index+len(target)]==target:spans.append((matches[index].start(),matches[index+len(target)-1].end()))
+  for start,end in reversed(spans):result=result[:start]+'[trecho a reformular]'+result[end:]
+ return result
 def validate_draft(draft,body):
  if draft.get('reject') is not False:raise ValueError('writer_rejected')
  title=draft.get('title');description=draft.get('description');paras=draft.get('paragraphs');facts=draft.get('facts')
@@ -352,7 +365,7 @@ def validate_draft(draft,body):
  if rumor(title) or suspicious(written):raise ValueError('unverified_claim')
  return draft
 def generate(candidate,body,history):
- raw=model_call(WRITER,dict(fonte=candidate['sourceName'],tituloDaFonte=candidate['title'],evidenciaCompleta=body),3200)
+ raw=model_call(WRITER,dict(fonte=candidate['sourceName'],tituloDaFonte=candidate['title'],evidenciaCompleta=body),1900)
  facts=raw.get('facts',[])
  raw['eventKey']='evento-'+candidate['id']
  raw['facts']=facts
@@ -360,11 +373,11 @@ def generate(candidate,body,history):
  try:d=validate_draft(raw,body)
  except ValueError as error:
   if str(error)!='copied_passage':raise
-  repair=WRITER+'''\nREWRITE REQUIRED: the previous draft repeated source wording. Produce a fully paraphrased replacement while preserving only supported facts, exact names and numbers. Change every sentence containing any item in trechosExatosProibidos so no 12-word sequence remains. Do not merely move or punctuate those words. The short facts[].quote pointers must remain literal source excerpts. This is a fresh rewrite attempt: do not return rascunhoRejeitado unchanged.'''
+  repair=WRITER+'''\nREWRITE REQUIRED: the previous draft repeated source wording. Exact copied runs were replaced by [trecho a reformular] in both the evidence and rejected draft. Produce a fully paraphrased replacement while preserving only supported facts, exact names and numbers. Rebuild every placeholder from the surrounding verified context so no 12-word source sequence remains. Do not merely move or punctuate neighboring words. The short facts[].quote pointers must be new literal excerpts still visible in evidenciaCompleta. This is a fresh rewrite attempt: do not return rascunhoRejeitado unchanged.'''
   for attempt in range(1,4):
    blocked=copied_passages(raw,body)
    log('copy_rewrite_requested',candidate=candidate['id'],attempt=attempt,blockedPassages=len(blocked))
-   raw=model_call(repair,dict(fonte=candidate['sourceName'],tituloDaFonte=candidate['title'],evidenciaCompleta=body,rascunhoRejeitado=raw,trechosExatosProibidos=blocked,tentativa=attempt),3200)
+   raw=model_call(repair,dict(fonte=candidate['sourceName'],tituloDaFonte=candidate['title'],evidenciaCompleta=redact_blocked(body,blocked),rascunhoRejeitado=redact_blocked(raw,blocked),trechosBloqueados=len(blocked),tentativa=attempt),1900)
    raw['eventKey']='evento-'+candidate['id']
    write(f'.cache/drafts/{candidate["id"]}-rewritten-{attempt}.json',raw)
    try:
