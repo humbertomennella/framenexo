@@ -107,7 +107,7 @@ jobs:
             .cache/editorial-report.json
             .cache/llama-server.log
             .cache/drafts/*-raw.json
-            .cache/drafts/*-rewritten.json
+            .cache/drafts/*-rewritten-*.json
             .cache/drafts/*-review.json
           include-hidden-files: true
           retention-days: 30
