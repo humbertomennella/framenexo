@@ -12,6 +12,11 @@ import evidence_anchor
 
 
 class RecoveryTransport(unittest.TestCase):
+    def test_full_length_writer_keeps_long_timeout_with_bounded_output(self):
+        source=Path(p.__file__).read_text()
+        self.assertIn("timeout=600 if stage in ('writer','rewrite') else 240",source)
+        self.assertEqual(source.count("),1900)"),2)
+
     def test_self_closing_images_do_not_truncate_article(self):
         raw='<article><p>First paragraph<img src="pixel" /><img src="pixel2" /></p><p>Important second paragraph<br/>continued.</p></article><aside>Unrelated news</aside>'
         body=p.article_text(raw,{'hosts':['example.com']})
