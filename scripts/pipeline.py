@@ -338,6 +338,24 @@ def redact_blocked(value,blocked):
    if words[index:index+len(target)]==target:spans.append((matches[index].start(),matches[index+len(target)-1].end()))
   for start,end in reversed(spans):result=result[:start]+'[trecho a reformular]'+result[end:]
  return result
+def remove_repair_placeholders(draft):
+ """Drop only sentences the repair model left explicitly unresolved.
+
+ The marker is injected by us, never by a source. Keeping it would correctly
+ fail the markup gate, while deleting its whole sentence cannot add or alter a
+ factual claim. The ordinary length, structure, copy and factual gates still
+ validate the resulting draft.
+ """
+ if not isinstance(draft,dict):return draft
+ cleaned=dict(draft);paragraphs=[]
+ for paragraph in draft.get('paragraphs',[]):
+  if not isinstance(paragraph,str):paragraphs.append(paragraph);continue
+  sentences=re.split(r'(?<=[.!?])\s+',paragraph)
+  kept=[sentence for sentence in sentences if '[trecho a reformular]' not in sentence.lower()]
+  value=' '.join(kept).strip()
+  if value:paragraphs.append(value)
+ cleaned['paragraphs']=paragraphs
+ return cleaned
 def validate_draft(draft,body):
  if draft.get('reject') is not False:raise ValueError('writer_rejected')
  title=draft.get('title');description=draft.get('description');paras=draft.get('paragraphs');facts=draft.get('facts')
@@ -384,6 +402,7 @@ def generate(candidate,body,history):
    repair=WRITER+'\nREWRITE REQUIRED: '+instruction+''' Preserve only supported facts, exact names and numbers. Do not merely move or punctuate neighboring words. The short facts[].quote pointers must be new literal excerpts still visible in evidenciaCompleta. This is a fresh rewrite attempt: do not return rascunhoRejeitado unchanged.'''
    log('draft_rewrite_requested',candidate=candidate['id'],attempt=attempt,reason=reason,blockedPassages=len(blocked))
    raw=model_call(repair,dict(fonte=candidate['sourceName'],tituloDaFonte=candidate['title'],evidenciaCompleta=redact_blocked(body,blocked),rascunhoRejeitado=redact_blocked(raw,blocked),motivoDaCorrecao=reason,trechosBloqueados=len(blocked),tentativa=attempt),1900)
+   raw=remove_repair_placeholders(raw)
    raw['eventKey']='evento-'+candidate['id']
    write(f'.cache/drafts/{candidate["id"]}-rewritten-{attempt}.json',raw)
    try:
