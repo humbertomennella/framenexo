@@ -16,6 +16,7 @@ class RecoveryTransport(unittest.TestCase):
         source=Path(p.__file__).read_text()
         self.assertIn("timeout=600 if stage in ('writer','rewrite') else 240",source)
         self.assertEqual(source.count("),1900)"),2)
+        self.assertIn("temperature=0.2 if stage=='rewrite' else 0",source)
 
     def test_self_closing_images_do_not_truncate_article(self):
         raw='<article><p>First paragraph<img src="pixel" /><img src="pixel2" /></p><p>Important second paragraph<br/>continued.</p></article><aside>Unrelated news</aside>'
@@ -75,6 +76,18 @@ class RecoveryTransport(unittest.TestCase):
         self.assertEqual(result,review)
         self.assertEqual(validate.call_count,3)
         self.assertEqual(model.call_args_list[2].args[1]['tentativa'],2)
+
+    def test_invalid_paragraph_count_gets_one_repair_then_full_validation(self):
+        first={'facts':[],'title':'Eight paragraphs'}
+        rewritten={'facts':[],'title':'Nine paragraphs'}
+        review={'supported':True,'portuguese':True,'original':True,'duplicate':False}
+        with tempfile.TemporaryDirectory() as directory,patch.object(p,'ROOT',Path(directory)),patch.object(p,'model_call',side_effect=[first,rewritten,review]) as model,patch.object(p,'validate_draft',side_effect=[ValueError('invalid_paragraphs'),rewritten]) as validate:
+            draft,result=p.generate({'id':'candidate123','sourceName':'Newsroom','title':'Source title'},'full evidence',[])
+        self.assertEqual(draft,rewritten)
+        self.assertEqual(result,review)
+        self.assertEqual(validate.call_count,2)
+        self.assertEqual(model.call_args_list[1].args[1]['motivoDaCorrecao'],'invalid_paragraphs')
+        self.assertIn('9-12 concise paragraphs',model.call_args_list[1].args[0])
 
     def test_copy_repair_redacts_the_exact_blocked_passage(self):
         copied='um dois três quatro cinco seis sete oito nove dez onze doze'
