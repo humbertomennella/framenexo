@@ -128,8 +128,8 @@ def verify(group,sources,cache=None):
     for item in group:
         source=sources[item['sourceId']];body=cache.get(item['url'])
         if not body:continue
-        wire=re.search(r'\b(?:por|by|com informa[çc][õo]es d[aeo]|with reporting from|reporting by)\s+(Reuters|Associated Press|AFP|Ag[êe]ncia Brasil)\b',body,re.I)
-        if wire:item=dict(item,originalOrganization={'reuters':'reuters','associated press':'associated-press','afp':'afp','agencia brasil':'agencia-brasil'}[p.normalized(wire.group(1))])
+        wire=re.search(r'\b(?:por|by|com informa[çc][õo]es d[aeo]|with reporting from|reporting by)\s+(Reuters|Associated Press|AFP|Ag[êe]ncia Brasil|ONU News)\b',body,re.I)
+        if wire:item=dict(item,originalOrganization={'reuters':'reuters','associated press':'associated-press','afp':'afp','agencia brasil':'agencia-brasil','onu news':'onu'}[p.normalized(wire.group(1))])
         routes.append((item,body))
     route_items=[x[0] for x in routes]
     if not publishable(route_items,sources):raise ValueError('verified_source_routes_required')
@@ -145,7 +145,7 @@ def verify(group,sources,cache=None):
         if 'anchorId' in route:
             quote=anchor_options(body).get(str(route['anchorId']),'')
         if not isinstance(quote,str) or not evidence_anchor.matches(body,quote) or not isinstance(org,str) or not re.fullmatch(r'[a-z0-9-]{2,80}',org):raise ValueError('invalid_shared_fact_anchor')
-        known={p.source_organization(x,source) for source in sources.values() for x in [dict(sourceId=source['id'])]} | {'reuters','associated-press','afp','agencia-brasil'}
+        known={p.source_organization(x,source) for source in sources.values() for x in [dict(sourceId=source['id'])]} | {'reuters','associated-press','afp','agencia-brasil','onu'}
         if org not in known or (c.get('originalOrganization') and org!=c['originalOrganization']):raise ValueError('unknown_or_conflicting_provenance')
         c=dict(c,originalOrganization=org)
         if any(p.source_organization(x,sources[x['sourceId']])==org for x in approved):continue
