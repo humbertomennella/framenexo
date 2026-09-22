@@ -103,6 +103,12 @@ class MediaFallback(unittest.TestCase):
   acquire.assert_not_called()
 
 class WorkflowContract(unittest.TestCase):
+ def test_transient_candidate_timeout_does_not_abort_the_whole_edition(self):
+  text=(ROOT/'scripts/publish_edition.py').read_text()
+  handler=text.split('except (urllib.error.URLError,TimeoutError) as e:',1)[1].split('except Exception as e:',1)[0]
+  self.assertIn('continue',handler)
+  self.assertNotIn(';break',handler)
+
  def test_regular_publisher_has_primary_and_recovery_runs(self):
   text=(ROOT/'.github/workflows/collector.yml').read_text()
   self.assertIn("- 'scripts/pipeline.py'",text)
