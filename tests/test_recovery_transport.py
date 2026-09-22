@@ -107,6 +107,13 @@ class RecoveryTransport(unittest.TestCase):
         redacted=p.redact_blocked(value,[copied])
         self.assertEqual(redacted['paragraphs'],['[trecho a reformular]. Fim.'])
 
+    def test_repair_placeholder_drops_its_sentence_then_keeps_all_gates(self):
+        draft={'paragraphs':['Primeiro fato confirmado. [trecho a reformular] durante o evento. Segundo fato confirmado.','[trecho a reformular].'],'title':'Título preservado'}
+        cleaned=p.remove_repair_placeholders(draft)
+        self.assertEqual(cleaned['paragraphs'],['Primeiro fato confirmado. Segundo fato confirmado.'])
+        self.assertEqual(cleaned['title'],'Título preservado')
+        self.assertNotIn('[trecho a reformular]',json.dumps(cleaned,ensure_ascii=False))
+
     def test_copy_matcher_keeps_the_existing_twelve_word_gate(self):
         copied='um dois três quatro cinco seis sete oito nove dez onze doze'
         draft={'title':'Original','description':'Description','paragraphs':[copied]}
