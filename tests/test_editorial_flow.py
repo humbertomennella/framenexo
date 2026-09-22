@@ -44,6 +44,7 @@ class EditorialFlow(unittest.TestCase):
   review=dict(sameFact=True,conflict=False,syndicationUncertain=False,routes=[dict(id=x['id'],quote='these words do not exist here',originalOrganization=x['sourceId']) for x in rows])
   with patch.object(p,'evidence',return_value='Court orders delivery of complete records today.'),patch.object(p,'model_call',return_value=review),self.assertRaisesRegex(ValueError,'anchor'):selection.verify(rows,sources)
   with patch.object(p,'evidence',return_value='Por Reuters Court orders delivery of complete records today.'),self.assertRaisesRegex(ValueError,'verified_source_routes'):selection.verify(rows,sources)
+  with patch.object(p,'evidence',return_value='Por ONU News Court orders delivery of complete records today.'),self.assertRaisesRegex(ValueError,'verified_source_routes'):selection.verify(rows,sources)
  def test_supported_routes_are_recorded(self):
   rows=[self.row(),self.row('b','two')];sources={x:{'id':x,'organization':x} for x in ('one','two')}
   review=dict(sameFact=True,conflict=False,syndicationUncertain=False,claim='Decisão judicial',routes=[dict(id=x['id'],quote='Court orders delivery of complete records today.',originalOrganization=x['sourceId']) for x in rows])

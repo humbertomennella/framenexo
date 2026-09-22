@@ -19,6 +19,19 @@ class RecoveryTransport(unittest.TestCase):
         self.assertIn('continued.',body)
         self.assertNotIn('Unrelated news',body)
 
+    def test_un_news_uses_explicit_body_after_empty_article_shell(self):
+        raw='''<article><div class="node__content"></div></article>
+        <nav><p>Navigation must stay out.</p></nav>
+        <div class="field field--name-field-text-column field__item">
+          <p>Primeiro parágrafo confirmado da matéria.</p>
+          <p>Segundo parágrafo com os detalhes publicados.</p>
+        </div><aside><p>Related story must stay out.</p></aside>'''
+        body=p.article_text(raw,{'hosts':['news.un.org']})
+        self.assertIn('Primeiro parágrafo',body)
+        self.assertIn('Segundo parágrafo',body)
+        self.assertNotIn('Navigation',body)
+        self.assertNotIn('Related story',body)
+
     def test_full_cached_route_survives_short_live_excerpt(self):
         cached=' '.join('evidence'+str(i) for i in range(220))
         with patch.object(selection,'cached_evidence',return_value=cached),patch.object(selection,'feed_evidence',return_value=None),patch.object(p,'evidence',return_value='short live header'):
