@@ -71,7 +71,7 @@ class RecoveryTransport(unittest.TestCase):
         self.assertEqual(validate.call_count,3)
         self.assertEqual(model.call_args_list[2].args[1]['tentativa'],2)
 
-    def test_copy_repair_receives_the_exact_blocked_passage(self):
+    def test_copy_repair_redacts_the_exact_blocked_passage(self):
         copied='um dois três quatro cinco seis sete oito nove dez onze doze'
         first={'facts':[],'title':'First','description':'Description','paragraphs':[copied]}
         rewritten={'facts':[],'title':'Rewritten'}
@@ -79,7 +79,15 @@ class RecoveryTransport(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory,patch.object(p,'ROOT',Path(directory)),patch.object(p,'model_call',side_effect=[first,rewritten,review]) as model,patch.object(p,'validate_draft',side_effect=[ValueError('copied_passage'),rewritten]):
             p.generate({'id':'candidate123','sourceName':'Newsroom','title':'Source title'},copied,[])
         payload=model.call_args_list[1].args[1]
-        self.assertEqual(payload['trechosExatosProibidos'],[p.normalized(copied)])
+        self.assertEqual(payload['trechosBloqueados'],1)
+        self.assertNotIn(copied,json.dumps(payload,ensure_ascii=False))
+        self.assertIn('[trecho a reformular]',payload['evidenciaCompleta'])
+
+    def test_redaction_handles_punctuation_and_nested_draft_fields(self):
+        copied='um dois três quatro cinco seis sete oito nove dez onze doze'
+        value={'paragraphs':['Um, dois três quatro cinco seis sete oito nove dez onze doze. Fim.']}
+        redacted=p.redact_blocked(value,[copied])
+        self.assertEqual(redacted['paragraphs'],['[trecho a reformular]. Fim.'])
 
     def test_copy_matcher_keeps_the_existing_twelve_word_gate(self):
         copied='um dois três quatro cinco seis sete oito nove dez onze doze'
