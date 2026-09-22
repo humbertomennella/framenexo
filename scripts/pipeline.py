@@ -297,8 +297,8 @@ def model_call(system,payload,max_tokens=800):
  if p.scheme!='http' or p.hostname not in ('127.0.0.1','localhost','::1') or p.username or p.password or p.path not in ('','/') or p.query or p.fragment:raise ValueError('model_must_be_loopback')
  request=dict(messages=[dict(role='system',content=system+' /no_think'),dict(role='user',content=json.dumps(payload,ensure_ascii=False))],temperature=0,max_tokens=max_tokens,response_format={'type':'json_object'},chat_template_kwargs={'enable_thinking':False})
  req=urllib.request.Request(endpoint.rstrip('/')+'/v1/chat/completions',data=json.dumps(request).encode(),headers={'Content-Type':'application/json'},method='POST')
- started=time.monotonic();timeout=600 if max_tokens>2000 else 240
- stage='shared_fact' if 'sources' in payload else 'factual_review' if 'article' in payload else 'rewrite' if 'rascunhoRejeitado' in payload else 'writer'
+ started=time.monotonic();stage='shared_fact' if 'sources' in payload else 'factual_review' if 'article' in payload else 'rewrite' if 'rascunhoRejeitado' in payload else 'writer'
+ timeout=600 if stage in ('writer','rewrite') else 240
  metrics=dict(stage=stage,inputCharacters=sum(len(m['content']) for m in request['messages']),maxTokens=max_tokens,timeoutSeconds=timeout)
  log('model_request_started',**metrics)
  print(json.dumps(dict(event='model_request_started',**metrics)),flush=True)
